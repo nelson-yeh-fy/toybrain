@@ -13,3 +13,6 @@ docker rm docker-nginx
 ## Run Nginx and let it access outside html and outside configurations
 sudo docker run --name docker-nginx -p 80:80 -v ~/docker-nginx/html:/usr/share/nginx/html -v ~/docker-nginx/default.conf:/etc/nginx/conf.d/default.conf -d nginx
 
+#setup desktop sublime env.
+git env: http://oranwind.org/git-zai-windows-xia-an-zhuang-git-ban-ben-kong-zhi/
+sublime env: http://eddychang.me/blog/16-javascript/51-sublime-text-3-react.html
