@@ -7,8 +7,8 @@ function formatName(userName){
 };
 
 const userName = {
-  'firstName' : 'Nelson',
-  'LastName' : 'Yeh'
+  'firstName' : 'Lindon3513',
+  'LastName' : 'Droid'
 };
 
 const element = (
@@ -50,6 +50,7 @@ class Comment extends React.Component {
   render(){
     return(
       <div>
+        <h5 className="comment-id">id:{this.props.id}</h5> 
         <p className="comment-header">{this.props.author}</p>
         <p className="comment-body">{this.props.body}</p>
         <div>
@@ -62,16 +63,38 @@ class Comment extends React.Component {
 
 class CommentBox extends React.Component {
   render(){
+    const comments = this._getComments();
     return(
       <div>
         <h1>Comments</h1>
-        <h4 className="comment-count">2 comments</h4>
+        <h4 className="comment-count">{this._getCommentsTitle(comments.length)}</h4>
         <div>
-          <Comment author="Anne Droid" body="I wanna know what love is" />
-          <Comment author="Jackson Amber" body="I wanna know how to smile" />
+          {comments}
         </div>
       </div>
     );
+  }
+
+  _getComments(){
+    const commentList = [
+      {id:0, author: "Annie Droid", body: "I wanna know what love is"},
+      {id:1, author: "Jackson Amber", body: "I wanna know how to smile"},
+      {id:2, author: "Nickson Peber", body: "I wanna know how to laugh"}
+    ];
+    return commentList.map( (comment)=>{
+      return (
+        <Comment author={comment.author} body={comment.body} id={comment.id} />
+      );
+    });
+  }
+
+  _getCommentsTitle(count){
+    if(count === 0)
+      return "no comments";
+    else if(count === 1)
+      return "1 comment";
+    else
+      return `${count} comments`;
   }
 }
 
