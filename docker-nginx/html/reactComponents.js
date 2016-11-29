@@ -38,7 +38,44 @@ class StoryBox extends React.Component {
     );
   }
 }
+
 ReactDOM.render(    
     <StoryBox />,
     document.getElementById('story-app')
+);
+
+//----------------------------------------------------
+
+class Comment extends React.Component {
+  render(){
+    return(
+      <div>
+        <p className="comment-header">{this.props.author}</p>
+        <p className="comment-body">{this.props.body}</p>
+        <div>
+          <a href="#" className="comment-footer-delete">delete comment</a>
+        </div>
+      </div>      
+    );
+  }
+}
+
+class CommentBox extends React.Component {
+  render(){
+    return(
+      <div>
+        <h1>Comments</h1>
+        <h4 className="comment-count">2 comments</h4>
+        <div>
+          <Comment author="Anne Droid" body="I wanna know what love is" />
+          <Comment author="Jackson Amber" body="I wanna know how to smile" />
+        </div>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <CommentBox />,
+  document.getElementById('comment-app')
 );
