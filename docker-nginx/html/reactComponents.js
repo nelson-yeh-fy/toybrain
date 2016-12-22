@@ -62,26 +62,71 @@ class Comment extends React.Component {
   }
 }
 
+class CommentForm extends React.Component {
+  render(){
+    return (
+      <form className="comment-form" onSubmit={this._handleSubmit.bind(this)}>
+        <label>Join the discussion</label>
+        <div className="comment-form-fields">
+          <input placeholder="Name:" ref={(input) => this._author=input} />
+          <textarea placeholder="Comments:" ref={(textarea) => this._body=textarea} />
+        </div>
+        <div className="comment-form-actions">
+          <button type="submit">Post comment</button>
+        </div>
+      </form>
+    );
+  }
+
+  _handleSubmit(event){
+    event.preventDefault(); //prevent page reload when click the submit button
+    let author = this._author;
+    let body = this._body;
+    this.props.addComment(author.value, body.value);
+  }
+}
+
 class CommentBox extends React.Component {
+
+  constructor(){
+    super();
+    this.state = {
+      showComments: true,
+      comments: [{id:1, author: "Annie Droid", body: "I wanna know what love is"}
+                ,{id:2, author: "Jackson Amber", body: "I wanna know how to smile"}
+                ]
+    };
+  }
+
   render(){
     const comments = this._getComments();
+    let buttonText = "Show comments";
+    let commentNode;
+    if(this.state.showComments){
+      buttonText = "Hide comments";
+      commentNode = comments;
+    }
+
     return(
       <div>
         <h2>Comments</h2>
         <h4 className="comment-count">{this._getCommentsTitle(comments.length)}</h4>
+        <button onClick={this._handleClick.bind(this)} >{buttonText}</button>
+        <CommentForm addComment={this._addComment.bind(this)}/>
         <div>
-          {comments}
-        </div>
+          {commentNode}
+        </div>        
       </div>
     );
   }
 
+  _addComment(author, body){ //this method will be trigered by commentForm 
+    let newComment = {id: this.state.comments.length+1, author, body};
+    this.setState({ comments: this.state.comments.concat([newComment]) });
+  }
+
   _getComments(){
-    const commentList = [
-      {id:0, author: "Annie Droid", body: "I wanna know what love is"},
-      {id:1, author: "Jackson Amber", body: "I wanna know how to smile"}
-    ];
-    return commentList.map( (comment)=>{
+    return this.state.comments.map( (comment)=>{
       return (
         <Comment author={comment.author} body={comment.body} key={comment.id} />
       );
@@ -96,7 +141,14 @@ class CommentBox extends React.Component {
     else
       return `${count} comments`;
   }
+
+  _handleClick(){
+    this.setState(
+      {showComments: !this.state.showComments}
+    );
+  }
 }
+
 
 ReactDOM.render(
   <CommentBox />,
