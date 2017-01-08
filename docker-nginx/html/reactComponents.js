@@ -28,7 +28,7 @@ ReactDOM.render(
 class StoryBox extends React.Component {
   render(){
     const now = new Date();
-    const topics = ['Html', 'JavaScript', 'JSX', 'ReactJS'];
+    const topics = ['Html', 'JavaScript', 'JSX'];
     return( 
       <div>
         <h2>Story Box</h2>
@@ -93,7 +93,6 @@ class CommentBox extends React.Component {
     this.state = {
       showComments: true,
       comments: [{id:1, author: "Annie Droid", body: "I wanna know what love is"}
-                ,{id:2, author: "Jackson Amber", body: "I wanna know how to smile"}
                 ]
     };
   }
@@ -157,16 +156,95 @@ ReactDOM.render(
 
 //----------------------------------------------------
 
-class tile extends React.Component{
+const { createStore } = Redux; // import {createStore} from 'redux';
+const { connect, Provider } = ReactRedux; // import {connect, Provider} from 'react-redux';
+// import * as ReduxActions from './reduxActions'
+//import { addTodo, removeTodo } from './reduxActions'
 
+
+// Redux - Actions
+const ADD_TODO = 'INCREMENT';
+const DEC_TODO = 'DECREMENT';
+
+// Redux - ActionCreators
+function addTodo(num){
+  return {
+    type: ADD_TODO,
+    number: num
+  }
+} 
+function removeTodo(num){
+  return {
+    type: DEC_TODO,
+    number: num
+  }
+}
+
+// Redux - Reducers Default State
+const initialTodo = {
+  TodoCount: 0
+}
+
+// Redux - Reducers
+const counter = (state = initialTodo, action) => {
+  switch(action.type) {
+    case 'INCREMENT':
+      return {TodoCount: state.TodoCount + action.number};
+    case 'DECREMENT':
+      return {TodoCount: state.TodoCount - action.number};
+    default:
+      return state;
+  }
+}
+
+const store = createStore(counter);
+store.subscribe(() =>
+  console.log(store.getState())
+)
+
+// The only way to mutate the internal state is to dispatch an action. 
+// The actions can be serialized, logged or stored and later replayed. 
+store.dispatch(addTodo(3))
+store.dispatch(removeTodo(3))
+store.dispatch({ type: 'INCREMENT', number: 1 })
+store.dispatch({ type: 'DECREMENT', number: 1 })
+
+
+class TodoBox extends React.Component {
   render(){
     return(
-      <h3>1333</h3>
+      <div>
+        <h2>ToDos:</h2>
+        <h4>{this.props.value}</h4>
+        <button onClick={this.props.onIncreaseClick}> + </button>
+        <button onClick={this.props.onDecreaseClick}> - </button>
+      </div>
     );
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    value: state.TodoCount
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onIncreaseClick: () => dispatch(addTodo(3)),
+    onDecreaseClick: () => dispatch(removeTodo(3))
+  }
+}
+
+const ReduxConnectedTodoBox = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoBox)
+
+
 ReactDOM.render(
-  <tile />,
-  document.getElementById('loadingTile-app')
+  <Provider store={store}>
+    <ReduxConnectedTodoBox />
+  </Provider>,
+  document.getElementById('todo-app')
 );
