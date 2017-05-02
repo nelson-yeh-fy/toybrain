@@ -1,0 +1,46 @@
+﻿version: '2'
+services:
+  # nginx:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.nginx
+  #   image: lindon3513/nginx3
+  #   container_name: nginx3
+  #   ports:
+  #     - "80:80"   # remember to setup secutity group rules if you use amazon EC2
+  #   volumes:
+  #     - ~/docker-compose-webDevOps/wwwroot/html:/usr/share/nginx/html
+  #     - ~/docker-compose-webDevOps/wwwroot/nginxDefault.conf:/etc/nginx/conf.d/default.conf
+  webpack:
+    build:
+      context: .
+      dockerfile: Dockerfile.webpack
+    image: lindon3513/webpack6
+    container_name: webpack6
+    ports:
+      # - "8080:8080"   # for live reload, remember to setup secutity group rules if you use amazon EC2
+      - "3000:3000"   # for live reload, remember to setup secutity group rules if you use amazon EC2
+    volumes:
+      - ~/docker-compose-webDevOps/storyboard/:/storyboard/
+      - ~/docker-compose-webDevOps/wwwroot/html:/storyboard/dist
+      # - ~/docker-compose-webDevOps/webpack/storyboardApp/asset:/app/asset
+      # - ~/docker-compose-webDevOps/webpack/storyboardApp/dist:/app/dist
+      # - ~/docker-compose-webDevOps/webpack/storyboardApp/node_modules:/app/node_modules
+      # - ~/docker-compose-webDevOps/webpack/storyboardApp/src:/app/src
+      # - ~/docker-compose-webDevOps/webpack/storyboardApp/:/app/
+      # - ~/docker-compose-webDevOps/wwwroot/html:/app/build
+      # - /app/node_modules
+volumes:
+  wwwroot:
+    driver: local
+
+
+# CMD for reference:
+# docker start 0d24233123 /bin/bash
+# docker exec -ti 0ds2434234 /bin/bash
+# docker-compose run web bash
+# docker-compose up --build -d
+
+# docker commit webpack webpack0
+# docker run -p 8080:8080 -p 3000:3000 -v ~/docker-compose-webDevOps/storyboard/:/storyboard/ -v ~/docker-compose-webDevOps/wwwroot/html:/storyboard/dist -td webpack0
+

@@ -1,0 +1,35 @@
+# Dockerfile.webpack
+
+FROM ubuntu:latest
+
+RUN apt-get update
+RUN apt-get install curl -y
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && apt-get install -y nodejs #https://nodejs.org/en/download/package-manager/
+#RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash #http://yoember.com/nodejs/the-best-way-to-install-node-js/
+
+RUN mkdir storyboard
+WORKDIR /storyboard
+RUN mkdir -p app/asset
+RUN mkdir -p app/src
+RUN rm -rf node_modules
+RUN mkdir -p node_modules
+
+RUN npm install webpack --global
+# CMD webpack --watch --watch-polling
+
+RUN npm install #This depends on our package.json
+RUN npm run start #run start command in package.json (run webpack-dev-server)
+#
+# RUN npm init --yes										#init a new package.json
+# RUN npm install --save react 								#react
+# RUN npm install --save react-dom 							#react-dom
+# RUN npm install --save-dev webpack						#webpack local
+# RUN npm install --save-dev file-loader					#file loader
+# RUN npm install --save-dev css-loader style-loader		#css loader
+# RUN npm install --save-dev url-loader  					#image loader
+# RUN npm install --save-dev babel-core 					#babel core 
+# RUN npm install --save-dev babel-loader					#babel loader
+# RUN npm install --save-dev babel-preset-es2015
+# RUN npm install --save-dev babel-preset-react
+# ###https://github.com/jpsierens/webpack-react-redux
+
