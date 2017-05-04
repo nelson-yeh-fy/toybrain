@@ -44,7 +44,8 @@ class MessageBoard extends Component {
     );
   }
 
-  _handleSubmit(event) {
+  _handleSubmit(e) {
+    e.preventDefault(); //prevent page reload when click the submit button
     let itemArray = this.state.items;
     itemArray.push(
       {
@@ -55,8 +56,7 @@ class MessageBoard extends Component {
     this.setState({
       items: itemArray
     });
-    this._inputElement.value = "";
-    event.preventDefault(); //prevent page reload when click the submit button
+    this._inputElement.value = "";    
   }
 }
 
