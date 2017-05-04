@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        { 
+            //https://medium.com/@auchenberg/live-edit-and-debug-your-react-apps-directly-from-vs-code-without-leaving-the-editor-3da489ed905f
+            //https://github.com/facebookincubator/create-react-app
+            "name": "Chrome", 
+            "type": "chrome", 
+            "request": "launch", 
+            "url": "http://localhost:3000", 
+            "webRoot": "${workspaceRoot}/docker-nginx/chatting/src", 
+            "userDataDir": "${workspaceRoot}/.chrome", 
+            "sourceMapPathOverrides": { 
+                "webpack:///src/*": "${webRoot}/*" 
+            } 
+        },
+        {
+            "name": "Launch Chrome against localhost",
+            "type": "chrome",
+            "request": "launch",            
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceRoot}"
+        },
+        {
+            "name": "Attach to Chrome",
+            "type": "chrome",
+            "request": "attach",            
+            "port": 9222,
+            "webRoot": "${workspaceRoot}"
+        }
+    ]
+}
