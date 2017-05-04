@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -8,15 +8,41 @@
 }
 
 .App-header {
+  text-align: center;
   background-color: #222;
-  height: 150px;
+  height: 140px;
   padding: 20px;
   color: white;
 }
 
-.App-intro {
+.App-intro {  
   font-size: large;
+  padding: 50px;
+  background-color: #66CCFF;
+  font-family: sans-serif;
 }
+
+.App-MsgListMain .header input {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #FFF;
+}
+
+.App-MsgListMain .header button {
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px;
+  background-color: #0066FF;
+  color: #FFF;
+  border: 2px solid #0066FF;
+}
+ 
+.App-MsgListMain .header button:hover {
+  background-color: #003399;
+  border: 2px solid #003399;
+  cursor: pointer;
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
