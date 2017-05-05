@@ -4,6 +4,7 @@
         { 
             //https://medium.com/@auchenberg/live-edit-and-debug-your-react-apps-directly-from-vs-code-without-leaving-the-editor-3da489ed905f
             //https://github.com/facebookincubator/create-react-app
+            //http://www.penta-code.com/how-to-add-redux-to-create-react-app/
             "name": "Chrome", 
             "type": "chrome", 
             "request": "launch", 
