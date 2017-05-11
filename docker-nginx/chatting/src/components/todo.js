@@ -6,18 +6,28 @@ import * as todoActionCreators from '../actions/todo';
 import AddTodo from './addTodo';
 
 class TodoList extends Component {
+    static propTypes = {
+        // https://wecodetheweb.com/2015/06/02/why-react-proptypes-are-important/
+        actions: React.PropTypes.object.isRequired,
+        todo: React.PropTypes.arrayOf(
+            React.PropTypes.shape({
+                idx: React.PropTypes.string,
+                showComments: React.PropTypes.bool,
+                // done: React.propTypes.bool, ????
+                text: React.PropTypes.string
+            })).isRequired
+    }
     constructor(props) {
         super(props);
         this.state = {
-        }
+        };
     }
 
     render() {
-
         function createTasks(item) {
-            return <li key={item.idx}>{item.text}</li>
+            return <li key={item.idx}>{item.text}</li>;
         }
-        let listItems = this.props.todo.map(createTasks);
+        const listItems = this.props.todo.map(createTasks);
         //   Alternative:
         //   const listItems = this.props.todo.map((item) => {
         //       return <li key={item.idx}>{item.text}</li>;
@@ -37,14 +47,14 @@ class TodoList extends Component {
 }
 
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
     return {
-        todo: state.todo //!! rootReducer.todo
+        todo: state.todo // todo means TodoList's prop, state.todo means rootReducer.todo
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(todoActionCreators, dispatch)
-    }
+    };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
