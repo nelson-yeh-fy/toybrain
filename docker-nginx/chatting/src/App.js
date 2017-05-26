@@ -17,6 +17,8 @@ class App extends Component {
                 <div className="App-intro" id="scrollbar-style-5">
                     <Todo />
                     <Cart />
+                </div>
+                <div>
                     <TimeEvent />
                 </div>
             </div>

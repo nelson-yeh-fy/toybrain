@@ -14,8 +14,8 @@ class TimeEventList extends Component {
             React.PropTypes.shape({
                 idx: React.PropTypes.number,
                 showComments: React.PropTypes.bool,
-                // done: React.propTypes.bool, ????
-                text: React.PropTypes.string
+                text: React.PropTypes.string,
+                eventTime: React.PropTypes.string
             })).isRequired
     }
     constructor(props) {
@@ -26,7 +26,19 @@ class TimeEventList extends Component {
 
     render() {
         function createTasks(item) {
-            return <li className="fa fa-clock-o bg-gray" key={item.idx}>{item.text}</li>;
+            return (
+                <li className="fa fa-clock-o bg-gray" key={item.idx}>
+                    <i>
+                        <div className="timeline-item">
+                            <span className="time">{item.eventTime}</span>
+                            <h3 className="timeline-header">by Tony</h3>
+                        </div>
+                        <div className="timeline-body">
+                            {item.text}
+                        </div>
+                    </i>
+                </li>
+            );
         }
         const listItems = this.props.timeEvents.map(createTasks);
         //   Alternative:

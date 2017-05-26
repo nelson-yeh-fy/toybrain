@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class AddTimeEvent extends Component {
     static propTypes = {
@@ -15,8 +16,8 @@ class AddTimeEvent extends Component {
         const item = {
             idx: Date.now(),
             showComments: true,
-            done: true,
-            text: this._inputElement.value
+            text: this._inputElement.value,
+            eventTime: moment().calendar()
         };
         this.props.addItemProp(item);
         this._inputElement.value = '';
