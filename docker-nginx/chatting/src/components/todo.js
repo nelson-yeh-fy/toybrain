@@ -11,7 +11,7 @@ class TodoList extends Component {
         actions: React.PropTypes.object.isRequired,
         todo: React.PropTypes.arrayOf(
             React.PropTypes.shape({
-                idx: React.PropTypes.string,
+                idx: React.PropTypes.number,
                 showComments: React.PropTypes.bool,
                 // done: React.propTypes.bool, ????
                 text: React.PropTypes.string

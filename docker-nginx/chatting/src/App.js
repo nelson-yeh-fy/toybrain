@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './css/main.css';
 
 import Cart from './components/cart';
 import Todo from './components/todo';
+import TimeEvent from './components/timeEvent';
 
 class App extends Component {
     render() {
@@ -11,13 +12,12 @@ class App extends Component {
             <div className="App">
                 <div className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-                    <h2>Welcome to dockerized board</h2>
+                    <h3>Welcome to dockerized board</h3>
                 </div>
-                <div className="App-intro">
+                <div className="App-intro" id="scrollbar-style-5">
                     <Todo />
-                </div>
-                <div className="App-intro">
                     <Cart />
+                    <TimeEvent />
                 </div>
             </div>
         );
