@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
+import './css/font-awesome/css/font-awesome.css';
 
 // Redux
 import { Provider } from 'react-redux';

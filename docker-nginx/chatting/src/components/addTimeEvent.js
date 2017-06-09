@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { FormControl } from 'react-bootstrap';
 import moment from 'moment';
 
 class AddTimeEvent extends Component {
@@ -17,7 +18,8 @@ class AddTimeEvent extends Component {
             idx: Date.now(),
             showComments: true,
             text: this._inputElement.value,
-            eventTime: moment().calendar()
+            addby: 'Nelson',
+            addon: moment().calendar()
         };
         this.props.addItemProp(item);
         this._inputElement.value = '';
@@ -26,8 +28,8 @@ class AddTimeEvent extends Component {
     render() {
         return (
             <form onSubmit={this.onHandleSubmit}>
-                <input ref={(a) => this._inputElement = a} placeholder="Enter time event..." />
-                <button type="submit">Add</button>
+                <FormControl className="input-sm box-calllog" componentClass="textarea" rows={4} cols={20} ref={(a) => this._inputElement = a} placeholder="Enter time event..." />
+                <button type="submit">Submit</button>
             </form>
         );
     }

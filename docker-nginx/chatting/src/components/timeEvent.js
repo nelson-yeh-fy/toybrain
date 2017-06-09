@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Button, ButtonGroup, FormGroup } from 'react-bootstrap';
 import * as timeEventActionCreators from '../actions/timeEvent';
 import './../css/main.css';
 
@@ -15,7 +16,8 @@ class TimeEventList extends Component {
                 idx: React.PropTypes.number,
                 showComments: React.PropTypes.bool,
                 text: React.PropTypes.string,
-                eventTime: React.PropTypes.string
+                addby: React.PropTypes.string,
+                addon: React.PropTypes.string
             })).isRequired
     }
     constructor(props) {
@@ -25,54 +27,47 @@ class TimeEventList extends Component {
     }
 
     render() {
-        function createTasks(item) {
+        function createTimeEventLogs(item) {
             return (
-                <li className="fa fa-clock-o bg-gray" key={item.idx}>
-                    <i>
-                        <div className="timeline-item">
-                            <span className="time">{item.eventTime}</span>
-                            <h3 className="timeline-header">by Tony</h3>
-                        </div>
-                        <div className="timeline-body">
-                            {item.text}
-                        </div>
-                    </i>
+                <li key={item.idx}>
+                    <i className="fa fa-clock-o bg-gray"></i>
+                    <div className="timeline-item">
+                        <span>{item.addon}</span>
+                        <span className="timeline-header"> {item.addby}</span>
+                        <span className="timeline-body"> {item.text}</span>
+                    </div>
                 </li>
             );
         }
-        const listItems = this.props.timeEvents.map(createTasks);
-        //   Alternative:
-        //   const listItems = this.props.todo.map((item) => {
-        //       return <li key={item.idx}>{item.text}</li>;
-        //   });
+        const listItems = this.props.timeEvents.map(createTimeEventLogs);
 
         return (
             <div className="box box-calllog">
                 <div className="calllog-extrude">
                     <a href="#" data-toggle="control-sidebar" id="calllogLink">
-                        <i className="fa icon-mdt_collapse_toright" id="extrudeIcon"></i>
+                        <i className="fa icon-mdt_collapse_toright" id="extrudeIcon" />
                     </a>
                 </div>
                 <div className="box-header box-calllog" id="timeEventHeader">
-                    <span id="timeEventTile" className="">
-                        CFS Time Event
-                    </span>
+                    <span className="" id="timeEventTile">CFS Time Event</span>
+                    <span id="timeCfsNo" />
+                    <i className="fa icon-mdt_maximize" id="btnExpandLog" />
                 </div>
-                <div className="box-calllog" style={{marginTop: 0}}>
+                <div className="box-calllog" style={{ marginTop: 0 }}>
                     <div id="timeEventBtns">
-                        <div className="btn-group time-event">
-                            <button tabIndex={-1} className="col-sm-6 btn logFilterBtn logFilterBtnActive">ALL</button>
-                            <button tabIndex={-1} className="col-sm-6 btn logFilterBtn">TEXT ONLY</button>
+                        <ButtonGroup className="time-event" justified>
+                            <Button className="btn logFilterBtn logFilterBtnActive" active>ALL</Button>
+                            <Button className="btn logFilterBtn">TEXT ONLY</Button>
+                        </ButtonGroup>
+                        <div id="divCallLogContent">
+                            <ul className="timeline" id="cfsLog1">{listItems}</ul>
                         </div>
                     </div>
-                    <div id="divCallLogContent">
-                        <ul className="timeline" id="cfsLog1">{listItems}</ul>
-                    </div>
                 </div>
-                <div id="callLogFooter" className="box-footer box-calllog">
-                    <div className="form-group-sm">
+                <div className="box-footer box-calllog" id="callLogFooter">
+                    <FormGroup bsSize="sm">
                         <AddTimeEvent addItemProp={this.props.actions.addToTimeEvent} />
-                    </div>
+                    </FormGroup>
                 </div>
             </div>
         );

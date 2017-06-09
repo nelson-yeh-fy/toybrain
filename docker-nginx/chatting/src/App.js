@@ -18,9 +18,9 @@ class App extends Component {
                     <Todo />
                     <Cart />
                 </div>
-                <div>
+                <aside className="control-sidebar control-sidebar-light control-sidebar-open" id="divCallLogPanel">
                     <TimeEvent />
-                </div>
+                </aside>
             </div>
         );
     }
