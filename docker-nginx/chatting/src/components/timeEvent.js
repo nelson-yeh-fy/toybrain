@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button, ButtonGroup, FormGroup } from 'react-bootstrap';
+import { Button, ButtonGroup, FormGroup, Col } from 'react-bootstrap';
 import * as timeEventActionCreators from '../actions/timeEvent';
 import './../css/main.css';
 
@@ -29,12 +29,12 @@ class TimeEventList extends Component {
     render() {
         function createTimeEventLogs(item) {
             return (
-                <li key={item.idx}>
+                <li className="time-label" key={item.idx}>
                     <i className="fa fa-clock-o bg-gray"></i>
-                    <div className="timeline-item">
-                        <span>{item.addon}</span>
+                    <div className="timeline-item">                        
                         <span className="timeline-header"> {item.addby}</span>
                         <span className="timeline-body"> {item.text}</span>
+                        <span>{item.addon}</span>
                     </div>
                 </li>
             );
