@@ -5,3 +5,12 @@ export const addToTimeEvent = (item) => {
         item
     };
 };
+
+export const initializeTimeEvent = (item) => {
+    console.log('initialize time event:', item);
+    return {
+        type: 'INI_TimeEvent',
+        item
+    };
+};
+

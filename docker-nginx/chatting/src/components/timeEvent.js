@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Button, ButtonGroup, FormGroup, Col } from 'react-bootstrap';
+import { Button, ButtonGroup, FormGroup } from 'react-bootstrap';
 import * as timeEventActionCreators from '../actions/timeEvent';
-import './../css/main.css';
+import 'whatwg-fetch';
 
+import './../css/main.css';
 import AddTimeEvent from './addTimeEvent';
 
 class TimeEventList extends Component {
@@ -23,15 +24,52 @@ class TimeEventList extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isLoading: false,
+            hasError: false
         };
     }
 
+    componentDidMount() {
+        // this.fetchData('http://localhost:3001/users');
+        // this.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');
+        this.fetchData('/timeEvent');
+    }
+
+    fetchData(url) {
+        this.setState({ isLoading: true });
+        fetch(url, {
+            method: 'GET'
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    console.log(response.status);
+                    throw Error(response.statusText);
+                }
+                this.setState({ isLoading: false });
+                return response.json();
+            })
+            // .then((items) => this.setState({ items }))
+            .then((items) => this.props.actions.initializeTimeEvent(items))
+            .catch((error) => { this.setState({ hasError: true }); console.log(error); }
+            );
+    }
+
     render() {
+        if (this.state.hasError) {
+            return (<div>
+                <p>Sorry! There was an error loading the items</p>
+            </div>
+            );
+        }
+        if (this.state.isLoading) {
+            return <p>Loading…</p>;
+        }
+
         function createTimeEventLogs(item) {
             return (
                 <li className="time-label" key={item.idx}>
                     <i className="fa fa-clock-o bg-gray"></i>
-                    <div className="timeline-item">                        
+                    <div className="timeline-item">
                         <span className="timeline-header"> {item.addby}</span>
                         <span className="timeline-body"> {item.text}</span>
                         <span>{item.addon}</span>
@@ -59,7 +97,7 @@ class TimeEventList extends Component {
                             <Button className="btn logFilterBtn logFilterBtnActive" active>ALL</Button>
                             <Button className="btn logFilterBtn">TEXT ONLY</Button>
                         </ButtonGroup>
-                        <div id="divCallLogContent">
+                        <div id="divCallLogContent" style={{ height: 300 }}>
                             <ul className="timeline" id="cfsLog1">{listItems}</ul>
                         </div>
                     </div>
