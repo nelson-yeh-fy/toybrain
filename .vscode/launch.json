@@ -2,13 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         { 
-            //https://medium.com/@auchenberg/live-edit-and-debug-your-react-apps-directly-from-vs-code-without-leaving-the-editor-3da489ed905f
-            //https://github.com/facebookincubator/create-react-app
-            //http://www.penta-code.com/how-to-add-redux-to-create-react-app/ //Add Redux into app created by 'create-react-app'
-            //https://github.com/facebookincubator/create-react-app/tree/master/packages/eslint-config-react-app //Add ESlint into app created by 'create-react-app'
-            //(cancel) http://blog.burgettweb.net/2017/01/07/using-bootstrap-with-create-react-app/ //Add Bootstrap into app
-            //http://momentjs.com/  //Add Moment.js for parsing and validating time
-            //https://react-bootstrap.github.io/getting-started.html //Add react-bootstrap into app created by 'create-react-app'
             "name": "Chrome", 
             "type": "chrome", 
             "request": "launch", 

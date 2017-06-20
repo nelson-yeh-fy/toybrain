@@ -32,7 +32,7 @@ class TimeEventList extends Component {
     componentDidMount() {
         // this.fetchData('http://localhost:3001/users');
         // this.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');
-        this.fetchData('/timeEvent');
+        this.fetchData('/api/timeEvents');
     }
 
     fetchData(url) {
@@ -42,7 +42,6 @@ class TimeEventList extends Component {
         })
             .then((response) => {
                 if (!response.ok) {
-                    console.log(response.status);
                     throw Error(response.statusText);
                 }
                 this.setState({ isLoading: false });
@@ -50,7 +49,7 @@ class TimeEventList extends Component {
             })
             // .then((items) => this.setState({ items }))
             .then((items) => this.props.actions.initializeTimeEvent(items))
-            .catch((error) => { this.setState({ hasError: true }); console.log(error); }
+            .catch((error) => { this.setState({ hasError: true }); }
             );
     }
 
@@ -68,7 +67,7 @@ class TimeEventList extends Component {
         function createTimeEventLogs(item) {
             return (
                 <li className="time-label" key={item.idx}>
-                    <i className="fa fa-clock-o bg-gray"></i>
+                    <i className="fa fa-clock-o bg-gray" />
                     <div className="timeline-item">
                         <span className="timeline-header"> {item.addby}</span>
                         <span className="timeline-body"> {item.text}</span>
