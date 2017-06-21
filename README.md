@@ -21,6 +21,7 @@ https://github.com/facebookincubator/create-react-app/tree/master/packages/eslin
 (cancel) http://blog.burgettweb.net/2017/01/07/using-bootstrap-with-create-react-app/ //Add Bootstrap into app
 http://momentjs.com/  //Add Moment.js for parsing and validating time
 https://react-bootstrap.github.io/getting-started.html //Add react-bootstrap into app created by 'create-react-app'
+https://github.com/gaearon/redux-thunk //Add Redux-thunk for async actions, e.g.: fetch webapis
 
 # Add Express WebAPI
 https://code.visualstudio.com/docs/nodejs/nodejs-tutorial //visualStudio code tutorial

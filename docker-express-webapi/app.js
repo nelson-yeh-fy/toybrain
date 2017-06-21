@@ -25,8 +25,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/api/users', users);
+app.use(function(req,res,next){setTimeout(next,2000)}); //Add delay to timeEvent
 app.use('/api/timeEvents', timeEvents); 
-//not timeEvents, but api/timeEvents, this is for dev server's understanding that it will use proxy in package.json '"proxy": "http://localhost:3001"'
+app.use(function(req,res,next){setTimeout(next,0)}); //Remove delay
+//not timeEvents but api/timeEvents, this is for dev server's understanding that it will use proxy in package.json '"proxy": "http://localhost:3001"'
 //in react app: componentDidMount() {
 //     this.fetchData('/api/timeEvents'); // starts from '/api/', will proxy the request to localhost:3001, and query our /api/timeEvents 
 // }

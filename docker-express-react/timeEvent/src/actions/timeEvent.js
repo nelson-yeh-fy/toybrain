@@ -1,16 +1,47 @@
 export const addToTimeEvent = (item) => {
-    console.log('adding time event:', item);
     return {
-        type: 'ADD_TimeEvent',
+        type: 'ADD_TIMEEVENT',
         item
     };
 };
 
-export const initializeTimeEvent = (item) => {
-    console.log('initialize time event:', item);
+export const initTimeEventsWhenFetchSucceed = (item) => {
     return {
-        type: 'INI_TimeEvent',
+        type: 'INI_TIMEEVENT',
         item
     };
 };
 
+export const TimeEventsIsLoading = (bool) => {
+    return {
+        type: 'SET_LOADING_FLAG',
+        isLoading: bool
+    };
+};
+
+export const TimeEventsLoadingError = (bool) => {
+    return {
+        type: 'SET_LOADING_RESULT',
+        hasError: bool
+    };
+};
+
+export function fetchData(url) {
+    return (dispatch) => {
+        dispatch(TimeEventsIsLoading(true));
+
+        fetch(url, {
+            method: 'GET'
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                dispatch(TimeEventsIsLoading(false));
+                return response.json();
+            })
+            .then((items) => dispatch(initTimeEventsWhenFetchSucceed(items)))
+            .catch((error) => dispatch(TimeEventsLoadingError(true)))
+            ;
+    };
+}

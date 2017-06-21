@@ -19,48 +19,30 @@ class TimeEventList extends Component {
                 text: React.PropTypes.string,
                 addby: React.PropTypes.string,
                 addon: React.PropTypes.string
-            })).isRequired
+            })).isRequired,
+        isLoading: React.PropTypes.bool,
+        hasError: React.PropTypes.bool
     }
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: false,
-            hasError: false
         };
     }
 
     componentDidMount() {
         // this.fetchData('http://localhost:3001/users');
         // this.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');
-        this.fetchData('/api/timeEvents');
-    }
-
-    fetchData(url) {
-        this.setState({ isLoading: true });
-        fetch(url, {
-            method: 'GET'
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw Error(response.statusText);
-                }
-                this.setState({ isLoading: false });
-                return response.json();
-            })
-            // .then((items) => this.setState({ items }))
-            .then((items) => this.props.actions.initializeTimeEvent(items))
-            .catch((error) => { this.setState({ hasError: true }); }
-            );
+        this.props.actions.fetchData('/api/timeEvents');
     }
 
     render() {
-        if (this.state.hasError) {
+        if (this.props.hasError) {
             return (<div>
                 <p>Sorry! There was an error loading the items</p>
             </div>
             );
         }
-        if (this.state.isLoading) {
+        if (this.props.isLoading) {
             return <p>Loading…</p>;
         }
 
@@ -113,7 +95,9 @@ class TimeEventList extends Component {
 
 function mapStateToProps(state) {
     return {
-        timeEvents: state.timeEvent // timeEvents means TimeEventList's prop, state.timeEvent means rootReducer.timeEvent
+        timeEvents: state.timeEvents, // timeEvents means TimeEventList's prop, state.timeEvent means rootReducer.timeEvent
+        isLoading: state.timeEventLoadingStatus,
+        hasError: state.timeEventLoadingResult
     };
 }
 function mapDispatchToProps(dispatch) {
