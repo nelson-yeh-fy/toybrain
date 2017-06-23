@@ -4,7 +4,7 @@ import './css/main.css';
 
 import Cart from './components/cart';
 import Todo from './components/todo';
-import TimeEvent from './components/timeEvent';
+import TimeEventContainer from './containers/timeEventContainer';
 
 class App extends Component {
     render() {
@@ -19,7 +19,7 @@ class App extends Component {
                     <Cart />
                 </div>
                 <aside className="control-sidebar control-sidebar-light control-sidebar-open" id="divCallLogPanel">
-                    <TimeEvent />
+                    <TimeEventContainer />
                 </aside>
             </div>
         );

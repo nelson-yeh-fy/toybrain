@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { Button, ButtonGroup, FormGroup } from 'react-bootstrap';
-import * as timeEventActionCreators from '../actions/timeEvent';
-import 'whatwg-fetch';
 
 import './../css/main.css';
 import AddTimeEvent from './addTimeEvent';
@@ -27,12 +23,6 @@ class TimeEventList extends Component {
         super(props);
         this.state = {
         };
-    }
-
-    componentDidMount() {
-        // this.fetchData('http://localhost:3001/users');
-        // this.fetchData('http://5826ed963900d612000138bd.mockapi.io/items');
-        this.props.actions.fetchData('/api/timeEvents');
     }
 
     render() {
@@ -93,16 +83,4 @@ class TimeEventList extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        timeEvents: state.timeEvents, // timeEvents means TimeEventList's prop, state.timeEvent means rootReducer.timeEvent
-        isLoading: state.timeEventLoadingStatus,
-        hasError: state.timeEventLoadingResult
-    };
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(timeEventActionCreators, dispatch)
-    };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(TimeEventList);
+export default TimeEventList;
