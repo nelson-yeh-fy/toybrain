@@ -32,3 +32,8 @@ https://www.fullstackreact.com/articles/how-to-get-create-react-app-to-work-with
 ## CORS issues
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS 
 Proxying API Requests in Development: https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md
+## Make express webAPI restful and db-ready
+https://zellwk.com/blog/crud-express-mongodb/ //connect to mongodb
+https://mlab.com/databases/cad-time-events/collections/timeEvents?q=&f=&s=&pageNum=0&pageSize=10 //my mongolab db
+https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4 //make it restful
+https://www.terlici.com/2015/04/03/mongodb-node-express.html //sample to create a dbhelper
