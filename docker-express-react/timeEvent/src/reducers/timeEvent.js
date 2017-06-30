@@ -30,7 +30,7 @@ export const timeEventLoadingStatus = (state = false, payload) => {
 export const timeEventLoadingResult = (state = false, payload) => {
     switch (payload.type) {
         case 'SET_LOADING_RESULT':
-            return payload.LoadingError;
+            return payload.hasError;
         default:
             return state;
     }

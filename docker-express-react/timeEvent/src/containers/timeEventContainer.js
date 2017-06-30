@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as timeEventActionCreators from '../actions/timeEvent';
 import 'whatwg-fetch';
+import moment from 'moment';
 
 import TimeEventList from '../components/timeEvent';
 
@@ -33,9 +34,29 @@ class TimeEventContainer extends Component {
         this.props.actions.fetchData('/api/timeEvents');
     }
 
+    showResults = values =>
+        new Promise(resolve => {
+            setTimeout(() => { // simulate server latency
+                console.log(values);
+
+                const newTimeEvent = {
+                    idx: Date.now(),
+                    showComments: true,
+                    text: values.text,
+                    addby: values.addby,
+                    addon: moment().calendar()
+                };
+
+                this.props.actions.addTimeEventToDB('/api/timeEvents', newTimeEvent);
+                window.alert(`You submitted:\n\n${JSON.stringify(newTimeEvent, null, 2)}`);
+                resolve();
+            }, 1000);
+        })
+
     render() {
         return (
-            <TimeEventList isLoading={this.props.isLoading} hasError={this.props.hasError} timeEvents={this.props.timeEvents} actions={this.props.actions}/>
+            <TimeEventList isLoading={this.props.isLoading} hasError={this.props.hasError}
+                timeEvents={this.props.timeEvents} actions={this.props.actions} addTimeEventAction={this.showResults} />
         );
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, FormGroup } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 import './../css/main.css';
 import AddTimeEvent from './addTimeEvent';
@@ -7,7 +7,7 @@ import AddTimeEvent from './addTimeEvent';
 class TimeEventList extends Component {
     static propTypes = {
         // https://wecodetheweb.com/2015/06/02/why-react-proptypes-are-important/
-        actions: React.PropTypes.object.isRequired,
+        addTimeEventAction: React.PropTypes.object.isRequired,
         timeEvents: React.PropTypes.arrayOf(
             React.PropTypes.shape({
                 idx: React.PropTypes.number,
@@ -74,9 +74,7 @@ class TimeEventList extends Component {
                     </div>
                 </div>
                 <div className="box-footer box-calllog" id="callLogFooter">
-                    <FormGroup bsSize="sm">
-                        <AddTimeEvent addItemProp={this.props.actions.addToTimeEvent} />
-                    </FormGroup>
+                    <AddTimeEvent onSubmit={this.props.addTimeEventAction} />
                 </div>
             </div>
         );

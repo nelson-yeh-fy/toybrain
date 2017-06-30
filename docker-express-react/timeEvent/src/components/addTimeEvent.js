@@ -1,38 +1,44 @@
 
 import React, { Component } from 'react';
-import { FormControl } from 'react-bootstrap';
-import moment from 'moment';
+import { Field, reduxForm } from 'redux-form';
 
 class AddTimeEvent extends Component {
     static propTypes = {
-        addItemProp: React.PropTypes.func.isRequired,
-    }
-    constructor(props) {
-        super(props);
-        this.onHandleSubmit = this.onHandleSubmit.bind(this);
-    }
-
-    onHandleSubmit(e) {
-        e.preventDefault(); // prevent page reload when click the submit button
-        const item = {
-            idx: Date.now(),
-            showComments: true,
-            text: this._inputElement.value,
-            addby: 'Nelson',
-            addon: moment().calendar()
-        };
-        this.props.addItemProp(item);
-        this._inputElement.value = '';
+        handleSubmit: React.PropTypes.func.isRequired, // this function is provided by redux-form
+        pristine: React.PropTypes.func.isRequired, // this function is provided by redux-form
+        reset: React.PropTypes.func.isRequired, // this function is provided by redux-form
+        submitting: React.PropTypes.func.isRequired // this function is provided by redux-form
     }
 
     render() {
+        const { handleSubmit, pristine, reset, submitting } = this.props;
         return (
-            <form onSubmit={this.onHandleSubmit}>
-                <FormControl className="input-sm box-calllog" componentClass="textarea" rows={4} cols={20} ref={(a) => this._inputElement = a} placeholder="Enter time event..." />
-                <button type="submit">Submit</button>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Add by</label>
+                    <div>
+                        <Field name="addby" component="input" type="text" placeholder="Nelson" />
+                    </div>
+                </div>
+                <div>
+                    <label>text</label>
+                    <div>
+                        <Field name="text" component="textarea" placeholder="Enter time event..." className="input-sm box-calllog" rows={4} cols={20} />
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" disabled={pristine || submitting}>Submit</button>
+                    <button type="button" disabled={pristine || submitting} onClick={reset}>
+                        Clear Values
+                    </button>
+                </div>
             </form>
         );
     }
 }
 
-export default AddTimeEvent;
+const DecoratedAddTimeEvent = reduxForm({
+    form: 'AddTimeEvent' // a unique name for this form
+})(AddTimeEvent);
+
+export default DecoratedAddTimeEvent;

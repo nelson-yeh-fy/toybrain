@@ -22,6 +22,7 @@ https://github.com/facebookincubator/create-react-app/tree/master/packages/eslin
 http://momentjs.com/  //Add Moment.js for parsing and validating time
 https://react-bootstrap.github.io/getting-started.html //Add react-bootstrap into app created by 'create-react-app'
 https://github.com/gaearon/redux-thunk //Add Redux-thunk for async actions, e.g.: fetch webapis
+http://redux-form.com/6.8.0/docs/GettingStarted.md/ //Add Redux-form for better submit form validation
 
 # Add Express WebAPI
 https://code.visualstudio.com/docs/nodejs/nodejs-tutorial //visualStudio code tutorial
@@ -37,3 +38,4 @@ https://zellwk.com/blog/crud-express-mongodb/ //connect to mongodb
 https://mlab.com/databases/cad-time-events/collections/timeEvents?q=&f=&s=&pageNum=0&pageSize=10 //my mongolab db
 https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4 //make it restful
 https://www.terlici.com/2015/04/03/mongodb-node-express.html //sample to create a dbhelper
+https://gist.github.com/iksose/9401758 //sample to manipulate mongodb in dbhelper

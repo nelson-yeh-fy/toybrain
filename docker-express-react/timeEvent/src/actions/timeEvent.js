@@ -45,3 +45,30 @@ export function fetchData(url) {
             ;
     };
 }
+
+export function addTimeEventToDB(url, item) {
+    return (dispatch) => {
+        console.log(JSON.stringify(item));
+        dispatch(TimeEventsIsLoading(true));
+        fetch(url,
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(item)
+            }
+        )
+            .then((response) => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                dispatch(TimeEventsIsLoading(false));
+                return;
+            })
+            // .then((items) => dispatch(initTimeEventsWhenFetchSucceed(items)))
+            .catch((error) => dispatch(TimeEventsLoadingError(true)))
+            ;
+    };
+}
