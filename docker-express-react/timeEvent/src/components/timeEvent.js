@@ -7,17 +7,19 @@ import AddTimeEvent from './addTimeEvent';
 class TimeEventList extends Component {
     static propTypes = {
         // https://wecodetheweb.com/2015/06/02/why-react-proptypes-are-important/
-        addTimeEventAction: React.PropTypes.object.isRequired,
+        addTimeEventAction: React.PropTypes.func.isRequired,
+        setDisplayUserCommentOnlyAction: React.PropTypes.func.isRequired,
         timeEvents: React.PropTypes.arrayOf(
             React.PropTypes.shape({
                 idx: React.PropTypes.number,
-                showComments: React.PropTypes.bool,
+                isUserComment: React.PropTypes.bool,
                 text: React.PropTypes.string,
                 addby: React.PropTypes.string,
                 addon: React.PropTypes.string
             })).isRequired,
-        isLoading: React.PropTypes.bool,
-        hasError: React.PropTypes.bool
+        isUserCommentFiltered: React.PropTypes.bool.isRequired,
+        isLoading: React.PropTypes.bool.isRequired,
+        hasError: React.PropTypes.bool.isRequired
     }
     constructor(props) {
         super(props);
@@ -48,7 +50,18 @@ class TimeEventList extends Component {
                 </li>
             );
         }
-        const listItems = this.props.timeEvents.map(createTimeEventLogs);
+
+        function getVisibleTimeEvents(items, filter) {
+            switch (filter) {
+                case true:
+                    return items.filter(item => item.isUserComment);
+                default:
+                    return items;
+            }
+        }
+
+        const filteredItems = getVisibleTimeEvents(this.props.timeEvents, this.props.isUserCommentFiltered);
+        const listItems = filteredItems.map(createTimeEventLogs);
 
         return (
             <div className="box box-calllog">
@@ -65,8 +78,8 @@ class TimeEventList extends Component {
                 <div className="box-calllog" style={{ marginTop: 0 }}>
                     <div id="timeEventBtns">
                         <ButtonGroup className="time-event" justified>
-                            <Button className="btn logFilterBtn logFilterBtnActive" active>ALL</Button>
-                            <Button className="btn logFilterBtn">TEXT ONLY</Button>
+                            <Button className="btn logFilterBtn logFilterBtnActive" active onClick={() => this.props.setDisplayUserCommentOnlyAction(false)}>ALL</Button>
+                            <Button className="btn logFilterBtn" onClick={() => this.props.setDisplayUserCommentOnlyAction(true)}>TEXT ONLY</Button>
                         </ButtonGroup>
                         <div id="divCallLogContent" style={{ height: 300 }}>
                             <ul className="timeline" id="cfsLog1">{listItems}</ul>

@@ -3,12 +3,13 @@ import { reducer as reduxFormReducer  } from 'redux-form';
 
 import todo from './todo';
 import cart from './cart';
-import { timeEvents, timeEventLoadingStatus, timeEventLoadingResult } from './timeEvent';
+import { timeEvents, timeEventShowsUserCommentOnly, timeEventLoadingStatus, timeEventLoadingResult } from './timeEvent';
 
 const rootReducer = combineReducers({
     cart,
     todo,
     timeEvents,
+    timeEventShowsUserCommentOnly,
     timeEventLoadingStatus,
     timeEventLoadingResult,
     form: reduxFormReducer

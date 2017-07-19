@@ -1,7 +1,7 @@
 // Redux - Reducers Default State for TodoList
 const initialTimeEventList = {
     idx: 1494578015311,
-    showComments: true,
+    isUserComment: true,
     text: 'Dispatching unit 0310 to CFS2017-00123',
     addby: 'defaultState',
     addon: '2017-05-06'
@@ -13,6 +13,17 @@ export const timeEvents = (state = [initialTimeEventList], payload) => {
             return [...state, payload.item];
         case 'INI_TIMEEVENT':
             return [...state, ...payload.item];
+        // case 'TOOGLE_TIMEEVENT_FILTER':
+        //     return state.filter(eachitem => eachitem.showComments === payload.FilterToDisplayAll);
+        default:
+            return state;
+    }
+};
+
+export const timeEventShowsUserCommentOnly = (state = false, payload) => {
+    switch (payload.type) {
+        case 'SHOW_USER_COMMENT_ONLY':
+            return payload.isShowUserCommentOnly;
         default:
             return state;
     }

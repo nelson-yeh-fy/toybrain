@@ -14,13 +14,14 @@ class TimeEventContainer extends Component {
         timeEvents: React.PropTypes.arrayOf(
             React.PropTypes.shape({
                 idx: React.PropTypes.number,
-                showComments: React.PropTypes.bool,
+                isUserComment: React.PropTypes.bool,
                 text: React.PropTypes.string,
                 addby: React.PropTypes.string,
                 addon: React.PropTypes.string
             })).isRequired,
-        isLoading: React.PropTypes.bool,
-        hasError: React.PropTypes.bool
+        isShowUserCommentOnly: React.PropTypes.bool.isRequired,
+        isLoading: React.PropTypes.bool.isRequired,
+        hasError: React.PropTypes.bool.isRequired
     }
     constructor(props) {
         super(props);
@@ -41,7 +42,7 @@ class TimeEventContainer extends Component {
 
                 const newTimeEvent = {
                     idx: Date.now(),
-                    showComments: true,
+                    isUserComment: values.isUserComment,
                     text: values.text,
                     addby: values.addby,
                     addon: moment().calendar()
@@ -55,8 +56,9 @@ class TimeEventContainer extends Component {
 
     render() {
         return (
-            <TimeEventList isLoading={this.props.isLoading} hasError={this.props.hasError}
-                timeEvents={this.props.timeEvents} actions={this.props.actions} addTimeEventAction={this.showResults} />
+            <TimeEventList timeEvents={this.props.timeEvents} addTimeEventAction={this.showResults} setDisplayUserCommentOnlyAction={this.props.actions.showUserCommentOnly}
+                isUserCommentFiltered={this.props.isShowUserCommentOnly} isLoading={this.props.isLoading} hasError={this.props.hasError}
+                />
         );
     }
 }
@@ -64,6 +66,7 @@ class TimeEventContainer extends Component {
 function mapStateToProps(state) {
     return {
         timeEvents: state.timeEvents, // timeEvents means TimeEventList's prop, state.timeEvent means rootReducer.timeEvent
+        isShowUserCommentOnly: state.timeEventShowsUserCommentOnly,
         isLoading: state.timeEventLoadingStatus,
         hasError: state.timeEventLoadingResult
     };

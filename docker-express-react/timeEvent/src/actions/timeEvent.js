@@ -12,6 +12,13 @@ export const initTimeEventsWhenFetchSucceed = (item) => {
     };
 };
 
+export const showUserCommentOnly = (bool) => {
+    return {
+        type: 'SHOW_USER_COMMENT_ONLY',
+        isShowUserCommentOnly: bool
+    };
+};
+
 export const TimeEventsIsLoading = (bool) => {
     return {
         type: 'SET_LOADING_FLAG',
