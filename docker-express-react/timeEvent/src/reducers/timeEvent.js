@@ -20,6 +20,15 @@ export const timeEvents = (state = [initialTimeEventList], payload) => {
     }
 };
 
+export const timeEventShow = (state = true, payload) => {
+    switch (payload.type) {
+        case 'SHOW_TIMEEVENT':
+            return payload.isShowTimeEvent;
+        default:
+            return state;
+    }
+};
+
 export const timeEventShowsUserCommentOnly = (state = false, payload) => {
     switch (payload.type) {
         case 'SHOW_USER_COMMENT_ONLY':

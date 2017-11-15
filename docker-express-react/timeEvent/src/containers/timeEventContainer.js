@@ -19,6 +19,7 @@ class TimeEventContainer extends Component {
                 addby: React.PropTypes.string,
                 addon: React.PropTypes.string
             })).isRequired,
+        isShowTimeEvent: React.PropTypes.bool.isRequired,
         isShowUserCommentOnly: React.PropTypes.bool.isRequired,
         isLoading: React.PropTypes.bool.isRequired,
         hasError: React.PropTypes.bool.isRequired
@@ -54,11 +55,32 @@ class TimeEventContainer extends Component {
             }, 1000);
         })
 
+    getTimeEventComponent() {
+        switch (this.props.isShowTimeEvent) {
+            case true:
+                return (<TimeEventList timeEvents={this.props.timeEvents} addTimeEventAction={this.showResults}
+                    setDisplayTimeEventAction={this.props.actions.showTimeEvent}
+                    setDisplayUserCommentOnlyAction={this.props.actions.showUserCommentOnly}
+                    isUserCommentFiltered={this.props.isShowUserCommentOnly} isLoading={this.props.isLoading} hasError={this.props.hasError}
+                />);
+            default:
+                return (
+                    <aside className="control-sidebar" id="divCallLogPanel">
+                        <div className="box box-calllog" style={{ paddingRight: 0 }}>
+                            <div className="calllog-extrude">
+                                <a href="#" data-toggle="control-sidebar" id="calllogLink" onClick={() => this.props.actions.showTimeEvent(true)} >
+                                    <i className="fa icon-mdt_collapse_toleft" id="extrudeIcon" />
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                );
+        }
+    }
+
     render() {
         return (
-            <TimeEventList timeEvents={this.props.timeEvents} addTimeEventAction={this.showResults} setDisplayUserCommentOnlyAction={this.props.actions.showUserCommentOnly}
-                isUserCommentFiltered={this.props.isShowUserCommentOnly} isLoading={this.props.isLoading} hasError={this.props.hasError}
-                />
+            this.getTimeEventComponent()
         );
     }
 }
@@ -66,6 +88,7 @@ class TimeEventContainer extends Component {
 function mapStateToProps(state) {
     return {
         timeEvents: state.timeEvents, // timeEvents means TimeEventList's prop, state.timeEvent means rootReducer.timeEvent
+        isShowTimeEvent: state.timeEventShow,
         isShowUserCommentOnly: state.timeEventShowsUserCommentOnly,
         isLoading: state.timeEventLoadingStatus,
         hasError: state.timeEventLoadingResult

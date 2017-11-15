@@ -12,6 +12,13 @@ export const initTimeEventsWhenFetchSucceed = (item) => {
     };
 };
 
+export const showTimeEvent = (bool) => {
+    return {
+        type: 'SHOW_TIMEEVENT',
+        isShowTimeEvent: bool
+    };
+};
+
 export const showUserCommentOnly = (bool) => {
     return {
         type: 'SHOW_USER_COMMENT_ONLY',

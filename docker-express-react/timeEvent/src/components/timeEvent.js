@@ -8,6 +8,7 @@ class TimeEventList extends Component {
     static propTypes = {
         // https://wecodetheweb.com/2015/06/02/why-react-proptypes-are-important/
         addTimeEventAction: React.PropTypes.func.isRequired,
+        setDisplayTimeEventAction: React.PropTypes.func.isRequired,
         setDisplayUserCommentOnlyAction: React.PropTypes.func.isRequired,
         timeEvents: React.PropTypes.arrayOf(
             React.PropTypes.shape({
@@ -64,32 +65,33 @@ class TimeEventList extends Component {
         const listItems = filteredItems.map(createTimeEventLogs);
 
         return (
-            <div className="box box-calllog">
-                <div className="calllog-extrude">
-                    <a href="#" data-toggle="control-sidebar" id="calllogLink">
-                        <i className="fa icon-mdt_collapse_toright" id="extrudeIcon" />
-                    </a>
-                </div>
-                <div className="box-header box-calllog" id="timeEventHeader">
-                    <span className="" id="timeEventTile">CFS Time Event</span>
-                    <span id="timeCfsNo" />
-                    <i className="fa icon-mdt_maximize" id="btnExpandLog" />
-                </div>
-                <div className="box-calllog" style={{ marginTop: 0 }}>
-                    <div id="timeEventBtns">
-                        <ButtonGroup className="time-event" justified>
-                            <Button className="btn logFilterBtn logFilterBtnActive" active onClick={() => this.props.setDisplayUserCommentOnlyAction(false)}>ALL</Button>
-                            <Button className="btn logFilterBtn" onClick={() => this.props.setDisplayUserCommentOnlyAction(true)}>TEXT ONLY</Button>
-                        </ButtonGroup>
-                        <div id="divCallLogContent" style={{ height: 300 }}>
-                            <ul className="timeline" id="cfsLog1">{listItems}</ul>
+            <aside className="control-sidebar control-sidebar-open" id="divCallLogPanel">
+                <div className="box box-calllog">
+                    <div className="calllog-extrude">
+                        <a href="#" data-toggle="control-sidebar" id="calllogLink" onClick={() => this.props.setDisplayTimeEventAction(false)}>
+                            <i className="fa icon-mdt_collapse_toright" id="extrudeIcon" />
+                        </a>
+                    </div>
+                    <div className="box-header box-calllog" id="timeEventHeader">
+                        <span className="" id="timeEventTile">CFS Time Event</span>
+                        <span id="timeCfsNo" />
+                    </div>
+                    <div className="box-calllog" style={{ marginTop: 0 }}>
+                        <div id="timeEventBtns">
+                            <ButtonGroup className="time-event" justified>
+                                <Button className="btn logFilterBtn logFilterBtnActive" active onClick={() => this.props.setDisplayUserCommentOnlyAction(false)}>ALL</Button>
+                                <Button className="btn logFilterBtn" onClick={() => this.props.setDisplayUserCommentOnlyAction(true)}>TEXT ONLY</Button>
+                            </ButtonGroup>
+                            <div id="divCallLogContent" style={{ height: 300 }}>
+                                <ul className="timeline" id="cfsLog1">{listItems}</ul>
+                            </div>
                         </div>
                     </div>
+                    <div className="box-footer box-calllog" id="callLogFooter">
+                        <AddTimeEvent onSubmit={this.props.addTimeEventAction} />
+                    </div>
                 </div>
-                <div className="box-footer box-calllog" id="callLogFooter">
-                    <AddTimeEvent onSubmit={this.props.addTimeEventAction} />
-                </div>
-            </div>
+            </aside>
         );
     }
 }
