@@ -17,6 +17,12 @@
   color: white;
 }
 
+.App-mdtframe {  
+  height: 765px;
+  font-family: sans-serif;
+  overflow-y: auto;
+}
+
 .App-intro {  
   font-size: large;
   padding: 30px;

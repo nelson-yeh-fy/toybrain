@@ -7,6 +7,8 @@ import MdtControlBar from '../components/mdtControlBar';
 import MdtCfsBrief from '../components/mdtCfsBrief';
 import MdtCfsInfo from '../components/mdtCfsInfo';
 
+import './../css/main.css';
+
 class MdtContainer extends Component {
     constructor(props) {
         super(props);
@@ -16,10 +18,10 @@ class MdtContainer extends Component {
 
     render() {
         return (
-            <div>
-            <MdtControlBar />
-            <MdtCfsBrief />
-            <MdtCfsInfo />
+            <div className="App-mdtframe skin-blue sidebar-mini control-sidebar-open night-body">
+                <MdtControlBar />
+                <MdtCfsBrief />
+                <MdtCfsInfo />
             </div>
         );
     }

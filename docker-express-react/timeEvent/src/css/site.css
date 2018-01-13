@@ -1,0 +1,367 @@
+﻿.hide_panel {
+	display: none;
+}
+
+label {
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+	font-weight: normal;
+}
+
+.btn_unit_status {
+	width: 100px;
+	height: 60px;
+	display: inline-block;
+	border: 1px solid;
+	border-radius: 3px;
+	font-size: 16px;
+	word-wrap: break-word;
+	line-height: 15px;
+}
+
+.btn-normal {
+	width: 100px;
+	height: 25px;
+}
+
+.btn-small {
+	width: 80px;
+	height: 22px;
+}
+
+/*input.error { border: 1px dotted red; }*/
+.error {
+	color: red;
+}
+
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+
+
+.custom-combobox {
+	position: relative;
+	display: inline-block;
+}
+
+.custom-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-left: -1px;
+	padding: 0;
+}
+
+.custom-combobox-input {
+	margin: 0;
+	padding: 3px 6px;
+}
+
+.ui-autocomplete {
+	max-height: 200px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+}
+
+.ui-front {
+	z-index: 1050;
+}
+
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+* html .ui-autocomplete {
+	height: 100px;
+}
+
+.cfs_status_item {
+	border-top: 3px solid red;
+	background-color: lightyellow;
+}
+
+.notification-container {
+	background-color: #fefefe;
+	-webkit-box-shadow: 0px 0px 10px 3px rgba(170,170,170,1);
+	-moz-box-shadow: 0px 0px 10px 3px rgba(170,170,170,1);
+	box-shadow: 0px 0px 10px 3px rgba(170,170,170,1);
+}
+
+.list-notification > li {
+	padding: 0px 10px;
+	vertical-align: top;
+}
+
+	.list-notification > li:nth-of-type(odd) {
+		background-color: #f9f9f9;
+	}
+
+	.list-notification > li div, .list-notification > li span, .list-notification > li a {
+		display: inline-block;
+	}
+
+.list-hover > li:hover {
+	background-color: #eeeeee;
+}
+
+.notification-title {
+	font-weight: bold;
+}
+
+.poptip {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	padding: 6px 10px 5px;
+	*padding: 7px 10px 4px;
+	line-height: 16px;
+	color: #DB7C22;
+	font-size: 12px;
+	background-color: #FFFCEF;
+	border: solid 1px #FFBB76;
+	border-radius: 2px;
+	box-shadow: 0 0 3px #ddd;
+	z-index:3000;
+}
+
+.poptip-arrow {
+	position: absolute;
+	overflow: hidden;
+	font-style: normal;
+	font-family: simsun;
+	font-size: 12px;
+	text-shadow: 0 0 2px #ccc;
+}
+
+	.poptip-arrow em, .poptip-arrow i {
+		position: absolute;
+		left: 0;
+		top: 0;
+		font-style: normal;
+	}
+
+	.poptip-arrow em {
+		color: #FFBB76;
+	}
+
+	.poptip-arrow i {
+		color: #FFFCEF;
+		text-shadow: none;
+	}
+
+.poptip-arrow-top, .poptip-arrow-bottom {
+	height: 6px;
+	width: 12px;
+	left: 12px;
+	margin-left: -6px;
+}
+
+.poptip-arrow-left, .poptip-arrow-right {
+	height: 12px;
+	width: 6px;
+	top: 12px;
+	margin-top: -6px;
+}
+
+.poptip-arrow-top {
+	top: -6px;
+}
+
+	.poptip-arrow-top em {
+		top: -1px;
+	}
+
+	.poptip-arrow-top i {
+		top: 0px;
+	}
+
+.poptip-arrow-bottom {
+	bottom: -6px;
+}
+
+	.poptip-arrow-bottom em {
+		top: -8px;
+	}
+
+	.poptip-arrow-bottom i {
+		top: -9px;
+	}
+
+.poptip-arrow-left {
+	left: -6px;
+}
+
+	.poptip-arrow-left em {
+		left: 1px;
+	}
+
+	.poptip-arrow-left i {
+		left: 2px;
+	}
+
+.poptip-arrow-right {
+	right: -6px;
+}
+
+	.poptip-arrow-right em {
+		left: -6px;
+	}
+
+	.poptip-arrow-right i {
+		left: -7px;
+	}
+
+.valid-error {
+	border-color: red;
+}
+
+.label-large {
+	display: inline;
+	padding: .2em .6em .3em;
+	font-weight: bold;
+	line-height: 1;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: .25em;
+	background-color: #EEEEEE;
+}
+
+.label-NEW {
+	color: #00a65a;
+}
+
+.label-DISPATCHED {
+	color: #367fa9;
+}
+
+.label-CLOSED {
+	color: #d73925;
+}
+
+.label-REOPENED {
+	color: #e08e0b;
+}
+
+.label-ALL {
+	color: #00acd6;
+}
+
+.box-header-btn-group {
+	margin: -2px 0px 0px 0px;
+}
+
+.unit-status {
+	color: #185598;
+}
+
+.form-group-sm {
+	padding-top: 2px;
+}
+
+table#tblUnitList tbody td {
+	vertical-align: middle;
+}
+
+table#tblUnitList th {
+	vertical-align: middle;
+}
+
+.btn-info {
+	background-color: #32bcde;
+	border-color: #32bcde;
+}
+
+.caption-label {
+	color: #000000;
+}
+
+#txtCfsDesc {
+	height: 50px;
+}
+
+.upper-case {
+	text-transform: uppercase;
+}
+
+.input-textbox {
+	box-shadow: none;
+	border: 1px solid #d2d6de;
+	border-radius: 2px;
+	line-height: 1;
+}
+
+.cmd-dispatch-label {
+	font-weight: bold;
+	color: #5d7483;
+}
+
+.textarea-nosize {
+	resize: none;
+}
+
+.access-cfs-item {
+	margin: 0px;
+	height: auto;
+	padding: 3px 0px 3px 0px;
+	word-wrap:break-word;
+	word-break: keep-all;
+}
+
+.cfsUnitTimerElapsed_warn{
+	color:#ffff00 !important;
+	background-color:#ff0000;
+	animation:flash 1s linear infinite;
+}
+.cfsUnitTimerElapsed_warn_no_flashing{
+	color:#ffff00 !important;
+	background-color:#ff0000;
+}
+@keyframes flash{
+	from {
+	opacity: 0;
+	}
+	to {
+	opacity: 1;
+	}
+}
+.cfsUnitTimerElapsed{
+	padding-left:5px;
+	padding-right:5px;
+	color:#ff0000;
+}
+
+.inline_block {
+	display: inline-block;
+}
+
+.inline {
+	display: inline;
+}
+
+.sendStatusWrapper {
+	padding-left: 5px;
+}
+
+.counterTipWrapper {
+	
+}
+
+.txt_counter_tip {
+	padding:0px 3px 0px 3px;
+	font-size:110%; 
+	display:inline-block !important;
+}
+
+.txt_counter_tip_label {
+	display:inline-block !important;
+}
+
+.cfs_log_item_btn {
+	display: inline-block;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	font-size: 24px;
+}

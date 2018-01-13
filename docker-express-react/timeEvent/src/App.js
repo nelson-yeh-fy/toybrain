@@ -15,16 +15,12 @@ class App extends Component {
                     <img src={logo} className="App-logo" alt="logo" />
                     <h3>Welcome to dockerized board</h3>
                 </div>
-                <div>
-                    <MdtContainer />
-                </div>
+                <MdtContainer />
                 <div className="App-intro" id="scrollbar-style-5">
                     <Todo />
                     <Cart />
                 </div>
-                <div>
-                    <TimeEventContainer />
-                </div>
+                <TimeEventContainer />
             </div>
         );
     }

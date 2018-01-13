@@ -1,0 +1,29 @@
+﻿body {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+	line-height: 18px;
+	color: #404040;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+#main {
+	margin: 0;
+}
+
+.message-panel {
+	background-color: #ecf0f5; /*border: 1px solid lightgray;*/
+	width: 450px;
+	position: fixed;
+	right: 0;
+	top: 50px;
+	/*height: 550px;*/
+	max-height: 800px;
+	display: none;
+}

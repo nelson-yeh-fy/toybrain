@@ -1,0 +1,237 @@
+@font-face {
+  font-family: 'mdticon';
+  src:  url('fonts/mdticon.eot?ivv3sh');
+  src:  url('fonts/mdticon.eot?ivv3sh#iefix') format('embedded-opentype'),
+    url('fonts/mdticon.ttf?ivv3sh') format('truetype'),
+    url('fonts/mdticon.woff?ivv3sh') format('woff'),
+    url('fonts/mdticon.svg?ivv3sh#mdticon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-mdt"], [class*="icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'mdticon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mdt_add:before {
+  content: "\e900";
+}
+.icon-mdt_addcase:before {
+  content: "\e901";
+}
+.icon-mdt_admin:before {
+  content: "\e902";
+}
+.icon-mdt_advsearch:before {
+  content: "\e903";
+}
+.icon-mdt_annunce:before {
+  content: "\e904";
+}
+.icon-mdt_arrowdown:before {
+  content: "\e905";
+}
+.icon-mdt_arrowleft:before {
+  content: "\e906";
+}
+.icon-mdt_arrowright:before {
+  content: "\e907";
+}
+.icon-mdt_arrowup:before {
+  content: "\e908";
+}
+.icon-mdt_assigned:before {
+  content: "\e909";
+}
+.icon-mdt_building:before {
+  content: "\e90a";
+}
+.icon-mdt_carddevice:before {
+  content: "\e90b";
+}
+.icon-mdt_cfsstatus:before {
+  content: "\e90c";
+}
+.icon-mdt_change:before {
+  content: "\e90d";
+}
+.icon-mdt_chat:before {
+  content: "\e90e";
+}
+.icon-mdt_checked_1:before {
+  content: "\e90f";
+}
+.icon-mdt_checked:before {
+  content: "\e910";
+}
+.icon-mdt_collapse_toleft:before {
+  content: "\e911";
+}
+.icon-mdt_collapse_toright:before {
+  content: "\e912";
+}
+.icon-mdt_delete_1:before {
+  content: "\e913";
+}
+.icon-mdt_delete:before {
+  content: "\e914";
+}
+.icon-mdt_driection:before {
+  content: "\e915";
+}
+.icon-mdt_drive:before {
+  content: "\e916";
+}
+.icon-mdt_edit:before {
+  content: "\e917";
+}
+.icon-mdt_ems:before {
+  content: "\e918";
+}
+.icon-mdt_eticket:before {
+  content: "\e919";
+}
+.icon-mdt_fire:before {
+  content: "\e91a";
+}
+.icon-mdt_goto:before {
+  content: "\e91b";
+}
+.icon-mdt_guide:before {
+  content: "\e91c";
+}
+.icon-mdt_history:before {
+  content: "\e91d";
+}
+.icon-mdt_home:before {
+  content: "\e91e";
+}
+.icon-mdt_inbox:before {
+  content: "\e91f";
+}
+.icon-mdt_location:before {
+  content: "\e920";
+}
+.icon-mdt_map:before {
+  content: "\e921";
+}
+.icon-mdt_maximize:before {
+  content: "\e922";
+}
+.icon-mdt_minimize:before {
+  content: "\e923";
+}
+.icon-mdt_moon:before {
+  content: "\e924";
+}
+.icon-mdt_msg:before {
+  content: "\e925";
+}
+.icon-mdt_nearby:before {
+  content: "\e926";
+}
+.icon-mdt_nearbyunit:before {
+  content: "\e927";
+}
+.icon-mdt_nocall:before {
+  content: "\e928";
+}
+.icon-mdt_nodata:before {
+  content: "\e929";
+}
+.icon-mdt_person:before {
+  content: "\e92a";
+}
+.icon-mdt_police:before {
+  content: "\e92b";
+}
+.icon-mdt_policemark:before {
+  content: "\e92c";
+}
+.icon-mdt_refresh:before {
+  content: "\e92d";
+}
+.icon-mdt_remove:before {
+  content: "\e92e";
+}
+.icon-mdt_scene:before {
+  content: "\e92f";
+}
+.icon-mdt_search:before {
+  content: "\e930";
+}
+.icon-mdt_searchcar:before {
+  content: "\e931";
+}
+.icon-mdt_searchcase:before {
+  content: "\e932";
+}
+.icon-mdt_searcheticket:before {
+  content: "\e933";
+}
+.icon-mdt_searchpeople:before {
+  content: "\e934";
+}
+.icon-mdt_setting:before {
+  content: "\e935";
+}
+.icon-mdt_star:before {
+  content: "\e936";
+}
+.icon-mdt_stopcar:before {
+  content: "\e937";
+}
+.icon-mdt_sun:before {
+  content: "\e938";
+}
+.icon-mdt_supervisor:before {
+  content: "\e939";
+}
+.icon-mdt_time:before {
+  content: "\e93a";
+}
+.icon-mdt_timeevent:before {
+  content: "\e93b";
+}
+.icon-mdt_traffic:before {
+  content: "\e93c";
+}
+.icon-mdt_transit:before {
+  content: "\e93d";
+}
+.icon-mdt_transport:before {
+  content: "\e93e";
+}
+.icon-mdt_unassigned:before {
+  content: "\e93f";
+}
+.icon-mdt_write:before {
+  content: "\e940";
+}
+.icon-mdt_zone:before {
+  content: "\e941";
+}
+.icon-mdt_zoomin:before {
+  content: "\e942";
+}
+.icon-mdt_zoomout:before {
+  content: "\e943";
+}
+.icon-scan:before {
+  content: "\e944";
+}
+.icon-timer:before {
+  content: "\e945";
+}
+
