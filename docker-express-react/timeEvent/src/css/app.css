@@ -1,5 +1,4 @@
 .App {
-  text-align: left;
   width: 1024px;
 	margin: auto;  
 }
@@ -19,8 +18,11 @@
 
 .App-mdtframe {  
   height: 765px;
-  font-family: sans-serif;
-  overflow-y: auto;
+  width: 1024px;
+}
+
+.App-mdtframe .CfsBrief{  
+  height: 200rem;
 }
 
 .App-intro {  
