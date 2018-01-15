@@ -1,6 +1,7 @@
 .App {
     text-align: left;
     background-color: #5c5b5c;
+    color: #ffffff;
     height: 600px;
     width: 800px;
   }
@@ -10,6 +11,16 @@
     height: 80px;
   }
   
+  .App-sidebar {
+    text-align: center;
+    background-color: #5c5b5c;
+    padding: 0px;
+  }
+
+  .App-brief-progress {
+    text-align: right;
+  }
+
   .App-header {
     background-color: #222;
     height: 110px;
@@ -26,6 +37,8 @@
     padding: 10px;
     color: white;
   }
+
+
   
   @keyframes App-logo-spin {
     from { transform: rotate(0deg); }
