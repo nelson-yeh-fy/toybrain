@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/fontawesome-all';
 import './css/App.css';
 
-import { Container, Row, Col, Button, Breadcrumb, BreadcrumbItem, Jumbotron, Collapse, CardBody, Card } from 'reactstrap';
+import {
+  Button, Breadcrumb, BreadcrumbItem, Jumbotron, Collapse, CardBody, Card, Badge, ListGroup, ListGroupItem,
+  Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem, Progress
+} from 'reactstrap';
 
 class App extends Component {
 
@@ -18,87 +27,117 @@ class App extends Component {
 
   render() {
     return (
-      <Container className="App">
-        <Row>
-          {
-            //SideBar Menu Area
-          }
-          <Col className="App-sidebar" xs="2" sm="2" md="2" lg="2" xl="2">
-            <img src={logo} className="App-logo" alt="logo" />
-            <br />
-            <Button outline color="info" size="lg" block>CFS Box</Button>
-            <Button outline color="info" size="lg" block>Init CFS</Button>{' '}
-            <Button outline color="info" size="lg" block>NCIC</Button>{' '}
-            <Button outline color="info" size="lg" block>Map</Button>{' '}
-            <Button outline color="info" size="lg" block>Chat</Button>{' '}
-            <Button outline color="info" size="lg" block>Super</Button>{' '}
-          </Col>
+      <div>
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-5 col-md-6 col-lg-6">.col-sm-5 .col-md-6</div>
+            <div className="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0 col-lg-6">.col-sm-5 .col-sm-offset-2 .col-md-6 .col-md-offset-0</div>
+          </div>
+        </div>
 
-          <Col xs="10" sm="10" md="10" lg="10" xl="10">
+        <div className="container App">
+          <div className="row">
             {
-              //CFS Brief Information Area
+              //SideBar Menu Area
             }
-            <Row className="cfs-brief">
-              <Col xs="3" sm="3" md="3" lg="3" xl="3">
-                <Breadcrumb tag="nav">
-                  <BreadcrumbItem tag="a" href="#">#2018-000132</BreadcrumbItem>
-                </Breadcrumb>
-              </Col>
-              <Col xs="9" sm="9" md="9" lg="9" xl="9">
-                <Breadcrumb tag="nav" className="App-brief-progress">
-                  <BreadcrumbItem tag="a" href="#">initiated</BreadcrumbItem>
-                  <BreadcrumbItem tag="a" href="#">dispatched</BreadcrumbItem>
-                  <BreadcrumbItem tag="a" href="#">on scene</BreadcrumbItem>
-                  <BreadcrumbItem active tag="span">completed</BreadcrumbItem>
-                </Breadcrumb>
-              </Col>
-            </Row>
+            <div className="col-2 mdt-sidebar">
+              <img src={logo} className="App-logo" alt="logo" />
+              <ListGroup>
+                <ListGroupItem active tag="button" action>CFS Box&nbsp;&nbsp;<Badge color="warning">4</Badge></ListGroupItem>
+                <ListGroupItem tag="button" action>Initiate CFS</ListGroupItem>
+                <ListGroupItem tag="button" action>NCIC</ListGroupItem>
+                <ListGroupItem tag="button" action>Map</ListGroupItem>
+                <ListGroupItem tag="button" action>Chat</ListGroupItem>
+                <ListGroupItem tag="button" action>Super</ListGroupItem>
+                <ListGroupItem divider />
+                <ListGroupItem divider />
+                <ListGroupItem> <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret style={{ 'font-size': '14px' }}>
+                    Unit 501 (o)
+                  </DropdownToggle>
+                  <DropdownMenu >
+                    <DropdownItem>
+                      Available
+                    </DropdownItem>
+                    <DropdownItem>
+                      En Route
+                    </DropdownItem>
+                    <DropdownItem>
+                      On Scene
+                    </DropdownItem>
+                    <DropdownItem>
+                      Off Duty
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>
+                      Reset
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+                </ListGroupItem>
+              </ListGroup>
+            </div>
 
-            <Row>
-              <Col xs="10" sm="10" md="10" lg="10" xl="10">
-                {
-                  //CFS Summary, and other related components Area
-                }
-                <Row>
-                  <Jumbotron style={{ color: '#222' }}>
-                    <h1 className="display-5">CFS Summary, and other components</h1>
-                    <p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
+            <div className="col-10">
+              {
+                //CFS Brief Information Area
+              }
+              <div className="row">
+                <div className="mdt-brief">
+                  <h2 className="cfsNumber">#2018-000132 <span className="cfsType badge badge-danger">P1 - Residential Fire </span></h2>
+                  <h4 className="cfsAddress">102 SUNSET BOULEVARD, WEST CAPE MAY, NJ 08204 <span className="cfsAddressStatus badge badge-success">Verified</span></h4>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-9">
+                  <div className="row">
+                    <Progress multi>
+                      <Progress bar animated color="info" value="25">Dispatched</Progress>
+                      <Progress bar animated color="info" value="25">Enroute</Progress>
+                      <Progress bar color="secondary" value="25">OnScene</Progress>
+                      <Progress bar color="secondary" value="25">Closed</Progress>
+                    </Progress>
+                  </div>
+                  <div className="row">
+                    <div className="mdt-info">
+                      {
+                        //CFS Summary, and other related components Area
+                      }
+                      <span className="cfsDescTitle"> Description </span><i className="cfsDescTitle fas fa-phone-volume"></i>
+                      <div className="cfsDesc" id="scrollbar-style-6">
+                        <p>A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. Propane Tanks in Basement.</p>
+                        <p>A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. Propane Tanks in Basement. Anim pariatur cliche reprehenderit,
+                      enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+                      nesciunt sapiente ea proident. </p>
+                      </div>
+                    </div>
                     <hr className="my-2" />
-                    <p>It uses utility classes for typgraphy and spacing to space content out within the larger container.</p>
-                    <p className="lead">
-                      <Button color="primary">Learn More</Button>
-                    </p>
-                  </Jumbotron>
-                </Row>
-
-                {
-                  //CFS TimeEvent Area, expandable and collapsable
-                }
-                <Row>
-                  <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>CFS TimeEvent Toggle</Button>
-                  <Collapse isOpen={this.state.collapse}>
-                    <Card>
-                      <CardBody style={{ color: '#222' }}>
-                        Anim pariatur cliche reprehenderit,
-                      enim eiusmod high life accusamus terry richardson ad squid. Nihil
-                      anim keffiyeh helvetica, craft beer labore wes anderson cred
-                      nesciunt sapiente ea proident.
-                      </CardBody>
-                    </Card>
-                  </Collapse>
-
-                </Row>
-              </Col>
-              <Col xs="2" sm="2" md="2" lg="2" xl="2">
-                {
-                  //CFS Highlights Area
-                }
-                CFS Highlights
-            </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
+                    <div className="mdt-timeEvent">
+                      {
+                        //CFS TimeEvent Area, expandable and collapsable
+                      }
+                      <Card>
+                        <CardBody>
+                          Anim pariatur cliche reprehenderit,
+                            enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                            anim keffiyeh helvetica, craft beer labore wes anderson cred
+                            nesciunt sapiente ea proident.
+                          </CardBody>
+                      </Card>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-3">
+                  {
+                    //CFS Highlights Area
+                  }
+                  CFS Highlights
+            </div>
+              </div>
+            </div>
+          </div>
+        </div></div>
     );
   }
 }
