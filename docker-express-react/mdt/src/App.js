@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Grid, Sidebar, Segment, Container, Button, Menu, Icon, Header, Label, Input, Divider, Feed, Progress, Tab } from 'semantic-ui-react'
 import CfsBrief from './component/cfsBrief';
+import CfsRelated from './component/cfsRelated';
 import './App.css';
 
 class App extends Component {
 
   state = {
     visible: true,
-    percent: 20
+    percent: 20,
   }
 
   increment = () => this.setState({
@@ -21,10 +22,10 @@ class App extends Component {
     { menuItem: 'Tab 2', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
     { menuItem: 'Tab 3', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
   ]
-  
 
   render() {
     const { visible } = this.state
+
     return (
       <Sidebar.Pushable as={Segment}>
         <Sidebar as={Menu} className='mdt-sidebar' animation='uncover' width='thin' visible={visible} icon='labeled' vertical inverted>
@@ -78,10 +79,14 @@ class App extends Component {
                     {
                       //CFS Desc Area
                     }
-                    <Tab menu={{ fluid: true, text: true, inverted: true, aligned:'right' }} panes={[
-                          { menuItem: { key: 'menu_cfsSummary', icon: 'users', content: 'CFS Summary' }, render: () => <Tab.Pane key='tab1'><CfsBrief /></Tab.Pane> },
-                          { menuItem: { key: 'menu_cfsRelated', icon: 'map', content: 'Related Info.' }, render: () => <Tab.Pane loading>Tab 2 Content</Tab.Pane> },
-                          { menuItem: 'Tab 3', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+                    <Tab menu={{ fluid: true, text: true, inverted: true, aligned:'right' }} renderActiveOnly='true'
+                        panes={
+                        [
+                          { menuItem: { icon: 'users', content: 'CFS Summary' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsSummary'><CfsBrief /></Tab.Pane> },
+                          { menuItem: { icon: 'newspaper', content: 'Related Info.' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsRelated'><CfsRelated /></Tab.Pane> },
+                          { menuItem: { icon: 'search', content: 'NCIC' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsMap'><CfsRelated /></Tab.Pane> },
+                          { menuItem: { icon: 'ticket', content: 'eTicket' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsMap'><CfsRelated /></Tab.Pane> },
+                          { menuItem: 'construction', render: () => <Tab.Pane loading>Tab under construction</Tab.Pane> },
                         ]} />
                     
                   </Grid.Column>

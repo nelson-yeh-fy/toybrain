@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Sidebar, Segment, Container, Button, Menu, Icon, Header, Label, Input, Divider, Feed, Progress, Tab } from 'semantic-ui-react'
+import { Segment, Container, Icon, Header, Label, Input, Divider, Feed } from 'semantic-ui-react'
 import '../App.css';
 
 class CfsBrief extends Component {
