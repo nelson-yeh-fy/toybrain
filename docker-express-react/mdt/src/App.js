@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Sidebar, Segment, Container, Button, Menu, Icon, Header, Label, Input, Divider, Feed, Progress, Tab } from 'semantic-ui-react'
+import { Grid, Sidebar, Segment, Container, Button, Menu, Header, Label, Input, Progress, Tab } from 'semantic-ui-react'
 import CfsBrief from './component/cfsBrief';
 import CfsRelated from './component/cfsRelated';
 import './App.css';
@@ -17,14 +17,17 @@ class App extends Component {
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
-  tabpanes = [
-    { menuItem: 'Tab 1', render: () => <Tab.Pane>Tab 1 Content</Tab.Pane> },
-    { menuItem: 'Tab 2', render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
-    { menuItem: 'Tab 3', render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
-  ]
+  
 
   render() {
-    const { visible } = this.state
+    const { visible } = this.state;
+
+    const tabpanes = [
+      { menuItem: { key: '1', icon: 'users', content: 'CFS Summary' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsSummary'><CfsBrief /></Tab.Pane> },
+      { menuItem: { key: '2', icon: 'newspaper', content: 'Related Info.' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsRelated'><CfsRelated /></Tab.Pane> },
+      { menuItem: { key: '3', icon: 'search', content: 'NCIC' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsMap'><CfsRelated /></Tab.Pane> },
+      { menuItem: { key: '4', icon: 'ticket', content: 'eTicket' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsMap'><CfsRelated /></Tab.Pane> },
+    ];
 
     return (
       <Sidebar.Pushable as={Segment}>
@@ -79,15 +82,7 @@ class App extends Component {
                     {
                       //CFS Desc Area
                     }
-                    <Tab menu={{ fluid: true, text: true, inverted: true, aligned:'right' }} renderActiveOnly='true'
-                        panes={
-                        [
-                          { menuItem: { icon: 'users', content: 'CFS Summary' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsSummary'><CfsBrief /></Tab.Pane> },
-                          { menuItem: { icon: 'newspaper', content: 'Related Info.' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsRelated'><CfsRelated /></Tab.Pane> },
-                          { menuItem: { icon: 'search', content: 'NCIC' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsMap'><CfsRelated /></Tab.Pane> },
-                          { menuItem: { icon: 'ticket', content: 'eTicket' }, render: () => <Tab.Pane style={{margin:0, border:0, padding:0}} key='tabCfsMap'><CfsRelated /></Tab.Pane> },
-                          { menuItem: 'construction', render: () => <Tab.Pane loading>Tab under construction</Tab.Pane> },
-                        ]} />
+                    <Tab menu={{ fluid: true, inverted: true, aligned:'right' }} renderActiveOnly={true} panes={tabpanes} />
                     
                   </Grid.Column>
                   <Grid.Column width={4}>

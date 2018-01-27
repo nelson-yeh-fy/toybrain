@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid } from 'semantic-ui-react'
+import { } from 'semantic-ui-react'
 import '../App.css';
 
 class CfsRelated extends Component {
