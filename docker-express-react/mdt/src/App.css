@@ -1,30 +1,20 @@
-.App {
-  font-size: 20px;
-  background-color: #242833;
-  height: 768px;
-  width: 1024px;
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
   padding: 15px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 110px;
-  padding: 10px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.mdt-sidebar {
-  font-size: 18px !important;
+.App-sidebar {
+  font-size: 22px !important;
   text-align: left !important;
+}
+
+.App-tabcontent {
+  font-size: 20px;
+  min-height: 638px;
+  margin:0;
+  border:0 !important;
+  padding:0;
 }
 
 .cfs-brief {
@@ -53,7 +43,6 @@
   vertical-align: middle;
 }
 
-
 .cfs-info {
   color: #d3d3d3;
 }
@@ -70,9 +59,9 @@
 }
 
 .cfs-info .cfs-timeEvent {
-  height: 200px;
   overflow-y: auto;
   color: #d3d3d3 !important;
+  height: 450px;
 }
 
 
