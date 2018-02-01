@@ -17,20 +17,20 @@ class App extends Component {
     const { visible } = this.state;
 
     const tabpanes = [
-      { menuItem: { key: '1', icon: 'users' }, render: () => <Tab.Pane inverted className='App-tabcontent' key='tabCfsSummary'><CfsInfo /></Tab.Pane> },
-      { menuItem: { key: '2', icon: 'newspaper' }, render: () => <Tab.Pane inverted className='App-tabcontent' style={{margin:0, border:0, padding:0}} key='tabCfsRelated'><CfsRelated /></Tab.Pane> },
-      { menuItem: { key: '3', icon: 'search' }, render: () => <Tab.Pane inverted className='App-tabcontent' style={{margin:0, border:0, padding:0}} key='tabCfsMap'><CfsRelated /></Tab.Pane> },
-      { menuItem: { key: '4', icon: 'ticket' }, render: () => <Tab.Pane inverted className='App-tabcontent' style={{margin:0, border:0, padding:0}} key='tabCfsMap'><CfsRelated /></Tab.Pane> },
+      { menuItem: { key: '1', icon: 'users', content: 'CFS Summary' }, render: () => <Tab.Pane inverted className='App-tabcontent' key='tabCfsSummary'><CfsInfo /></Tab.Pane> },
+      { menuItem: { key: '2', icon: 'newspaper', content: 'Related Info.' }, render: () => <Tab.Pane inverted className='App-tabcontent' style={{margin:0, border:0, padding:0}} key='tabCfsRelated'><CfsRelated /></Tab.Pane> },
+      { menuItem: { key: '3', icon: 'search', content: 'NCIC' }, render: () => <Tab.Pane inverted className='App-tabcontent' style={{margin:0, border:0, padding:0}} key='tabCfsMap'><CfsRelated /></Tab.Pane> },
+      { menuItem: { key: '4', icon: 'ticket', content: 'eTicket' }, render: () => <Tab.Pane inverted className='App-tabcontent' style={{margin:0, border:0, padding:0}} key='tabCfsMap'><CfsRelated /></Tab.Pane> },
     ];
     /*'CFS Summary', 'Related Info.', 'NCIC', 'eTicket'*/
 
     return (
       <Sidebar.Pushable as={Segment}>
-        <Sidebar as={Menu} className='App-sidebar' animation='uncover' width='thin' visible={visible} icon='labeled' vertical inverted>
-          <Segment style={{ padding: '1em 0em 0em 1em' }} vertical inverted>
-            <Input size='small' label={{ icon: 'search' }} labelPosition='left corner' placeholder='Search CFS...' fluid />
+        <Sidebar as={Menu} animation='uncover' width='thin' visible={visible} icon='labeled' vertical inverted>
+          <Segment className='App-sidebar' style={{ padding: '1em 0em 0em 1em' }} vertical inverted>
+            <Input size='small' label={{ icon: 'search' }} labelPosition='left corner' placeholder='CFS No.' fluid />
             <Menu.Item>
-              <div>CFS BOX&nbsp;&nbsp;
+              <div>Inbox&nbsp;&nbsp;
               <Label image id="cfsBoxCount" color='teal'>2</Label>
               </div>
               <Menu.Menu>
@@ -66,7 +66,7 @@ class App extends Component {
                     {
                       //CFS Desc Area
                     }
-                    <Tab menu={{ fluid: true, inverted: true, aligned:'right',  vertical: true, tabular: 'left' }} renderActiveOnly={true} panes={tabpanes} />                    
+                    <Tab menu={{ fluid: true, inverted: true, aligned:'right' }} renderActiveOnly={true} panes={tabpanes} />                    
                   </Grid.Column>
                   <Grid.Column width={4}>
                     {
