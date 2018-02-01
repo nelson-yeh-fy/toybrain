@@ -12,18 +12,21 @@
   padding:0 !important;
 }
 
-.App-tabcontent {
-  font-size: 20px;
-  min-height: 638px;
-  margin:0;
-  border:0 !important;
-  padding:0;
+.cfs-case-selector {
+  padding-left: 14px !important;
 }
 
-.cfs-brief {
-  text-align: left;
-  height: 80px !important;
-  margin: 10px;
+.cfs-highlight {
+  background-color: #1c1d30 !important;
+  padding: 14px !important;
+  /* padding-top: 14px !important;
+  padding-left: 14px !important;
+  padding-right: 14px !important; */
+  height: 70px;
+}
+
+.cfs-progress {
+  padding: 0px !important;
 }
 
 .cfsNumber{
@@ -44,6 +47,14 @@
 .cfsAddressStatus{
   font-size: 14px;
   vertical-align: middle;
+}
+
+.cfs-info-tabcontent {
+  font-size: 20px;
+  min-height: 638px;
+  margin:0;
+  border:0 !important;
+  padding:0;
 }
 
 .cfs-info {
