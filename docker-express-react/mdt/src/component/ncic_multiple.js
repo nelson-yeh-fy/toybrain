@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import faker from 'faker'
 import _ from 'lodash'
 import { Container, Input, Select, Button, Search } from 'semantic-ui-react'
-import '../App.css';
+import '../assets/App.css';
 
 const state_options = [
     { key: 'nj', text: 'NJ', value: 'NJ' },
@@ -62,7 +62,7 @@ class NcicMultiple extends Component {
             <Container textAlign='justified' fluid>
                 <Search
                     loading={isLoading}
-                    onResultSelect={this.handleResultSelect}
+                    onResultSelect={(e, { result }) => this.setState({ value: result.title })}
                     onSearchChange={this.handleSearchChange}
                     results={results}
                     value={value}

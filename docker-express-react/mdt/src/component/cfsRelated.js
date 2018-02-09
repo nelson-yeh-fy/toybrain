@@ -1,16 +1,12 @@
-import React, { Component } from 'react'
-import { } from 'semantic-ui-react'
-import '../App.css';
+import React from 'react';
+import { } from 'semantic-ui-react';
+import '../assets/App.css';
 
-class CfsRelated extends Component {
+const CfsRelated = () => (
+  <div>
+    cfsRelated
+  </div>
+);
 
-    render() {
-        return (
-            <div>
-                cfsRelated
-            </div>
-        )
-    }
-}
 
 export default CfsRelated;

@@ -1,8 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import store, { history } from './store';
+import App from './containers/App';
+
 import 'semantic-ui-css/semantic.min.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const target = document.querySelector('#root');
+
+render(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <div>
+        <App />
+      </div>
+    </ConnectedRouter>
+  </Provider>,
+  target,
+);

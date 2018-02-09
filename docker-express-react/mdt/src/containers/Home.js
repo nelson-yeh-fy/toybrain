@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Grid, Sidebar, Segment, Menu, Label, Input, Tab, Step, Icon, Dropdown, Button, Rail } from 'semantic-ui-react'
-import CfsHighligh from './component/cfsHighligh';
-import CfsInfo from './component/cfsInfo';
-import CfsRelated from './component/cfsRelated';
-import Ncic from './component/ncic';
-import './App.css';
+import CfsHighligh from '../component/cfsHighligh';
+import CfsInfo from '../component/cfsInfo';
+import CfsRelated from '../component/cfsRelated';
+import Ncic from '../component/ncic';
+import '../assets/App.css';
 
-class App extends Component {
+class Home extends Component {
 
   state = {
     visible: true, 
@@ -131,6 +131,6 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Label, Header } from 'semantic-ui-react'
-import '../App.css';
+import '../assets/App.css';
 
 class CfsHighligh extends Component {
     state = {

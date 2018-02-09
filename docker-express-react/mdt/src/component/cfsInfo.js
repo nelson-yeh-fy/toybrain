@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Comment, Form, Button, Input, Divider } from 'semantic-ui-react'
-import '../App.css';
-import '../assets/fontawesome-all';
+import '../assets/App.css';
 import imgDefault from '../assets/images/image.png'
 import imgElliot from '../assets/images/elliot.jpg'
 import imgHelen from '../assets/images/helen.jpg'

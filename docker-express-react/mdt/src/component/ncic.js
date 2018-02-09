@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Tab } from 'semantic-ui-react'
 import NcicMultiple from './ncic_multiple';
 import CfsRelated from './cfsRelated';
-import '../App.css';
+import '../assets/App.css';
 
 class Ncic extends Component {
     state = {
