@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Grid, Sidebar, Segment, Menu, Label, Input, Tab, Step, Icon, Dropdown, Button, Rail } from 'semantic-ui-react'
 import CfsHighligh from '../component/cfsHighligh';
-import CfsInfo from '../component/cfsInfo';
+import CFSInfo from './CFSInfo';
 import CfsRelated from '../component/cfsRelated';
 import Ncic from '../component/ncic';
 import '../assets/App.css';
@@ -9,7 +9,7 @@ import '../assets/App.css';
 class Home extends Component {
 
   state = {
-    visible: true, 
+    visible: true,
   }
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
@@ -18,7 +18,7 @@ class Home extends Component {
     const { visible } = this.state;
 
     const tabpanes = [
-      { menuItem: { key: '1', icon: 'users', content: 'CFS Summary' }, render: () => <Tab.Pane inverted className='cfs-info-tabcontent' key='tabCfsSummary'><CfsInfo /></Tab.Pane> },
+      { menuItem: { key: '1', icon: 'users', content: 'CFS Summary' }, render: () => <Tab.Pane inverted className='cfs-info-tabcontent' key='tabCfsSummary'><CFSInfo /></Tab.Pane> },
       { menuItem: { key: '2', icon: 'newspaper', content: 'Related Info.' }, render: () => <Tab.Pane inverted className='cfs-info-tabcontent' key='tabCfsRelated'><CfsRelated /></Tab.Pane> },
       { menuItem: { key: '3', icon: 'search', content: 'In case NCIC' }, render: () => <Tab.Pane inverted className='cfs-info-tabcontent' key='tabCfsNcic'><Ncic /></Tab.Pane> },
       { menuItem: { key: '4', icon: 'ticket', content: 'eTicket' }, render: () => <Tab.Pane inverted className='cfs-info-tabcontent' key='tabCfsTicket'><CfsRelated /></Tab.Pane> },

@@ -9,6 +9,7 @@ const initialState = {
   isDecrementing: false,
 };
 
+// The followings are reducers
 export default (state = initialState, action) => {
   switch (action.type) {
     case INCREMENT_REQUESTED:
@@ -42,53 +43,67 @@ export default (state = initialState, action) => {
   }
 };
 
-// action
-export const increment = () => (
-  {
-    type: INCREMENT,
-  }
-);
+// The followings are actions, to be separated from reducer file
+export const increment = () =>
+  (dispatch) => {
+    dispatch({
+      type: INCREMENT_REQUESTED,
+    });
 
-// export const increment = () => (dispatch) => {
-//   dispatch({
-//     type: INCREMENT_REQUESTED,
-//   });
-
-//   dispatch({
-//     type: INCREMENT,
-//   });
-// };
-
-export const incrementAsync = () => (dispatch) => {
-  dispatch({
-    type: INCREMENT_REQUESTED,
-  });
-
-  return setTimeout(() => {
     dispatch({
       type: INCREMENT,
     });
-  }, 3000);
-};
+  };
 
-export const decrement = () => (dispatch) => {
-  dispatch({
-    type: DECREMENT_REQUESTED,
-  });
+export const incrementAsync = () => (
+  (dispatch) => {
+    dispatch({
+      type: INCREMENT_REQUESTED,
+    });
 
-  dispatch({
-    type: DECREMENT,
-  });
-};
+    setTimeout(() => {
+      dispatch({
+        type: INCREMENT,
+      });
+    }, 2000);
+  }
+);
 
-export const decrementAsync = () => (dispatch) => {
-  dispatch({
-    type: DECREMENT_REQUESTED,
-  });
+export const decrement = () =>
+  (dispatch) => {
+    dispatch({
+      type: DECREMENT_REQUESTED,
+    });
 
-  return setTimeout(() => {
     dispatch({
       type: DECREMENT,
     });
-  }, 3000);
-};
+  };
+
+export const decrementAsync = () => (
+  (dispatch) => {
+    dispatch({
+      type: DECREMENT_REQUESTED,
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: DECREMENT,
+      });
+    }, 2000);
+  }
+);
+
+// export const decrement = () => (
+//   {
+//     type: DECREMENT,
+//   }
+// );
+
+// export const decrementAsync = () => (
+//   (dispatch) => {
+//     setTimeout(() => {
+//       dispatch(decrement());
+//     }, 2000);
+//   }
+// );

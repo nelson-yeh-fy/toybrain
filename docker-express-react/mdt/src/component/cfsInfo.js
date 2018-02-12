@@ -6,7 +6,7 @@ import imgElliot from '../assets/images/elliot.jpg'
 import imgHelen from '../assets/images/helen.jpg'
 import imgJenny from '../assets/images/jenny.jpg'
 
-class CfsInfo extends Component {
+class CfsInfotmp extends Component {
     state = {
         visible: true,
         percent: 20,
@@ -20,7 +20,7 @@ class CfsInfo extends Component {
                     <div className="desc">
                         <p>A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. Propane Tanks in Basement. A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. Propane Tanks in Basement. Anim pariatur cliche reprehenderit,
                               enim eiusmod high life accusamus terry richardson ad squid. Nihil  </p>
-                    </div>                
+                    </div>
                 </div>
                 <Divider />
                 {
@@ -74,7 +74,7 @@ class CfsInfo extends Component {
                                 <Comment.Text className='timeEventContent'>
                                 we surely will come back for more of the same another
                                 day soon. Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all
-                                over again. Even if we don't run extra laps that day, 
+                                over again. Even if we don't run extra laps that day,
                                 </Comment.Text>
                             </Comment.Content>
                         </Comment>
@@ -111,4 +111,4 @@ class CfsInfo extends Component {
     }
 }
 
-export default CfsInfo;
+export default CfsInfotmp;

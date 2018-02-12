@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -15,33 +16,39 @@ const Counter = props => (
 
     <p>
       <button onClick={props.increment} disabled={props.isIncrementing}>Increment</button>
-      <button onClick={props.incrementAsync} disabled={props.isIncrementing}>Increment Async</button>
+      <button onClick={props.incrementAsync} disabled={props.isIncrementing}>
+        Increment Async
+      </button>
     </p>
 
     <p>
       <button onClick={props.decrement} disabled={props.isDecrementing}>Decrement</button>
-      <button onClick={props.decrementAsync} disabled={props.isDecrementing}>Decrement Async</button>
+      <button onClick={props.decrementAsync} disabled={props.isDecrementing}>
+        Decrement Async
+      </button>
     </p>
 
     <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p>
   </div>
 );
 
-// Counter.propTypes = {
-//   increment: PropTypes.func.isRequired,
-//   incrementAsync: PropTypes.func.isRequired,
-//   decrement: PropTypes.func.isRequired,
-//   decrementAsync: PropTypes.func.isRequired,
-//   isIncrementing: PropTypes.bool.isRequired,
-//   isDecrementing: PropTypes.bool.isRequired,
-//   count: PropTypes.number.isRequired,
-//   changePage: PropTypes.func.isRequired,
-// };
+Counter.propTypes = {
+  count: PropTypes.number.isRequired,
+  isIncrementing: PropTypes.bool.isRequired,
+  isDecrementing: PropTypes.bool.isRequired,
+  increment: PropTypes.func.isRequired,
+  incrementAsync: PropTypes.func.isRequired,
+  decrement: PropTypes.func.isRequired,
+  decrementAsync: PropTypes.func.isRequired,
+  changePage: PropTypes.func.isRequired,
+};
 
 // Take application state (our redux store) as an argument,
 // and passed as props to this component.
 const mapStateToProps = state => ({
-  count: state.counter.count, // 'count' means Counter.js's prop, 'state.counter.count' means store (createStore via rootReducer)'s counter
+  // 'count' means one of Counter.js's prop;
+  // 'state.counter.count' means store (createStore via rootReducer)'s counter
+  count: state.counter.count,
   isIncrementing: state.counter.isIncrementing,
   isDecrementing: state.counter.isDecrementing,
 });
