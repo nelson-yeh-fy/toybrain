@@ -28,20 +28,20 @@ const initialState = {
   }, {
     idx: 1494578015312,
     isUserComment: true,
-    text: 'we surely will come back for more of the same another day soon. Ours is a life of constant reruns. \
-        We\'re always circling back to where we\'d we started, then starting all \
-        over again. Even if we don\'t run extra laps that day', // to be changed to Text'
+    text: `we surely will come back for more of the same another day soon. Ours is a life of constant reruns.
+        We're always circling back to where we'd we started, then starting all
+        over again. Even if we don't run extra laps that day', // to be changed to Text`,
     addby: 'Jackson', // to be changed to Author
     // to be add a avator info to Author?
     addon: '2017-09-05', // to be changed to AddOn
   }, {
     idx: 1494578015312,
     isUserComment: true,
-    text: 'Ours is a life of constant reruns. We re always circling back to where we d we started, then starting all \
-        over again. Even if we don\'t run extra laps that day, we surely will come back for more of the same another \
-        day soon. Ours is a life of constant reruns. We\'re always circling back to where we\'d we started, then starting all \
-        over again. Even if we dgain. Even if we don\'t run extra laps that day, we surely will come back for more of the same another \
-        day soon. Ours is a life of constant reruns. We\'re always circling back to where we\'d we started, then starting all',
+    text: `Ours is a life of constant reruns. We re always circling back to where we d we started, then starting all
+        over again. Even if we don't run extra laps that day, we surely will come back for more of the same another
+        day soon. Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all
+        over again. Even if we dgain. Even if we don't run extra laps that day, we surely will come back for more of the same another
+        day soon. Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all`,
     addby: 'Alison', // to be changed to Author
     // to be add a avator info to Author?
     addon: '2017-09-10', // to be changed to AddOn
@@ -114,7 +114,7 @@ export default (state = initialState, action) => {
 // };
 
 // The followings are actions, to be separated from reducer file
-export const refreshCFSLog = () =>
+export const refreshCFSLog = url =>
   (dispatch) => {
     dispatch({
       type: REFRESH_REQUESTED,
@@ -134,6 +134,31 @@ export const refreshCFSLogAsync = () => (
     setTimeout(() => {
       dispatch({
         type: REFRESH,
+      });
+    }, 2000);
+  }
+);
+
+export const appendCFSLog = () =>
+  (dispatch) => {
+    dispatch({
+      type: APPEND_REQUESTED,
+    });
+
+    dispatch({
+      type: APPEND,
+    });
+  };
+
+export const appendCFSLogAsync = () => (
+  (dispatch) => {
+    dispatch({
+      type: APPEND_REQUESTED,
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: APPEND,
       });
     }, 2000);
   }

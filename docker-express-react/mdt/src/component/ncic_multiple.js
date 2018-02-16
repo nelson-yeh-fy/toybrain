@@ -26,9 +26,6 @@ const source = _.times(5, () => ({
 }))
 
 class NcicMultiple extends Component {
-    state = {
-    }
-
     componentWillMount() {
         this.resetComponent()
     }

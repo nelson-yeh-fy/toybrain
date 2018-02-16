@@ -77,7 +77,7 @@ class Home extends Component {
                 {
                   //CFS Info Area
                 }
-                <Tab menu={{ fluid: true, inverted: true, aligned: 'right' }} defaultActiveIndex={2} renderActiveOnly={true} panes={tabpanes} />
+                <Tab menu={{ fluid: true, inverted: true, aligned: 'right' }} defaultActiveIndex={0} renderActiveOnly={true} panes={tabpanes} />
 
                 {
                   //CFS Status Area
