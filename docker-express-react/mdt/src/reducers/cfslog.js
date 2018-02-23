@@ -1,9 +1,6 @@
-export const APPEND_REQUESTED = 'cfslog/APPEND_REQUESTED';
-export const APPEND = 'cfslog/APPEND';
-export const REFRESH_REQUESTED = 'cfslog/REFRESH_REQUESTED';
-export const REFRESH = 'cfslog/REFRESH';
+import { APPEND_REQUESTED, APPEND, REFRESH_REQUESTED, REFRESH } from '../constants/actionTypes';
 
-const initialState = {
+const defaultState = {
   timeEventLogs: [{
     idx: 1494578015311,
     isUserComment: true,
@@ -19,14 +16,14 @@ const initialState = {
     // to be add a avator info to Author?
     addon: '2017-05-10', // to be changed to AddOn
   }, {
-    idx: 1494578015312,
+    idx: 1494578015313,
     isUserComment: true,
     text: 'How artistic!', // to be changed to Text
     addby: 'Matt', // to be changed to Author
     // to be add a avator info to Author?
     addon: '2017-08-10', // to be changed to AddOn
   }, {
-    idx: 1494578015312,
+    idx: 1494578015314,
     isUserComment: true,
     text: `we surely will come back for more of the same another day soon. Ours is a life of constant reruns.
         We're always circling back to where we'd we started, then starting all
@@ -35,7 +32,7 @@ const initialState = {
     // to be add a avator info to Author?
     addon: '2017-09-05', // to be changed to AddOn
   }, {
-    idx: 1494578015312,
+    idx: 1494578015315,
     isUserComment: true,
     text: `Ours is a life of constant reruns. We re always circling back to where we d we started, then starting all
         over again. Even if we don't run extra laps that day, we surely will come back for more of the same another
@@ -51,31 +48,37 @@ const initialState = {
 };
 
 // The followings are reducers
-export default (state = initialState, action) => {
+export default (state = defaultState, action) => {
   switch (action.type) {
-    case APPEND_REQUESTED:
-      return {
-        ...state,
-        isIncrementing: true,
-      };
-
-    case APPEND:
-      return [...state, action.item];
-
     case REFRESH_REQUESTED:
       return {
         ...state,
-        isIncrementing: true,
+        isRefreshing: true,
       };
 
     case REFRESH:
-      return [...state, action.item];
+      return {
+        ...state,
+        isRefreshing: !state.isRefreshing,
+      };
+
+    case APPEND_REQUESTED:
+      return {
+        ...state,
+        isAdding: true,
+      };
+
+    case APPEND:
+      return {
+        ...state,
+        isAdding: !state.isAdding,
+        timeEventLogs: [...state.timeEventLogs, action.item],
+      };
 
     default:
       return state;
   }
 };
-
 
 // export const timeEventShow = (state = true, payload) => {
 //   switch (payload.type) {
@@ -113,8 +116,8 @@ export default (state = initialState, action) => {
 //   }
 // };
 
-// The followings are actions, to be separated from reducer file
-export const refreshCFSLog = url =>
+// The followings are action creators, to be separated from this file
+export const refreshCFSLog = () =>
   (dispatch) => {
     dispatch({
       type: REFRESH_REQUESTED,
@@ -150,7 +153,7 @@ export const appendCFSLog = () =>
     });
   };
 
-export const appendCFSLogAsync = () => (
+export const appendCFSLogAsync = val => (
   (dispatch) => {
     dispatch({
       type: APPEND_REQUESTED,
@@ -159,6 +162,7 @@ export const appendCFSLogAsync = () => (
     setTimeout(() => {
       dispatch({
         type: APPEND,
+        payload: val,
       });
     }, 2000);
   }

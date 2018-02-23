@@ -16,14 +16,14 @@ const lic_options = [
     { key: 'other', text: 'Other', value: 'other' },
 ]
 
-const source = _.times(5, () => ({
-    title: faker.company.companyName(),
-    description: faker.company.catchPhrase(),
-    date: faker.date.past('7'),
-    address: faker.address.streetAddress(),
-    image: faker.internet.avatar(),
-    price: faker.finance.amount(0, 100, 2, '$'),
-}))
+// const source = _.times(5, () => ({
+//     title: faker.company.companyName(),
+//     description: faker.company.catchPhrase(),
+//     date: faker.date.past('7'),
+//     address: faker.address.streetAddress(),
+//     image: faker.internet.avatar(),
+//     price: faker.finance.amount(0, 100, 2, '$'),
+// }))
 
 class NcicMultiple extends Component {
     componentWillMount() {
@@ -43,10 +43,10 @@ class NcicMultiple extends Component {
             const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
             const isMatch = result => re.test(result.title)
 
-            this.setState({
-                isLoading: false,
-                results: _.filter(source, isMatch),
-            })
+            // this.setState({
+            //     isLoading: false,
+            //     results: _.filter(source, isMatch),
+            // })
         }, 500)
     }
 
