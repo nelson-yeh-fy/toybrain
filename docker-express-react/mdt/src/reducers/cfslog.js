@@ -1,189 +1,152 @@
-import { APPEND_REQUESTED, APPEND, REFRESH_REQUESTED, REFRESH } from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 
-const defaultState = {
-  timeEventLogs: [{
-    idx: 1494578015311,
-    isUserComment: true,
-    text: 'Dispatching unit 0310 to CFS2017-00123', // to be changed to Text
-    addby: 'System', // to be changed to Author
-    // to be add a avator info to Author?
-    addon: '2017-05-06', // to be changed to AddOn
-  }, {
-    idx: 1494578015312,
-    isUserComment: true,
-    text: 'Dispatching unit 0310 to CFS2017-00124', // to be changed to Text
-    addby: 'System', // to be changed to Author
-    // to be add a avator info to Author?
-    addon: '2017-05-10', // to be changed to AddOn
-  }, {
-    idx: 1494578015313,
-    isUserComment: true,
-    text: 'How artistic!', // to be changed to Text
-    addby: 'Matt', // to be changed to Author
-    // to be add a avator info to Author?
-    addon: '2017-08-10', // to be changed to AddOn
-  }, {
-    idx: 1494578015314,
-    isUserComment: true,
-    text: `we surely will come back for more of the same another day soon. Ours is a life of constant reruns.
+const defaultState = [{
+  id: 1494578015311,
+  type: 1,
+  text: 'Dispatching unit 0310 to CFS2017-00123',
+  addby: 'System',
+  addon: '2017-05-06',
+}, {
+  id: 1494578015313,
+  type: 2,
+  text: 'How artistic!',
+  addby: 'Matt',
+  addon: '2017-08-10',
+}, {
+  id: 1494578015314,
+  type: 2,
+  text: `we surely will come back for more of the same another day soon. Ours is a life of constant reruns.
         We're always circling back to where we'd we started, then starting all
         over again. Even if we don't run extra laps that day', // to be changed to Text`,
-    addby: 'Jackson', // to be changed to Author
-    // to be add a avator info to Author?
-    addon: '2017-09-05', // to be changed to AddOn
-  }, {
-    idx: 1494578015315,
-    isUserComment: true,
-    text: `Ours is a life of constant reruns. We re always circling back to where we d we started, then starting all
-        over again. Even if we don't run extra laps that day, we surely will come back for more of the same another
-        day soon. Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all
-        over again. Even if we dgain. Even if we don't run extra laps that day, we surely will come back for more of the same another
-        day soon. Ours is a life of constant reruns. We're always circling back to where we'd we started, then starting all`,
-    addby: 'Alison', // to be changed to Author
-    // to be add a avator info to Author?
-    addon: '2017-09-10', // to be changed to AddOn
-  }],
-  isRefreshing: false,
-  isAdding: false,
-};
+  addby: 'Jackson',
+  addon: '2017-09-05',
+}, {
+  id: 1494578015315,
+  type: 3,
+  text: `Send Tone (0115) successfully,
+        Tone 0115 = FD01, FD02, EMS South`,
+  addby: 'Alison',
+  addon: '2017-09-10',
+}];
 
 // The followings are reducers
-export default (state = defaultState, action) => {
+export default (state = defaultState /* [] */, action) => {
   switch (action.type) {
-    case REFRESH_REQUESTED:
-      return {
-        ...state,
-        isRefreshing: true,
-      };
+    case actionTypes.REFRESH:
+      return state;
 
-    case REFRESH:
-      return {
-        ...state,
-        isRefreshing: !state.isRefreshing,
-      };
-
-    case APPEND_REQUESTED:
-      return {
-        ...state,
-        isAdding: true,
-      };
-
-    case APPEND:
-      return {
-        ...state,
-        isAdding: !state.isAdding,
-        timeEventLogs: [...state.timeEventLogs, action.item],
-      };
+    case actionTypes.APPEND:
+      return [...state, action.item];
 
     default:
       return state;
   }
 };
 
-// export const timeEventShow = (state = true, payload) => {
-//   switch (payload.type) {
-//       case 'SHOW_TIMEEVENT':
-//           return payload.isShowTimeEvent;
-//       default:
-//           return state;
-//   }
-// };
-
-// export const timeEventShowsUserCommentOnly = (state = false, payload) => {
-//   switch (payload.type) {
-//       case 'SHOW_USER_COMMENT_ONLY':
-//           return payload.isShowUserCommentOnly;
-//       default:
-//           return state;
-//   }
-// };
-
-// export const timeEventLoadingStatus = (state = false, payload) => {
-//   switch (payload.type) {
-//       case 'SET_LOADING_FLAG':
-//           return payload.isLoading;
-//       default:
-//           return state;
-//   }
-// };
-
-// export const timeEventLoadingResult = (state = false, payload) => {
-//   switch (payload.type) {
-//       case 'SET_LOADING_RESULT':
-//           return payload.hasError;
-//       default:
-//           return state;
-//   }
-// };
-
-// The followings are action creators, to be separated from this file
+// The followings are actionCreators, to be separated from reducer file
 export const refreshCFSLog = () =>
   (dispatch) => {
     dispatch({
-      type: REFRESH_REQUESTED,
+      type: actionTypes.REFRESH_REQUESTED,
     });
 
     dispatch({
-      type: REFRESH,
+      type: actionTypes.REFRESH,
     });
   };
 
 export const refreshCFSLogAsync = () => (
   (dispatch) => {
     dispatch({
-      type: REFRESH_REQUESTED,
+      type: actionTypes.REFRESH_REQUESTED,
     });
 
     setTimeout(() => {
       dispatch({
-        type: REFRESH,
+        type: actionTypes.REFRESH,
       });
     }, 2000);
   }
 );
 
-export const appendCFSLog = () =>
+export const appendCFSLog = val =>
   (dispatch) => {
     dispatch({
-      type: APPEND_REQUESTED,
+      type: actionTypes.APPEND_REQUESTED,
     });
 
     dispatch({
-      type: APPEND,
+      type: actionTypes.APPEND,
+      item: val,
     });
   };
 
-export const appendCFSLogAsync = val => (
+export const appendCFSLogAsync = val =>
   (dispatch) => {
     dispatch({
-      type: APPEND_REQUESTED,
+      type: actionTypes.APPEND_REQUESTED,
     });
 
     setTimeout(() => {
       dispatch({
-        type: APPEND,
-        payload: val,
+        type: actionTypes.APPEND,
+        item: val,
       });
     }, 2000);
-  }
-);
+  };
 
-// export function fetchData(url) {
-//   return (dispatch) => {
-//       dispatch(TimeEventsIsLoading(true));
-
-//       fetch(url, {
-//           method: 'GET'
-//       })
-//           .then((response) => {
-//               if (!response.ok) {
-//                   throw Error(response.statusText);
-//               }
-//               dispatch(TimeEventsIsLoading(false));
-//               return response.json();
-//           })
-//           .then((items) => dispatch(initTimeEventsWhenFetchSucceed(items)))
-//           .catch((error) => dispatch(TimeEventsLoadingError(true)))
-//           ;
-//   };
+// export function addTimeEventToDB(url, item) {
+//     return (dispatch) => {
+//         console.log(JSON.stringify(item));
+//         dispatch(TimeEventsIsLoading(true));
+//         fetch(url,
+//             {
+//                 method: 'POST',
+//                 headers: {
+//                     'Accept': 'application/json',
+//                     'Content-Type': 'application/json',
+//                 },
+//                 body: JSON.stringify(item)
+//             }
+//         )
+//             .then((response) => {
+//                 if (!response.ok) {
+//                     throw Error(response.statusText);
+//                 }
+//                 dispatch(TimeEventsIsLoading(false));
+//                 return;
+//             })
+//             // .then((items) => dispatch(initTimeEventsWhenFetchSucceed(items)))
+//             .catch((error) => dispatch(TimeEventsLoadingError(true)))
+//             ;
+//     };
 // }
+
+export const showAllCFSLog = () =>
+  (dispatch) => {
+    dispatch({
+      type: actionTypes.SHOW_ALL,
+    });
+  };
+
+export const showSystemTextOnlyCFSLog = () =>
+  (dispatch) => {
+    dispatch({
+      type: actionTypes.SHOW_SYSTEMTEXTONLY,
+    });
+  };
+
+export const showUserTextOnlyCFSLog = () =>
+  (dispatch) => {
+    dispatch({
+      type: actionTypes.SHOW_USERTEXTONLY,
+    });
+  };
+
+export const showToneOnlyCFSLog = () =>
+  (dispatch) => {
+    dispatch({
+      type: actionTypes.SHOW_TONEONLY,
+    });
+  };
+

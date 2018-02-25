@@ -3,16 +3,30 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container, Comment, Form, Button, Input, Divider, Icon } from 'semantic-ui-react';
-import cfsLog from '../component/cfsLog';
-import * as actionCreators from '../actionCreators/cfsLog';
+import CfsLog from '../components/CfsInfo/CfsLog';
+import {
+  refreshCFSLog,
+  refreshCFSLogAsync,
+  appendCFSLog,
+  appendCFSLogAsync,
+} from '../reducers/cfsLog';
 import '../assets/App.css';
 
-let newTimeEvent = {
-  idx: Date.now(),
-  isUserComment: true,
-  text: 'abc',
-  addby: 'sys',
-  addon: '2018-10-22',
+let inputVal = '';
+
+const getVisibleCfsLog = (cfsLog, filter) => {
+  switch (filter) {
+    case 1:// 'SHOW_SYSTEMTEXTONLY':
+      return cfsLog.filter(t => !t.isUserComment);
+    case 2:// 'SHOW_USERTEXTONLY':
+      return cfsLog.filter(t => !t.isUserComment);
+    case 4:// 'SHOW_TONEONLY':
+      return cfsLog.filter(t => !t.isUserComment);
+    case 7:// 'SHOW_ALL':
+      return cfsLog.filter(t => t.isUserComment);
+    default:
+      return cfsLog;
+  }
 };
 
 const CfsInfo = props => (
@@ -24,7 +38,6 @@ const CfsInfo = props => (
             One employee is stuck in bathroom. Propane Tanks in Basement.
             A fire started behind the pizza oven and is getting worse.
             One employee is stuck in bathroom.
-            Propane Tanks in Basement. Anim pariatur cliche reprehenderit
         </p>
       </div>
     </div>
@@ -36,7 +49,7 @@ const CfsInfo = props => (
       <span className="title"> Time Event:
         <span className="float-right">
           <Button
-            onClick={props.actions.refreshCFSLogAsync}
+            onClick={props.refreshCFSLogAsync}
             disabled={props.isRefreshing}
             size="mini"
             icon
@@ -48,13 +61,28 @@ const CfsInfo = props => (
       </span>
       <div className="timeEvent">
         <Comment.Group>
-          {props.timeEventLogs.map(x => cfsLog(x))}
+          {props.cfsLog.map(x => CfsLog(x))}
         </Comment.Group>
       </div>
       <Divider />
-      <Form>
+      <Form onSubmit={() => {
+        if (inputVal !== '') {
+          props.appendCFSLogAsync({
+            idx: Date.now(),
+            isUserComment: true,
+            text: inputVal,
+            addby: 'sys',
+            addon: '2018-10-22',
+          });
+        }
+      }}
+      >
         <Form.Group widths="equal">
-          <Form.Field control={Input} placeholder="Enter more comments..." />
+          <Form.Field
+            onChange={(e) => { inputVal = e.target.value; }}
+            control={Input}
+            placeholder="Enter more comments..."
+          />
           <Form.Button
             disabled={props.isAdding}
             content="Add"
@@ -70,7 +98,7 @@ const CfsInfo = props => (
 
 // onClick={props.actions.appendCFSLog(newTimeEvent)}
 CfsInfo.propTypes = {
-  timeEventLogs: PropTypes.arrayOf(PropTypes.shape({
+  cfsLog: PropTypes.arrayOf(PropTypes.shape({
     idx: PropTypes.number,
     isUserComment: PropTypes.bool,
     text: PropTypes.string,
@@ -79,28 +107,28 @@ CfsInfo.propTypes = {
   })).isRequired,
   isRefreshing: PropTypes.bool.isRequired,
   isAdding: PropTypes.bool.isRequired,
-  // refreshCFSLog: PropTypes.func.isRequired,
-  // refreshCFSLogAsync: PropTypes.func.isRequired,
-  // appendCFSLog: PropTypes.func.isRequired,
-  // appendCFSLogAsync: PropTypes.func.isRequired,
+  refreshCFSLog: PropTypes.func.isRequired,
+  refreshCFSLogAsync: PropTypes.func.isRequired,
+  appendCFSLog: PropTypes.func.isRequired,
+  appendCFSLogAsync: PropTypes.func.isRequired,
 };
 
 // Take application state (our redux store) as an argument,
 // and passed as props to this component.
 const mapStateToProps = state => ({
-  ...state.cfsLog,
-  // // 'timeEventLogs' means one of CFSInfo.js's prop;
-  // // 'state.counter.count' means store (createStore via rootReducer)'s counter
-  // timeEventLogs: state.cfsLog.timeEventLogs,
-  // isRefreshing: state.cfsLog.isRefreshing,
-  // isAdding: state.cfsLog.isAdding,
+  cfsLog: getVisibleCfsLog(state.cfsLog, state.cfsLogStatus.listFilter),
+  // 'isRefreshing' means one of CFSInfo.js's prop;
+  // 'state.cfsLogListStatus.isRefreshing' means store (createStore via rootReducer)'s isRefreshing variable
+  isRefreshing: state.cfsLogStatus.isRefreshing,
+  isAdding: state.cfsLogStatus.isAdding,
 });
 
-// Take function 'dispatch' as an argument,
-// this causes our actions to be sent toward store (via reducers)
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actionCreators, dispatch),
-});
+const mapDispatchToProps = dispatch => bindActionCreators({
+  refreshCFSLog,
+  refreshCFSLogAsync,
+  appendCFSLog,
+  appendCFSLogAsync,
+}, dispatch);
 
 export default connect(
   mapStateToProps,

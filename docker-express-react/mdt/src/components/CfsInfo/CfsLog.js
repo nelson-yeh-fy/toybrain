@@ -1,10 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import { Comment } from 'semantic-ui-react';
-import '../assets/App.css';
-import imgElliot from '../assets/images/elliot.jpg';
-import imgHelen from '../assets/images/helen.jpg';
-import imgJenny from '../assets/images/jenny.jpg';
+import '../../assets/App.css';
+import imgElliot from '../../assets/images/elliot.jpg';
+import imgHelen from '../../assets/images/helen.jpg';
+import imgJenny from '../../assets/images/jenny.jpg';
 
 const imgArray = [imgElliot, imgHelen, imgJenny];
 

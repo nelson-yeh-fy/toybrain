@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Grid, Sidebar, Segment, Menu, Label, Input, Tab, Step, Icon, Dropdown, Button, Rail } from 'semantic-ui-react'
-import CfsHighligh from '../component/cfsHighligh';
+import CfsHighligh from '../components/cfsHighligh';
 import CFSInfo from './CFSInfo';
-import CfsRelated from '../component/cfsRelated';
-import Ncic from '../component/ncic';
+import CfsRelated from '../components/cfsRelated';
+import Ncic from '../components/ncic';
 import '../assets/App.css';
 
 class Home extends Component {
