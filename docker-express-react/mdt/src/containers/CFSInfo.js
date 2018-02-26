@@ -68,11 +68,11 @@ const CfsInfo = props => (
       <Form onSubmit={() => {
         if (inputVal !== '') {
           props.appendCFSLogAsync({
-            idx: Date.now(),
-            isUserComment: true,
+            id: Date.now(),
+            type: 2,
             text: inputVal,
-            addby: 'sys',
-            addon: '2018-10-22',
+            addby: 'UserName',
+            addon: new Date(Date.now()).toLocaleString(),
           });
         }
       }}
