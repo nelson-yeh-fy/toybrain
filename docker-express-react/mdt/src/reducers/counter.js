@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/actionTypes';
+import * as constants from '../constants';
 
 const initialState = {
   count: 0,
@@ -9,26 +9,26 @@ const initialState = {
 // The followings are reducers
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.INCREMENT_REQUESTED:
+    case constants.INCREMENT_REQUESTED:
       return {
         ...state,
         isIncrementing: true,
       };
 
-    case actionTypes.INCREMENT:
+    case constants.INCREMENT:
       return {
         ...state,
         count: state.count + 1,
         isIncrementing: !state.isIncrementing,
       };
 
-    case actionTypes.DECREMENT_REQUESTED:
+    case constants.DECREMENT_REQUESTED:
       return {
         ...state,
         isDecrementing: true,
       };
 
-    case actionTypes.DECREMENT:
+    case constants.DECREMENT:
       return {
         ...state,
         count: state.count - 1,
@@ -44,23 +44,23 @@ export default (state = initialState, action) => {
 export const increment = () =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.INCREMENT_REQUESTED,
+      type: constants.INCREMENT_REQUESTED,
     });
 
     dispatch({
-      type: actionTypes.INCREMENT,
+      type: constants.INCREMENT,
     });
   };
 
 export const incrementAsync = () => (
   (dispatch) => {
     dispatch({
-      type: actionTypes.INCREMENT_REQUESTED,
+      type: constants.INCREMENT_REQUESTED,
     });
 
     setTimeout(() => {
       dispatch({
-        type: actionTypes.INCREMENT,
+        type: constants.INCREMENT,
       });
     }, 2000);
   }
@@ -69,38 +69,24 @@ export const incrementAsync = () => (
 export const decrement = () =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.DECREMENT_REQUESTED,
+      type: constants.DECREMENT_REQUESTED,
     });
 
     dispatch({
-      type: actionTypes.DECREMENT,
+      type: constants.DECREMENT,
     });
   };
 
 export const decrementAsync = () => (
   (dispatch) => {
     dispatch({
-      type: actionTypes.DECREMENT_REQUESTED,
+      type: constants.DECREMENT_REQUESTED,
     });
 
     setTimeout(() => {
       dispatch({
-        type: actionTypes.DECREMENT,
+        type: constants.DECREMENT,
       });
     }, 2000);
   }
 );
-
-// export const decrement = () => (
-//   {
-//     type: DECREMENT,
-//   }
-// );
-
-// export const decrementAsync = () => (
-//   (dispatch) => {
-//     setTimeout(() => {
-//       dispatch(decrement());
-//     }, 2000);
-//   }
-// );

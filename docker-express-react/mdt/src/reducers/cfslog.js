@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/actionTypes';
+import * as constants from '../constants';
 
 const defaultState = [{
   id: 1494578015311,
@@ -32,10 +32,10 @@ const defaultState = [{
 // The followings are reducers
 export default (state = defaultState /* [] */, action) => {
   switch (action.type) {
-    case actionTypes.REFRESH:
+    case constants.REFRESH:
       return state;
 
-    case actionTypes.APPEND:
+    case constants.APPEND:
       return [...state, action.item];
 
     default:
@@ -47,23 +47,23 @@ export default (state = defaultState /* [] */, action) => {
 export const refreshCFSLog = () =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.REFRESH_REQUESTED,
+      type: constants.REFRESH_REQUESTED,
     });
 
     dispatch({
-      type: actionTypes.REFRESH,
+      type: constants.REFRESH,
     });
   };
 
 export const refreshCFSLogAsync = () => (
   (dispatch) => {
     dispatch({
-      type: actionTypes.REFRESH_REQUESTED,
+      type: constants.REFRESH_REQUESTED,
     });
 
     setTimeout(() => {
       dispatch({
-        type: actionTypes.REFRESH,
+        type: constants.REFRESH,
       });
     }, 2000);
   }
@@ -72,27 +72,54 @@ export const refreshCFSLogAsync = () => (
 export const appendCFSLog = val =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.APPEND_REQUESTED,
+      type: constants.APPEND_REQUESTED,
     });
 
     dispatch({
-      type: actionTypes.APPEND,
+      type: constants.APPEND,
       item: val,
     });
+  };
+
+export const appendCFSLogAsync111 = val =>
+  (dispatch) => {
+    dispatch({
+      type: constants.APPEND_REQUESTED,
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: constants.APPEND,
+        item: val,
+      });
+    }, 2000);
   };
 
 export const appendCFSLogAsync = val =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.APPEND_REQUESTED,
+      type: constants.APPEND_REQUESTED,
     });
 
-    setTimeout(() => {
-      dispatch({
-        type: actionTypes.APPEND,
-        item: val,
+    fetch(constants.webAPIUrl,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(val)
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        dispatch(TimeEventsIsLoading(false));
+        return;
       });
-    }, 2000);
+      // .then((items) => dispatch(initTimeEventsWhenFetchSucceed(items)))
+      // .catch((error) => dispatch(appendSystemErrorLog(error)));
   };
 
 // export function addTimeEventToDB(url, item) {
@@ -125,28 +152,28 @@ export const appendCFSLogAsync = val =>
 export const showAllCFSLog = () =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.SHOW_ALL,
+      type: constants.SHOW_ALL,
     });
   };
 
 export const showSystemTextOnlyCFSLog = () =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.SHOW_SYSTEMTEXTONLY,
+      type: constants.SHOW_SYSTEMTEXTONLY,
     });
   };
 
 export const showUserTextOnlyCFSLog = () =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.SHOW_USERTEXTONLY,
+      type: constants.SHOW_USERTEXTONLY,
     });
   };
 
 export const showToneOnlyCFSLog = () =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.SHOW_TONEONLY,
+      type: constants.SHOW_TONEONLY,
     });
   };
 

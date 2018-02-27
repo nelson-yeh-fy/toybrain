@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants/actionTypes';
+import * as constants from '../constants';
 
 const defaultState = {
   isRefreshing: false,
@@ -9,49 +9,49 @@ const defaultState = {
 // The followings are reducers
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.REFRESH_REQUESTED:
+    case constants.REFRESH_REQUESTED:
       return {
         ...state,
         isRefreshing: true,
       };
 
-    case actionTypes.REFRESH:
+    case constants.REFRESH:
       return {
         ...state,
         isRefreshing: !state.isRefreshing,
       };
 
-    case actionTypes.APPEND_REQUESTED:
+    case constants.APPEND_REQUESTED:
       return {
         ...state,
         isAdding: true,
       };
 
-    case actionTypes.APPEND:
+    case constants.APPEND:
       return {
         ...state,
         isAdding: !state.isAdding,
       };
 
-    case actionTypes.SHOW_ALL:
+    case constants.SHOW_ALL:
       return {
         ...state,
         listFilter: 7,
       };
 
-    case actionTypes.SHOW_SYSTEMTEXTONLY:
+    case constants.SHOW_SYSTEMTEXTONLY:
       return {
         ...state,
         listFilter: 1,
       };
 
-    case actionTypes.SHOW_USERTEXTONLY:
+    case constants.SHOW_USERTEXTONLY:
       return {
         ...state,
         listFilter: 2,
       };
 
-    case actionTypes.SHOW_TONEONLY:
+    case constants.SHOW_TONEONLY:
       return {
         ...state,
         listFilter: 4,
