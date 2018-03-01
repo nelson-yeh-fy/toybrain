@@ -58,6 +58,7 @@ exports.findAllTimeEvent = function (req, res) {
         state.db.collection(TIMEEVENT_COLLECTION_NAME).find().toArray((err, result) => {
             if (err)
                 return console.log(err)
+            console.log(result);
             res.json(result);
         })
     }

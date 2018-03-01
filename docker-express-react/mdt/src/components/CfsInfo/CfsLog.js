@@ -9,7 +9,7 @@ import imgJenny from '../../assets/images/jenny.jpg';
 const imgArray = [imgElliot, imgHelen, imgJenny];
 
 const cfsLog = item => (
-  <Comment key={item.idx}>
+  <Comment key={Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}>
     <Comment.Avatar src={_.sample(imgArray)} />
     <Comment.Content>
       <Comment.Author as="a" className="timeEventAvator">{item.addby}</Comment.Author>

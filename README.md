@@ -21,8 +21,10 @@ https://github.com/facebookincubator/create-react-app/tree/master/packages/eslin
 (cancel) http://blog.burgettweb.net/2017/01/07/using-bootstrap-with-create-react-app/ //Add Bootstrap into app
 http://momentjs.com/  //Add Moment.js for parsing and validating time
 https://react-bootstrap.github.io/getting-started.html //Add react-bootstrap into app created by 'create-react-app'
-https://github.com/gaearon/redux-thunk //Add Redux-thunk for async actions, e.g.: fetch webapis
-http://redux-form.com/6.8.0/docs/GettingStarted.md/ //Add Redux-form for better submit form validation
+(cancel) https://github.com/gaearon/redux-thunk //Add Redux-thunk for async actions, e.g.: fetch webapis
+(cancel) http://redux-form.com/6.8.0/docs/GettingStarted.md/ //Add Redux-form for better submit form validation
+https://engineering.thetrainline.com/handling-api-calls-in-redux-with-redux-api-middleware-c95c38816e13 //using redux middleware to do async actions, RSAA
+https://github.com/agraboso/redux-api-middleware //same with previous purpose
 
 # Add Express WebAPI
 https://code.visualstudio.com/docs/nodejs/nodejs-tutorial //visualStudio code tutorial
@@ -31,7 +33,7 @@ https://www.getpostman.com/ //Download Postman for testing WebAPIs
 https://medium.com/@stowball/a-dummys-guide-to-redux-and-thunk-in-react-d8904a7005d3 //Make react app dynamic, and change it to Redux.
 https://www.fullstackreact.com/articles/how-to-get-create-react-app-to-work-with-your-rails-api/ //Rails on React, a reference to fetch webAPI
 ## CORS issues
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS 
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 Proxying API Requests in Development: https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md
 ## Make express webAPI restful and db-ready
 https://zellwk.com/blog/crud-express-mongodb/ //connect to mongodb

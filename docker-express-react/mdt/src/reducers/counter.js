@@ -1,4 +1,4 @@
-import * as constants from '../constants';
+import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
   count: 0,
@@ -9,26 +9,26 @@ const initialState = {
 // The followings are reducers
 export default (state = initialState, action) => {
   switch (action.type) {
-    case constants.INCREMENT_REQUESTED:
+    case actionTypes.INCREMENT_REQUESTED:
       return {
         ...state,
         isIncrementing: true,
       };
 
-    case constants.INCREMENT:
+    case actionTypes.INCREMENT_SUCCESS:
       return {
         ...state,
         count: state.count + 1,
         isIncrementing: !state.isIncrementing,
       };
 
-    case constants.DECREMENT_REQUESTED:
+    case actionTypes.DECREMENT_REQUESTED:
       return {
         ...state,
         isDecrementing: true,
       };
 
-    case constants.DECREMENT:
+    case actionTypes.DECREMENT_SUCCESS:
       return {
         ...state,
         count: state.count - 1,
@@ -44,23 +44,23 @@ export default (state = initialState, action) => {
 export const increment = () =>
   (dispatch) => {
     dispatch({
-      type: constants.INCREMENT_REQUESTED,
+      type: actionTypes.INCREMENT_REQUESTED,
     });
 
     dispatch({
-      type: constants.INCREMENT,
+      type: actionTypes.INCREMENT_SUCCESS,
     });
   };
 
 export const incrementAsync = () => (
   (dispatch) => {
     dispatch({
-      type: constants.INCREMENT_REQUESTED,
+      type: actionTypes.INCREMENT_REQUESTED,
     });
 
     setTimeout(() => {
       dispatch({
-        type: constants.INCREMENT,
+        type: actionTypes.INCREMENT_SUCCESS,
       });
     }, 2000);
   }
@@ -69,23 +69,23 @@ export const incrementAsync = () => (
 export const decrement = () =>
   (dispatch) => {
     dispatch({
-      type: constants.DECREMENT_REQUESTED,
+      type: actionTypes.DECREMENT_REQUESTED,
     });
 
     dispatch({
-      type: constants.DECREMENT,
+      type: actionTypes.DECREMENT_SUCCESS,
     });
   };
 
 export const decrementAsync = () => (
   (dispatch) => {
     dispatch({
-      type: constants.DECREMENT_REQUESTED,
+      type: actionTypes.DECREMENT_REQUESTED,
     });
 
     setTimeout(() => {
       dispatch({
-        type: constants.DECREMENT,
+        type: actionTypes.DECREMENT_SUCCESS,
       });
     }, 2000);
   }

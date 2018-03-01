@@ -1,3 +1,4 @@
+import * as actionTypes from '../constants/actionTypes';
 import * as constants from '../constants';
 
 const defaultState = {
@@ -9,49 +10,49 @@ const defaultState = {
 // The followings are reducers
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case constants.REFRESH_REQUESTED:
+    case actionTypes.REFRESH_REQUESTED:
       return {
         ...state,
         isRefreshing: true,
       };
 
-    case constants.REFRESH:
+    case actionTypes.REFRESH_SUCCESS:
       return {
         ...state,
         isRefreshing: !state.isRefreshing,
       };
 
-    case constants.APPEND_REQUESTED:
+    case actionTypes.APPEND_REQUESTED:
       return {
         ...state,
         isAdding: true,
       };
 
-    case constants.APPEND:
+    case actionTypes.APPEND_SUCCESS:
       return {
         ...state,
         isAdding: !state.isAdding,
       };
 
-    case constants.SHOW_ALL:
+    case actionTypes.SHOW_ALL:
       return {
         ...state,
         listFilter: 7,
       };
 
-    case constants.SHOW_SYSTEMTEXTONLY:
+    case actionTypes.SHOW_SYSTEMTEXTONLY:
       return {
         ...state,
         listFilter: 1,
       };
 
-    case constants.SHOW_USERTEXTONLY:
+    case actionTypes.SHOW_USERTEXTONLY:
       return {
         ...state,
         listFilter: 2,
       };
 
-    case constants.SHOW_TONEONLY:
+    case actionTypes.SHOW_TONEONLY:
       return {
         ...state,
         listFilter: 4,
