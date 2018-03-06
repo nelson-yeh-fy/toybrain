@@ -68,6 +68,7 @@ const CfsInfo = props => (
       <Form onSubmit={() => {
         if (inputVal !== '') {
           props.appendCFSLogAsync({
+            id: Date.now(),
             type: 2,
             text: inputVal,
             addby: 'UserName',

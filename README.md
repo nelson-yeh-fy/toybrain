@@ -25,6 +25,7 @@ https://react-bootstrap.github.io/getting-started.html //Add react-bootstrap int
 (cancel) http://redux-form.com/6.8.0/docs/GettingStarted.md/ //Add Redux-form for better submit form validation
 https://engineering.thetrainline.com/handling-api-calls-in-redux-with-redux-api-middleware-c95c38816e13 //using redux middleware to do async actions, RSAA
 https://github.com/agraboso/redux-api-middleware //same with previous purpose
+https://www.fullstackreact.com/30-days-of-react/day-21/ //30 days of Redux
 
 # Add Express WebAPI
 https://code.visualstudio.com/docs/nodejs/nodejs-tutorial //visualStudio code tutorial
