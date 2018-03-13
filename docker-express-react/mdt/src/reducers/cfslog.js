@@ -1,9 +1,7 @@
 import { RSAA, getJSON } from 'redux-api-middleware'; // RSAA = '@@redux-api-middleware/RSAA'
-import { schema, normalize, denormalize } from 'normalizr';
+import { normalize, denormalize } from 'normalizr';
 import * as actionTypes from '../constants/actionTypes';
 import * as constants from '../constants';
-
-const cfsLogSchema = new schema.Entity('cfsLog');
 
 const defaultState = {
   logArticles: [{
@@ -102,7 +100,7 @@ export function refreshCFSLogAsync() {
               // }];
               const denormalizedJsonArray = [];
               json.map(item =>
-                denormalizedJsonArray.push(denormalize(item.entities.cfsLog[Object.keys(item.entities.cfsLog)], cfsLogSchema, item)));
+                denormalizedJsonArray.push(denormalize(item.entities.cfsLog[Object.keys(item.entities.cfsLog)], constants.cfsLogSchema, item)));
               console.log(denormalizedJsonArray);
               return denormalizedJsonArray;
             }),
@@ -144,7 +142,7 @@ export function appendCFSLogAsync(val) {
     [RSAA]: {
       endpoint: constants.webAPIUrl,
       method: 'POST',
-      body: JSON.stringify(normalize(val, cfsLogSchema)),
+      body: JSON.stringify(normalize(val, constants.cfsLogSchema)),
       headers: {
         'Content-Type': 'application/json',
       },

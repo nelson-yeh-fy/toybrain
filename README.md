@@ -18,14 +18,16 @@ https://medium.com/@auchenberg/live-edit-and-debug-your-react-apps-directly-from
 https://github.com/facebookincubator/create-react-app
 http://www.penta-code.com/how-to-add-redux-to-create-react-app/ //Add Redux into app created by 'create-react-app'
 https://github.com/facebookincubator/create-react-app/tree/master/packages/eslint-config-react-app //Add ESlint into app created by 'create-react-app'
-(cancel) http://blog.burgettweb.net/2017/01/07/using-bootstrap-with-create-react-app/ //Add Bootstrap into app
+(cancel) http://blog.burgettweb.net/2017/01/07/using-bootstrap-with-create-react-app/ //Add Bootstrap into app (cancel)
 http://momentjs.com/  //Add Moment.js for parsing and validating time
 https://react-bootstrap.github.io/getting-started.html //Add react-bootstrap into app created by 'create-react-app'
-(cancel) https://github.com/gaearon/redux-thunk //Add Redux-thunk for async actions, e.g.: fetch webapis
-(cancel) http://redux-form.com/6.8.0/docs/GettingStarted.md/ //Add Redux-form for better submit form validation
+(cancel) https://github.com/gaearon/redux-thunk //Add Redux-thunk for async actions, e.g.: fetch webapis (cancel)
+(cancel) http://redux-form.com/6.8.0/docs/GettingStarted.md/ //Add Redux-form for better submit form validation (cancel)
 https://engineering.thetrainline.com/handling-api-calls-in-redux-with-redux-api-middleware-c95c38816e13 //using redux middleware to do async actions, RSAA
 https://github.com/agraboso/redux-api-middleware //same with previous purpose
 https://www.fullstackreact.com/30-days-of-react/day-21/ //30 days of Redux
+https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#entitykey-definition---options-- //normalizr
+https://github.com/gpbl/denormalizr //denormalizr
 
 # Add Express WebAPI
 https://code.visualstudio.com/docs/nodejs/nodejs-tutorial //visualStudio code tutorial
