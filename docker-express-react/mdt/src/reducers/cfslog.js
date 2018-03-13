@@ -1,47 +1,47 @@
 import { RSAA, getJSON } from 'redux-api-middleware'; // RSAA = '@@redux-api-middleware/RSAA'
-import { schema, arrayOf, normalize } from 'normalizr';
+import { schema, normalize, denormalize } from 'normalizr';
 import * as actionTypes from '../constants/actionTypes';
 import * as constants from '../constants';
 
 const cfsLogSchema = new schema.Entity('cfsLog');
 
-const defaultState = [{
-  id: 99999001,
-  type: 1,
-  text: 'Dispatching unit 0310 to CFS2017-00123',
-  addby: 'System',
-  addon: '2017-05-06',
-}, {
-  id: 99999002,
-  type: 2,
-  text: 'How artistic!',
-  addby: 'Matt',
-  addon: '2017-08-10',
-}, {
-  id: 99999003,
-  type: 2,
-  text: `we surely will come back for more of the same another day soon. Ours is a life of constant reruns.
+const defaultState = {
+  logArticles: [{
+    id: 99999001,
+    type: 1,
+    text: 'Dispatching unit 0310 to CFS2017-00123',
+    addby: 'System',
+    addon: '2017-05-06',
+  }, {
+    id: 99999002,
+    type: 2,
+    text: `we surely will come back for more of the same another day soon. Ours is a life of constant reruns.
         We're always circling back to where we'd we started, then starting all
         over again. Even if we don't run extra laps that day', // to be changed to Text`,
-  addby: 'Jackson',
-  addon: '2017-09-05',
-}, {
-  id: 99999004,
-  type: 3,
-  text: `Send Tone (0115) successfully,
+    addby: 'Jackson',
+    addon: '2017-09-05',
+  }, {
+    id: 99999003,
+    type: 3,
+    text: `Send Tone (0115) successfully,
         Tone 0115 = FD01, FD02, EMS South`,
-  addby: 'Alison',
-  addon: '2017-09-10',
-}];
+    addby: 'Alison',
+    addon: '2017-09-10',
+  }],
+};
 
 // The followings are reducers
 export default (state = defaultState /* [] */, action) => {
   switch (action.type) {
     case actionTypes.REFRESH_SUCCESS:
-      return action.payload;
+      return {
+        logArticles: [...state.logArticles, ...action.payload],
+      };
 
     case actionTypes.APPEND_SUCCESS:
-      return [...state, action.payload];
+      return {
+        logArticles: [...state.logArticles, action.payload],
+      };
 
     default:
       return state;
@@ -83,17 +83,31 @@ export function refreshCFSLogAsync() {
         actionTypes.REFRESH_REQUESTED,
         {
           type: actionTypes.REFRESH_SUCCESS,
-          // payload: [{
-          //   type: 1,
-          //   text: 'Dispatching unit 0310 to CFS2017-00123',
-          //   addby: 'System',
-          //   addon: '2017-05-06',
-          // }],
-          // payload: (action, state, res) =>
-          //   getJSON(res)
-          //     .then(json => normalize(json, arrayOf(timeEventSchema))),
+          payload: (action, state, res) =>
+            getJSON(res).then((json) => {
+              // const sampleItem = [{
+              //   _id: '5a9f2074651a131bdc9015d7',
+              //   entities: {
+              //     cfsLog: {
+              //       1520377971854: {
+              //         id: 1520377971854,
+              //         type: 2,
+              //         text: 'fsef',
+              //         addby: 'UserName',
+              //         addon: '3/6/2018, 6:12:51 PM',
+              //       },
+              //     },
+              //   },
+              //   result: 1520377971854,
+              // }];
+              const denormalizedJsonArray = [];
+              json.map(item =>
+                denormalizedJsonArray.push(denormalize(item.entities.cfsLog[Object.keys(item.entities.cfsLog)], cfsLogSchema, item)));
+              console.log(denormalizedJsonArray);
+              return denormalizedJsonArray;
+            }),
         },
-        'FAILURE',
+        actionTypes.REFRESH_FAILURE,
       ],
     },
   };
@@ -140,93 +154,11 @@ export function appendCFSLogAsync(val) {
           type: actionTypes.APPEND_SUCCESS,
           payload: val,
         },
-        'FAILURE',
+        actionTypes.APPEND_FAILURE,
       ],
     },
   };
 }
-
-// export const appendCFSLogAsync222 = val =>
-//   (dispatch) => {
-//     dispatch({
-//       type: constants.APPEND_REQUESTED,
-//     });
-
-//     return fetch(
-//       constants.webAPIUrl,
-//       {
-//         method: 'POST',
-//         headers: {
-//           'Accept': 'application/json',
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           type: 3,
-//           text: `Send Tone (0115) successfully,
-//                 Tone 0115 = FD01, FD02, EMS South`,
-//           addby: 'Alison',
-//           addon: '2017-09-10',
-//         }),
-//       },
-//     )
-//       .then((response) => {
-//         if (response.status >= 200 && response.status < 300) {
-//           console.log(response);
-//           console.log(...val);
-//           dispatch({
-//             type: constants.APPEND,
-//             item: val,
-//           });
-//         } else {
-//           const error = new Error(response.statusText);
-//           error.response = response;
-//           throw error;
-//         }
-//       });
-//     // .then((items) => dispatch(initTimeEventsWhenFetchSucceed(items)))
-//     // .catch((error) => dispatch(appendSystemErrorLog(error)));
-//   };
-
-// export const appendCFSLogAsync = val =>
-//   (dispatch) => {
-//     dispatch({
-//       type: constants.APPEND_REQUESTED,
-//     });
-
-//     return fetch(
-//       constants.webAPIUrl,
-//       {
-//         method: 'POST',
-//         headers: {
-//           'Accept': 'application/json',
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           type: 3,
-//           text: `Send Tone (0115) successfully,
-//                 Tone 0115 = FD01, FD02, EMS South`,
-//           addby: 'Alison',
-//           addon: '2017-09-10',
-//         }),
-//       },
-//     )
-//       .then((response) => {
-//         if (response.status >= 200 && response.status < 300) {
-//           console.log(response);
-//           console.log(...val);
-//           dispatch({
-//             type: constants.APPEND,
-//             item: val,
-//           });
-//         } else {
-//           const error = new Error(response.statusText);
-//           error.response = response;
-//           throw error;
-//         }
-//       });
-//     // .then((items) => dispatch(initTimeEventsWhenFetchSucceed(items)))
-//     // .catch((error) => dispatch(appendSystemErrorLog(error)));
-//   };
 
 export const showAllCFSLog = () =>
   (dispatch) => {

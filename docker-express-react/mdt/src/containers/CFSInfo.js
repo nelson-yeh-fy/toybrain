@@ -14,18 +14,18 @@ import '../assets/App.css';
 
 let inputVal = '';
 
-const getVisibleCfsLog = (cfsLog, filter) => {
+const getVisibleCfsLogArticles = (cfsLogArticles, filter) => {
   switch (filter) {
     case 1:// 'SHOW_SYSTEMTEXTONLY':
-      return cfsLog.filter(t => !t.isUserComment);
+      return cfsLogArticles.filter(t => !t.isUserComment);
     case 2:// 'SHOW_USERTEXTONLY':
-      return cfsLog.filter(t => !t.isUserComment);
+      return cfsLogArticles.filter(t => !t.isUserComment);
     case 4:// 'SHOW_TONEONLY':
-      return cfsLog.filter(t => !t.isUserComment);
+      return cfsLogArticles.filter(t => !t.isUserComment);
     case 7:// 'SHOW_ALL':
-      return cfsLog.filter(t => t.isUserComment);
+      return cfsLogArticles.filter(t => t.isUserComment);
     default:
-      return cfsLog;
+      return cfsLogArticles;
   }
 };
 
@@ -61,7 +61,7 @@ const CfsInfo = props => (
       </span>
       <div className="timeEvent">
         <Comment.Group>
-          {props.cfsLog.map(x => CfsLog(x))}
+          {props.cfsLogArticles.map(x => CfsLog(x))}
         </Comment.Group>
       </div>
       <Divider />
@@ -98,7 +98,7 @@ const CfsInfo = props => (
 
 // onClick={props.actions.appendCFSLog(newTimeEvent)}
 CfsInfo.propTypes = {
-  cfsLog: PropTypes.arrayOf(PropTypes.shape({
+  cfsLogArticles: PropTypes.arrayOf(PropTypes.shape({
     idx: PropTypes.number,
     isUserComment: PropTypes.bool,
     text: PropTypes.string,
@@ -116,7 +116,7 @@ CfsInfo.propTypes = {
 // Take application state (our redux store) as an argument,
 // and passed as props to this component.
 const mapStateToProps = state => ({
-  cfsLog: getVisibleCfsLog(state.cfsLog, state.cfsLogStatus.listFilter),
+  cfsLogArticles: getVisibleCfsLogArticles(state.cfsLog.logArticles, state.cfsLogStatus.listFilter),
   // 'isRefreshing' means one of CFSInfo.js's prop;
   // 'state.cfsLogListStatus.isRefreshing' means store (createStore via rootReducer)'s isRefreshing variable
   isRefreshing: state.cfsLogStatus.isRefreshing,
