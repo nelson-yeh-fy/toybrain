@@ -1,5 +1,4 @@
 import * as actionTypes from '../constants/actionTypes';
-import * as constants from '../constants';
 
 const defaultState = {
   isRefreshing: false,

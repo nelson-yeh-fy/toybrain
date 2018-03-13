@@ -107,9 +107,7 @@ CfsInfo.propTypes = {
   })).isRequired,
   isRefreshing: PropTypes.bool.isRequired,
   isAdding: PropTypes.bool.isRequired,
-  refreshCFSLog: PropTypes.func.isRequired,
   refreshCFSLogAsync: PropTypes.func.isRequired,
-  appendCFSLog: PropTypes.func.isRequired,
   appendCFSLogAsync: PropTypes.func.isRequired,
 };
 
