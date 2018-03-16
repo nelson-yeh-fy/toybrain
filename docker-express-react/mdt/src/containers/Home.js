@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Sidebar, Segment, Menu, Label, Input, Tab, Step, Icon, Dropdown, Button, Rail } from 'semantic-ui-react'
-import CfsHighligh from '../components/cfsHighligh';
+import { Image, Container, Grid, Sidebar, Segment, Menu, Label, Input, Tab, Step, Icon, Dropdown, Button, Rail } from 'semantic-ui-react'
 import CFSInfo from './CFSInfo';
 import CfsRelated from '../components/cfsRelated';
 import Ncic from '../components/ncic';
@@ -18,18 +17,56 @@ class Home extends Component {
     const { visible } = this.state;
 
     const tabpanes = [
-      { menuItem: { key: '1', icon: 'users', content: 'CFS Summary' }, render: () => <Tab.Pane inverted className='cfs-info-tabcontent' key='tabCfsSummary'><CFSInfo /></Tab.Pane> },
-      { menuItem: { key: '2', icon: 'newspaper', content: 'Related Info.' }, render: () => <Tab.Pane inverted className='cfs-info-tabcontent' key='tabCfsRelated'><CfsRelated /></Tab.Pane> },
-      { menuItem: { key: '3', icon: 'search', content: 'In case NCIC' }, render: () => <Tab.Pane inverted className='cfs-info-tabcontent' key='tabCfsNcic'><Ncic /></Tab.Pane> },
-      { menuItem: { key: '4', icon: 'ticket', content: 'eTicket' }, render: () => <Tab.Pane inverted className='cfs-info-tabcontent' key='tabCfsTicket'><CfsRelated /></Tab.Pane> },
+      {
+        menuItem:
+          <Menu.Item as='a' header onClick={this.toggleVisibility}>
+            <Image
+              size='mini'
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K" alt="" height="14"
+              style={{ marginRight: '0.5em' }}
+            />
+            <Dropdown item simple text='Your CFS(3)'>
+              <Dropdown.Menu>
+                <Dropdown.Item>2018-000354</Dropdown.Item>
+                <Dropdown.Item>2018-000141</Dropdown.Item>
+                <Dropdown.Item>2018-000214</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Item>,
+        render: () =>
+          <Tab.Pane className='cfs-info-tabcontent' key='tabCfsSummary'>
+            <CFSInfo />
+          </Tab.Pane>
+      },
+      {
+        menuItem:
+          <Menu.Item as='a' header>
+            2018-000354
+          </Menu.Item>,
+        render: () =>
+          <Tab.Pane className='cfs-info-tabcontent' key='tabCfsSummary'><CFSInfo /></Tab.Pane>
+      },
+      {
+        menuItem: { key: '2', icon: 'newspaper', content: 'Related Info.' }, render: () =>
+          <Tab.Pane className='cfs-info-tabcontent' key='tabCfsRelated'><CfsRelated /></Tab.Pane>
+      },
+      {
+        menuItem: { key: '3', icon: 'search', content: 'NCIC' }, render: () =>
+          <Tab.Pane className='cfs-info-tabcontent' key='tabCfsNcic'><Ncic /></Tab.Pane>
+      },
+      {
+        menuItem: { key: '4', icon: 'ticket', content: 'eTicket' }, render: () =>
+          <Tab.Pane className='cfs-info-tabcontent' key='tabCfsTicket'><CfsRelated /></Tab.Pane>
+      },
     ];
-    /*'CFS Summary', 'Related Info.', 'NCIC', 'eTicket'*/
 
     return (
       <Sidebar.Pushable as={Segment}>
         <Sidebar as={Menu} animation='uncover' width='thin' visible={visible} icon='labeled' vertical inverted>
           <Segment className='App-sidebar' style={{ padding: '1em 0em 0em 1em' }} vertical inverted>
-            <Input size='small' label={{ icon: 'search' }} labelPosition='left corner' placeholder='CFS No.' fluid />
+            <Menu.Item as='a' header>
+              InfoShare MDT
+        </Menu.Item>
             <Menu.Item>
               <div>Inbox&nbsp;&nbsp;
               <Label image id="cfsBoxCount" color='teal'>2</Label>
@@ -58,73 +95,59 @@ class Home extends Component {
           </Segment>
         </Sidebar>
         <Sidebar.Pusher>
-          <Segment vertical inverted>
+          <div>
+            <Grid columns={2}>
+              <Grid.Column width={11} style={{ paddingRight: 0 }}>
+                <Tab menu={{ inverted: true, style: { borderRadius: 0, height: 50 } }} defaultActiveIndex={0} renderActiveOnly={true} panes={tabpanes} />
+              </Grid.Column>
+              <Grid.Column width={5} style={{ paddingLeft: 0 }}>
+                <Menu inverted style={{ borderRadius: 0, height: 50 }}>
+                  <Menu.Item>
+                    <Input size='medium' label={{ icon: 'search' }} labelPosition='left corner' placeholder='Enter CFS Number' />
+                  </Menu.Item>
+                </Menu>
+                <Segment vertical style={{ paddingLeft: 14 }}>
+                  <Step.Group size='mini' vertical>
+                    <Step className='step'>
+                      <Icon name='call square' />
+                      <Step.Content>
+                        <Step.Title>CFS Initiated</Step.Title>
+                        <Step.Description>15:31:00</Step.Description>
+                      </Step.Content>
+                    </Step>
+                    <Step active>
+                      <Icon name='send outline' />
+                      <Step.Content>
+                        <Step.Title>Unit Dispatched</Step.Title>
+                        <Step.Description>15:31:20</Step.Description>
+                      </Step.Content>
+                    </Step>
+                    <Step disabled>
+                      <Icon name='angle double right' />
+                      <Step.Content>
+                        <Step.Title>Unit Enroute</Step.Title>
+                        <Step.Description>15:31:30</Step.Description>
+                      </Step.Content>
+                    </Step>
+                    <Step disabled>
+                      <Icon name='building' />
+                      <Step.Content>
+                        <Step.Title>Unit On Scene</Step.Title>
+                      </Step.Content>
+                    </Step>
+                  </Step.Group>
+                </Segment>
+                <Segment style={{ paddingLeft: 14 }}>
+                  <Label size="small" color="teal" horizontal>501</Label>
+                  <Label size="small" color="teal" horizontal>502</Label>
+                </Segment>
+              </Grid.Column>
+            </Grid>
             <Button basic color='blue' icon='bars' className='cfs-case-selector'
               label={{ size: 'large', as: 'a', basic: true, color: 'blue', pointing: 'left', content: '#2018-000132' }}
               onClick={this.toggleVisibility}
             />
-            <Dropdown inline>
-              <Dropdown.Menu>
-                <Dropdown.Item>2018-000130</Dropdown.Item>
-                <Dropdown.Item>2018-000131</Dropdown.Item>
-                <Dropdown.Item>2018-000132</Dropdown.Item>
-                <Dropdown.Item>2018-000135</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <CfsHighligh />
-            <Grid columns={2}>
-              <Grid.Column width={11} style={{padding:0}}>
-                {
-                  //CFS Info Area
-                }
-                <Tab menu={{ fluid: true, inverted: true, aligned: 'right' }} defaultActiveIndex={0} renderActiveOnly={true} panes={tabpanes} />
-
-                {
-                  //CFS Status Area
-                }
-                <Rail attached position='right' style={{padding:5}}>
-                  <Segment vertical>
-                    <Step.Group size='mini' vertical>
-                      <Step className='step'>
-                        <Icon name='call square' />
-                        <Step.Content>
-                          <Step.Title>CFS Initiated</Step.Title>
-                          <Step.Description>15:31:00</Step.Description>
-                        </Step.Content>
-                      </Step>
-
-                      <Step active>
-                        <Icon name='send outline' />
-                        <Step.Content>
-                          <Step.Title>Unit Dispatched</Step.Title>
-                          <Step.Description>15:31:20</Step.Description>
-                        </Step.Content>
-                      </Step>
-
-                      <Step disabled>
-                        <Icon name='angle double right' />
-                        <Step.Content>
-                          <Step.Title>Unit Enroute</Step.Title>
-                          <Step.Description>15:31:30</Step.Description>
-                        </Step.Content>
-                      </Step>
-
-                      <Step disabled>
-                        <Icon name='building' />
-                        <Step.Content>
-                          <Step.Title>Unit On Scene</Step.Title>
-                        </Step.Content>
-                      </Step>
-                    </Step.Group>
-                  </Segment>
-                  <Segment vertical>
-                    <Label size="small" color="teal" horizontal>501</Label>
-                    <Label size="small" color="teal" horizontal>502</Label>
-                  </Segment>
-                </Rail>
-              </Grid.Column>
-            </Grid>
-          </Segment>
+          </div>
         </Sidebar.Pusher>
       </Sidebar.Pushable>
     )

@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Container, Comment, Form, Button, Input, Divider, Icon } from 'semantic-ui-react';
+import { Container, Comment, Form, Button, Input, Divider, Icon, Checkbox, Segment } from 'semantic-ui-react';
+import CfsHighlight from '../components/cfsHighlight';
 import CfsLog from '../components/CfsInfo/CfsLog';
 import {
   refreshCFSLog,
@@ -31,68 +32,70 @@ const getVisibleCfsLogArticles = (cfsLogArticles, filter) => {
 
 const CfsInfo = props => (
   <Container>
-    <div className="cfs-info">
-      <span className="title"> Description: </span>
-      <div className="desc">
-        <p> A fire started behind the pizza oven and is getting worse.
-            One employee is stuck in bathroom. Propane Tanks in Basement.
-            A fire started behind the pizza oven and is getting worse.
-            One employee is stuck in bathroom.
-        </p>
+    <CfsHighlight />
+    <Segment color="blue">
+      <p className="cfs-title"> CFS Description: </p>
+    </Segment>
+    <p className="cfs-description">
+      {`A fire started behind the pizza oven and is getting worse.
+          One employee is stuck in bathroom. Propane Tanks in Basement.
+          A fire started behind the pizza oven and is getting worse.
+          One employee is stuck in bathroom.
+          A fire started behind the pizza oven and is getting worse.
+          One employee is stuck in bathroom. Propane Tanks in Basement.
+          A fire started behind the pizza oven and is getting worse.
+          One employee is stuck in bathroom.`}
+    </p>
+    <Divider />
+    <Segment color="blue">
+      <p className="cfs-title">CFS Logs:</p>
+      <div className="float-right">
+        <Button
+          onClick={props.refreshCFSLogAsync}
+          disabled={props.isRefreshing}
+          size="mini"
+          icon
+          primary
+        >
+          <Icon name="refresh" />
+        </Button>
+        <Checkbox />
       </div>
+    </Segment>
+    <div className="cfs-timeEvent">
+      <Comment.Group style={{ maxWidth: 'none' }} >
+        {props.cfsLogArticles.map(x => CfsLog(x))}
+      </Comment.Group>
     </div>
     <Divider />
-    {
-      // CFS TimeEvent Area, expandable and collapsable
-    }
-    <div className="cfs-info">
-      <span className="title"> Time Event:
-        <span className="float-right">
-          <Button
-            onClick={props.refreshCFSLogAsync}
-            disabled={props.isRefreshing}
-            size="mini"
-            icon
-            primary
-          >
-            <Icon name="refresh" />
-          </Button>
-        </span>
-      </span>
-      <div className="timeEvent">
-        <Comment.Group>
-          {props.cfsLogArticles.map(x => CfsLog(x))}
-        </Comment.Group>
-      </div>
-      <Divider />
-      <Form onSubmit={() => {
-        if (inputVal !== '') {
-          props.appendCFSLogAsync({
-            id: Date.now(),
-            type: 2,
-            text: inputVal,
-            addby: 'UserName',
-            addon: new Date(Date.now()).toLocaleString(),
-          });
-        }
-      }}
-      >
-        <Form.Group widths="equal">
-          <Form.Field
-            onChange={(e) => { inputVal = e.target.value; }}
-            control={Input}
-            placeholder="Enter more comments..."
-          />
-          <Form.Button
-            disabled={props.isAdding}
-            content="Add"
-            labelPosition="right"
-            icon="edit"
-            primary
-          />
-        </Form.Group>
-      </Form>
-    </div>
+    <Form onSubmit={() => {
+      if (inputVal !== '') {
+        props.appendCFSLogAsync({
+          id: Date.now(),
+          type: 2,
+          text: inputVal,
+          addby: 'UserName',
+          addon: new Date(Date.now()).toLocaleString(),
+        });
+      }
+    }}
+    >
+      <Form.Group widths="equal">
+        <Form.Field
+          onChange={(e) => { inputVal = e.target.value; }}
+          control={Input}
+          placeholder="Enter more comments..."
+        />
+        <Form.Button
+          disabled={props.isAdding}
+          content="Add"
+          labelPosition="right"
+          icon="edit"
+          primary
+        />
+      </Form.Group>
+    </Form>
+
   </Container>
 );
 

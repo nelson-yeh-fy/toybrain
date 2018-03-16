@@ -26,15 +26,6 @@ body {
   padding-left: 14px !important;
 }
 
-.cfs-highlight {
-  background-color: #1c1d30 !important;
-  padding: 14px !important;
-  /* padding-top: 14px !important;
-  padding-left: 14px !important;
-  padding-right: 14px !important; */
-  height: 70px;
-}
-
 .cfs-progress {
   padding: 0px !important;
 }
@@ -68,25 +59,19 @@ body {
   padding-left:16px !important;
 }
 
-.cfs-info {
-  color: #d3d3d3;
-  padding-left: 14px;
-}
-
-.cfs-info .title{
-  font-size: 20px;
-  font-weight: bold;
-  color: #888888;
-}
-
-.cfs-info .desc{
+.cfs-title{
   font-size: 18px;
-  overflow-y: auto;
-  height: 100px;
-  padding-top: 10px;
+  font-weight: bold;
+  color: #535353;
 }
 
-.cfs-info .timeEvent {
+.cfs-description{
+  font-size: 18px;
+  height: 100px;
+  overflow-y: auto !important;
+}
+
+.cfs-timeEvent {
   overflow-y: auto;
   height: 350px;
   padding-top: 10px;
