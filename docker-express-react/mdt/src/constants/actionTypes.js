@@ -15,3 +15,8 @@ export const SHOW_ALL = 'cfslog/SHOW_ALL';
 export const SHOW_SYSTEMTEXTONLY = 'cfslog/SHOW_SYSTEMTEXTONLY';
 export const SHOW_USERTEXTONLY = 'cfslog/SHOW_USERTEXTONLY';
 export const SHOW_TONEONLY = 'cfslog/SHOW_TONEONLY';
+
+// cfsDetail
+export const UPDATE_CFSSTATUS_REQUESTED = 'cfsdetail/UPDATE_CFSSTATUS_REQUESTED';
+export const UPDATE_CFSSTATUS_SUCCESS = 'cfsdetail/UPDATE_CFSSTATUS_SUCCESS';
+export const UPDATE_CFSSTATUS_FAILURE = 'cfsdetail/UPDATE_CFSSTATUS_FAILURE';

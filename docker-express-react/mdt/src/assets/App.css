@@ -4,10 +4,6 @@ body {
   font-family: sans-serif;
 }
 
-.float-right {
-  float: right;
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -22,32 +18,13 @@ body {
   padding:0 !important;
 }
 
-.cfs-case-selector {
-  padding-left: 14px !important;
+.margin-left-14 {
+  margin-left: 14px !important;
 }
 
-.cfs-progress {
-  padding: 0px !important;
-}
-
-.cfsNumber{
-  color: #ffffff !important;
-  font-weight: bold !important;
-}
-
-.cfsType{
-  background-color: #ff0000 !important;
-  color: #ffffff !important;
-  font-size: 16px !important;
-}
-
-.cfsAddress{
-  color: #d3d3d3;
-}
-
-.cfsAddressStatus{
-  font-size: 14px;
-  vertical-align: middle;
+.margin-left-Right-14 {
+  margin-left: 14px !important;
+  margin-right: 14px !important;
 }
 
 .cfs-info-tabcontent {
@@ -59,13 +36,13 @@ body {
   padding-left:16px !important;
 }
 
-.cfs-title{
+.cfs-title {
   font-size: 18px;
   font-weight: bold;
   color: #535353;
 }
 
-.cfs-description{
+.cfs-description {
   font-size: 18px;
   height: 100px;
   overflow-y: auto !important;
@@ -92,11 +69,6 @@ body {
   color: #7c7b8d !important;
   max-width: 100% !important;
 }
-
-.step {
-  padding: 10px !important;
-}
-
 
 
 @keyframes App-logo-spin {

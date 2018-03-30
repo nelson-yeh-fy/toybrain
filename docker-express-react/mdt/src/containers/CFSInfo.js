@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container, Comment, Form, Button, Input, Divider, Icon, Checkbox, Segment } from 'semantic-ui-react';
-import CfsHighlight from '../components/cfsHighlight';
-import CfsLog from '../components/CfsInfo/CfsLog';
+import cfsAbstract from '../components/cfsAbstract';
+import cfsLog from '../components/cfsInfo/cfsLog';
 import {
   refreshCFSLog,
   refreshCFSLogAsync,
@@ -30,9 +30,9 @@ const getVisibleCfsLogArticles = (cfsLogArticles, filter) => {
   }
 };
 
-const CfsInfo = props => (
+const CFSInfo = props => (
   <Container>
-    <CfsHighlight />
+    <cfsAbstract />
     <Segment color="blue">
       <p className="cfs-title"> CFS Description: </p>
     </Segment>
@@ -47,24 +47,26 @@ const CfsInfo = props => (
           One employee is stuck in bathroom.`}
     </p>
     <Divider />
-    <Segment color="blue">
-      <p className="cfs-title">CFS Logs:</p>
-      <div className="float-right">
+    <Segment color="blue" >
+      <div className="cfs-title">CFS Logs:
+        <Checkbox label="System Text" className="margin-left-14" />
+        <Checkbox label="User Text" className="margin-left-14" />
+        <Checkbox label="Tone" className="margin-left-14" />
         <Button
           onClick={props.refreshCFSLogAsync}
           disabled={props.isRefreshing}
           size="mini"
+          floated="right"
           icon
           primary
         >
           <Icon name="refresh" />
         </Button>
-        <Checkbox />
       </div>
     </Segment>
     <div className="cfs-timeEvent">
       <Comment.Group style={{ maxWidth: 'none' }} >
-        {props.cfsLogArticles.map(x => CfsLog(x))}
+        {props.cfsLogArticles.map(x => cfsLog(x))}
       </Comment.Group>
     </div>
     <Divider />
@@ -99,8 +101,8 @@ const CfsInfo = props => (
   </Container>
 );
 
-// onClick={props.actions.appendCFSLog(newTimeEvent)}
-CfsInfo.propTypes = {
+
+CFSInfo.propTypes = {
   cfsLogArticles: PropTypes.arrayOf(PropTypes.shape({
     idx: PropTypes.number,
     isUserComment: PropTypes.bool,
@@ -134,4 +136,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CfsInfo);
+)(CFSInfo);
