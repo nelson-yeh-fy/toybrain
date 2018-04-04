@@ -3,13 +3,13 @@ import { Image, Grid, Segment, Menu, Label, Input, Tab, Step, Icon, Dropdown, Bu
 import CFSInfo from './CFSInfo';
 import CFSRelated from './CFSRelated';
 import Simulate from './Simulate';
-import Ncic from '../components/ncic';
+import NCIC from './NCIC';
 import '../assets/App.css';
 
 const tabpanes = [
   {
     menuItem:
-      <Menu.Item as="a" header>
+      <Menu.Item as="a" header key="0">
         <Image
           size="mini"
           src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
@@ -62,12 +62,12 @@ const tabpanes = [
     menuItem: { key: '4', icon: 'search', content: 'NCIC' },
     render: () => (
       <Tab.Pane className="cfs-info-tabcontent" key="tabCfsNcic">
-        <Ncic />
+        <NCIC />
       </Tab.Pane>
     ),
   },
   {
-    menuItem: { key: '5', icon: 'test', content: 'Simulate' },
+    menuItem: { key: '5', content: 'Simulate' },
     render: () => (
       <Tab.Pane className="cfs-info-tabcontent" key="tabSimulate">
         <Simulate />
@@ -101,7 +101,7 @@ const Home = () => (
             </Header.Subheader>
           </Header>
         </Segment>
-        <Step.Group size="medium" vertical className="margin-left-Right-14">
+        <Step.Group vertical className="margin-left-Right-14">
           <Step className="step">
             <Icon name="volume control phone" />
             <Step.Content>

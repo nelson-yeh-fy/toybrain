@@ -11,10 +11,10 @@ export const APPEND_FAILURE = 'cfslog/APPEND_FAILURE';
 export const REFRESH_REQUESTED = 'cfslog/REFRESH_REQUESTED';
 export const REFRESH_SUCCESS = 'cfslog/REFRESH_SUCCESS';
 export const REFRESH_FAILURE = 'cfslog/REFRESH_FAILURE';
-export const SHOW_ALL = 'cfslog/SHOW_ALL';
-export const SHOW_SYSTEMTEXTONLY = 'cfslog/SHOW_SYSTEMTEXTONLY';
-export const SHOW_USERTEXTONLY = 'cfslog/SHOW_USERTEXTONLY';
-export const SHOW_TONEONLY = 'cfslog/SHOW_TONEONLY';
+export const SHOW_CFSLOG_ALL = 'cfslog/SHOW_CFSLOG_ALL';
+export const SHOW_CFSLOG_SYSTEMTEXT = 'cfslog/SHOW_CFSLOG_SYSTEMTEXT';
+export const SHOW_CFSLOG_USERTEXT = 'cfslog/SHOW_CFSLOG_USERTEXT';
+export const SHOW_CFSLOG_TONE = 'cfslog/SHOW_CFSLOG_TONE';
 
 // cfsDetail
 export const UPDATE_CFSSTATUS_REQUESTED = 'cfsdetail/UPDATE_CFSSTATUS_REQUESTED';

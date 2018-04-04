@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container, Button, Label } from 'semantic-ui-react';
-import cfsAbstract from '../components/cfsAbstract';
+import CfsAbstract from '../components/cfsAbstract';
 import {
   updateCFSStatus,
   updateCFSStatusAsync,
@@ -12,7 +12,7 @@ import '../assets/App.css';
 
 const Simulate = props => (
   <Container>
-    <cfsAbstract />
+    <CfsAbstract />
     <Label>{props.cfsStatus}</Label>
     <Button
       disabled={props.isCFSStatusUpdating}

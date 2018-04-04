@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import faker from 'faker'
-import _ from 'lodash'
+//import faker from 'faker'
+//import _ from 'lodash'
 import { Container, Input, Select, Button, Search } from 'semantic-ui-react'
 import '../assets/App.css';
 
@@ -40,8 +40,8 @@ class NcicMultiple extends Component {
         setTimeout(() => {
             if (this.state.value.length < 1) return this.resetComponent()
 
-            const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-            const isMatch = result => re.test(result.title)
+            //const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
+            //const isMatch = result => re.test(result.title)
 
             // this.setState({
             //     isLoading: false,

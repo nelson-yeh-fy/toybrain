@@ -3,7 +3,10 @@ import * as actionTypes from '../constants/actionTypes';
 const defaultState = {
   isRefreshing: false,
   isAdding: false,
-  listFilter: 0, // 0: show all, 1: show user comment only, 2: show tone only
+  listFilterMask: 7, // 0: show all, 1: show user comment only, 2: show tone only
+  chkChecked_SysText: true,
+  chkChecked_UsrText: true,
+  chkChecked_Tone: true,
 };
 
 // The followings are reducers
@@ -33,28 +36,25 @@ export default (state = defaultState, action) => {
         isAdding: !state.isAdding,
       };
 
-    case actionTypes.SHOW_ALL:
+    case actionTypes.SHOW_CFSLOG_SYSTEMTEXT:
       return {
         ...state,
-        listFilter: 7,
+        chkChecked_SysText: action.payload,
+        listFilterMask: action.payload === true ? state.listFilterMask + 1 : state.listFilterMask - 1,
       };
 
-    case actionTypes.SHOW_SYSTEMTEXTONLY:
+    case actionTypes.SHOW_CFSLOG_USERTEXT:
       return {
         ...state,
-        listFilter: 1,
+        chkChecked_UsrText: action.payload,
+        listFilterMask: action.payload === true ? state.listFilterMask + 2 : state.listFilterMask - 2,
       };
 
-    case actionTypes.SHOW_USERTEXTONLY:
+    case actionTypes.SHOW_CFSLOG_TONE:
       return {
         ...state,
-        listFilter: 2,
-      };
-
-    case actionTypes.SHOW_TONEONLY:
-      return {
-        ...state,
-        listFilter: 4,
+        chkChecked_Tone: action.payload,
+        listFilterMask: action.payload === true ? state.listFilterMask + 4 : state.listFilterMask - 4,
       };
 
     default:
@@ -97,3 +97,34 @@ export default (state = defaultState, action) => {
 //           return state;
 //   }
 // };
+export const showAllCFSLog = () =>
+  (dispatch) => {
+    dispatch({
+      type: actionTypes.SHOW_CFSLOG_ALL,
+    });
+  };
+
+export const showCFSLogSystemText = val =>
+  (dispatch) => {
+    console.log(val);
+    dispatch({
+      type: actionTypes.SHOW_CFSLOG_SYSTEMTEXT,
+      payload: val,
+    });
+  };
+
+export const showCFSLogUserText = val =>
+  (dispatch) => {
+    dispatch({
+      type: actionTypes.SHOW_CFSLOG_USERTEXT,
+      payload: val,
+    });
+  };
+
+export const showCFSLogTone = val =>
+  (dispatch) => {
+    dispatch({
+      type: actionTypes.SHOW_CFSLOG_TONE,
+      payload: val,
+    });
+  };

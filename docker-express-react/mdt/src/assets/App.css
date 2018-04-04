@@ -4,6 +4,17 @@ body {
   font-family: sans-serif;
 }
 
+label {
+  font-size: 14px;
+  padding: 10px;
+  margin: 0 0 10px;
+ }
+
+ label:hover {
+  background:#eee;
+  cursor: pointer;
+ }
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;

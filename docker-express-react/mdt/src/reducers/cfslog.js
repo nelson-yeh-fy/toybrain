@@ -20,7 +20,7 @@ const defaultState = {
     addon: '2017-09-05',
   }, {
     id: 99999003,
-    type: 3,
+    type: 4,
     text: `Send Tone (0115) successfully,
         Tone 0115 = FD01, FD02, EMS South`,
     addby: 'Alison',
@@ -157,32 +157,3 @@ export function appendCFSLogAsync(val) {
     },
   };
 }
-
-export const showAllCFSLog = () =>
-  (dispatch) => {
-    dispatch({
-      type: actionTypes.SHOW_ALL,
-    });
-  };
-
-export const showSystemTextOnlyCFSLog = () =>
-  (dispatch) => {
-    dispatch({
-      type: actionTypes.SHOW_SYSTEMTEXTONLY,
-    });
-  };
-
-export const showUserTextOnlyCFSLog = () =>
-  (dispatch) => {
-    dispatch({
-      type: actionTypes.SHOW_USERTEXTONLY,
-    });
-  };
-
-export const showToneOnlyCFSLog = () =>
-  (dispatch) => {
-    dispatch({
-      type: actionTypes.SHOW_TONEONLY,
-    });
-  };
-

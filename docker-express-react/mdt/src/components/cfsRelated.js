@@ -2,10 +2,10 @@ import React from 'react';
 import { } from 'semantic-ui-react';
 import '../assets/App.css';
 
-const cfsRelated = () => (
+const CfsRelated = () => (
   <div>
     cfsRelated information
   </div>
 );
 
-export default cfsRelated;
+export default CfsRelated;

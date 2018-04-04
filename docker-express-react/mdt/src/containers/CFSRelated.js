@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container } from 'semantic-ui-react';
-import cfsAbstract from '../components/cfsAbstract';
-import cfsRelated from '../components/cfsRelated';
+import CfsAbstract from '../components/cfsAbstract';
+import CfsRelated from '../components/cfsRelated';
 import '../assets/App.css';
 
 const CFSRelated = props => (
   <Container>
-    <cfsAbstract />
-    <cfsRelated />
+    <CfsAbstract />
+    <CfsRelated />
   </Container>
 );
 
