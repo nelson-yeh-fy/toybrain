@@ -33,7 +33,7 @@ const CFSInfo = props => (
       funcShowCFSLogSystemText={props.showCFSLogSystemText}
       funcShowCFSLogUserText={props.showCFSLogUserText}
       funcShowCFSLogTone={props.showCFSLogTone}
-      funcRefreshLog={props.refreshCFSLogAsync}
+      funcRefreshCFSLogAsync={props.refreshCFSLogAsync}
       funcAppendCFSLogAsync={props.appendCFSLogAsync}
     />
   </Container>
