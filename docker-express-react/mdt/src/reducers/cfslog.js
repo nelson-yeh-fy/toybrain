@@ -31,12 +31,12 @@ const defaultState = {
 // The followings are reducers
 export default (state = defaultState /* [] */, action) => {
   switch (action.type) {
-    case actionTypes.REFRESH_SUCCESS:
+    case actionTypes.REFRESH_CFSLOG_SUCCESS:
       return {
         logArticles: [...state.logArticles, ...action.payload],
       };
 
-    case actionTypes.APPEND_SUCCESS:
+    case actionTypes.APPEND_CFSLOG_SUCCESS:
       return {
         logArticles: [...state.logArticles, action.payload],
       };
@@ -50,23 +50,23 @@ export default (state = defaultState /* [] */, action) => {
 export const refreshCFSLog = () =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.REFRESH_REQUESTED,
+      type: actionTypes.REFRESH_CFSLOG_REQUESTED,
     });
 
     dispatch({
-      type: actionTypes.REFRESH_SUCCESS,
+      type: actionTypes.REFRESH_CFSLOG_SUCCESS,
     });
   };
 
 export const refreshCFSLogAsyncObsolete = () => (
   (dispatch) => {
     dispatch({
-      type: actionTypes.REFRESH_REQUESTED,
+      type: actionTypes.REFRESH_CFSLOG_REQUESTED,
     });
 
     setTimeout(() => {
       dispatch({
-        type: actionTypes.REFRESH_SUCCESS,
+        type: actionTypes.REFRESH_CFSLOG_SUCCESS,
       });
     }, 2000);
   }
@@ -78,9 +78,9 @@ export function refreshCFSLogAsync() {
       endpoint: constants.webAPIUrl,
       method: 'GET',
       types: [
-        actionTypes.REFRESH_REQUESTED,
+        actionTypes.REFRESH_CFSLOG_REQUESTED,
         {
-          type: actionTypes.REFRESH_SUCCESS,
+          type: actionTypes.REFRESH_CFSLOG_SUCCESS,
           payload: (action, state, res) =>
             getJSON(res).then((json) => {
               // const sampleItem = [{
@@ -105,7 +105,7 @@ export function refreshCFSLogAsync() {
               return denormalizedJsonArray;
             }),
         },
-        actionTypes.REFRESH_FAILURE,
+        actionTypes.REFRESH_CFSLOG_FAILURE,
       ],
     },
   };
@@ -114,11 +114,11 @@ export function refreshCFSLogAsync() {
 export const appendCFSLog = val =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.APPEND_REQUESTED,
+      type: actionTypes.APPEND_CFSLOG_REQUESTED,
     });
 
     dispatch({
-      type: actionTypes.APPEND_SUCCESS,
+      type: actionTypes.APPEND_CFSLOG_SUCCESS,
       payload: val,
     });
   };
@@ -126,12 +126,12 @@ export const appendCFSLog = val =>
 export const appendCFSLogAsyncObsolete = val =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.APPEND_REQUESTED,
+      type: actionTypes.APPEND_CFSLOG_REQUESTED,
     });
 
     setTimeout(() => {
       dispatch({
-        type: actionTypes.APPEND_SUCCESS,
+        type: actionTypes.APPEND_CFSLOG_SUCCESS,
         payload: val,
       });
     }, 2000);
@@ -147,12 +147,12 @@ export function appendCFSLogAsync(val) {
         'Content-Type': 'application/json',
       },
       types: [
-        actionTypes.APPEND_REQUESTED,
+        actionTypes.APPEND_CFSLOG_REQUESTED,
         {
-          type: actionTypes.APPEND_SUCCESS,
+          type: actionTypes.APPEND_CFSLOG_SUCCESS,
           payload: val,
         },
-        actionTypes.APPEND_FAILURE,
+        actionTypes.APPEND_CFSLOG_FAILURE,
       ],
     },
   };

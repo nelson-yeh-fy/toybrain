@@ -12,25 +12,25 @@ const defaultState = {
 // The followings are reducers
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.REFRESH_REQUESTED:
+    case actionTypes.REFRESH_CFSLOG_REQUESTED:
       return {
         ...state,
         isRefreshing: true,
       };
 
-    case actionTypes.REFRESH_SUCCESS:
+    case actionTypes.REFRESH_CFSLOG_SUCCESS:
       return {
         ...state,
         isRefreshing: !state.isRefreshing,
       };
 
-    case actionTypes.APPEND_REQUESTED:
+    case actionTypes.APPEND_CFSLOG_REQUESTED:
       return {
         ...state,
         isAdding: true,
       };
 
-    case actionTypes.APPEND_SUCCESS:
+    case actionTypes.APPEND_CFSLOG_SUCCESS:
       return {
         ...state,
         isAdding: !state.isAdding,
