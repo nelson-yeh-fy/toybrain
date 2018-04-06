@@ -17,7 +17,7 @@ const tabpanes = [
           height="14"
           style={{ marginRight: '0.5em' }}
         />
-        <Dropdown item simple text="2018-000354 (3 more CFS)">
+        <Dropdown item simple text="2018-000354(3 more)">
           <Dropdown.Menu>
             <Dropdown.Item>2018-000354 [Car Stop]</Dropdown.Item>
             <Dropdown.Item>2018-000141 [Fire]</Dropdown.Item>
@@ -67,7 +67,23 @@ const tabpanes = [
     ),
   },
   {
-    menuItem: { key: '5', content: 'Simulate' },
+    menuItem: { key: '5', icon: 'bug', content: '' },
+    render: () => (
+      <Tab.Pane className="cfs-info-tabcontent" key="tabSimulate">
+        <Simulate />
+      </Tab.Pane>
+    ),
+  },
+  {
+    menuItem: { key: '6', icon: 'map', content: '' },
+    render: () => (
+      <Tab.Pane className="cfs-info-tabcontent" key="tabSimulate">
+        <Simulate />
+      </Tab.Pane>
+    ),
+  },
+  {
+    menuItem: { key: '7', icon: 'male', content: '' },
     render: () => (
       <Tab.Pane className="cfs-info-tabcontent" key="tabSimulate">
         <Simulate />
@@ -87,10 +103,6 @@ const Home = () => (
         <Menu inverted style={{ borderRadius: 0, height: 50 }}>
           <Menu.Item>
             <Input size="medium" label={{ icon: 'search' }} labelPosition="left corner" placeholder="Enter CFS Number" />
-            <Button.Group size="small">
-              <Button icon="map" />
-              <Button icon="dashboard" />
-            </Button.Group>
           </Menu.Item>
         </Menu>
         <Segment inverted tertiary className="margin-left-Right-14" style={{ height: 150 }} >
@@ -116,13 +128,13 @@ const Home = () => (
               <Step.Description>
                 <List divided selection>
                   <List.Item>
-                    <Label size="small" color="teal" horizontal>501</Label> 15:31:20
+                    <Label htmlFor="1" size="small" color="teal" horizontal>501</Label> 15:31:20
                   </List.Item>
                   <List.Item>
-                    <Label size="small" color="teal" horizontal>502</Label> 15:31:30
+                    <Label htmlFor="1" size="small" color="teal" horizontal>502</Label> 15:31:30
                   </List.Item>
                   <List.Item>
-                    <Label size="small" color="red" horizontal>701</Label> 15:31:32
+                    <Label htmlFor="1" size="small" color="red" horizontal>701</Label> 15:31:32
                   </List.Item>
                 </List>
               </Step.Description>
@@ -135,7 +147,7 @@ const Home = () => (
               <Step.Description>
                 <List divided selection>
                   <List.Item>
-                    <Label size="small" color="red" horizontal>503</Label> 15:32:31
+                    <Label htmlFor="1" size="small" color="red" horizontal>503</Label> 15:32:31
                   </List.Item>
                 </List>
               </Step.Description>
@@ -163,7 +175,9 @@ const Home = () => (
       color="blue"
       icon="bars"
       className="cfs-case-selector"
-      label={{ size: 'large', as: 'a', basic: true, color: 'blue', pointing: 'left', content: '#2018-000132' }}
+      label={{
+        size: 'large', as: 'a', basic: true, color: 'blue', pointing: 'left', content: '#2018-000132',
+      }}
       onClick={this.toggleVisibility}
     />
   </div>

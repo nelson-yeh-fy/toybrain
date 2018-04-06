@@ -62,41 +62,7 @@ export default (state = defaultState, action) => {
   }
 };
 
-// export const timeEventShow = (state = true, payload) => {
-//   switch (payload.type) {
-//       case 'SHOW_TIMEEVENT':
-//           return payload.isShowTimeEvent;
-//       default:
-//           return state;
-//   }
-// };
-
-// export const timeEventShowsUserCommentOnly = (state = false, payload) => {
-//   switch (payload.type) {
-//       case 'SHOW_USER_COMMENT_ONLY':
-//           return payload.isShowUserCommentOnly;
-//       default:
-//           return state;
-//   }
-// };
-
-// export const timeEventLoadingStatus = (state = false, payload) => {
-//   switch (payload.type) {
-//       case 'SET_LOADING_FLAG':
-//           return payload.isLoading;
-//       default:
-//           return state;
-//   }
-// };
-
-// export const timeEventLoadingResult = (state = false, payload) => {
-//   switch (payload.type) {
-//       case 'SET_LOADING_RESULT':
-//           return payload.hasError;
-//       default:
-//           return state;
-//   }
-// };
+// The followings are actionCreators, to be separated from reducer file
 export const showAllCFSLog = () =>
   (dispatch) => {
     dispatch({
@@ -106,7 +72,6 @@ export const showAllCFSLog = () =>
 
 export const showCFSLogSystemText = val =>
   (dispatch) => {
-    console.log(val);
     dispatch({
       type: actionTypes.SHOW_CFSLOG_SYSTEMTEXT,
       payload: val,

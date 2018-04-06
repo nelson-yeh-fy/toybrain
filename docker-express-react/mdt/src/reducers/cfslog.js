@@ -101,7 +101,7 @@ export function refreshCFSLogAsync() {
               const denormalizedJsonArray = [];
               json.map(item =>
                 denormalizedJsonArray.push(denormalize(item.entities.cfsLog[Object.keys(item.entities.cfsLog)], constants.cfsLogSchema, item)));
-              console.log(denormalizedJsonArray);
+              // console.log(denormalizedJsonArray);
               return denormalizedJsonArray;
             }),
         },
