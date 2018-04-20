@@ -5,9 +5,11 @@ import { bindActionCreators } from 'redux';
 import { Container, Button, Label } from 'semantic-ui-react';
 import CfsAbstract from '../components/cfsAbstract';
 import {
-  updateCFSStatus,
-  updateCFSStatusAsync,
-} from '../reducers/cfsDetail';
+  getCFSInfoAsync,
+  addCFSInfoAsync,
+  updateCFS,
+  updateCFSAsync,
+} from '../reducers/cfsInfo';
 import '../assets/App.css';
 
 const Simulate = props => (
@@ -15,8 +17,19 @@ const Simulate = props => (
     <CfsAbstract />
     <Label>{props.cfsStatus}</Label>
     <Button
-      disabled={props.isCFSStatusUpdating}
-      onClick={() => { props.updateCFSStatus(1); }}
+      disabled={props.isCFSUpdating}
+      // onClick={() => { props.updateCFS(1); }}
+      onClick={() => {
+        props.addCFSInfoAsync({
+        id: Date.now(),
+        cfsNumber: '2018-000120',
+        cfsStatus: 0, // 0:new, 1:dispatched, 2:closed
+        cfsDesc: 'Dispatching unit 0310 to CFS2017-00123',
+        addby: 'System',
+        addon: new Date(Date.now()).toLocaleString(),
+        isCFSUpdating: false,
+      });
+      }}
       size="mini"
       content="Dispatched"
       icon="refresh"
@@ -27,19 +40,23 @@ const Simulate = props => (
 
 Simulate.propTypes = {
   cfsStatus: PropTypes.number.isRequired,
-  isCFSStatusUpdating: PropTypes.bool.isRequired,
-  updateCFSStatus: PropTypes.func.isRequired,
+  isCFSUpdating: PropTypes.bool.isRequired,
+  getCFSInfoAsync: PropTypes.func.isRequired,
+  addCFSInfoAsync: PropTypes.func.isRequired,
+  updateCFS: PropTypes.func.isRequired,
 };
 
 // Take application state (our redux store) as an argument,
 // and passed as props to this component.
 const mapStateToProps = state => ({
-  cfsStatus: state.cfsDetail.cfsStatus,
-  isCFSStatusUpdating: state.cfsDetail.isCFSStatusUpdating,
+  cfsStatus: state.cfsInfo.cfsStatus,
+  isCFSUpdating: state.cfsInfo.isCFSUpdating,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  updateCFSStatus,
+  getCFSInfoAsync,
+  addCFSInfoAsync,
+  updateCFS,
 }, dispatch);
 
 export default connect(
