@@ -6,31 +6,28 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
-var timeEvents = require('./routes/timeEvents');
-
+var cfsInfo = require('./routes/cfsInfo');
+var cfsLogs = require('./routes/cfsLogs');
 var app = express();
-var dbHelper = require('./dbHelper_mongoDB');
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', index);
 app.use('/api/users', users);
+app.use('/api/cfsInfo', cfsInfo);
+app.use('/api/cfsLogs', cfsLogs);
 // app.use(function(req,res,next){setTimeout(next,2000)}); //Add delay to timeEvent
-app.use('/api/timeEvents', timeEvents);
 // app.use(function(req,res,next){setTimeout(next,0)}); //Remove delay
 
 /* not timeEvents but api/timeEvents, this is for dev server's understanding that it will use proxy in package.json '"proxy": "http://localhost:3001"'
  * in react app: componentDidMount() {
- *   this.fetchData('/api/timeEvents'); // starts from '/api/', will proxy the request to localhost:3001, and query our /api/timeEvents 
+ *   this.fetchData('/api/timeEvents'); // starts from '/api/', will proxy the request to localhost:3001, and query our /api/timeEvents
  * }
  * Proxying API Requests in Development: https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md
 */
@@ -53,9 +50,10 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-// Connect to database on start
-// I currently use mongodb, which is hosted on mongolab for testing
-dbHelper.connect('mongodb://observer1:observer1@ds135252.mlab.com:35252/cad-time-events', function (err) {
+// Connect to database when this express service start
+// currently use mongodb, which is hosted on mongolab for testing
+var dbHelper = require('./dbHelpers/mongoLab');
+dbHelper.connect('mongodb://user1:user1@ds251889.mlab.com:51889/cad_prototyping', function (err) {
   if (err) {
     console.log('Unable to connect to database.')
     process.exit(1)

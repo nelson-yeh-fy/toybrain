@@ -1,6 +1,5 @@
 var MongoClient = require('mongodb').MongoClient
 
-const TIMEEVENT_COLLECTION_NAME = 'timeEvents';
 var state = {
     db: null,
 }
@@ -29,9 +28,9 @@ exports.close = function (done) {
     }
 }
 
-exports.findTimeEventById = function (req, res) {
+exports.findById = function (req, res, mongodb_collection_name) {
     if (state.db) {
-        state.db.collection(TIMEEVENT_COLLECTION_NAME).findOne({ 'idx': req.params.id }, function (err, result) {
+        state.db.collection(mongodb_collection_name).findOne({ 'id': req.params.id }, function (err, result) {
             if (err)
                 return console.log(err)
             res.json(result);
@@ -39,23 +38,10 @@ exports.findTimeEventById = function (req, res) {
     }
 }
 
-exports.findAllTimeEvent = function (req, res) {
+exports.findAll = function (req, res, mongodb_collection_name) {
 
-    // res.json([{
-    //     idx: 12345,
-    //     isUserComment: true,
-    //     text: 'Dispatch unit 100',
-    //     addby: 'webApi',
-    //     addon: '2017-06-13'
-    // }, {
-    //     idx: 12346,
-    //     isUserComment: true,
-    //     text: 'Dispatch unit 102',
-    //     addby: 'webApi',
-    //     addon: '2017-06-14'
-    // }]);
     if (state.db) {
-        state.db.collection(TIMEEVENT_COLLECTION_NAME).find().toArray((err, result) => {
+        state.db.collection(mongodb_collection_name).find().toArray((err, result) => {
             if (err)
                 return console.log(err)
             console.log(result);
@@ -64,12 +50,12 @@ exports.findAllTimeEvent = function (req, res) {
     }
 };
 
-exports.addTimeEvent = function (req, res) {
+exports.addItem = function (req, res, mongodb_collection_name) {
     if (state.db) {
-        var timeEvent = req.body;
-        console.log('Adding timeEvent: ' + JSON.stringify(timeEvent));
-        state.db.collection(TIMEEVENT_COLLECTION_NAME, function (err, collection) {
-            collection.insert(timeEvent, { safe: true }, function (err, result) {
+        var item = req.body;
+        console.log('Adding Item: ' + JSON.stringify(item));
+        state.db.collection(mongodb_collection_name, function (err, collection) {
+            collection.insert(item, { safe: true }, function (err, result) {
                 if (err) {
                     res.send({ 'error': 'An error has occurred' });
                 } else {
@@ -81,32 +67,32 @@ exports.addTimeEvent = function (req, res) {
     }
 }
 
-exports.updateTimeEvent = function (req, res) {
+exports.updateItem = function (req, res, mongodb_collection_name) {
     if (state.db) {
         var id = req.params.id;
-        var timeEvent = req.body;
+        var item = req.body;
         console.log('Updating id: ' + id);
-        console.log(JSON.stringify(timeEvent));
-        state.db.collection(TIMEEVENT_COLLECTION_NAME, function (err, collection) {
-            collection.update({ 'idx': id }, timeEvent, { safe: true }, function (err, result) {
+        console.log(JSON.stringify(item));
+        state.db.collection(mongodb_collection_name, function (err, collection) {
+            collection.update({ 'id': id }, item, { safe: true }, function (err, result) {
                 if (err) {
                     console.log('Error updating: ' + err);
                     res.send({ 'error': 'An error has occurred' });
                 } else {
                     console.log('' + result + ' document(s) updated');
-                    res.send(timeEvent);
+                    res.send(item);
                 }
             });
         });
     }
 }
 
-exports.deleteTimeEvent = function (req, res) {
+exports.deleteItem = function (req, res, mongodb_collection_name) {
     if (state.db) {
         var id = req.params.id;
         console.log('Deleting id: ' + id);
-        state.db.collection(TIMEEVENT_COLLECTION_NAME, function (err, collection) {
-            collection.remove({ 'idx': id }, { safe: true }, function (err, result) {
+        state.db.collection(mongodb_collection_name, function (err, collection) {
+            collection.remove({ 'id': id }, { safe: true }, function (err, result) {
                 if (err) {
                     res.send({ 'error': 'An error has occurred - ' + err });
                 } else {

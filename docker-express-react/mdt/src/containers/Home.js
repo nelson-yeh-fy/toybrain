@@ -6,91 +6,118 @@ import Simulate from './Simulate';
 import NCIC from './NCIC';
 import '../assets/App.css';
 
-const tabpanes = [
-  {
-    menuItem:
-      <Menu.Item as="a" header key="0">
-        <Image
-          size="mini"
-          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
-          alt=""
-          height="14"
-          style={{ marginRight: '0.5em' }}
-        />
-        <Dropdown item simple text="2018-000354(3 more)">
-          <Dropdown.Menu>
-            <Dropdown.Item>2018-000354 [Car Stop]</Dropdown.Item>
-            <Dropdown.Item>2018-000141 [Fire]</Dropdown.Item>
-            <Dropdown.Item>2018-000214 [Fire]</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item>New CFS</Dropdown.Item>
-            <Dropdown.Item>New Car Stop</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </Menu.Item>,
-    render: () => (
-      <Tab.Pane className="cfs-info-tabcontent" key="tabCfsSummary">
-        <CFSInfo />
-      </Tab.Pane>
-    ),
-  },
-  {
-    menuItem: { key: '1', icon: 'vcard', content: 'CFS Summary' },
-    render: () => (
-      <Tab.Pane className="cfs-info-tabcontent" key="tabCfsSummary">
-        <CFSInfo />
-      </Tab.Pane>
-    ),
-  },
-  {
-    menuItem: { key: '2', icon: 'newspaper', content: 'CFS Related Info.' },
-    render: () => (
-      <Tab.Pane className="cfs-info-tabcontent" key="tabCfsRelated">
-        <CFSRelated />
-      </Tab.Pane>
-    ),
-  },
-  {
-    menuItem: { key: '3', icon: 'ticket', content: 'CFS eTickets' },
-    render: () => (
-      <Tab.Pane className="cfs-info-tabcontent" key="tabCfsTicket">
-        <CFSRelated />
-      </Tab.Pane>
-    ),
-  },
-  {
-    menuItem: { key: '4', icon: 'search', content: 'NCIC' },
-    render: () => (
-      <Tab.Pane className="cfs-info-tabcontent" key="tabCfsNcic">
-        <NCIC />
-      </Tab.Pane>
-    ),
-  },
-  {
-    menuItem: { key: '5', icon: 'bug', content: '' },
-    render: () => (
-      <Tab.Pane className="cfs-info-tabcontent" key="tabSimulate">
-        <Simulate />
-      </Tab.Pane>
-    ),
-  },
-  {
-    menuItem: { key: '6', icon: 'map', content: '' },
-    render: () => (
-      <Tab.Pane className="cfs-info-tabcontent" key="tabSimulate">
-        <Simulate />
-      </Tab.Pane>
-    ),
-  },
-  {
-    menuItem: { key: '7', icon: 'male', content: '' },
-    render: () => (
-      <Tab.Pane className="cfs-info-tabcontent" key="tabSimulate">
-        <Simulate />
-      </Tab.Pane>
-    ),
-  },
-];
+const tabpanes = [{
+  menuItem:
+  <Menu.Item as="a" header key="0">
+    <Image
+      size="mini"
+      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
+      alt=""
+      height="14"
+      style={{ marginRight: '0.5em' }}
+    />
+    <Dropdown item simple text="2018-000354(3 more)">
+      <Dropdown.Menu>
+        <Dropdown.Item>2018-000354 [Car Stop]</Dropdown.Item>
+        <Dropdown.Item>2018-000141 [Fire]</Dropdown.Item>
+        <Dropdown.Item>2018-000214 [Fire]</Dropdown.Item>
+        <Dropdown.Divider />
+        <Dropdown.Item>New CFS</Dropdown.Item>
+        <Dropdown.Item>New Car Stop</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  </Menu.Item>,
+  render: () => (
+    <Tab.Pane className="cfs-info-tabcontent" key="tabCfsSummary">
+      <CFSInfo />
+    </Tab.Pane>
+  ),
+},
+{
+  menuItem:
+  <Menu.Item as="a" header key="1">
+    <Icon name="vcard" />
+      CFS Summary
+  </Menu.Item>,
+  render: () => (
+    <Tab.Pane className="cfs-info-tabcontent" key="tabCfsSummary">
+      <CFSInfo />
+    </Tab.Pane>
+  ),
+},
+{
+  menuItem:
+  <Menu.Item as="a" header key="2">
+    <Icon name="newspaper" />
+      Related Info.
+  </Menu.Item>,
+  render: () => (
+    <Tab.Pane className="cfs-info-tabcontent" key="tabCfsRelated">
+      <CFSRelated />
+    </Tab.Pane>
+  ),
+},
+{
+  menuItem:
+  <Menu.Item as="a" header key="3">
+    <Icon name="ticket" />
+      eTickets.
+  </Menu.Item>,
+  render: () => (
+    <Tab.Pane className="cfs-info-tabcontent" key="tabCfsTicket">
+      <CFSRelated />
+    </Tab.Pane>
+  ),
+},
+{
+  menuItem:
+  <Menu.Item as="a" header key="4">
+    <Icon name="search" />
+      NCIC.
+  </Menu.Item>,
+  render: () => (
+    <Tab.Pane className="cfs-info-tabcontent" key="tabCfsNcic">
+      <NCIC />
+    </Tab.Pane>
+  ),
+},
+{
+  menuItem:
+  <Menu.Item as="a" header key="5" className="tooltip">
+    <Icon name="bug" />
+    <span className="tooltiptext">Simulate</span>
+  </Menu.Item>,
+  render: () => (
+    <Tab.Pane className="cfs-info-tabcontent" key="tabSimulate">
+      <Simulate />
+    </Tab.Pane>
+  ),
+},
+{
+  menuItem:
+  <Menu.Item as="a" header key="6" className="tooltip">
+    <Icon name="map" />
+    <span className="tooltiptext">Map</span>
+  </Menu.Item>,
+  render: () => (
+    <Tab.Pane className="cfs-info-tabcontent" key="tabSimulate">
+      <Simulate />
+    </Tab.Pane>
+  ),
+},
+{
+  menuItem:
+  <Menu.Item as="a" header key="7" className="tooltip">
+    <Icon name="male" />
+    <span className="tooltiptext">Supervisor</span>
+  </Menu.Item>,
+  // { key: '7', icon: 'male', content: '' },
+  render: () => (
+    <Tab.Pane className="cfs-info-tabcontent" key="tabSimulate">
+      <Simulate />
+    </Tab.Pane>
+  ),
+}];
 
 const Home = () => (
   <div>

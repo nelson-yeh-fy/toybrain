@@ -4,31 +4,6 @@ body {
   font-family: sans-serif;
 }
 
-label {
-  font-size: 14px;
-  padding: 10px;
-  margin: 0 0 10px;
- }
-
- label:hover {
-  background:#eee;
-  cursor: pointer;
- }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-  padding: 15px;
-}
-
-.App-sidebar {
-  background-color: #1c1d30 !important;
-  font-size: 22px !important;
-  text-align: left !important;
-  border:1 !important;
-  padding:0 !important;
-}
-
 .margin-left-14 {
   margin-left: 14px !important;
 }
@@ -36,6 +11,14 @@ label {
 .margin-left-Right-14 {
   margin-left: 14px !important;
   margin-right: 14px !important;
+}
+
+.hidden {
+  display: none
+}
+
+.no-border {
+  border: none !important;
 }
 
 .cfs-info-tabcontent {
@@ -54,9 +37,10 @@ label {
 }
 
 .cfs-description {
-  font-size: 18px;
-  height: 100px;
+  font-size: 18px !important;
+  /*height: 100px !important;*/
   overflow-y: auto !important;
+  resize: none !important;
 }
 
 .cfs-timeEvent {
@@ -81,10 +65,65 @@ label {
   max-width: 100% !important;
 }
 
+.App-sidebar {
+  background-color: #1c1d30 !important;
+  font-size: 22px !important;
+  text-align: left !important;
+  border:1 !important;
+  padding:0 !important;
+}
+
+label {
+  font-size: 14px;
+  padding: 10px;
+  margin: 0 0 10px;
+ }
+
+label:hover {
+  background:#eee;
+  cursor: pointer;
+ }
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+  padding: 15px;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+/*
+ *  Tooltip hover text
+ */
+ .tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 
 /*

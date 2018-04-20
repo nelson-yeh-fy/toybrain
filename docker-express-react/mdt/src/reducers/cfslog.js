@@ -75,7 +75,7 @@ export const refreshCFSLogAsyncObsolete = () => (
 export function refreshCFSLogAsync() {
   return {
     [RSAA]: {
-      endpoint: constants.webAPIUrl,
+      endpoint: constants.webAPIUrl_cfsLogs,
       method: 'GET',
       types: [
         actionTypes.REFRESH_CFSLOG_REQUESTED,
@@ -140,7 +140,7 @@ export const appendCFSLogAsyncObsolete = val =>
 export function appendCFSLogAsync(val) {
   return {
     [RSAA]: {
-      endpoint: constants.webAPIUrl,
+      endpoint: constants.webAPIUrl_cfsLogs,
       method: 'POST',
       body: JSON.stringify(normalize(val, constants.cfsLogSchema)),
       headers: {
