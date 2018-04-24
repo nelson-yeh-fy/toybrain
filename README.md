@@ -18,11 +18,11 @@ https://medium.com/@auchenberg/live-edit-and-debug-your-react-apps-directly-from
 https://github.com/facebookincubator/create-react-app
 http://www.penta-code.com/how-to-add-redux-to-create-react-app/ //Add Redux into app created by 'create-react-app'
 https://github.com/facebookincubator/create-react-app/tree/master/packages/eslint-config-react-app //Add ESlint into app created by 'create-react-app'
-(cancel) http://blog.burgettweb.net/2017/01/07/using-bootstrap-with-create-react-app/ //Add Bootstrap into app (cancel)
+(cancel) http://blog.burgettweb.net/2017/01/07/using-bootstrap-with-create-react-app/ //Add Bootstrap into app (obsolete)
 http://momentjs.com/  //Add Moment.js for parsing and validating time
 https://react-bootstrap.github.io/getting-started.html //Add react-bootstrap into app created by 'create-react-app'
-(cancel) https://github.com/gaearon/redux-thunk //Add Redux-thunk for async actions, e.g.: fetch webapis (cancel)
-(cancel) http://redux-form.com/6.8.0/docs/GettingStarted.md/ //Add Redux-form for better submit form validation (cancel)
+(cancel) https://github.com/gaearon/redux-thunk //Add Redux-thunk for async actions, e.g.: fetch webapis (obsolete)
+(cancel) http://redux-form.com/6.8.0/docs/GettingStarted.md/ //Add Redux-form for better submit form validation (obsolete)
 https://engineering.thetrainline.com/handling-api-calls-in-redux-with-redux-api-middleware-c95c38816e13 //using redux middleware to do async actions, RSAA
 https://github.com/agraboso/redux-api-middleware //same with previous purpose
 https://www.fullstackreact.com/30-days-of-react/day-21/ //30 days of Redux
@@ -41,6 +41,7 @@ Proxying API Requests in Development: https://github.com/facebookincubator/creat
 ## Make express webAPI restful and db-ready
 https://zellwk.com/blog/crud-express-mongodb/ //connect to mongodb
 https://mlab.com/databases/cad-time-events/collections/timeEvents?q=&f=&s=&pageNum=0&pageSize=10 //my mongolab db
-https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4 //make it restful
-https://www.terlici.com/2015/04/03/mongodb-node-express.html //sample to create a dbhelper
-https://gist.github.com/iksose/9401758 //sample to manipulate mongodb in dbhelper
+https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4 //make it restful (obsolete)
+https://www.terlici.com/2015/04/03/mongodb-node-express.html //sample to create a dbhelper (obsolete)
+https://gist.github.com/iksose/9401758 //sample to manipulate mongodb in dbhelper (obsolete)
+https://dev.to/aurelkurtula/building-a-restful-api-with-express-and-mongodb--3mmh
