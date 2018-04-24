@@ -24,13 +24,13 @@ export default (state = defaultState, action) => {
         isRefreshing: !state.isRefreshing,
       };
 
-    case actionTypes.APPEND_CFSLOG_REQUESTED:
+    case actionTypes.POST_CFSLOG_REQUESTED:
       return {
         ...state,
         isAdding: true,
       };
 
-    case actionTypes.APPEND_CFSLOG_SUCCESS:
+    case actionTypes.POST_CFSLOG_SUCCESS:
       return {
         ...state,
         isAdding: !state.isAdding,

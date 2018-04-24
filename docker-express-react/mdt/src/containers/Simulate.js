@@ -6,9 +6,9 @@ import { Container, Button, Label } from 'semantic-ui-react';
 import CfsAbstract from '../components/cfsAbstract';
 import {
   getCFSInfoAsync,
-  addCFSInfoAsync,
-  updateCFS,
-  updateCFSAsync,
+  postCFSInfoAsync,
+  putCFSInfoAsync,
+  patchCFSInfoAsync,
 } from '../reducers/cfsInfo';
 import '../assets/App.css';
 
@@ -20,8 +20,7 @@ const Simulate = props => (
       disabled={props.isCFSUpdating}
       // onClick={() => { props.updateCFS(1); }}
       onClick={() => {
-        props.addCFSInfoAsync({
-        id: Date.now(),
+        props.postCFSInfoAsync({
         cfsNumber: '2018-000120',
         cfsStatus: 0, // 0:new, 1:dispatched, 2:closed
         cfsDesc: 'Dispatching unit 0310 to CFS2017-00123',
@@ -31,7 +30,45 @@ const Simulate = props => (
       });
       }}
       size="mini"
-      content="Dispatched"
+      content="Add fake CFSInfo"
+      icon="refresh"
+      primary
+    />
+
+    <Button
+      disabled={props.isCFSUpdating}
+      // onClick={() => { props.updateCFS(1); }}
+      onClick={() => {
+        props.putCFSInfoAsync({
+        toBeUpdateId: '5adf7c0a61496a7fbcbb5ba5',
+        cfsNumber: '2018-000122',
+        cfsStatus: 1, // 0:new, 1:dispatched, 2:closed
+        cfsDesc: '1Dispatching unit 0310 to CFS2017-00123',
+        addby: 'System',
+        addon: new Date(Date.now()).toLocaleString(),
+        isCFSUpdating: false,
+      });
+      }}
+      size="mini"
+      content="Update(Put) fake CFSInfo"
+      icon="refresh"
+      primary
+    />
+
+    <Button
+      disabled={props.isCFSUpdating}
+    // onClick={() => { props.updateCFS(1); }}
+      onClick={() => {
+      props.patchCFSInfoAsync({
+      toBeUpdateId: '5adf7c0a61496a7fbcbb5ba5',
+      cfsDesc: 'add 0310 to CFS2017-00123',
+      addby: 'System',
+      addon: new Date(Date.now()).toLocaleString(),
+      isCFSUpdating: false,
+    });
+    }}
+      size="mini"
+      content="Patch fake CFSInfo"
       icon="refresh"
       primary
     />
@@ -42,8 +79,9 @@ Simulate.propTypes = {
   cfsStatus: PropTypes.number.isRequired,
   isCFSUpdating: PropTypes.bool.isRequired,
   getCFSInfoAsync: PropTypes.func.isRequired,
-  addCFSInfoAsync: PropTypes.func.isRequired,
-  updateCFS: PropTypes.func.isRequired,
+  postCFSInfoAsync: PropTypes.func.isRequired,
+  putCFSInfoAsync: PropTypes.func.isRequired,
+  patchCFSInfoAsync: PropTypes.func.isRequired,
 };
 
 // Take application state (our redux store) as an argument,
@@ -55,8 +93,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getCFSInfoAsync,
-  addCFSInfoAsync,
-  updateCFS,
+  postCFSInfoAsync,
+  putCFSInfoAsync,
+  patchCFSInfoAsync,
 }, dispatch);
 
 export default connect(

@@ -1,5 +1,4 @@
 import { RSAA, getJSON } from 'redux-api-middleware'; // RSAA = '@@redux-api-middleware/RSAA'
-import { normalize, denormalize } from 'normalizr';
 import * as actionTypes from '../constants/actionTypes';
 import * as constants from '../constants';
 
@@ -36,7 +35,7 @@ export default (state = defaultState /* [] */, action) => {
         logArticles: [...state.logArticles, ...action.payload],
       };
 
-    case actionTypes.APPEND_CFSLOG_SUCCESS:
+    case actionTypes.POST_CFSLOG_SUCCESS:
       return {
         logArticles: [...state.logArticles, action.payload],
       };
@@ -75,7 +74,7 @@ export const refreshCFSLogAsyncObsolete = () => (
 export function refreshCFSLogAsync() {
   return {
     [RSAA]: {
-      endpoint: constants.webAPIUrl_cfsLogs,
+      endpoint: constants.webAPIUrlCfsLog,
       method: 'GET',
       types: [
         actionTypes.REFRESH_CFSLOG_REQUESTED,
@@ -98,11 +97,19 @@ export function refreshCFSLogAsync() {
               //   },
               //   result: 1520377971854,
               // }];
-              const denormalizedJsonArray = [];
-              json.map(item =>
-                denormalizedJsonArray.push(denormalize(item.entities.cfsLog[Object.keys(item.entities.cfsLog)], constants.cfsLogSchema, item)));
-              // console.log(denormalizedJsonArray);
-              return denormalizedJsonArray;
+
+              // import { schema } from 'normalizr';
+              // export const cfsInfoSchema = new schema.Entity('cfsInfo');
+              // export const cfsLogSchema = new schema.Entity('cfsLog');
+              // const denormalizedJsonArray = [];
+              // json.map(item =>
+              //   denormalizedJsonArray.push(denormalize(item.entities.cfsLog[Object.keys(item.entities.cfsLog)], constants.cfsLogSchema, item)));
+              // // console.log(denormalizedJsonArray);
+              // return denormalizedJsonArray;
+
+              const JsonArray = [];
+              json.map(item => JsonArray.push(item));
+              return JsonArray;
             }),
         },
         actionTypes.REFRESH_CFSLOG_FAILURE,
@@ -114,24 +121,12 @@ export function refreshCFSLogAsync() {
 export const appendCFSLog = val =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.APPEND_CFSLOG_REQUESTED,
-    });
-
-    dispatch({
-      type: actionTypes.APPEND_CFSLOG_SUCCESS,
-      payload: val,
-    });
-  };
-
-export const appendCFSLogAsyncObsolete = val =>
-  (dispatch) => {
-    dispatch({
-      type: actionTypes.APPEND_CFSLOG_REQUESTED,
+      type: actionTypes.POST_CFSLOG_REQUESTED,
     });
 
     setTimeout(() => {
       dispatch({
-        type: actionTypes.APPEND_CFSLOG_SUCCESS,
+        type: actionTypes.POST_CFSLOG_SUCCESS,
         payload: val,
       });
     }, 2000);
@@ -140,19 +135,20 @@ export const appendCFSLogAsyncObsolete = val =>
 export function appendCFSLogAsync(val) {
   return {
     [RSAA]: {
-      endpoint: constants.webAPIUrl_cfsLogs,
+      endpoint: constants.webAPIUrlCfsLog,
       method: 'POST',
-      body: JSON.stringify(normalize(val, constants.cfsLogSchema)),
+      // body: JSON.stringify(normalize(val, constants.cfsLogSchema)),
+      body: JSON.stringify(val),
       headers: {
         'Content-Type': 'application/json',
       },
       types: [
-        actionTypes.APPEND_CFSLOG_REQUESTED,
+        actionTypes.POST_CFSLOG_REQUESTED,
         {
-          type: actionTypes.APPEND_CFSLOG_SUCCESS,
+          type: actionTypes.POST_CFSLOG_SUCCESS,
           payload: val,
         },
-        actionTypes.APPEND_CFSLOG_FAILURE,
+        actionTypes.POST_CFSLOG_FAILURE,
       ],
     },
   };

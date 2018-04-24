@@ -16,29 +16,28 @@ const defaultState = {
 // The followings are reducers
 export default (state = defaultState /* [] */, action) => {
   switch (action.type) {
-    case actionTypes.ADD_CFSINFO_REQUESTED:
-      return {
-        ...state,
-        isCFSUpdating: !state.isCFSUpdating,
-      };
-
-    case actionTypes.ADD_CFSINFO_SUCCESS:
-      return {
-        ...action.payload,
-        isCFSUpdating: !state.isCFSUpdating,
-      };
-
-    case actionTypes.UPDATE_CFSINFO_REQUESTED:
+    case actionTypes.POST_CFSINFO_REQUESTED:
       return {
         ...state,
         isCFSUpdating: true,
       };
 
-    case actionTypes.UPDATE_CFSINFO_SUCCESS:
+    case actionTypes.POST_CFSINFO_SUCCESS:
+      return {
+        ...action.payload,
+        isCFSUpdating: false,
+      };
+
+    case actionTypes.PUT_CFSINFO_REQUESTED:
       return {
         ...state,
-        isCFSUpdating: !state.isCFSUpdating,
-        cfsStatus: action.payload,
+        isCFSUpdating: true,
+      };
+
+    case actionTypes.PUT_CFSINFO_SUCCESS:
+      return {
+        ...action.payload,
+        isCFSUpdating: false,
       };
 
     default:
@@ -51,7 +50,7 @@ export default (state = defaultState /* [] */, action) => {
 export function getCFSInfoAsync() {
   return {
     [RSAA]: {
-      endpoint: constants.webAPIUrl_cfsInfo,
+      endpoint: constants.webAPIUrlCfsInfo,
       method: 'GET',
       types: [
         actionTypes.GET_CFSINFO_REQUESTED,
@@ -59,26 +58,9 @@ export function getCFSInfoAsync() {
           type: actionTypes.GET_CFSINFO_SUCCESS,
           payload: (action, state, res) =>
             getJSON(res).then((json) => {
-              // const sampleItem = [{
-              //   _id: '5a9f2074651a131bdc9015d7',
-              //   entities: {
-              //     cfsLog: {
-              //       1520377971854: {
-              //         id: 1520377971854,
-              //         type: 2,
-              //         text: 'fsef',
-              //         addby: 'UserName',
-              //         addon: '3/6/2018, 6:12:51 PM',
-              //       },
-              //     },
-              //   },
-              //   result: 1520377971854,
-              // }];
-              const denormalizedJsonArray = [];
-              json.map(item =>
-                denormalizedJsonArray.push(denormalize(item.entities.cfsLog[Object.keys(item.entities.cfsLog)], constants.cfsInfoSchema, item)));
-              // console.log(denormalizedJsonArray);
-              return denormalizedJsonArray;
+              const JsonArray = [];
+              json.map(item => JsonArray.push(item));
+              return JsonArray;
             }),
         },
         actionTypes.GET_CFSINFO_FAILURE,
@@ -87,47 +69,65 @@ export function getCFSInfoAsync() {
   };
 }
 
-export function addCFSInfoAsync(val) {
+export function postCFSInfoAsync(val) {
   return {
     [RSAA]: {
-      endpoint: constants.webAPIUrl_cfsInfo,
+      endpoint: constants.webAPIUrlCfsInfo,
       method: 'POST',
-      body: JSON.stringify(normalize(val, constants.cfsInfoSchema)),
+      body: JSON.stringify(val),
       headers: {
         'Content-Type': 'application/json',
       },
       types: [
-        actionTypes.ADD_CFSINFO_REQUESTED,
+        actionTypes.POST_CFSINFO_REQUESTED,
         {
-          type: actionTypes.ADD_CFSINFO_SUCCESS,
+          type: actionTypes.POST_CFSINFO_SUCCESS,
           payload: val,
         },
-        actionTypes.ADD_CFSINFO_FAILURE,
+        actionTypes.POST_CFSINFO_FAILURE,
       ],
     },
   };
 }
 
-export const updateCFS = val =>
-  (dispatch) => {
-    dispatch({
-      type: actionTypes.UPDATE_CFSINFO_REQUESTED,
-    });
-
-    dispatch({
-      type: actionTypes.UPDATE_CFSINFO_SUCCESS,
-      payload: val,
-    });
+export function putCFSInfoAsync(val) {
+  return {
+    [RSAA]: {
+      endpoint: constants.webAPIUrlCfsInfo.concat('/', val.toBeUpdateId),
+      method: 'PUT',
+      body: JSON.stringify(val),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      types: [
+        actionTypes.PUT_CFSINFO_REQUESTED,
+        {
+          type: actionTypes.PUT_CFSINFO_SUCCESS,
+          payload: val,
+        },
+        actionTypes.PUT_CFSINFO_FAILURE,
+      ],
+    },
   };
+}
 
-export const updateCFSAsync = val =>
-  (dispatch) => {
-    dispatch({
-      type: actionTypes.UPDATE_CFSINFO_REQUESTED,
-    });
-
-    dispatch({
-      type: actionTypes.UPDATE_CFSINFO_SUCCESS,
-      payload: val,
-    });
+export function patchCFSInfoAsync(val) {
+  return {
+    [RSAA]: {
+      endpoint: constants.webAPIUrlCfsInfo.concat('/', val.toBeUpdateId),
+      method: 'PATCH',
+      body: JSON.stringify(val),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      types: [
+        actionTypes.PATCH_CFSINFO_REQUESTED,
+        {
+          type: actionTypes.PATCH_CFSINFO_SUCCESS,
+          payload: val,
+        },
+        actionTypes.PATCH_CFSINFO_FAILURE,
+      ],
+    },
   };
+}
