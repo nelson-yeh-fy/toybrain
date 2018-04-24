@@ -1,5 +1,4 @@
 import { RSAA, getJSON } from 'redux-api-middleware'; // RSAA = '@@redux-api-middleware/RSAA'
-import { normalize, denormalize } from 'normalizr';
 import * as actionTypes from '../constants/actionTypes';
 import * as constants from '../constants';
 

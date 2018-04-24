@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Divider, Form } from 'semantic-ui-react';
+import { Segment, Divider } from 'semantic-ui-react';
 import '../../assets/App.css';
 import EditableListElement from '../general/EditableListElement';
 
