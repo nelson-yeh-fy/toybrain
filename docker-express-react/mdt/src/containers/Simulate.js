@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container, Button, Label } from 'semantic-ui-react';
-import CfsAbstract from '../components/cfsAbstract';
+import CfsAbstract from '../components/cfsInfo/cfsAbstract';
 import {
   getCFSInfoAsync,
   postCFSInfoAsync,

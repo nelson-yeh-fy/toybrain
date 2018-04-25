@@ -10,8 +10,8 @@ class EditableListElement extends Component {
     this.ESCAPE_KEY = 27;
     this.ENTER_KEY = 13;
     this.state = {
-      editText: props.editText,
-      isEditing: props.isEditing,
+      editText: props.fieldValueTBUpdate,
+      isEditing: false,
     };
   }
 
@@ -20,23 +20,22 @@ class EditableListElement extends Component {
   //     isEditing: !prevState.isEditing,
   //   }));
   // }
+  handleChange(e) {
+    this.setState({ editText: e.target.value });
+  }
+
   handleOnFocus(e) {
     this.setState({
       isEditing: true,
     });
   }
 
-  handleChange(e) {
-    this.setState({ editText: e.target.value });
-  }
-
-  handleSubmit(e) {
-    const val = this.state.editText.trim();
-    console.log(val);
-    if (val) {
-      this.setState({
-        editText: val,
-        isEditing: false,
+  handleOnBlur(e) {
+    if (this.state.editText !== this.props.fieldValueTBUpdate) {
+      console.log('value changed, try update');
+      this.props.funcToInvoke({
+        toBeUpdateId: this.props.itemIdToBeUpdate,
+        [this.props.fieldKeyTBUpdate]: this.state.editText,
       });
     }
   }
@@ -44,7 +43,7 @@ class EditableListElement extends Component {
   handleKeyDown(e) {
     if (e.which === this.ESCAPE_KEY) {
       this.setState({
-        editText: this.props.editText,
+        editText: this.props.fieldValueTBUpdate,
         isEditing: false,
       });
     }
@@ -59,7 +58,7 @@ class EditableListElement extends Component {
           className={this.state.isEditing ? 'cfs-description' : 'cfs-description no-border'}
           onChange={e => this.handleChange(e)}
           onFocus={e => this.handleOnFocus(e)}
-          onBlur={e => this.handleSubmit(e)}
+          onBlur={e => this.handleOnBlur(e)}
           onKeyDown={e => this.handleKeyDown(e)}
           value={this.state.editText}
         />
@@ -87,8 +86,10 @@ class EditableListElement extends Component {
 }
 
 EditableListElement.propTypes = {
-  editText: PropTypes.string.isRequired,
-  isEditing: PropTypes.bool.isRequired,
+  funcToInvoke: PropTypes.func.isRequired,
+  itemIdToBeUpdate: PropTypes.string.isRequired,
+  fieldValueTBUpdate: PropTypes.string.isRequired,
+  fieldKeyTBUpdate: PropTypes.string.isRequired,
 };
 
 export default EditableListElement;

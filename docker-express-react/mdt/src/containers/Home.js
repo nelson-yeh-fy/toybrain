@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image, Grid, Segment, Menu, Label, Input, Tab, Step, Icon, Dropdown, Button, List, Header } from 'semantic-ui-react';
+import { Container, Image, Grid, Segment, Menu, Label, Input, Tab, Step, Icon, Dropdown, Button, List, Header } from 'semantic-ui-react';
 import CFSInfo from './CFSInfo';
+import CFSLog from './CFSLog';
 import CFSRelated from './CFSRelated';
 import Simulate from './Simulate';
 import NCIC from './NCIC';
@@ -29,7 +30,7 @@ const tabpanes = [{
   </Menu.Item>,
   render: () => (
     <Tab.Pane className="cfs-info-tabcontent" key="tabCfsSummary">
-      <CFSInfo />
+      tbd
     </Tab.Pane>
   ),
 },
@@ -41,7 +42,10 @@ const tabpanes = [{
   </Menu.Item>,
   render: () => (
     <Tab.Pane className="cfs-info-tabcontent" key="tabCfsSummary">
-      <CFSInfo />
+      <Container>
+        <CFSInfo />
+        <CFSLog />
+      </Container>
     </Tab.Pane>
   ),
 },
@@ -123,7 +127,7 @@ const Home = () => (
   <div>
     <Grid columns={2}>
       <Grid.Column width={12} style={{ paddingRight: 0 }}>
-        <Tab menu={{ inverted: true, style: { borderRadius: 0, height: 50 } }} defaultActiveIndex={0} renderActiveOnly panes={tabpanes} />
+        <Tab menu={{ inverted: true, style: { borderRadius: 0, height: 50 } }} defaultActiveIndex={1} renderActiveOnly panes={tabpanes} />
       </Grid.Column>
 
       <Grid.Column width={4} style={{ paddingLeft: 0 }}>

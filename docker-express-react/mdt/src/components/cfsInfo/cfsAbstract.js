@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Label, Header } from 'semantic-ui-react';
-import '../assets/App.css';
+import '../../assets/App.css';
 
 const CfsAbstract = () => (
   <Container textAlign="justified" fluid style={{ paddingBottom: 15 }}>

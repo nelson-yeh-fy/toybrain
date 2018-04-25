@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Tab } from 'semantic-ui-react';
-import CfsAbstract from '../components/cfsAbstract';
+import CfsAbstract from '../components/cfsInfo/cfsAbstract';
 import CfsRelated from '../components/cfsRelated';
 import NcicMultiple from '../components/ncic_multiple';
 import '../assets/App.css';

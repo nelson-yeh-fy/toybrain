@@ -1,18 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Segment, Divider } from 'semantic-ui-react';
-import '../../assets/App.css';
 import EditableListElement from '../general/EditableListElement';
+import '../../assets/App.css';
 
-const sampleData = `A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. Propane Tanks in Basement. A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. ropane Tanks in Basement. A fire started behind the pizza oven and is getting worse. One employee is stuck iaan bathroomf.`;
+let sampleData = `A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. Propane Tanks in Basement. A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. ropane Tanks in Basement. A fire started behind the pizza oven and is getting worse. One employee is stuck iaan bathroomf.`;
 
-const CfsDesc = () => (
+const CfsDesc = ({
+  funcPatchCFSInfo,
+}) => (
   <div>
     <Segment color="blue">
       <p className="cfs-title"> CFS Description: </p>
     </Segment>
-    <EditableListElement editText={sampleData} isEditing={false} />
+    <EditableListElement
+      funcToInvoke={funcPatchCFSInfo}
+      itemIdToBeUpdate="5adf7c0a61496a7fbcbb5ba5"
+      fieldKeyTBUpdate="cfsDesc"
+      fieldValueTBUpdate={sampleData}
+    />
     <Divider />
   </div>
 );
+
+CfsDesc.propTypes = {
+  funcPatchCFSInfo: PropTypes.func.isRequired,
+};
 
 export default CfsDesc;
