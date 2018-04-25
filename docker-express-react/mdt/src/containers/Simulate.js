@@ -25,8 +25,6 @@ const Simulate = props => (
         cfsStatus: 0, // 0:new, 1:dispatched, 2:closed
         cfsDesc: 'Dispatching unit 0310 to CFS2017-00123',
         addby: 'System',
-        addon: new Date(Date.now()).toLocaleString(),
-        isCFSUpdating: false,
       });
       }}
       size="mini"
@@ -45,8 +43,6 @@ const Simulate = props => (
         cfsStatus: 1, // 0:new, 1:dispatched, 2:closed
         cfsDesc: '1Dispatching unit 0310 to CFS2017-00123',
         addby: 'System',
-        addon: new Date(Date.now()).toLocaleString(),
-        isCFSUpdating: false,
       });
       }}
       size="mini"
@@ -63,8 +59,6 @@ const Simulate = props => (
       toBeUpdateId: '5adf7c0a61496a7fbcbb5ba5',
       cfsDesc: 'add 0310 to CFS2017-00123',
       addby: 'System',
-      addon: new Date(Date.now()).toLocaleString(),
-      isCFSUpdating: false,
     });
     }}
       size="mini"

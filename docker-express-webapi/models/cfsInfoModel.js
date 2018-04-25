@@ -7,6 +7,6 @@ const cfsInfoModel = new Schema({
   cfsStatus: { type: Number },
   cfsDesc: { type: String },
   addby: { type: String },
-  addon: { type: String },
+  addon: { type: Date, default: Date.now },
 });
 export default mongoose.model('cfsInfo', cfsInfoModel)

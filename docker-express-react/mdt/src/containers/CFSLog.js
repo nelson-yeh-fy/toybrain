@@ -58,7 +58,7 @@ const getVisibleCfsLogArticles = (cfsLogArticles, listFilterMask) => {
       return cfsLogArticles.filter(t => t.type === 0);
     case 1: // show system text only
       return cfsLogArticles.filter(t => t.type === 1);
-    case 2: // 'SHOW_USERTEXTONLY':
+    case 2: // 'show user text only':
       return cfsLogArticles.filter(t => t.type === 2);
     case 3: // 'show system text + user text
       return cfsLogArticles.filter(t => t.type <= 3);

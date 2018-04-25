@@ -3,7 +3,7 @@ import * as actionTypes from '../constants/actionTypes';
 const defaultState = {
   isRefreshing: false,
   isAdding: false,
-  listFilterMask: 7, // 0: show all, 1: show user comment only, 2: show tone only
+  listFilterMask: 7, // 1: system text 2: user text 4: tone text
   chkChecked_SysText: true,
   chkChecked_UsrText: true,
   chkChecked_Tone: true,

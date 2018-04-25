@@ -75,7 +75,6 @@ const CfsLog = ({
       type: 2,
       text: inputVal,
       addby: 'UserName',
-      addon: new Date(Date.now()).toLocaleString(),
     });
   }
 }}
