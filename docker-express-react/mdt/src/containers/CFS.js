@@ -11,16 +11,26 @@ import {
   putCFSInfoAsync,
   patchCFSInfoAsync,
 } from '../reducers/cfsInfo';
+import CFSAPI from '../api/CFSAPI';
 import '../assets/App.css';
 
-const CFSInfo = props => (
-  <Container>
-    <CfsAbstract />
-    <CfsDesc funcPatchCFSInfo={props.patchCFSInfoAsync} />
-  </Container>
-);
+const CFS = (props) => {
+  console.log(`${props.match.params.cfsId}`);
+  const foundCFS = CFSAPI.get(props.match.params.cfsId);
+  if (!foundCFS) {
+    return (
+      <div>Sorry, but the CFS was not found</div>
+    );
+  }
+  return (
+    <Container>
+      <CfsAbstract />
+      <CfsDesc funcPatchCFSInfo={props.patchCFSInfoAsync} />
+    </Container>
+  );
+};
 
-CFSInfo.propTypes = {
+CFS.propTypes = {
   cfsStatus: PropTypes.number.isRequired,
   isCFSUpdating: PropTypes.bool.isRequired,
   getCFSInfoAsync: PropTypes.func.isRequired,
@@ -46,4 +56,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CFSInfo);
+)(CFS);

@@ -1,10 +1,17 @@
 import React from 'react';
-import { Container, Image, Grid, Segment, Menu, Label, Input, Tab, Step, Icon, Dropdown, Button, List, Header } from 'semantic-ui-react';
-import CFSInfo from './CFSInfo';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Container, Image, Grid, Menu, Input, Tab, Icon, Dropdown, Button } from 'semantic-ui-react';
+import CFS from './CFS';
 import CFSLog from './CFSLog';
 import CFSRelated from './CFSRelated';
+import CFSStatus from '../components/cfsStatus';
 import Simulate from './Simulate';
 import NCIC from './NCIC';
+import {
+  getCFSInfoListAsync,
+} from '../reducers/cfsInfoList';
 import '../assets/App.css';
 
 const tabpanes = [{
@@ -16,6 +23,7 @@ const tabpanes = [{
       alt=""
       height="14"
       style={{ marginRight: '0.5em' }}
+
     />
     <Dropdown item simple text="2018-000354(3 more)">
       <Dropdown.Menu>
@@ -43,7 +51,7 @@ const tabpanes = [{
   render: () => (
     <Tab.Pane className="cfs-info-tabcontent" key="tabCfsSummary">
       <Container>
-        <CFSInfo />
+        <CFS />
         <CFSLog />
       </Container>
     </Tab.Pane>
@@ -123,11 +131,17 @@ const tabpanes = [{
   ),
 }];
 
-const Home = () => (
+const Home = props => (
   <div>
     <Grid columns={2}>
       <Grid.Column width={12} style={{ paddingRight: 0 }}>
-        <Tab menu={{ inverted: true, style: { borderRadius: 0, height: 50 } }} defaultActiveIndex={1} renderActiveOnly panes={tabpanes} />
+        <Tab
+          menu={{ inverted: true, style: { borderRadius: 0, height: 50 } }}
+          defaultActiveIndex={1}
+          renderActiveOnly
+          panes={tabpanes}
+          property={props}
+        />
       </Grid.Column>
 
       <Grid.Column width={4} style={{ paddingLeft: 0 }}>
@@ -136,69 +150,7 @@ const Home = () => (
             <Input size="medium" label={{ icon: 'search' }} labelPosition="left corner" placeholder="Enter CFS Number" />
           </Menu.Item>
         </Menu>
-        <Segment inverted tertiary className="margin-left-Right-14" style={{ height: 150 }} >
-          <Header as="h2" inverted>
-            CFS Map
-            <Header.Subheader>
-              under construction
-            </Header.Subheader>
-          </Header>
-        </Segment>
-        <Step.Group vertical className="margin-left-Right-14">
-          <Step className="step">
-            <Icon name="volume control phone" />
-            <Step.Content>
-              <Step.Title>CFS Initiated</Step.Title>
-              <Step.Description>15:31:00</Step.Description>
-            </Step.Content>
-          </Step>
-          <Step active>
-            <Icon name="send outline" />
-            <Step.Content>
-              <Step.Title>Unit Dispatched</Step.Title>
-              <Step.Description>
-                <List divided selection>
-                  <List.Item>
-                    <Label htmlFor="1" size="small" color="teal" horizontal>501</Label> 15:31:20
-                  </List.Item>
-                  <List.Item>
-                    <Label htmlFor="1" size="small" color="teal" horizontal>502</Label> 15:31:30
-                  </List.Item>
-                  <List.Item>
-                    <Label htmlFor="1" size="small" color="red" horizontal>701</Label> 15:31:32
-                  </List.Item>
-                </List>
-              </Step.Description>
-            </Step.Content>
-          </Step>
-          <Step>
-            <Icon name="road" />
-            <Step.Content>
-              <Step.Title>Unit Enroute</Step.Title>
-              <Step.Description>
-                <List divided selection>
-                  <List.Item>
-                    <Label htmlFor="1" size="small" color="red" horizontal>503</Label> 15:32:31
-                  </List.Item>
-                </List>
-              </Step.Description>
-            </Step.Content>
-          </Step>
-          <Step disabled>
-            <Icon name="building" />
-            <Step.Content>
-              <Step.Title>Unit On Scene</Step.Title>
-              <Step.Description>15:38:00</Step.Description>
-            </Step.Content>
-          </Step>
-          <Step disabled>
-            <Icon name="file text" />
-            <Step.Content>
-              <Step.Title>CFS Closed</Step.Title>
-              <Step.Description>15:39:00</Step.Description>
-            </Step.Content>
-          </Step>
-        </Step.Group>
+        <CFSStatus />
       </Grid.Column>
     </Grid>
     <Button
@@ -214,4 +166,21 @@ const Home = () => (
   </div>
 );
 
-export default Home;
+Home.propTypes = {
+  getCFSInfoListAsync: PropTypes.func.isRequired,
+};
+
+// Take application state (our redux store) as an argument,
+// and passed as props to this component.
+const mapStateToProps = state => ({
+  cfsInfoList: state.cfsInfoList,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getCFSInfoListAsync,
+}, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Home);
