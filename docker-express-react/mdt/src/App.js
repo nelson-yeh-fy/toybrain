@@ -50,7 +50,7 @@ const Roster = () => (
   </Switch>
 );
 
-const AppContainer = () => (
+const App = () => (
   <BrowserRouter>
     <div>
       <header>
@@ -85,8 +85,8 @@ const AppContainer = () => (
   </BrowserRouter>
 );
 
-const App = connect(state => ({
-  location: state.location,
-}))(AppContainer);
+// const App = connect(state => ({
+//   location: state.location,
+// }))(AppContainer);
 
 export default App;
