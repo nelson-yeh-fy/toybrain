@@ -8,7 +8,7 @@ import {
   incrementAsync,
   decrement,
   decrementAsync,
-} from '../reducers/counter';
+} from '../../reducers/counter';
 
 const Counter = props => (
   <div>

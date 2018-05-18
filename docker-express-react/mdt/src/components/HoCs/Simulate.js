@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container, Button, Label } from 'semantic-ui-react';
-import CfsAbstract from '../components/cfsInfo/cfsAbstract';
+import CfsAbstract from '../CFSAbstract';
 import {
   getCFSInfoAsync,
   postCFSInfoAsync,
   putCFSInfoAsync,
   patchCFSInfoAsync,
-} from '../reducers/cfsInfo';
-import '../assets/App.css';
+} from '../../reducers/cfsInfo';
+import '../../assets/App.css';
 
 const Simulate = props => (
   <Container>

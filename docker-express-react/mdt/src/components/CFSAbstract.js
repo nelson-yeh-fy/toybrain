@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Label, Header } from 'semantic-ui-react';
-import '../../assets/App.css';
+import '../assets/App.css';
 
-const CfsAbstract = () => (
+const CFSAbstract = () => (
   <Container textAlign="justified" fluid style={{ paddingBottom: 15 }}>
     <Header size="large">102 SUNSET BOULEVARD, WEST CAPE MAY, NJ 08204
       <Label size="medium" color="green" horizontal>Verified</Label>
@@ -11,4 +11,4 @@ const CfsAbstract = () => (
   </Container>
 );
 
-export default CfsAbstract;
+export default CFSAbstract;

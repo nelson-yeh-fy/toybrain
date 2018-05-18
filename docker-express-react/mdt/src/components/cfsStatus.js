@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Segment, Label, Step, Icon, List, Header } from 'semantic-ui-react';
 
-const CfsStatus = () => (
+const CFSStatus = () => (
   <Container>
     <Segment inverted tertiary className="margin-left-Right-14" style={{ height: 150 }} >
       <Header as="h2" inverted>
@@ -69,4 +69,4 @@ const CfsStatus = () => (
   </Container>
 );
 
-export default CfsStatus;
+export default CFSStatus;

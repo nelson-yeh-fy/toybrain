@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react';
-import '../../assets/App.css';
+import '../assets/App.css';
 // import imgOK from '../../assets/images/ok_blue.png';
 
 class EditableListElement extends Component {

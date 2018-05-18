@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Segment, Button, Divider, Comment, Input, Form } from 'semantic-ui-react';
-import CfsLogItem from './cfsLogItem';
-import '../../assets/App.css';
+import CFSLogItem from './CFSLogItem';
+import '../assets/App.css';
 
 let inputVal = '';
 
-const CfsLog = ({
+const CFSLog = ({
   varCfsLogArticles,
   varIsRefreshing,
   varIsAdding,
@@ -64,7 +64,7 @@ const CfsLog = ({
     </Segment>
     <div className="cfs-timeEvent">
       <Comment.Group style={{ maxWidth: 'none' }} >
-        {varCfsLogArticles.map(x => CfsLogItem(x))}
+        {varCfsLogArticles.map(x => CFSLogItem(x))}
       </Comment.Group>
     </div>
     <Divider />
@@ -97,7 +97,7 @@ const CfsLog = ({
   </Container>
 );
 
-CfsLog.propTypes = {
+CFSLog.propTypes = {
   varCfsLogArticles: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     type: PropTypes.number,
@@ -117,5 +117,5 @@ CfsLog.propTypes = {
   funcShowCFSLogTone: PropTypes.func.isRequired,
 };
 
-export default CfsLog;
+export default CFSLog;
 

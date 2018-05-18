@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container, Image, Grid, Menu, Input, Tab, Icon, Dropdown, Button } from 'semantic-ui-react';
-import CFS from './CFS';
+import CFSInfo from './enhancedCFSInfo';
 import CFSLog from './CFSLog';
-import CFSRelated from './CFSRelated';
-import CFSStatus from '../components/cfsStatus';
+import CFSRelated from '../CFSRelated';
+import CFSStatus from '../CFSStatus';
 import Simulate from './Simulate';
 import NCIC from './NCIC';
 import {
   getCFSInfoListAsync,
-} from '../reducers/cfsInfoList';
-import '../assets/App.css';
+} from '../../reducers/cfsInfoList';
+import '../../assets/App.css';
 
 const tabpanes = [{
   menuItem:
@@ -51,7 +51,7 @@ const tabpanes = [{
   render: () => (
     <Tab.Pane className="cfs-info-tabcontent" key="tabCfsSummary">
       <Container>
-        <CFS />
+        <CFSInfo />
         <CFSLog />
       </Container>
     </Tab.Pane>

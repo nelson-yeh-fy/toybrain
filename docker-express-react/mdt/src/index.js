@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import 'semantic-ui-css/semantic.min.css';
 import store, { history } from './store';
-import App from './containers/App';
+import App from './App';
 
 const target = document.querySelector('#root');
 

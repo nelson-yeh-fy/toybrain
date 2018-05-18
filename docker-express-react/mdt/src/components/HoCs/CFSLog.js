@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import CfsLog from '../components/cfsInfo/cfsLog';
+import CfsLog from '../CFSLog';
 import {
   refreshCFSLog,
   refreshCFSLogAsync,
   appendCFSLog,
   appendCFSLogAsync,
-} from '../reducers/cfsLog';
+} from '../../reducers/cfsLog';
 import {
   showCFSLogSystemText,
   showCFSLogUserText,
   showCFSLogTone,
-} from '../reducers/cfsLogStatus';
-import '../assets/App.css';
+} from '../../reducers/cfsLogStatus';
+import '../../assets/App.css';
 
 const CFSLog = props => (
   <CfsLog

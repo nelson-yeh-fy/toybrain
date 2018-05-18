@@ -3,12 +3,13 @@ import * as actionTypes from '../constants/actionTypes';
 import * as constants from '../constants';
 
 const defaultState = {
-  id: 99999001,
-  cfsNumber: '2018-000120',
-  cfsStatus: 0, // 0:new, 1:dispatched, 2:closed
-  cfsDesc: 'Dispatching unit 0310 to CFS2017-00123',
-  addby: 'System',
-  addon: '2017-05-06',
+  addon: '2018-04-25T15:22:23.371Z',
+  _id: '3dgr42fb01bab7ab4c5a1fd9',
+  cfsNumber: '2015-000990',
+  cfsStatus: 0,
+  cfsDesc: "'Dispatching unit 0310 to CFS2017-00123'",
+  addby: "'System'",
+  __v: 0,
   isCFSUpdating: false,
 };
 
