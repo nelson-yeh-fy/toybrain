@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { compose, setDisplayName, lifecycle, mapProps } from 'recompose';
 import { Container } from 'semantic-ui-react';
@@ -45,8 +44,8 @@ const enhancedCFSInfo = compose(
   // e.g.: /CFS/:cfsID, using this.props.match.params.cfsId to get it.
 
   // use Redux's connect to provide a Redux HoC component
-  withRouter(connect(
-    (state, { ownParams }) => ({
+  connect(
+    state => ({
       // cfsInfo: state.cfsInfoList.find(item => { console.log('item._id:'+ item._id); item._id === '5ae0c99dd489186a6072013f' }),
       // cfsInfo: Object.assign([], state.cfsInfoList.find(item => item._id === ownParams.cfsId/* '5ae0c99dd489186a6072013f' */)),
       cfsInfo: Object.assign([], state.cfsInfoList.find(item => item._id === '5ae0c99dd489186a6072013f' )),
@@ -59,7 +58,7 @@ const enhancedCFSInfo = compose(
       putCFSInfoAsync,
       patchCFSInfoAsync,
     }, dispatch),
-  )),
+  ),
 
   // use recompose's lifecycle to configure additional lifecycle behaviors into this HoC component
   lifecycle({

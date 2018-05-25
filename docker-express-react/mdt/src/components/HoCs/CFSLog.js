@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import CfsLog from '../CFSLog';
 import {
@@ -81,7 +80,7 @@ const getVisibleCfsLogArticles = (cfsLogArticles, listFilterMask) => {
 
 // Take application state (our redux store) as an argument,
 // and passed as props to this component.
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   cfsLogArticles: getVisibleCfsLogArticles(state.cfsLog.logArticles, state.cfsLogStatus.listFilterMask),
   // 'isRefreshing' means one of CFSInfo.js's prop;
   // 'state.cfsLogListStatus.isRefreshing' means store (createStore via rootReducer)'s isRefreshing variable
@@ -90,7 +89,6 @@ const mapStateToProps = (state, ownProps) => ({
   isSysTextChkBoxChecked: state.cfsLogStatus.chkChecked_SysText,
   isUsrTextChkBoxChecked: state.cfsLogStatus.chkChecked_UsrText,
   isToneChkBoxChecked: state.cfsLogStatus.chkChecked_Tone,
-  ownPropItem: () => { console.log(ownProps.location.query.filter); return ownProps.location.query.filter || 'all'; },
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -103,7 +101,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   showCFSLogTone,
 }, dispatch);
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CFSLog));
+)(CFSLog);

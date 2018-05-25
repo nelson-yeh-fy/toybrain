@@ -51,7 +51,7 @@ const tabpanes = [{
   render: () => (
     <Tab.Pane className="cfs-info-tabcontent" key="tabCfsSummary">
       <Container>
-        <CFSInfo />
+        {/*<CFSInfo />*/}
         <CFSLog />
       </Container>
     </Tab.Pane>
