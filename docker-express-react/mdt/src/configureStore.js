@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { connectRoutes } from 'redux-first-router';
 import { apiMiddlewareForRSAA } from 'redux-api-middleware';
-import createHistory from 'history/createBrowserHistory';
 import routesMap from './routesMap';
 import options from './options';
 import * as reducers from './reducers';
@@ -10,9 +9,8 @@ import * as actionCreators from './actions';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ actionCreators })
   : compose;
-const history = createHistory();
 
-const configureStore = () => {
+const configureStore = (history) => {
   const {
     reducer,
     middleware,
@@ -32,11 +30,8 @@ export default configureStore;
 
 
 
-// export const history = createHistory();
 // const initialState = {};
 // const enhancers = [];
-// Object.assign([], middlewares, apiMiddleware); // make it able to use RSAAs
-
 // if (process.env.NODE_ENV === 'development') {
 //   const devToolsExtension = window.devToolsExtension;
 

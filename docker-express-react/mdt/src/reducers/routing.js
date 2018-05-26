@@ -7,6 +7,8 @@ export default (state = null, action = {}) => {
       return null;
     case 'USER':
       return action.payload.id;
+    case 'CFS':
+      return action.payload.id;
     default:
       return state;
   }

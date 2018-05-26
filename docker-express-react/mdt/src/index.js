@@ -6,8 +6,8 @@ import App from './components/HoCs/App';
 import configureStore from './configureStore';
 import 'semantic-ui-css/semantic.min.css';
 
-// const history = createHistory();
-const store = configureStore();
+const history = createHistory();
+const store = configureStore(history);
 
 render(
   <Provider store={store}>

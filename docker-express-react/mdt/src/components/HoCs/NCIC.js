@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Tab } from 'semantic-ui-react';
 import CFSAbstract from '../CFSAbstract';
 import CFSRelated from '../CFSRelated';
-import NCICMultiple from '../NCIC_multiple';
+import NCICMultiple from '../NcicMultiple';
 import '../../assets/App.css';
 
 const tabpanes = [

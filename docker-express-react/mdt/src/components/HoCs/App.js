@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
 
@@ -10,31 +11,64 @@ import CFSInfo from './enhancedCFSInfo';
 import CFSList from './enhancedCFSList';
 import Scientist from './enhancedScientist';
 
-// const App = () => (
-//   <div>
-//     Undersconstasjfkls
+const Footer = () => (<div>Footer</div>);
+
+const App = ({ routingType, routingId = null, onClick }) => {
+  let DisplayPage = null;
+  switch (routingType) {
+    case 'USER':
+      DisplayPage = () => (<div>USER: {routingId}</div>);
+      break;
+    case 'CFS':
+      DisplayPage = () => (<div>CFS: {routingId}</div>);
+      break;
+    case 'HOME':
+    default:
+      DisplayPage = () => (<div>Home</div>);
+      break;
+  }
+
+  return (
+    <div>
+      <header>
+        <Link to="/user/123">User 123 </Link>  { /* action updates location state + changes address bar */ }
+        <Link to={{ type: 'USER', payload: { id: 456 } }}>User 456 </Link> { /* so does this */ }
+        <span onClick={onClick}>User 5 </span>  { /* so does this, but without SEO benefits */ }
+        <Link to={{ type: 'CFS', payload: {} }}>CFS </Link> { /* so does this */ }
+        <Link to={{ type: 'CFS', payload: { id: 1 } }}>CFS 1 </Link> { /* so does this */ }
+      </header>
+      <DisplayPage />
+      <Footer />
+    </div>
+  );
+};
+
+App.propTypes = {
+  routingType: PropTypes.string.isRequired,
+  routingId: PropTypes.number,
+  onClick: PropTypes.func.isRequired,
+};
+
+// {!routingId
+//   ? <div>
+//     <h1>HOME</h1>
+//     { /*  all 3 "links" dispatch actions: */ }
+//     <Link to="/user/123">User 123</Link>  { /* action updates location state + changes address bar */ }
+//     <Link to={{ type: 'USER', payload: { id: 456 } }}>User 456</Link> { /* so does this */ }
+//     <span onClick={onClick}>User 5</span>  { /* so does this, but without SEO benefits */ }
+//     <Link to={{ type: 'CFS', payload: { id: 1 } }}>CFS 1</Link> { /* so does this */ }
 //   </div>
-// );
 
-const App = ({ userId, onClick }) => (
-  <div>
-    {!userId
-      ? <div>
-        <h1>HOME</h1>
-        { /*  all 3 "links" dispatch actions: */ }
-        <Link to="/user/123">User 123</Link>  { /* action updates location state + changes address bar */ }
-        <Link to={{ type: 'USER', payload: { id: 456 } }}>User 456</Link> { /* so does this */ }
-        <span onClick={onClick}>User 5</span>  { /* so does this, but without SEO benefits */ }
-      </div>
+//   : <h1>USER: {routingId}</h1> // press the browser BACK button to go HOME :)
+// }
 
-      : <h1>USER: {userId}</h1> // press the browser BACK button to go HOME :)
-    }
-  </div>
-);
-
-const mapStateToProps = ({ userId }) => ({ userId });
-const mapDispatchToProps = (dispatch) => ({
-  onClick: () => dispatch({ type: 'USER', payload: { id: 5 } })
+// const mapStateToProps = ({ userId }) => ({ userId });
+const mapStateToProps = state => ({
+  routingType: state.location.type,
+  routingId: state.location.payload.id,
+});
+const mapDispatchToProps = dispatch => ({
+  onClick: () => dispatch({ type: 'USER', payload: { id: 5 } }),
 });
 
 export default connect(
