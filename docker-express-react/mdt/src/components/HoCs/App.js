@@ -40,6 +40,9 @@ const getHeaderPage = (onClick, onClickLink) => {
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Item>
+        <Menu.Item as="a" header key="0" onClick={() => onClickLink('CFSList')} >
+          CFS List
+        </Menu.Item>
         <Menu.Item as="a" header key="1">
           <Icon name="vcard" />
           CFS Summary
@@ -149,7 +152,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   onClick: () => dispatch({ type: 'USER', payload: { id: 5 } }),
-  onClickLink: (routingType, routingPayload) => dispatch({ type: routingType, payload: routingPayload }),
+  onClickLink: (routingType, routingPayload = {}) => dispatch({ type: routingType, payload: routingPayload }),
 });
 
 export default connect(

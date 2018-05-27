@@ -29,7 +29,11 @@ https://www.fullstackreact.com/30-days-of-react/day-21/ //30 days of Redux
 https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#entitykey-definition---options-- //normalizr
 https://github.com/gpbl/denormalizr //denormalizr
 https://github.com/acdlite/recompose/blob/master/docs/API.md#withReducer //Recompose and HoCs
+https://recompose.docsforhumans.com/api/mapprops.html //Recompose wiki
 https://codepen.io/Kiwka/pen/vWZVvL //Recompose and HoCs
+https://medium.freecodecamp.org/an-introduction-to-the-redux-first-routing-model-98926ebf53cb //Redux-First-Router
+https://www.dailydrip.com/topics/react/drips/redux-first-router-first-impressions.html //Redux First Router
+https://medium.com/faceyspacey/pre-release-redux-first-router-a-step-beyond-redux-little-router-cd2716576aea //ReduxFirstRouter
 
 # Add Express WebAPI
 https://code.visualstudio.com/docs/nodejs/nodejs-tutorial //visualStudio code tutorial
