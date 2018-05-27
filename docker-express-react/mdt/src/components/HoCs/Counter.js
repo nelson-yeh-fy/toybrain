@@ -28,7 +28,7 @@ const Counter = props => (
       </button>
     </p>
 
-    <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p>
+    { /* <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p> */ }
   </div>
 );
 
@@ -40,7 +40,7 @@ Counter.propTypes = {
   incrementAsync: PropTypes.func.isRequired,
   decrement: PropTypes.func.isRequired,
   decrementAsync: PropTypes.func.isRequired,
-  changePage: PropTypes.func.isRequired,
+  // changePage: PropTypes.func.isRequired,
 };
 
 // Take application state (our redux store) as an argument,

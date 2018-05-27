@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import { Link } from 'react-router-dom';
+import Link from 'redux-first-router-link';
 
-const CFSList = props => (
+const CFSList = ({ cfsInfoList, toogleVisibility, isVisible }) => (
   <div>
     <ul>
       {
-        props.cfsInfoList.map(p => (
+        cfsInfoList.map(p => (
           <li key={p._id}>
-            { /*<Link to={`/CFS/${p._id}`}>{p.cfsNumber}</Link> */ }
+            <Link to={{ type: 'CFS', payload: { id: `${p._id}` } }}>{p.cfsNumber}</Link>
           </li>
         ))
       }
     </ul>
-    {props.isVisible ? <p>I'm visible</p> : <p> Not Visible </p>}
-    <button onClick={props.toogleVisibility}> Click me! </button>
+    <button onClick={toogleVisibility}> Click me! </button>
+    {isVisible ? <p>Visible</p> : <p> Not Visible </p>}
   </div>
 );
 
@@ -27,6 +27,8 @@ CFSList.propTypes = {
     cfsDesc: PropTypes.string,
     addby: PropTypes.string,
   })).isRequired,
+  isVisible: PropTypes.bool.isRequired,
+  toogleVisibility: PropTypes.func.isRequired,
 };
 
 export default CFSList;

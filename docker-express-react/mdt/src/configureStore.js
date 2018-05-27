@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { connectRoutes } from 'redux-first-router';
-import { apiMiddlewareForRSAA } from 'redux-api-middleware';
+import { apiMiddleware as webApiMiddleware } from 'redux-api-middleware';
+import thunk from 'redux-thunk';
 import routesMap from './routesMap';
 import options from './options';
 import * as reducers from './reducers';
@@ -19,8 +20,7 @@ const configureStore = (history) => {
   } = connectRoutes(history, routesMap);
 
   const rootReducer = combineReducers({ ...reducers, location: reducer });
-  // const middlewares = applyMiddleware([middleware, apiMiddlewareForRSAA]);
-  const middlewares = applyMiddleware(middleware);
+  const middlewares = applyMiddleware(middleware, webApiMiddleware, thunk);
   const enhancers = composeEnhancers(enhancer, middlewares);
 
   return createStore(rootReducer, enhancers);

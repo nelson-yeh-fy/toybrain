@@ -14,7 +14,7 @@ const defaultState = {
 };
 
 // The followings are reducers
-export default (state = defaultState /* [] */, action) => {
+export default (state = [], action) => {
   switch (action.type) {
     case actionTypes.POST_CFSINFO_REQUESTED:
       return {
@@ -49,23 +49,23 @@ export default (state = defaultState /* [] */, action) => {
 // The followings are actionCreators, to be separated from reducer file
 export function getCFSInfoAsync() {
   return {
-    [RSAA]: {
-      endpoint: constants.webAPIUrlCfsInfo,
-      method: 'GET',
-      types: [
-        actionTypes.GET_CFSINFO_REQUESTED,
-        {
-          type: actionTypes.GET_CFSINFO_SUCCESS,
-          payload: (action, state, res) =>
-            getJSON(res).then((json) => {
-              const JsonArray = [];
-              json.map(item => JsonArray.push(item));
-              return JsonArray;
-            }),
-        },
-        actionTypes.GET_CFSINFO_FAILURE,
-      ],
-    },
+    // [RSAA]: {
+    //   endpoint: constants.webAPIUrlCfsInfo,
+    //   method: 'GET',
+    //   types: [
+    //     actionTypes.GET_CFSINFO_REQUESTED,
+    //     {
+    //       type: actionTypes.GET_CFSINFO_SUCCESS,
+    //       payload: (action, state, res) =>
+    //         getJSON(res).then((json) => {
+    //           const JsonArray = [];
+    //           json.map(item => JsonArray.push(item));
+    //           return JsonArray;
+    //         }),
+    //     },
+    //     actionTypes.GET_CFSINFO_FAILURE,
+    //   ],
+    // },
   };
 }
 

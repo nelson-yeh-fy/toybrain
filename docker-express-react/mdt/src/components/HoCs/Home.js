@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container, Image, Grid, Menu, Input, Tab, Icon, Dropdown, Button } from 'semantic-ui-react';
 import CFSInfo from './enhancedCFSInfo';
-import CFSLog from './CFSLog';
+import CFSLog from './enhancedCFSLog';
 import CFSRelated from '../CFSRelated';
 import CFSStatus from '../CFSStatus';
 import Simulate from './Simulate';

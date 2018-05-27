@@ -7,17 +7,17 @@ import '../assets/App.css';
 let inputVal = '';
 
 const CFSLog = ({
-  varCfsLogArticles,
-  varIsRefreshing,
-  varIsAdding,
-  varIsSysTextChkBoxChecked,
-  varIsUsrTextChkBoxChecked,
-  varIsToneChkBoxChecked,
-  funcRefreshCFSLogAsync,
-  funcAppendCFSLogAsync,
-  funcShowCFSLogSystemText,
-  funcShowCFSLogUserText,
-  funcShowCFSLogTone,
+  cfsLogArticles,
+  isRefreshing,
+  isAdding,
+  isSysTextChkBoxChecked,
+  isUsrTextChkBoxChecked,
+  isToneChkBoxChecked,
+  refreshCFSLogAsync,
+  appendCFSLogAsync,
+  showCFSLogSystemText,
+  showCFSLogUserText,
+  showCFSLogTone,
 }) => (
   <Container>
     <Segment color="blue" >
@@ -27,8 +27,8 @@ const CFSLog = ({
             type="checkbox"
             id="myCheckBox_SystemText"
             value="System Text"
-            checked={varIsSysTextChkBoxChecked}
-            onChange={() => { funcShowCFSLogSystemText(!varIsSysTextChkBoxChecked); }}
+            checked={isSysTextChkBoxChecked}
+            onChange={() => { showCFSLogSystemText(!isSysTextChkBoxChecked); }}
           />
           System Text
         </label>
@@ -37,8 +37,8 @@ const CFSLog = ({
             type="checkbox"
             id="myCheckBox_UserText"
             value="User Text"
-            checked={varIsUsrTextChkBoxChecked}
-            onChange={() => { funcShowCFSLogUserText(!varIsUsrTextChkBoxChecked); }}
+            checked={isUsrTextChkBoxChecked}
+            onChange={() => { showCFSLogUserText(!isUsrTextChkBoxChecked); }}
           />
           User Text
         </label>
@@ -47,14 +47,14 @@ const CFSLog = ({
             type="checkbox"
             id="myCheckBox_Tone"
             value="Tone"
-            checked={varIsToneChkBoxChecked}
-            onChange={() => { funcShowCFSLogTone(!varIsToneChkBoxChecked); }}
+            checked={isToneChkBoxChecked}
+            onChange={() => { showCFSLogTone(!isToneChkBoxChecked); }}
           />
           Tone
         </label>
         <Button
-          onClick={funcRefreshCFSLogAsync}
-          disabled={varIsRefreshing}
+          onClick={refreshCFSLogAsync}
+          disabled={isRefreshing}
           size="mini"
           floated="right"
           icon="refresh"
@@ -64,13 +64,13 @@ const CFSLog = ({
     </Segment>
     <div className="cfs-timeEvent">
       <Comment.Group style={{ maxWidth: 'none' }} >
-        {varCfsLogArticles.map(x => CFSLogItem(x))}
+        {cfsLogArticles.map(x => CFSLogItem(x))}
       </Comment.Group>
     </div>
     <Divider />
     <Form onSubmit={() => {
   if (inputVal !== '') {
-    funcAppendCFSLogAsync({
+    appendCFSLogAsync({
       id: Date.now(),
       type: 2,
       text: inputVal,
@@ -86,7 +86,7 @@ const CFSLog = ({
           placeholder="Enter more comments..."
         />
         <Form.Button
-          disabled={varIsAdding}
+          disabled={isAdding}
           content="Add"
           labelPosition="right"
           icon="edit"
@@ -98,24 +98,23 @@ const CFSLog = ({
 );
 
 CFSLog.propTypes = {
-  varCfsLogArticles: PropTypes.arrayOf(PropTypes.shape({
+  cfsLogArticles: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     type: PropTypes.number,
     text: PropTypes.string,
     addby: PropTypes.string,
     addon: PropTypes.string,
   })).isRequired,
-  varIsRefreshing: PropTypes.bool.isRequired,
-  varIsAdding: PropTypes.bool.isRequired,
-  varIsSysTextChkBoxChecked: PropTypes.bool.isRequired,
-  varIsUsrTextChkBoxChecked: PropTypes.bool.isRequired,
-  varIsToneChkBoxChecked: PropTypes.bool.isRequired,
-  funcRefreshCFSLogAsync: PropTypes.func.isRequired,
-  funcAppendCFSLogAsync: PropTypes.func.isRequired,
-  funcShowCFSLogSystemText: PropTypes.func.isRequired,
-  funcShowCFSLogUserText: PropTypes.func.isRequired,
-  funcShowCFSLogTone: PropTypes.func.isRequired,
+  isRefreshing: PropTypes.bool.isRequired,
+  isAdding: PropTypes.bool.isRequired,
+  isSysTextChkBoxChecked: PropTypes.bool.isRequired,
+  isUsrTextChkBoxChecked: PropTypes.bool.isRequired,
+  isToneChkBoxChecked: PropTypes.bool.isRequired,
+  refreshCFSLogAsync: PropTypes.func.isRequired,
+  appendCFSLogAsync: PropTypes.func.isRequired,
+  showCFSLogSystemText: PropTypes.func.isRequired,
+  showCFSLogUserText: PropTypes.func.isRequired,
+  showCFSLogTone: PropTypes.func.isRequired,
 };
 
 export default CFSLog;
-
