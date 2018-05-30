@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Segment, Button, Divider, Comment, Input, Form } from 'semantic-ui-react';
 import CFSLogItem from './CFSLogItem';
+import * as commonPropTypes from '../constants/propsTypes';
 import '../assets/App.css';
 
 let inputVal = '';
@@ -98,13 +99,7 @@ const CFSLog = ({
 );
 
 CFSLog.propTypes = {
-  cfsLogArticles: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    type: PropTypes.number,
-    text: PropTypes.string,
-    addby: PropTypes.string,
-    addon: PropTypes.string,
-  })).isRequired,
+  ...commonPropTypes.CFSLogPropType,
   isRefreshing: PropTypes.bool.isRequired,
   isAdding: PropTypes.bool.isRequired,
   isSysTextChkBoxChecked: PropTypes.bool.isRequired,

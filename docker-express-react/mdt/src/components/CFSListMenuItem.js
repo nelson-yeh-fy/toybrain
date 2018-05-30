@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Menu, Image, Dropdown } from 'semantic-ui-react';
+import * as commonPropTypes from '../constants/propsTypes';
 
 const CFSListMenuItem = ({ cfsInfoList, onClickLink }) => (
   <Menu.Item as="a" header>
@@ -30,14 +31,7 @@ const CFSListMenuItem = ({ cfsInfoList, onClickLink }) => (
 );
 
 CFSListMenuItem.propTypes = {
-  cfsInfoList: PropTypes.arrayOf(PropTypes.shape({
-    addon: PropTypes.string,
-    _id: PropTypes.string,
-    cfsNumber: PropTypes.string,
-    cfsStatus: PropTypes.number,
-    cfsDesc: PropTypes.string,
-    addby: PropTypes.string,
-  })).isRequired,
+  ...commonPropTypes.CFSPropType,
   onClickLink: PropTypes.func.isRequired,
 };
 

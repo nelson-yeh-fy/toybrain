@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'redux-first-router-link';
+import * as commonPropTypes from '../constants/propsTypes';
 
 const CFSList = ({ cfsInfoList, toogleVisibility, isVisible }) => (
   <div>
@@ -19,14 +20,7 @@ const CFSList = ({ cfsInfoList, toogleVisibility, isVisible }) => (
 );
 
 CFSList.propTypes = {
-  cfsInfoList: PropTypes.arrayOf(PropTypes.shape({
-    addon: PropTypes.string,
-    _id: PropTypes.string,
-    cfsNumber: PropTypes.string,
-    cfsStatus: PropTypes.number,
-    cfsDesc: PropTypes.string,
-    addby: PropTypes.string,
-  })).isRequired,
+  ...commonPropTypes.CFSPropType,
   isVisible: PropTypes.bool.isRequired,
   toogleVisibility: PropTypes.func.isRequired,
 };
