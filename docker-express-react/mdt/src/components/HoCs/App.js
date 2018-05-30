@@ -53,11 +53,11 @@ const getHeaderPage = (onClick, onClickLink) => {
         </Menu.Item>
         <Menu.Item as="a" header key="3">
           <Icon name="ticket" />
-            eTickets.
+          eTickets.
         </Menu.Item>
         <Menu.Item as="a" header key="4">
           <Icon name="search" />
-            NCIC.
+          NCIC.
         </Menu.Item>
         <Menu.Item as="a" header key="5" className="tooltip">
           <Icon name="bug" />

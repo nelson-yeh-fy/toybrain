@@ -27,31 +27,3 @@ const configureStore = (history) => {
 };
 
 export default configureStore;
-
-
-
-// const initialState = {};
-// const enhancers = [];
-// if (process.env.NODE_ENV === 'development') {
-//   const devToolsExtension = window.devToolsExtension;
-
-//   if (typeof devToolsExtension === 'function') {
-//     enhancers.push(devToolsExtension());
-//   }
-// }
-
-// export default createStore(
-//   combineReducers({
-//     router: reducerFromLittleRouter,
-//     counter,
-//     cfsInfoList,
-//     cfsInfo,
-//     cfsLog,
-//     cfsLogStatus,
-//   }),
-//   initialState,
-//   compose(
-//     applyMiddleware(...middlewares),
-//     ...enhancers,
-//   ),
-// );
