@@ -13,7 +13,7 @@ const enhancedCFSList = compose(
   connect(
     state => ({
       cfsInfoList: state.cfsInfoList,
-      isDataNotReady: !Array.isArray(state.cfsInfoList) || state.cfsInfoList.length === 1,
+      isDataNotReady: !Array.isArray(state.cfsInfoList) || state.cfsInfoList.length <= 0,
     }),
     dispatch => bindActionCreators({
       getCFSInfoListAsync,
@@ -24,13 +24,13 @@ const enhancedCFSList = compose(
   withReducer('isVisible', 'toogleVisibility', isVisible => !isVisible, false),
 
   // use recompose's lifecycle to configure additional lifecycle behaviors into this HoC component
-  lifecycle({
-    componentDidMount() {
-      if (this.props.isDataNotReady) {
-        this.props.getCFSInfoListAsync();
-      }
-    },
-  }),
+  // lifecycle({
+  //   componentDidMount() {
+  //     if (this.props.isDataNotReady) {
+  //       this.props.getCFSInfoListAsync();
+  //     }
+  //   },
+  // }),
 
   // add an additional recompose's branched HoC component into this HoC component
   SpinnerWhileLoading(props => !props.isDataNotReady),

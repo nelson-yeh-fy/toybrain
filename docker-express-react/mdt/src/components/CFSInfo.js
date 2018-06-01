@@ -3,14 +3,10 @@ import PropTypes from 'prop-types';
 import { Container, Label, Header, Segment, Divider } from 'semantic-ui-react';
 
 import EditableListElement from './EditableListElement';
+import * as commonPropTypes from '../constants/propsTypes';
 import '../assets/App.css';
 
 const CFSInfo = ({ cfsInfoList, routingId, patchCFSInfoAsync }) => {
-  // const sampleData = `A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. Propane Tanks in Basement. A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. A fire started behind the pizza oven and is getting worse. One employee is stuck in bathroom. ropane Tanks in Basement. A fire started behind the pizza oven and is getting worse. One employee is stuck iaan bathroomf.`;
-  // <Container textAlign="justified" fluid style={{ paddingBottom: 15 }}>
-  // <h4>CFSnumber: {props.cfsInfo.cfsNumber}</h4>
-  // <CFSAbstract />
-  // <CFSDesc funcPatchCFSInfo={props.patchCFSInfoAsync} />
   const currentCFSInfo = cfsInfoList.find(item => item._id === routingId);
   return (
     <Container>
@@ -35,14 +31,7 @@ const CFSInfo = ({ cfsInfoList, routingId, patchCFSInfoAsync }) => {
 };
 
 CFSInfo.propTypes = {
-  cfsInfoList: PropTypes.arrayOf(PropTypes.shape({
-    addon: PropTypes.string,
-    _id: PropTypes.string,
-    cfsNumber: PropTypes.string,
-    cfsStatus: PropTypes.number,
-    cfsDesc: PropTypes.string,
-    addby: PropTypes.string,
-  })).isRequired,
+  ...commonPropTypes.CFSPropType,
   routingId: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,

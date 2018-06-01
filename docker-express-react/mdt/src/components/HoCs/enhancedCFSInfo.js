@@ -1,14 +1,8 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { compose, setDisplayName } from 'recompose';
 
 import CFSInfo from '../CFSInfo';
-import {
-  getCFSInfoAsync,
-  postCFSInfoAsync,
-  putCFSInfoAsync,
-  patchCFSInfoAsync,
-} from '../../reducers/cfsInfo';
+import { patchCFSInfoAsync } from '../../reducers/cfsInfo';
 
 const enhancedCFSInfo = compose(
   // setup this HOC's name
@@ -19,13 +13,12 @@ const enhancedCFSInfo = compose(
     state => ({
       cfsInfoList: state.cfsInfoList,
       routingId: state.location.payload.id,
+      isDataNotReady: !Array.isArray(state.cfsInfoList) || state.cfsInfoList.length === 1,
     }),
-    dispatch => bindActionCreators({
-      getCFSInfoAsync,
-      postCFSInfoAsync,
-      putCFSInfoAsync,
-      patchCFSInfoAsync,
-    }, dispatch),
+    dispatch => ({
+      patchCFSInfoAsync: () => dispatch(patchCFSInfoAsync()),
+      goHome: () => dispatch({ type: 'HOME' }),
+    }),
   ),
 )(CFSInfo);
 

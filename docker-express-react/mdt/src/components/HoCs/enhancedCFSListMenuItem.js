@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { compose, setDisplayName, withReducer, lifecycle } from 'recompose';
+import { compose, setDisplayName, lifecycle } from 'recompose';
 import { getCFSInfoListAsync } from '../../reducers/cfsInfoList';
 import CFSListMenuItem from '../CFSListMenuItem';
 import SpinnerWhileLoading from '../SpinnerWhileLoading';
@@ -19,9 +19,6 @@ const enhancedCFSListMenuItem = compose(
       onClickLink: (routingType, routingPayload = {}) => dispatch({ type: routingType, payload: routingPayload }),
     }),
   ),
-
-  // use recompose's withReducer to provide additional props into this HoC component
-  withReducer('isVisible', 'toogleVisibility', isVisible => !isVisible, false),
 
   // use recompose's lifecycle to configure additional lifecycle behaviors into this HoC component
   lifecycle({

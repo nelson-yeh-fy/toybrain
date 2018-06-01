@@ -17,12 +17,12 @@ import About from '../About';
 const Header = ({ onClick, onClickLink }) => (
   <div>
     <Menu inverted style={{ borderRadius: 0, height: 50 }}>
-      <CFSListMenuItem />
+      { /* <CFSListMenuItem /> */ }
       <Menu.Item as="a" header key="1">
         <Icon name="vcard" />
         CFS Summary
       </Menu.Item>
-      <Menu.Item as="a" header key="2">
+      <Menu.Item as="a" header key="2" onClick={() => onClickLink('CFSRelatedInfo', { id: 456 })}>
         <Icon name="newspaper" />
         Related Info.
       </Menu.Item>
@@ -56,7 +56,9 @@ const Header = ({ onClick, onClickLink }) => (
       <Link to="/user/123">User 123 </Link>  { /* action updates location state + changes address bar */}
       <Link to={{ type: 'USER', payload: { id: 456 } }}>User 456 </Link> { /* so does this */}
       <span onClick={() => onClick()}>User 5 </span>  { /* so does this, but without SEO benefits */}
-      <Link to={{ type: 'CFSList' }}>CFSList </Link>
+      <Link to={{ type: 'CFSLIST' }}>CFSList </Link>
+      <Link to={{ type: 'CFS', payload: { id: '4dgr42fb01bab7ab4c5a1fd9' } }}>CFS1 </Link>
+      <Link to={{ type: 'CFS', payload: { id: '5ae09d2fb01bab7ab4c51dd9' } }}>CFS2 </Link>
       <Link to={{ type: 'COUNTER' }}>Counter </Link>
     </div>
   </div>
