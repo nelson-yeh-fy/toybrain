@@ -57,8 +57,8 @@ const Header = ({ onClick, onClickLink }) => (
       <Link to={{ type: 'USER', payload: { id: 456 } }}>User 456 </Link> { /* so does this */}
       <span onClick={() => onClick()}>User 5 </span>  { /* so does this, but without SEO benefits */}
       <Link to={{ type: 'CFSLIST' }}>CFSList </Link>
-      <Link to={{ type: 'CFS', payload: { id: '4dgr42fb01bab7ab4c5a1fd9' } }}>CFS1 </Link>
-      <Link to={{ type: 'CFS', payload: { id: '5ae09d2fb01bab7ab4c51dd9' } }}>CFS2 </Link>
+      <Link to={{ type: 'CFSINFO', payload: { id: '4dgr42fb01bab7ab4c5a1fd9' } }}>CFS1 </Link>
+      <Link to={{ type: 'CFSINFO', payload: { id: '5ae09d2fb01bab7ab4c51dd9' } }}>CFS2 </Link>
       <Link to={{ type: 'COUNTER' }}>Counter </Link>
     </div>
   </div>

@@ -18,7 +18,7 @@ const getContentPage = (routingType, routingId) => {
     case 'CFSLIST':
       page = () => (<div><h3>CFSList</h3><CFSList /></div>);
       break;
-    case 'CFS':
+    case 'CFSINFO':
       page = () => (
         <Grid columns={2}>
           <Grid.Column width={12} style={{ paddingRight: 0 }}>

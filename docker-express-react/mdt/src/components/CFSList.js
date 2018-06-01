@@ -9,7 +9,7 @@ const CFSList = ({ cfsInfoList, toogleVisibility, isVisible }) => (
       {
         cfsInfoList.map(p => (
           <li key={p._id}>
-            <Link to={{ type: 'CFS', payload: { id: `${p._id}` } }}>{p.cfsNumber}</Link>
+            <Link to={{ type: 'CFSINFO', payload: { id: `${p._id}` } }}>{p.cfsNumber}</Link>
           </li>
         ))
       }
