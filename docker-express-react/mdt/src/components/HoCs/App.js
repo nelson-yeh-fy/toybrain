@@ -4,11 +4,11 @@ import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { NOT_FOUND } from 'redux-first-router';
 
-
 import Header from './Header';
 import CFSList from './enhancedCFSList';
-import CFSLog from './enhancedCFSLog';
 import CFSInfo from './enhancedCFSInfo';
+import CFSLog from './enhancedCFSLog';
+import CFSRelated from './enhancedCFSRelated';
 import CFSStatus from '../CFSStatus';
 import Counter from './Counter';
 
@@ -16,7 +16,7 @@ const getContentPage = (routingType, routingId) => {
   let page = null;
   switch (routingType) {
     case 'CFSLIST':
-      page = () => (<div><h3>CFSList</h3><CFSList /></div>);
+      page = () => (<div><CFSList /></div>);
       break;
     case 'CFSINFO':
       page = () => (
@@ -31,8 +31,8 @@ const getContentPage = (routingType, routingId) => {
         </Grid>
       );
       break;
-    case 'CFSRelatedInfo':
-      page = () => (<div><h3>CFSRelatedInfo</h3></div>);
+    case 'CFSRELATED':
+      page = () => (<div><CFSRelated /></div>);
       break;
     case 'COUNTER':
       page = () => (<div><header>COUNTER: {routingId}</header><main><Counter /></main></div>);

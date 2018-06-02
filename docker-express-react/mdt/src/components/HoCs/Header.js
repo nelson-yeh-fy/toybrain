@@ -22,43 +22,42 @@ const Header = ({ onClick, onClickLink }) => (
         <Icon name="vcard" />
         CFS Summary
       </Menu.Item>
-      <Menu.Item as="a" header key="2" onClick={() => onClickLink('CFSRelatedInfo', { id: 456 })}>
+      <Menu.Item as="a" header key="2" onClick={() => onClickLink('CFSRELATED', { id: 456 })}>
         <Icon name="newspaper" />
         Related Info.
       </Menu.Item>
       <Menu.Item as="a" header key="3">
-        <Icon name="ticket" />
-        eTickets.
+        <Icon name="map" />
+        Map
       </Menu.Item>
       <Menu.Item as="a" header key="4">
-        <Icon name="search" />
-        NCIC.
+        <Icon name="ticket" />
       </Menu.Item>
-      <Menu.Item as="a" header key="5" className="tooltip">
-        <Icon name="bug" />
-        <span className="tooltiptext">Simulate</span>
+      <Menu.Item as="a" header key="5">
+        <Icon name="search" />
       </Menu.Item>
       <Menu.Item as="a" header key="6" className="tooltip">
-        <Icon name="map" />
-        <span className="tooltiptext">Map</span>
-      </Menu.Item>
-      <Menu.Item as="a" header key="7" className="tooltip">
         <Icon name="male" />
         <span className="tooltiptext">Supervisor</span>
       </Menu.Item>
-      <Menu.Item name="User456" onClick={() => onClickLink('USER', { id: 456 })} />
+      <Menu.Item as="a" header key="7" className="tooltip">
+        <Icon name="bug" />
+        <span className="tooltiptext">Simulate</span>
+      </Menu.Item>
       <Menu.Item>
         <Input size="medium" label={{ icon: 'search' }} labelPosition="left corner" placeholder="Enter CFS Number" />
       </Menu.Item>
     </Menu>
 
     <div>
-      <Link to="/user/123">User 123 </Link>  { /* action updates location state + changes address bar */}
-      <Link to={{ type: 'USER', payload: { id: 456 } }}>User 456 </Link> { /* so does this */}
-      <span onClick={() => onClick()}>User 5 </span>  { /* so does this, but without SEO benefits */}
+      <Link to="/user/123">User1 </Link>  { /* action updates location state + changes address bar */}
+      <Link to={{ type: 'USER', payload: { id: 456 } }}>User4 </Link> { /* so does this */}
+      <span onClick={() => onClick()}>User5 </span>  { /* so does this, but without SEO benefits */}
       <Link to={{ type: 'CFSLIST' }}>CFSList </Link>
-      <Link to={{ type: 'CFSINFO', payload: { id: '4dgr42fb01bab7ab4c5a1fd9' } }}>CFS1 </Link>
-      <Link to={{ type: 'CFSINFO', payload: { id: '5ae09d2fb01bab7ab4c51dd9' } }}>CFS2 </Link>
+      <Link to={{ type: 'CFSINFO', payload: { id: '4dgr42fb01bab7ab4c5a1fd9' } }}>CFS1Info </Link>
+      <Link to={{ type: 'CFSINFO', payload: { id: '5ae09d2fb01bab7ab4c51dd9' } }}>CFS2Info </Link>
+      <Link to={{ type: 'CFSRELATED', payload: { id: '4dgr42fb01bab7ab4c5a1fd9' } }}>CFS1Related </Link>
+      <Link to={{ type: 'CFSRELATED', payload: { id: '5ae09d2fb01bab7ab4c51dd9' } }}>CFS2Related </Link>
       <Link to={{ type: 'COUNTER' }}>Counter </Link>
     </div>
   </div>

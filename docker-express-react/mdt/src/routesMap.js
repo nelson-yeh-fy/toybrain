@@ -45,7 +45,26 @@ const routesMap = {
       }
     },
   },
-  CFSRelatedInfo: '/cfs/:id/relatedInfo',
+  CFSRELATED: {
+    path: '/cfsrelated/:id',
+    thunk: (dispatch, getState) => {
+      const {
+        location: { payload: { id } }, // const { id } = getState().location.payload;
+        cfsInfoList,
+      } = getState();
+
+      if (cfsInfoList === undefined || cfsInfoList.length === 0) {
+        // const action = redirect({ type: 'CFSList' });
+        // return dispatch(action);
+        return dispatch({ type: 'CFSLIST' });
+      }
+
+      const currentCFSInfo = cfsInfoList.find(item => item._id === id);
+      if (currentCFSInfo === undefined || currentCFSInfo.length === 0) {
+        return dispatch({ type: 'CFSLIST' });
+      }
+    },
+  },
   COUNTER: '/counter',
 };
 
