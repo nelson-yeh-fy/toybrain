@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { NOT_FOUND } from 'redux-first-router';
-
-import Header from './Header';
+import * as commonPropTypes from '../../constants/propsTypes';
+import Header from './enhancedHeader';
 import CFSList from './enhancedCFSList';
 import CFSInfo from './enhancedCFSInfo';
 import CFSLog from './enhancedCFSLog';
@@ -63,10 +63,7 @@ const App = ({ routingType, routingId }) => {
 
 App.propTypes = {
   routingType: PropTypes.string.isRequired,
-  routingId: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
+  ...commonPropTypes.RoutingIdPropType.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -32,10 +32,7 @@ const CFSInfo = ({ cfsInfoList, routingId, patchCFSInfoAsync }) => {
 
 CFSInfo.propTypes = {
   ...commonPropTypes.CFSPropType,
-  routingId: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
+  ...commonPropTypes.RoutingIdPropType.isRequired,
   // cfsStatus: PropTypes.number.isRequired,
   // isCFSUpdating: PropTypes.bool.isRequired,
   // getCFSInfoAsync: PropTypes.func.isRequired,

@@ -20,3 +20,10 @@ export const CFSLogPropType = {
     addon: PropTypes.string,
   })).isRequired,
 };
+
+export const RoutingIdPropType = {
+  routingId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+};
