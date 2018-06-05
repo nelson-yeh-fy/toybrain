@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Menu, Image, Dropdown } from 'semantic-ui-react';
 import * as commonPropTypes from '../constants/propsTypes';
 
-const CFSListMenuItem = ({ cfsInfoList, onClickLink }) => (
+const CFSListMenuItem = ({ cfsList, onClickLink }) => (
   <Menu.Item as="a" header>
     <Image
       size="mini"
@@ -15,7 +15,7 @@ const CFSListMenuItem = ({ cfsInfoList, onClickLink }) => (
     <Dropdown item simple text="2018-000354(3 more)">
       <Dropdown.Menu>
         {
-          cfsInfoList.map(p => (
+          cfsList.map(p => (
             <Dropdown.Item key={p._id} onClick={() => onClickLink('CFS', { id: `${p._id}` })} >
               {`${p.cfsNumber} [${p.cfsStatus}]`}
             </Dropdown.Item>
@@ -31,7 +31,7 @@ const CFSListMenuItem = ({ cfsInfoList, onClickLink }) => (
 );
 
 CFSListMenuItem.propTypes = {
-  ...commonPropTypes.CFSPropType,
+  ...commonPropTypes.CFSListPropType.isRequired,
   onClickLink: PropTypes.func.isRequired,
 };
 

@@ -4,7 +4,7 @@ import { Menu, Image, Dropdown, Input, Icon } from 'semantic-ui-react';
 import Link from 'redux-first-router-link';
 import * as commonPropTypes from '../constants/propsTypes';
 
-const MenuItemCFSList = ({ cfsInfoList, onClickLink }) => (
+const MenuItemCFSList = ({ cfsList, onClickLink }) => (
   <Menu.Item as="a" header key="0">
     <Image
       size="mini"
@@ -16,7 +16,7 @@ const MenuItemCFSList = ({ cfsInfoList, onClickLink }) => (
     <Dropdown item simple text="2018-000354 (3 more)">
       <Dropdown.Menu>
         {
-        cfsInfoList.map(p => (
+        cfsList.map(p => (
           <Dropdown.Item key={p._id} onClick={() => onClickLink('CFSINFO', { id: `${p._id}` })} >
             {`${p.cfsNumber} [${p.cfsStatus}]`}
           </Dropdown.Item>
@@ -62,7 +62,7 @@ const MenuItemSearch = () => (
 );
 
 const Header = ({
-  cfsInfoList, routingId, onClick, onClickLink,
+  cfsList, routingId, onClick, onClickLink,
 }) => (
   <div>
     {console.log(`routingId:${routingId}`)}
@@ -70,7 +70,7 @@ const Header = ({
       routingId !== undefined ?
       (
         <Menu inverted style={{ borderRadius: 0, height: 50 }}>
-          <MenuItemCFSList cfsInfoList={cfsInfoList} onClickLink={onClickLink} />
+          <MenuItemCFSList cfsList={cfsList} onClickLink={onClickLink} />
           <MenuItemCFSInfo routingId={routingId} onClickLink={onClickLink} />
           <MenuItemCFSRelated routingId={routingId} onClickLink={onClickLink} />
           <MenuItemMap />
@@ -79,7 +79,7 @@ const Header = ({
         </Menu>
       ) : (
         <Menu inverted style={{ borderRadius: 0, height: 50 }}>
-          <MenuItemCFSList cfsInfoList={cfsInfoList} onClickLink={onClickLink} />
+          <MenuItemCFSList cfsList={cfsList} onClickLink={onClickLink} />
           <MenuItemMap />
           <MenuItemSupervisor />
           <MenuItemSearch />

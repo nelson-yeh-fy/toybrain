@@ -1,14 +1,26 @@
 import PropTypes from 'prop-types';
 
-export const CFSPropType = {
-  cfsInfoList: PropTypes.arrayOf(PropTypes.shape({
+export const CFSListPropType = {
+  cfsList: PropTypes.arrayOf(PropTypes.shape({
     addon: PropTypes.string,
     _id: PropTypes.string,
     cfsNumber: PropTypes.string,
     cfsStatus: PropTypes.number,
     cfsDesc: PropTypes.string,
     addby: PropTypes.string,
-  })).isRequired,
+  })),
+};
+
+export const CFSPropType = {
+  currentCFSInfo: PropTypes.shape({
+    addon: PropTypes.string,
+    _id: PropTypes.string,
+    cfsType: PropTypes.string,
+    cfsNumber: PropTypes.string,
+    cfsStatus: PropTypes.number,
+    cfsDesc: PropTypes.string,
+    addby: PropTypes.string,
+  }),
 };
 
 export const CFSLogPropType = {

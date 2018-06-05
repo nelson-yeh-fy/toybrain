@@ -17,7 +17,7 @@ import * as constants from '../constants';
 // The followings are reducers
 export default (state = [], action) => {
   switch (action.type) {
-    case actionTypes.GET_CFSINFO_LIST_SUCCESS:
+    case actionTypes.GET_CFS_LIST_SUCCESS:
       return [
         ...action.payload,
       ];
@@ -29,15 +29,15 @@ export default (state = [], action) => {
 
 
 // The followings are actionCreators, to be separated from reducer file
-export function getCFSInfoListAsync() {
+export function getCFSListAsync() {
   return {
     [RSAA]: {
       endpoint: constants.webAPIUrlCfsInfo,
       method: 'GET',
       types: [
-        actionTypes.GET_CFSINFO_LIST_REQUESTED,
+        actionTypes.GET_CFS_LIST_REQUESTED,
         {
-          type: actionTypes.GET_CFSINFO_LIST_SUCCESS,
+          type: actionTypes.GET_CFS_LIST_SUCCESS,
           payload: (action, state, res) =>
             getJSON(res).then((json) => {
               const JsonArray = [];
@@ -46,7 +46,7 @@ export function getCFSInfoListAsync() {
               return JsonArray;
             }),
         },
-        actionTypes.GET_CFSINFO_LIST_FAILURE,
+        actionTypes.GET_CFS_LIST_FAILURE,
       ],
     },
   };

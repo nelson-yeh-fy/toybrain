@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const cfsInfoModel = new Schema({
-	cfsNumber: { type: String },
+  cfsNumber: { type: String },
+  cfsType: { type: String },
   cfsStatus: { type: Number },
   cfsDesc: { type: String },
   addby: { type: String },

@@ -10,8 +10,8 @@ import CFSStatus from '../CFSStatus';
 import Simulate from './Simulate';
 import NCIC from './NCIC';
 import {
-  getCFSInfoListAsync,
-} from '../../reducers/cfsInfoList';
+  getCFSListAsync,
+} from '../../reducers/cfsList';
 import '../../assets/App.css';
 
 const tabpanes = [{
@@ -167,17 +167,17 @@ const Home = props => (
 );
 
 Home.propTypes = {
-  getCFSInfoListAsync: PropTypes.func.isRequired,
+  getCFSListAsync: PropTypes.func.isRequired,
 };
 
 // Take application state (our redux store) as an argument,
 // and passed as props to this component.
 const mapStateToProps = state => ({
-  cfsInfoList: state.cfsInfoList,
+  cfsList: state.cfsList,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getCFSInfoListAsync,
+  getCFSListAsync,
 }, dispatch);
 
 export default connect(

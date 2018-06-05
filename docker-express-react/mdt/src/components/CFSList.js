@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import Link from 'redux-first-router-link';
 import * as commonPropTypes from '../constants/propsTypes';
 
-const CFSList = ({ cfsInfoList, toogleVisibility, isVisible }) => (
+const CFSList = ({ cfsList, toogleVisibility, isVisible }) => (
   <div>
     <ul>
       {
-        cfsInfoList.map(p => (
+        cfsList.map(p => (
           <li key={p._id}>
             <Link to={{ type: 'CFSINFO', payload: { id: `${p._id}` } }}>{p.cfsNumber}</Link>
           </li>
@@ -20,7 +20,7 @@ const CFSList = ({ cfsInfoList, toogleVisibility, isVisible }) => (
 );
 
 CFSList.propTypes = {
-  ...commonPropTypes.CFSPropType,
+  ...commonPropTypes.CFSListPropType.isRequired,
   isVisible: PropTypes.bool.isRequired,
   toogleVisibility: PropTypes.func.isRequired,
 };

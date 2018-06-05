@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { compose, setDisplayName, lifecycle } from 'recompose';
-import { getCFSInfoListAsync } from '../../reducers/cfsInfoList';
+import { getCFSInfoAsync } from '../../reducers/cfsList';
 import CFSListMenuItem from '../CFSListMenuItem';
 import SpinnerWhileLoading from '../SpinnerWhileLoading';
 
@@ -11,11 +11,11 @@ const enhancedCFSListMenuItem = compose(
   // use Redux's connect to provide a Redux HoC component
   connect(
     state => ({
-      cfsInfoList: state.cfsInfoList,
-      isDataNotReady: !Array.isArray(state.cfsInfoList) || state.cfsInfoList.length === 1,
+      cfsList: state.cfsList,
+      isDataNotReady: !Array.isArray(state.cfsList) || state.cfsList.length <= 0,
     }),
     dispatch => ({
-      getCFSInfoListAsync: () => dispatch(getCFSInfoListAsync()),
+      getCFSInfoAsync: () => dispatch(getCFSInfoAsync()),
       onClickLink: (routingType, routingPayload = {}) => dispatch({ type: routingType, payload: routingPayload }),
     }),
   ),
@@ -24,7 +24,7 @@ const enhancedCFSListMenuItem = compose(
   lifecycle({
     componentDidMount() {
       if (this.props.isDataNotReady) {
-        this.props.getCFSInfoListAsync();
+        this.props.getCFSInfoAsync();
       }
     },
   }),

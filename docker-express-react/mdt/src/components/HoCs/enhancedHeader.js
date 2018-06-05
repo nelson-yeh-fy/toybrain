@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { compose, setDisplayName, lifecycle } from 'recompose';
-import { getCFSInfoListAsync } from '../../reducers/cfsInfoList';
+import { getCFSListAsync } from '../../reducers/cfsList';
 import Header from '../Header';
 import SpinnerWhileLoading from '../SpinnerWhileLoading';
 
@@ -11,12 +11,12 @@ const enhancedHeader = compose(
   // use Redux's connect to provide a Redux HoC component
   connect(
     state => ({
-      cfsInfoList: state.cfsInfoList,
+      cfsList: state.cfsList,
       routingId: state.location.payload.id,
-      isDataNotReady: !Array.isArray(state.cfsInfoList) || state.cfsInfoList.length === 1,
+      isDataNotReady: !Array.isArray(state.cfsList) || state.cfsList.length === 1,
     }),
     dispatch => ({
-      getCFSInfoListAsync: () => dispatch(getCFSInfoListAsync()),
+      getCFSListAsync: () => dispatch(getCFSListAsync()),
       onClick: () => dispatch({ type: 'USER', payload: { id: 5 } }),
       onClickLink: (routingType, routingPayload = {}) => dispatch({ type: routingType, payload: routingPayload }),
     }),
@@ -26,7 +26,7 @@ const enhancedHeader = compose(
   lifecycle({
     componentDidMount() {
       if (this.props.isDataNotReady) {
-        this.props.getCFSInfoListAsync();
+        this.props.getCFSListAsync();
       }
     },
   }),

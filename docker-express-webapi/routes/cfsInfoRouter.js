@@ -1,7 +1,19 @@
 import express from 'express';
 import CFSInfoModel from '../models/cfsInfoModel';
 const Router = express.Router();
+
+// Get partial fields of CFSInfoModel, make it effiency for getting list only.
 Router.route('/')
+    .get((req, res) => {
+      CFSInfoModel.find({}, (err, cfsInfo) => {
+        const cfslist = cfsInfo.map( item => {
+            return { _id: item._id, cfsNumber: item.cfsNumber, cfsStatus: item.cfsStatus }
+        })
+        res.json(cfslist)
+      })
+    })
+
+Router.route('/fulldetail')
     .get((req, res) => {
       CFSInfoModel.find({}, (err, cfsInfo) => {
             res.json(cfsInfo)
@@ -12,6 +24,7 @@ Router.route('/')
         cfsInfo.save();
         res.status(201).send(cfsInfo)
     })
+
 
 // Middleware
 Router.use('/:itemId', (req, res, next)=>{

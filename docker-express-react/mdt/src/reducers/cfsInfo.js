@@ -16,6 +16,18 @@ import * as constants from '../constants';
 // The followings are reducers
 export default (state = [], action) => {
   switch (action.type) {
+    case actionTypes.GET_CFSINFO_REQUESTED:
+      return {
+        ...state,
+        isCFSUpdating: true,
+      };
+
+    case actionTypes.GET_CFSINFO_SUCCESS:
+      return {
+        ...action.payload,
+        isCFSUpdating: false,
+      };
+
     case actionTypes.POST_CFSINFO_REQUESTED:
       return {
         ...state,
@@ -47,25 +59,46 @@ export default (state = [], action) => {
 
 
 // The followings are actionCreators, to be separated from reducer file
-export function getCFSInfoAsync() {
+// export function getCFSInfoAsync() {
+//   return {
+//     [RSAA]: {
+//       endpoint: constants.webAPIUrlCfsInfo,
+//       method: 'GET',
+//       types: [
+//         actionTypes.GET_CFSINFO_REQUESTED,
+//         {
+//           type: actionTypes.GET_CFSINFO_SUCCESS,
+//           payload: (action, state, res) =>
+//             getJSON(res).then((json) => {
+//               const JsonArray = [];
+//               json.map(item => JsonArray.push(item));
+//               return JsonArray;
+//             }),
+//         },
+//         actionTypes.GET_CFSINFO_FAILURE,
+//       ],
+//     },
+//   };
+// }
+
+export function getCFSInfoAsync(val) {
   return {
-    // [RSAA]: {
-    //   endpoint: constants.webAPIUrlCfsInfo,
-    //   method: 'GET',
-    //   types: [
-    //     actionTypes.GET_CFSINFO_REQUESTED,
-    //     {
-    //       type: actionTypes.GET_CFSINFO_SUCCESS,
-    //       payload: (action, state, res) =>
-    //         getJSON(res).then((json) => {
-    //           const JsonArray = [];
-    //           json.map(item => JsonArray.push(item));
-    //           return JsonArray;
-    //         }),
-    //     },
-    //     actionTypes.GET_CFSINFO_FAILURE,
-    //   ],
-    // },
+    [RSAA]: {
+      endpoint: constants.webAPIUrlCfsInfo.concat('/', val.toBeUpdateId),
+      method: 'GET',
+      body: JSON.stringify(val),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      types: [
+        actionTypes.GET_CFSINFO_REQUESTED,
+        {
+          type: actionTypes.GET_CFSINFO_SUCCESS,
+          payload: val,
+        },
+        actionTypes.GET_CFSINFO_FAILURE,
+      ],
+    },
   };
 }
 
