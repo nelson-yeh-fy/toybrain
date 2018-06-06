@@ -4,52 +4,63 @@ import { Menu, Image, Dropdown, Input, Icon } from 'semantic-ui-react';
 import Link from 'redux-first-router-link';
 import * as commonPropTypes from '../constants/propsTypes';
 
-const MenuItemCFSList = ({ cfsList, onClickLink }) => (
-  <Menu.Item as="a" header key="0">
-    <Image
-      size="mini"
-      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
-      alt=""
-      height="14"
-      style={{ marginRight: '0.5em' }}
-    />
-    <Dropdown item simple text="2018-000354 (3 more)">
-      <Dropdown.Menu>
-        {
-        cfsList.map(p => (
-          <Dropdown.Item key={p._id} onClick={() => onClickLink('CFSINFO', { id: `${p._id}` })} >
-            {`${p.cfsNumber} [${p.cfsStatus}]`}
-          </Dropdown.Item>
-        ))
-        }
-        <Dropdown.Divider />
-        <Dropdown.Item>New CFS</Dropdown.Item>
-        <Dropdown.Item>New Car Stop</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-  </Menu.Item>
-);
+const MenuItemCFSList = ({ isDataNotReady, cfsList, onClickLink }) => {
+  const cfsOptions = [];
+  cfsList.map(p => cfsOptions.push({ key: p._id, text: `${p.cfsNumber} [${p.cfsStatus}]`, value: p._id }));
+  //   <Dropdown item simple text="2018-000354 (3 more)">
+  //   <Dropdown.Menu>
+  //     {
+  //       cfsList.map(p => (
+  //         <Dropdown.Item key={p._id} onClick={() => onClickLink('CFSINFO', { id: `${p._id}` })} >
+  //           {`${p.cfsNumber} [${p.cfsStatus}]`}
+  //         </Dropdown.Item>
+  //       ))
+  //     }
+  //     <Dropdown.Divider />
+  //     <Dropdown.Item>New CFS</Dropdown.Item>
+  //     <Dropdown.Item>New Car Stop</Dropdown.Item>
+  //   </Dropdown.Menu>
+  // </Dropdown>
+  return (
+    <Menu.Item header key="0">
+      <Image
+        size="mini"
+        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
+        alt=""
+        height="14"
+        style={{ marginRight: '0.5em' }}
+      />
+      <Dropdown
+        loading={isDataNotReady}
+        simple
+        text={`${cfsOptions.length} CFS(s)`}
+        options={cfsOptions}
+        onChange={(e, { /* name, */ value }) => onClickLink('CFSINFO', { id: `${value}` })}
+      />
+    </Menu.Item>
+  );
+};
 
 const MenuItemCFSInfo = ({ routingId, onClickLink }) => (
-  <Menu.Item as="a" header key="1" onClick={() => onClickLink('CFSINFO', { id: routingId })}>
+  <Menu.Item header key="1" onClick={() => onClickLink('CFSINFO', { id: routingId })}>
     <Icon name="vcard" /> CFS Summary
   </Menu.Item>
 );
 
 const MenuItemCFSRelated = ({ routingId, onClickLink }) => (
-  <Menu.Item as="a" header key="2" onClick={() => onClickLink('CFSRELATED', { id: routingId })}>
+  <Menu.Item header key="2" onClick={() => onClickLink('CFSRELATED', { id: routingId })}>
     <Icon name="newspaper" /> Related Info.
   </Menu.Item>
 );
 
 const MenuItemMap = () => (
-  <Menu.Item as="a" header key="3">
+  <Menu.Item header key="3">
     <Icon name="map" /> Map
   </Menu.Item>
 );
 
 const MenuItemSupervisor = () => (
-  <Menu.Item as="a" header key="6" className="tooltip">
+  <Menu.Item header key="6" className="tooltip">
     <Icon name="male" />
     <span className="tooltiptext">Supervisor</span>
   </Menu.Item>
@@ -62,7 +73,7 @@ const MenuItemSearch = () => (
 );
 
 const Header = ({
-  cfsList, routingId, onClick, onClickLink,
+  isDataNotReady, cfsList, routingId, onClick, onClickLink,
 }) => (
   <div>
     {console.log(`routingId:${routingId}`)}
@@ -70,7 +81,7 @@ const Header = ({
       routingId !== undefined ?
       (
         <Menu inverted style={{ borderRadius: 0, height: 50 }}>
-          <MenuItemCFSList cfsList={cfsList} onClickLink={onClickLink} />
+          <MenuItemCFSList isDataNotReady={isDataNotReady} cfsList={cfsList} onClickLink={onClickLink} />
           <MenuItemCFSInfo routingId={routingId} onClickLink={onClickLink} />
           <MenuItemCFSRelated routingId={routingId} onClickLink={onClickLink} />
           <MenuItemMap />
@@ -104,6 +115,7 @@ const Header = ({
 Header.propTypes = {
   ...commonPropTypes.CFSPropType,
   ...commonPropTypes.RoutingIdPropType,
+  isDataNotReady: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   onClickLink: PropTypes.func.isRequired,
 };

@@ -1,47 +1,61 @@
 import { NOT_FOUND } from 'redux-first-router';
 import * as constants from './constants';
 import * as actionTypes from './constants/actionTypes';
-// import getCFSInfoAsync from './reducers/cfsList';
+
+const fakeDelay = ms => new Promise(res => setTimeout(res, ms));
 
 const routesMap = {
   HOME: '/', // action <-> url path
   USER: '/user/:id', // :id is a dynamic segment
-  CFSLIST: '/cfslist', // this.fetchData('http://localhost:3001/users');
-  // CFSLIST: {
-  //   path: '/cfslist',
-  //   thunk: async (dispatch, getState) => {
-  //     const { cfsList } = getState();
-  //     if (cfsList === undefined || cfsList.length === 0) {
-  //       console.log("now waiting for getting cfsList");
-  //       const response = await fetch(constants.webAPIUrlCfsInfo); // await response of fetch call
-  //       const data = await response.json(); // only proceed once promise is resolved
-  //       console.log("data: " + data);
-  //       if (data.length === 0) { // only proceed once second promise is resolved
-  //         return dispatch({ type: NOT_FOUND });
-  //       }
-  //       dispatch({
-  //         type: 'USER',
-  //         payload: { id: 123 },
-  //       });
-  //     }
-  //   },
-  // },
+  // CFSLIST: '/cfslist', // this.fetchData('http://localhost:3001/users');
+  CFSLIST: {
+    path: '/cfslist',
+    thunk: async (dispatch, getState) => {
+      const {
+        cfsList,
+      } = getState();
+
+      if (cfsList === undefined || cfsList.length === 0) {
+        dispatch({ type: actionTypes.GET_CFS_LIST_REQUESTED });
+
+        // await response of fetch call
+        await fakeDelay(3000);
+        const response = await fetch(`${constants.webAPIUrlCfsInfo}`);
+
+        // only proceed once promise is resolved
+        const data = await response.json();
+        if (data.length === 0) { // only proceed once second promise is resolved
+          dispatch({ type: actionTypes.GET_CFS_LIST_FAILURE });
+          return dispatch({ type: NOT_FOUND });
+        }
+
+        dispatch({
+          type: actionTypes.GET_CFS_LIST_SUCCESS,
+          payload: data,
+        });
+      }
+    },
+  },
   CFSINFO: {
     path: '/cfsinfo/:id',
     thunk: async (dispatch, getState) => {
       const {
-        location: { payload: { id } }, // const { id } = getState().location.payload;
-        cfsInfo,
+        location: { payload: { id: currentId } }, // const { id } = getState().location.payload;
+        location: { prev: { payload: { id: prevId } } },
       } = getState();
 
-      if (cfsInfo === undefined || cfsInfo.length === 0) {
+      if (currentId !== prevId) {
+        // console.log(`id: ${currentId}, prevId:${prevId}`);
+        dispatch({ type: actionTypes.GET_CFSINFO_REQUESTED });
+
         // await response of fetch call
-        const response = await fetch(`${constants.webAPIUrlCfsInfo}/${id}`);
+        await fakeDelay(1000);
+        const response = await fetch(`${constants.webAPIUrlCfsInfo}/${currentId}`);
 
         // only proceed once promise is resolved
         const data = await response.json();
-
         if (data.length === 0) { // only proceed once second promise is resolved
+          dispatch({ type: actionTypes.GET_CFSINFO_FAILURE });
           return dispatch({ type: NOT_FOUND });
         }
 

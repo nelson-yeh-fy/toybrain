@@ -18,7 +18,7 @@ export default (state = [], action) => {
   switch (action.type) {
     case actionTypes.GET_CFSINFO_REQUESTED:
       return {
-        ...state,
+
         isCFSUpdating: true,
       };
 

@@ -21,7 +21,7 @@ const CFSInfo = ({ currentCFSInfo, routingId, patchCFSInfoAsync }) => (
         funcToInvoke={patchCFSInfoAsync}
         itemIdToBeUpdate={routingId}
         fieldKeyTBUpdate="cfsDesc"
-        fieldValueTBUpdate={currentCFSInfo.cfsDesc}
+        fieldValueTBUpdate={`${currentCFSInfo.cfsDesc}`}
       />
       <Divider />
     </div>

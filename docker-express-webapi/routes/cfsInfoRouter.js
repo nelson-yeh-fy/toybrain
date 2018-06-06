@@ -9,7 +9,8 @@ Router.route('/')
         const cfslist = cfsInfo.map( item => {
             return { _id: item._id, cfsNumber: item.cfsNumber, cfsStatus: item.cfsStatus }
         })
-        res.json(cfslist)
+        // res.json(cfslist)
+        setTimeout((function() {res.json(cfslist)}), 2000);
       })
     })
 

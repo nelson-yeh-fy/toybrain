@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { compose, setDisplayName, lifecycle } from 'recompose';
 import { getCFSListAsync } from '../../reducers/cfsList';
 import Header from '../Header';
-import SpinnerWhileLoading from '../SpinnerWhileLoading';
 
 const enhancedHeader = compose(
   // setup this HOC's name
@@ -13,7 +12,7 @@ const enhancedHeader = compose(
     state => ({
       cfsList: state.cfsList,
       routingId: state.location.payload.id,
-      isDataNotReady: !Array.isArray(state.cfsList) || state.cfsList.length === 1,
+      isDataNotReady: !Array.isArray(state.cfsList) || state.cfsList.length <= 0,
     }),
     dispatch => ({
       getCFSListAsync: () => dispatch(getCFSListAsync()),
@@ -30,9 +29,6 @@ const enhancedHeader = compose(
       }
     },
   }),
-
-  // add an additional recompose's branched HoC component into this HoC component
-  SpinnerWhileLoading(props => !props.isDataNotReady),
 
   // assign pure functional component for recompose to composite a new HoC component
 )(Header);
