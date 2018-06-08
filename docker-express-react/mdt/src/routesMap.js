@@ -46,12 +46,12 @@ const routesMap = {
 
       if (currentId !== prevId) {
         // console.log(`id: ${currentId}, prevId:${prevId}`);
+
+        /* ****** same with reducer getCFSInfo_async ******* */
         dispatch({ type: actionTypes.GET_CFSINFO_REQUESTED });
-
-        // await response of fetch call
-        await fakeDelay(1000);
+        // additional await response of fetch call
+        // await fakeDelay(1000);
         const response = await fetch(`${constants.webAPIUrlCfsInfo}/${currentId}`);
-
         // only proceed once promise is resolved
         const data = await response.json();
         if (data.length === 0) { // only proceed once second promise is resolved
@@ -63,30 +63,11 @@ const routesMap = {
           type: actionTypes.GET_CFSINFO_SUCCESS,
           payload: data,
         });
+        /* ****************end of same with reducer getCFSInfo_async */
       }
     },
   },
 
-  CFSINFO2: {
-    path: '/cfsinfo/:id',
-    thunk: (dispatch, getState) => {
-      const {
-        location: { payload: { id } }, // const { id } = getState().location.payload;
-        cfsList,
-      } = getState();
-
-      if (cfsList === undefined || cfsList.length === 0) {
-        // const action = redirect({ type: 'CFSList' });
-        // return dispatch(action);
-        return dispatch({ type: 'CFSLIST' });
-      }
-
-      const currentCFSInfo = cfsList.find(item => item._id === id);
-      if (currentCFSInfo === undefined || currentCFSInfo.length === 0) {
-        return dispatch({ type: 'CFSLIST' });
-      }
-    },
-  },
   CFSRELATED: {
     path: '/cfsrelated/:id',
     thunk: (dispatch, getState) => {

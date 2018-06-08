@@ -22,13 +22,14 @@ const enhancedHeader = compose(
   ),
 
   // use recompose's lifecycle to configure additional lifecycle behaviors into this HoC component
-  lifecycle({
-    componentDidMount() {
-      if (this.props.isDataNotReady) {
-        this.props.getCFSListAsync();
-      }
-    },
-  }),
+  // this is component-paired data dependencies, I'm going to obselete this method.
+  // lifecycle({
+  //   componentDidMount() {
+  //     if (this.props.isDataNotReady) {
+  //       this.props.getCFSListAsync();
+  //     }
+  //   },
+  // }),
 
   // assign pure functional component for recompose to composite a new HoC component
 )(Header);

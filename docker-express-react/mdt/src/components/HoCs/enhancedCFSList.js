@@ -24,13 +24,14 @@ const enhancedCFSList = compose(
   withReducer('isVisible', 'toogleVisibility', isVisible => !isVisible, false),
 
   // use recompose's lifecycle to configure additional lifecycle behaviors into this HoC component
-  lifecycle({
-    componentDidMount() {
-      if (this.props.isDataNotReady) {
-        this.props.getCFSListAsync();
-      }
-    },
-  }),
+  // this is component-paired data dependencies, I'm going to obselete this method.
+  // lifecycle({
+  //   componentDidMount() {
+  //     if (this.props.isDataNotReady) {
+  //       this.props.getCFSListAsync();
+  //     }
+  //   },
+  // }),
 
   // add an additional recompose's branched HoC component into this HoC component
   SpinnerWhileLoading(props => !props.isDataNotReady),

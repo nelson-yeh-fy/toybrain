@@ -16,16 +16,9 @@ import * as constants from '../constants';
 // The followings are reducers
 export default (state = [], action) => {
   switch (action.type) {
-    case actionTypes.GET_CFSINFO_REQUESTED:
-      return {
-
-        isCFSUpdating: true,
-      };
-
     case actionTypes.GET_CFSINFO_SUCCESS:
       return {
         ...action.payload,
-        isCFSUpdating: false,
       };
 
     case actionTypes.POST_CFSINFO_REQUESTED:
