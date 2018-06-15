@@ -7,35 +7,64 @@ const fakeDelay = ms => new Promise(res => setTimeout(res, ms));
 const routesMap = {
   HOME: '/', // action <-> url path
   USER: '/user/:id', // :id is a dynamic segment
-  // CFSLIST: '/cfslist', // this.fetchData('http://localhost:3001/users');
-  CFSLIST: {
-    path: '/cfslist',
+  LIST: {
+    path: '/list/:category',
     thunk: async (dispatch, getState) => {
       const {
-        cfsList,
+        location: { payload: { category: cate } },
+        itemsByCategory,
       } = getState();
 
-      if (cfsList === undefined || cfsList.length === 0) {
-        dispatch({ type: actionTypes.GET_CFS_LIST_REQUESTED });
+      console.log("category" + cate);
 
+      if (itemsByCategory[cate]) return;
+
+      if (cate === 'cfsList') {
         // await response of fetch call
-        await fakeDelay(3000);
+        await fakeDelay(1000);
         const response = await fetch(`${constants.webAPIUrlCfsInfo}`);
 
         // only proceed once promise is resolved
         const data = await response.json();
         if (data.length === 0) { // only proceed once second promise is resolved
-          dispatch({ type: actionTypes.GET_CFS_LIST_FAILURE });
           return dispatch({ type: NOT_FOUND });
         }
-
         dispatch({
-          type: actionTypes.GET_CFS_LIST_SUCCESS,
-          payload: data,
+          type: 'CFSLIST_FETCHED',
+          payload: { category: cate, items: data },
         });
       }
     },
   },
+  // CFSLIST: '/cfslist', // this.fetchData('http://localhost:3001/users');
+  // CFSLIST: {
+  //   path: '/cfslist',
+  //   thunk: async (dispatch, getState) => {
+  //     const {
+  //       cfsList,
+  //     } = getState();
+
+  //     if (cfsList === undefined || cfsList.length === 0) {
+  //       dispatch({ type: actionTypes.GET_CFS_LIST_REQUESTED });
+
+  //       // await response of fetch call
+  //       await fakeDelay(3000);
+  //       const response = await fetch(`${constants.webAPIUrlCfsInfo}`);
+
+  //       // only proceed once promise is resolved
+  //       const data = await response.json();
+  //       if (data.length === 0) { // only proceed once second promise is resolved
+  //         dispatch({ type: actionTypes.GET_CFS_LIST_FAILURE });
+  //         return dispatch({ type: NOT_FOUND });
+  //       }
+
+  //       dispatch({
+  //         type: actionTypes.GET_CFS_LIST_SUCCESS,
+  //         payload: data,
+  //       });
+  //     }
+  //   },
+  // },
   CFSINFO: {
     path: '/cfsinfo/:id',
     thunk: async (dispatch, getState) => {

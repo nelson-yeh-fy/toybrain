@@ -2,9 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
-import App from './components/HoCs/App';
+import App from './components/App';
 import configureStore from './configureStore';
-import 'semantic-ui-css/semantic.min.css';
 
 const history = createHistory();
 const store = configureStore(history);
