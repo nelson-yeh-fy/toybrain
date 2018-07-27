@@ -1,6 +1,6 @@
 import React from 'react';
 import { compose, withReducer, withProps, branch, renderComponent } from 'recompose';
-import Scientist from '../Scientist';
+import Scientist from '../HoCs/Scientist';
 
 const NowLoading = () => (
   <div>now loading</div>

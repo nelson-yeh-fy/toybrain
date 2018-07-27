@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Container, Label, Header, Segment, Divider } from 'semantic-ui-react';
-import * as commonPropTypes from '../constants/propsTypes';
+import { CFSInfoPropType } from '../constants/propsTypes';
+import { getCFSInfoAsync, patchCFSInfoAsync } from '../actions/cfsActions';
 import '../assets/App.css';
 
-const CFSInfo = ({ currentCFSInfo, routingId, patchCFSInfoAsync }) => (
+const CFSInfo = ({ currentCFSInfo, getCFSInfoAsync }) => (
   <Container>
     <Header size="large">{currentCFSInfo.cfsNumber} :102 SUNSET BOULEVARD, WEST CAPE MAY, NJ 08204
       <Label size="medium" color="green" horizontal>Verified</Label>
@@ -18,23 +21,25 @@ const CFSInfo = ({ currentCFSInfo, routingId, patchCFSInfoAsync }) => (
         {currentCFSInfo.cfsDesc}
       </p>
       <Divider />
+      <button onClick={() => { getCFSInfoAsync('4dgr42fb01bab7ab4c5a1fd9'); }} >Click me</button>
     </div>
   </Container>
 );
 
 CFSInfo.propTypes = {
-  ...commonPropTypes.CFSPropType.isRequired,
-  ...commonPropTypes.RoutingIdPropType.isRequired,
-  // cfsStatus: PropTypes.number.isRequired,
-  // isCFSUpdating: PropTypes.bool.isRequired,
-  // getCFSInfoAsync: PropTypes.func.isRequired,
-  // postCFSInfoAsync: PropTypes.func.isRequired,
-  // putCFSInfoAsync: PropTypes.func.isRequired,
+  currentCFSInfo: CFSInfoPropType.isRequired,
+  getCFSInfoAsync: PropTypes.func.isRequired,
   patchCFSInfoAsync: PropTypes.func.isRequired,
 };
 
-export default CFSInfo;
 
+const mapStateToProps = state => ({
+  currentCFSInfo: state.itemsByCategory.CFS_INFO,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ patchCFSInfoAsync, getCFSInfoAsync }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CFSInfo);
 
 // import EditableListElement from './EditableListElement';
 // <EditableListElement

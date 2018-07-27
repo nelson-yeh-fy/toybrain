@@ -1,28 +1,30 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'redux-first-router-link';
-import * as commonPropTypes from '../constants/propsTypes';
+import { connect } from 'react-redux';
+import { CFSListPropType } from '../constants/propsTypes';
+import { CFS_INFO } from '../constants/actionTypes';
 
-const CFSList = ({ cfsList, toogleVisibility, isVisible }) => (
+const CFSList = ({ CfsList }) => (
   <div>
     <ul>
       {
-        cfsList.map(p => (
+        CfsList.map(p => (
           <li key={p._id}>
-            <Link to={{ type: 'CFSINFO', payload: { id: `${p._id}` } }}>{p.cfsNumber}</Link>
+            <Link to={{ type: 'ITEM', payload: { category: CFS_INFO, id: `${p._id}` } }}>{p.cfsNumber}</Link>
           </li>
         ))
       }
     </ul>
-    <button onClick={toogleVisibility}> Click me! </button>
-    {isVisible ? <p>Visible</p> : <p> Not Visible </p>}
   </div>
 );
 
 CFSList.propTypes = {
-  ...commonPropTypes.CFSListPropType.isRequired,
-  isVisible: PropTypes.bool.isRequired,
-  toogleVisibility: PropTypes.func.isRequired,
+  CfsList: CFSListPropType.isRequired,
 };
 
-export default CFSList;
+
+const mapStateToProps = state => ({
+  CfsList: state.itemsByCategory.CFS_LIST,
+});
+
+export default connect(mapStateToProps)(CFSList);

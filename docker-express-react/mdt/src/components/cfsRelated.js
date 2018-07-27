@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Container, Label, Header, Segment, Divider } from 'semantic-ui-react';
-
 import EditableListElement from './EditableListElement';
-import * as commonPropTypes from '../constants/propsTypes';
+import { CFSInfoPropType } from '../constants/propsTypes';
+import { patchCFSInfoAsync } from '../actions/cfsActions';
 import '../assets/App.css';
 
 const CFSRelated = ({ currentCFSInfo, routingId, patchCFSInfoAsync }) => (
@@ -38,9 +40,15 @@ const CFSRelated = ({ currentCFSInfo, routingId, patchCFSInfoAsync }) => (
 );
 
 CFSRelated.propTypes = {
-  ...commonPropTypes.CFSPropType.isRequired,
-  ...commonPropTypes.RoutingIdPropType.isRequired,
+  currentCFSInfo: CFSInfoPropType.isRequired,
   patchCFSInfoAsync: PropTypes.func.isRequired,
 };
 
-export default CFSRelated;
+
+const mapStateToProps = state => ({
+  currentCFSInfo: state.itemsByCategory.CFS_INFO,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({ patchCFSInfoAsync }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CFSRelated);

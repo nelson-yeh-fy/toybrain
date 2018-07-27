@@ -1,26 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Menu, Image, Dropdown, Input, Icon } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
-import * as commonPropTypes from '../constants/propsTypes';
+import { CFSListPropType } from '../constants/propsTypes';
+import {
+  CFS_LIST,
+  CFS_LIST_FETCHED,
+  CFS_INFO,
+  CFS_RELATED_FETCHED } from '../constants/actionTypes';
+import isLoading from '../selectors/isLoading';
+import { Menu, Image, Dropdown, Input, Icon } from 'semantic-ui-react';
 
-const MenuItemCFSList = ({ isDataNotReady, cfsList, onClickLink }) => {
+const MenuItemCFSList = ({ isLoading, cfsList, onClickLink }) => {
   const cfsOptions = [];
-  cfsList.map(p => cfsOptions.push({ key: p._id, text: `${p.cfsNumber} [${p.cfsStatus}]`, value: p._id }));
-  //   <Dropdown item simple text="2018-000354 (3 more)">
-  //   <Dropdown.Menu>
-  //     {
-  //       cfsList.map(p => (
-  //         <Dropdown.Item key={p._id} onClick={() => onClickLink('CFSINFO', { id: `${p._id}` })} >
-  //           {`${p.cfsNumber} [${p.cfsStatus}]`}
-  //         </Dropdown.Item>
-  //       ))
-  //     }
-  //     <Dropdown.Divider />
-  //     <Dropdown.Item>New CFS</Dropdown.Item>
-  //     <Dropdown.Item>New Car Stop</Dropdown.Item>
-  //   </Dropdown.Menu>
-  // </Dropdown>
+  // cfsList.map(p => cfsOptions.push({ key: p._id, text: `${p.cfsNumber} [${p.cfsStatus}]`, value: p._id }));
   return (
     <Menu.Item header key="0">
       <Image
@@ -31,99 +24,87 @@ const MenuItemCFSList = ({ isDataNotReady, cfsList, onClickLink }) => {
         style={{ marginRight: '0.5em' }}
       />
       <Dropdown
-        loading={isDataNotReady}
+        loading={isLoading}
         simple
         text={`${cfsOptions.length} CFS(s)`}
         options={cfsOptions}
-        onChange={(e, { /* name, */ value }) => onClickLink('CFSINFO', { id: `${value}` })}
+        onChange={(e, { /* name, */ value }) => onClickLink('ITEM', { category: CFS_INFO, id: `${value}` })}
       />
     </Menu.Item>
   );
 };
 
-const MenuItemCFSInfo = ({ routingId, onClickLink }) => (
-  <Menu.Item header key="1" onClick={() => onClickLink('CFSINFO', { id: routingId })}>
-    <Icon name="vcard" /> CFS Summary
-  </Menu.Item>
-);
-
-const MenuItemCFSRelated = ({ routingId, onClickLink }) => (
-  <Menu.Item header key="2" onClick={() => onClickLink('CFSRELATED', { id: routingId })}>
-    <Icon name="newspaper" /> Related Info.
-  </Menu.Item>
-);
-
-const MenuItemMap = () => (
-  <Menu.Item header key="3">
-    <Icon name="map" /> Map
-  </Menu.Item>
-);
-
-const MenuItemSupervisor = () => (
-  <Menu.Item header key="6" className="tooltip">
-    <Icon name="male" />
-    <span className="tooltiptext">Supervisor</span>
-  </Menu.Item>
-);
-
-const MenuItemSearch = () => (
-  <Menu.Item>
-    <Input size="medium" label={{ icon: 'search' }} labelPosition="left corner" placeholder="Enter CFS Number" />
-  </Menu.Item>
-);
+// <MenuItemCFSList cfsList={cfsList} onClickLink={onClickLink} />
+// <Menu.Item header key="1" >
+//   <Link to={{ type: 'CFSINFO_FETCHED', payload: { category: 'CFSINFO_FETCHED', id: `${currentCFSInfo._id}` } }}>
+//     <Icon name="vcard" /> CFS Summary
+//   </Link>
+// </Menu.Item>;
 
 const Header = ({
-  isDataNotReady, cfsList, routingId, onClick, onClickLink,
+  cfsList, isLoading, onClickLink,
 }) => (
   <div>
-    {console.log(`routingId:${routingId}`)}
     {
-      routingId !== undefined ?
+      cfsList !== undefined ?
       (
         <Menu inverted style={{ borderRadius: 0, height: 50 }}>
-          <MenuItemCFSList isDataNotReady={isDataNotReady} cfsList={cfsList} onClickLink={onClickLink} />
-          <MenuItemCFSInfo routingId={routingId} onClickLink={onClickLink} />
-          <MenuItemCFSRelated routingId={routingId} onClickLink={onClickLink} />
-          <MenuItemMap />
-          <MenuItemSupervisor />
-          <MenuItemSearch />
+          <MenuItemCFSList isLoading cfsList={cfsList} onClickLink={onClickLink} />
+          <Menu.Item header key="1" onClick={() => onClickLink(CFS_LIST_FETCHED)}>
+            <Icon name="vcard" /> CFS Summary
+          </Menu.Item>
+          <Menu.Item header key="2" onClick={() => onClickLink(CFS_RELATED_FETCHED)}>
+            <Icon name="newspaper" /> Related Info.
+          </Menu.Item>
+          <Menu.Item header key="3">
+            <Icon name="map" /> Map
+          </Menu.Item>
+          <Menu.Item header key="4">
+            <Input size="medium" label={{ icon: 'search' }} labelPosition="left corner" placeholder="Enter CFS Number" />
+          </Menu.Item>
+          <Menu.Item header key="5" className="tooltip">
+            <Icon name="male" />
+            <span className="tooltiptext">Supervisor</span>
+          </Menu.Item>
         </Menu>
       ) : (
         <Menu inverted style={{ borderRadius: 0, height: 50 }}>
-          <MenuItemCFSList cfsList={cfsList} onClickLink={onClickLink} />
-          <MenuItemMap />
-          <MenuItemSupervisor />
-          <MenuItemSearch />
+          <Menu.Item header key="6" className="tooltip">
+            <Icon name="male" />
+            <span className="tooltiptext">Supervisor</span>
+          </Menu.Item>
         </Menu>
       )
     }
 
     <div>
-      <Link to="/user/123">User1 </Link>  { /* action updates location state + changes address bar */}
-      <Link to={{ type: 'USER', payload: { id: 456 } }}>User4 </Link> { /* so does this */}
-      <span onClick={() => onClick()}>User5 </span>  { /* so does this, but without SEO benefits */}
-      <Link to={{ type: 'CFSLIST' }}>CFSList </Link>
-      <Link to={{ type: 'LIST', payload: { category: 'cfsList' } }}>CFSNewList </Link>
-
-      <Link to={{ type: 'CFSINFO', payload: { id: '4dgr42fb01bab7ab4c5a1fd9' } }}>CFS1Info </Link>
-      <Link to={{ type: 'CFSINFO', payload: { id: '5ae09d2fb01bab7ab4c51dd9' } }}>CFS2Info </Link>
-      <Link to={{ type: 'CFSRELATED', payload: { id: '4dgr42fb01bab7ab4c5a1fd9' } }}>CFS1Related </Link>
-      <Link to={{ type: 'CFSRELATED', payload: { id: '5ae09d2fb01bab7ab4c51dd9' } }}>CFS2Related </Link>
+      <Link to={{ type: 'HOME' }}>Home </Link>
       <Link to={{ type: 'COUNTER' }}>Counter </Link>
+      <Link to={{ type: 'ITEM', payload: { category: CFS_LIST } }}>CFSList </Link> { /* action updates location state + changes address bar */}
+      <Link to={{ type: 'ITEM', payload: { category: CFS_INFO, id: '5ae09d2fb01bab7ab4c51dd9' } }}>CFS2Info </Link>
+      <Link to={{ type: 'ITEM', payload: { category: CFS_INFO, id: '4dgr42fb01bab7ab4c5a1fd9' } }}>CFS1Info </Link>
     </div>
   </div>
 );
 
 Header.propTypes = {
-  ...commonPropTypes.CFSPropType,
-  ...commonPropTypes.RoutingIdPropType,
-  isDataNotReady: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  cfsList: CFSListPropType,
+  isLoading: PropTypes.bool.isRequired,
   onClickLink: PropTypes.func.isRequired,
 };
 
 Header.defaultProps = {
-  routingId: undefined,
+  cfsList: undefined,
 };
 
-export default Header;
+
+const mapStateToProps = state => ({
+  cfsList: state.itemsByCategory.CFS_LIST,
+  isLoading: isLoading(state.loading),
+});
+
+const mapDispatchToProps = dispatch => ({
+  onClickLink: (routingType, routingPayload = {}) => dispatch({ type: routingType, payload: routingPayload }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

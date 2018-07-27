@@ -1,3 +1,11 @@
+// itemsByCategory
+export const CFS_LIST = 'CFS_LIST';
+export const CFS_LIST_FETCHED = 'CFS_LIST_FETCHED';
+export const CFS_INFO = 'CFS_INFO';
+export const CFS_INFO_FETCHED = 'CFS_INFO_FETCHED';
+export const CFS_RELATED = 'CFS_RELATED';
+export const CFS_RELATED_FETCHED = 'FETCH_CFS_RELATED_SUCCEEDED';
+
 // counter
 export const INCREMENT_REQUESTED = 'counter/INCREMENT_REQUESTED';
 export const INCREMENT_SUCCESS = 'counter/INCREMENT_SUCCESS';
@@ -15,11 +23,6 @@ export const SHOW_CFSLOG_ALL = 'cfslog/SHOW_CFSLOG_ALL';
 export const SHOW_CFSLOG_SYSTEMTEXT = 'cfslog/SHOW_CFSLOG_SYSTEMTEXT';
 export const SHOW_CFSLOG_USERTEXT = 'cfslog/SHOW_CFSLOG_USERTEXT';
 export const SHOW_CFSLOG_TONE = 'cfslog/SHOW_CFSLOG_TONE';
-
-// cfsList
-export const GET_CFS_LIST_REQUESTED = 'cfsInfo/GET_CFS_LIST_REQUESTED';
-export const GET_CFS_LIST_SUCCESS = 'cfsInfo/GET_CFS_LIST_SUCCESS';
-export const GET_CFS_LIST_FAILURE = 'cfsInfo/GET_CFS_LIST_FAILURE';
 
 // cfsInfo
 export const GET_CFSINFO_REQUESTED = 'cfsInfo/GET_CFSINFO_REQUESTED';
