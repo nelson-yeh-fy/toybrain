@@ -5,6 +5,18 @@ const Router = express.Router();
 // Get partial fields of CFSInfoModel, make it effiency for getting list only.
 Router.route('/')
     .get((req, res) => {
+    CFSInfoModel.find({}, (err, cfsInfo) => {
+          res.json(cfsInfo)
+      })
+    })
+    .post((req, res) => {
+        let cfsInfo = new CFSInfoModel(req.body);
+        cfsInfo.save();
+        res.status(201).send(cfsInfo)
+    })
+
+Router.route('/briefList')
+    .get((req, res) => {
       CFSInfoModel.find({}, (err, cfsInfo) => {
         const cfslist = cfsInfo.map( item => {
             return { _id: item._id, cfsNumber: item.cfsNumber, cfsStatus: item.cfsStatus }
@@ -13,19 +25,6 @@ Router.route('/')
         setTimeout((function() {res.json(cfslist)}), 2000);
       })
     })
-
-Router.route('/fulldetail')
-    .get((req, res) => {
-      CFSInfoModel.find({}, (err, cfsInfo) => {
-            res.json(cfsInfo)
-        })
-    })
-    .post((req, res) => {
-        let cfsInfo = new CFSInfoModel(req.body);
-        cfsInfo.save();
-        res.status(201).send(cfsInfo)
-    })
-
 
 // Middleware
 Router.use('/:itemId', (req, res, next)=>{
@@ -49,6 +48,7 @@ Router.route('/:itemId')
         req.cfsInfo.cfsDesc = req.body.cfsDesc;
         req.cfsInfo.addby = req.body.addby;
         req.cfsInfo.addon = req.body.addon;
+        // req.cfsInfo.cfsLogs = req.body.cfsLogs;
         req.cfsInfo.save()
         res.json(req.book)
     })

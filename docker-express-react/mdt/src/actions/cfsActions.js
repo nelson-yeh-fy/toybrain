@@ -26,11 +26,11 @@ import * as constants from '../constants';
 // }
 
 export function getCFSInfoAsync(val) {
-  console.log("val:" + val);
+  console.log(val);
   return {
     [RSAA]: {
       // endpoint: constants.webAPIUrlCfsInfo.concat('/', val),
-      endpoint: `http://127.0.0.1:5656/api/cfsInfo/${val}`,
+      endpoint: `http://127.0.0.1:3001/api/cfsInfo/${val}`,
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -112,3 +112,102 @@ export function patchCFSInfoAsync(val) {
     },
   };
 }
+
+
+/*
+ * CFS Log
+ */
+export function appendCFSLogAsync(val) {
+  console.log(val);
+  return {
+    [RSAA]: {
+      // endpoint: `http://127.0.0.1:3001/api/cfsLog/`,
+      endpoint: constants.webAPIUrlCfsLog,
+      method: 'POST',
+      // body: JSON.stringify(normalize(val, constants.cfsLogSchema)),
+      body: JSON.stringify(val),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      types: [
+        actionTypes.POST_CFSLOG_REQUESTED,
+        {
+          type: actionTypes.POST_CFSLOG_SUCCESS,
+          payload: val,
+        },
+        actionTypes.POST_CFSLOG_FAILURE,
+      ],
+    },
+  };
+}
+
+export function refreshCFSLogAsync(val) {
+  return {
+    [RSAA]: {
+      // endpoint: `http://127.0.0.1:3001/api/cfsLogByCfs/${val}`,
+      endpoint: constants.webAPIUrlCfsLogByCfs.concat('/', val),
+      method: 'GET',
+      types: [
+        actionTypes.REFRESH_CFSLOG_REQUESTED,
+        {
+          type: actionTypes.REFRESH_CFSLOG_SUCCESS,
+          payload: (action, state, res) =>
+            getJSON(res).then((json) => {
+              // const sampleItem = [{
+              //   _id: '5a9f2074651a131bdc9015d7',
+              //   entities: {
+              //     cfsLog: {
+              //       1520377971854: {
+              //         id: 1520377971854,
+              //         type: 2,
+              //         text: 'fsef',
+              //         addby: 'UserName',
+              //         addon: '3/6/2018, 6:12:51 PM',
+              //       },
+              //     },
+              //   },
+              //   result: 1520377971854,
+              // }];
+
+              // import { schema } from 'normalizr';
+              // export const cfsInfoSchema = new schema.Entity('cfsInfo');
+              // export const cfsLogSchema = new schema.Entity('cfsLog');
+              // const denormalizedJsonArray = [];
+              // json.map(item =>
+              //   denormalizedJsonArray.push(denormalize(item.entities.cfsLog[Object.keys(item.entities.cfsLog)], constants.cfsLogSchema, item)));
+              // // console.log(denormalizedJsonArray);
+              // return denormalizedJsonArray;
+              const JsonArray = [];
+              json.map(item => JsonArray.push(item));
+              return JsonArray;
+            }),
+        },
+        actionTypes.REFRESH_CFSLOG_FAILURE,
+      ],
+    },
+  };
+}
+
+/*
+ * User Preference
+ */
+export const toggleShowSystemLogs = () =>
+  (dispatch) => {
+    dispatch({
+      type: actionTypes.TOGGLE_SHOW_SYSTEM_LOG,
+    });
+  };
+
+export const toggleShowUserLogs = () =>
+  (dispatch) => {
+    dispatch({
+      type: actionTypes.TOGGLE_SHOW_USER_LOG,
+    });
+  };
+
+export const toggleShowToneLogs = () =>
+  (dispatch) => {
+    dispatch({
+      type: actionTypes.TOGGLE_SHOW_TONE_LOG,
+    });
+  };

@@ -6,7 +6,7 @@ import { Grid } from 'semantic-ui-react';
 import { NOT_FOUND } from 'redux-first-router';
 import CFSList from './CFSList';
 import CFSInfo from './CFSInfo';
-import CFSLog from './HoCs/enhancedCFSLog';
+import CFSLog from './CFSLog';
 import CFSRelated from './CFSRelated';
 import CFSStatus from './CFSStatus';
 import Counter from './Counter';

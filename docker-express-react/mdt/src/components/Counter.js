@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+/* import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; */
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -32,6 +32,7 @@ const Counter = (props) => {
         </button>
       </p>
 
+      { /*
       <div>
         <ReactCSSTransitionGroup
           transitionName="example"
@@ -52,7 +53,8 @@ const Counter = (props) => {
         </ReactCSSTransitionGroup>
       </div>
 
-      { /* <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p> */ }
+      <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p>
+      */ }
     </div>
   );
 };

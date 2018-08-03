@@ -6,9 +6,10 @@ import bodyParser from 'body-parser';
 import bookRouter from './routes/bookRouter';
 import cfsInfoRouter from './routes/cfsInfoRouter';
 import cfsLogRouter from './routes/cfsLogRouter';
+import cfsLogRouterByCfs from './routes/cfsLogRouterByCfs';
 
 const app = express();
-const port = process.env.PORT || 5656;
+const port = process.env.PORT || 3001;
 // Connecting to the database
 const db = mongoose.connect(process.env.DB_ADDRESS);
 
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/Books', bookRouter);
 app.use('/api/cfsInfo', cfsInfoRouter);
 app.use('/api/cfsLog', cfsLogRouter);
+app.use('/api/cfsLogByCfs', cfsLogRouterByCfs);
 
 // Running the server
 app.listen(port, () => {

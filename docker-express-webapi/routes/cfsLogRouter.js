@@ -28,12 +28,13 @@ Router.use('/:itemId', (req, res, next)=>{
 Router.route('/:itemId')
     .get((req, res) => {
         res.json(req.cfsLog)
-    }) // end get Books/:itemId
+    })
     .put((req,res) => {
         req.cfsLog.type = req.body.type;
         req.cfsLog.text = req.body.text;
         req.cfsLog.addby = req.body.addby;
         req.cfsLog.addon = req.body.addon;
+        req.cfsLog.cfsId = req.body.cfsId;
         req.cfsLog.save()
         res.json(req.book)
     })

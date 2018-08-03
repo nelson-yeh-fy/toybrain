@@ -2,34 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import { Container, Segment, Button, Divider, Comment, Input, Form } from 'semantic-ui-react';
 import CFSLogItem from './CFSLogItem';
 import { CFSLogPropType } from '../constants/propsTypes';
-import {
-  refreshCFSLogAsync,
-  appendCFSLogAsync,
-} from '../reducers/cfsLog';
-import {
-  showCFSLogSystemText,
-  showCFSLogUserText,
-  showCFSLogTone,
-} from '../reducers/cfsLogStatus';
+import { appendCFSLogAsync, refreshCFSLogAsync, toggleShowSystemLogs, toggleShowUserLogs, toggleShowToneLogs } from '../actions/cfsActions';
 import '../assets/App.css';
 
 let inputVal = '';
 
 const CFSLog = ({
+  currentCfsId,
   cfsLogArticles,
   isRefreshing,
   isAdding,
-  isSysTextChkBoxChecked,
-  isUsrTextChkBoxChecked,
-  isToneChkBoxChecked,
+  isSystemLogsDisplayed,
+  isUserLogsDisplayed,
+  isToneLogsDisplayed,
   refreshCFSLogAsync,
   appendCFSLogAsync,
-  showCFSLogSystemText,
-  showCFSLogUserText,
-  showCFSLogTone,
+  toggleShowSystemLogs,
+  toggleShowUserLogs,
+  toggleShowToneLogs,
 }) => (
   <Container>
     <Segment color="blue" >
@@ -39,8 +33,8 @@ const CFSLog = ({
             type="checkbox"
             id="myCheckBox_SystemText"
             value="System Text"
-            checked={isSysTextChkBoxChecked}
-            onChange={() => { showCFSLogSystemText(!isSysTextChkBoxChecked); }}
+            checked={isSystemLogsDisplayed}
+            onChange={() => { toggleShowSystemLogs(); }}
           />
           System Text
         </label>
@@ -49,8 +43,8 @@ const CFSLog = ({
             type="checkbox"
             id="myCheckBox_UserText"
             value="User Text"
-            checked={isUsrTextChkBoxChecked}
-            onChange={() => { showCFSLogUserText(!isUsrTextChkBoxChecked); }}
+            checked={isUserLogsDisplayed}
+            onChange={() => { toggleShowUserLogs(); }}
           />
           User Text
         </label>
@@ -59,13 +53,13 @@ const CFSLog = ({
             type="checkbox"
             id="myCheckBox_Tone"
             value="Tone"
-            checked={isToneChkBoxChecked}
-            onChange={() => { showCFSLogTone(!isToneChkBoxChecked); }}
+            checked={isToneLogsDisplayed}
+            onChange={() => { toggleShowToneLogs(); }}
           />
           Tone
         </label>
         <Button
-          onClick={refreshCFSLogAsync}
+          onClick={() => { refreshCFSLogAsync(currentCfsId); }}
           disabled={isRefreshing}
           size="mini"
           floated="right"
@@ -83,10 +77,10 @@ const CFSLog = ({
     <Form onSubmit={() => {
   if (inputVal !== '') {
     appendCFSLogAsync({
-      id: Date.now(),
+      cfsId: currentCfsId,
       type: 2,
       text: inputVal,
-      addby: 'UserName',
+      addby: 'TestUser',
     });
   }
 }}
@@ -113,57 +107,57 @@ CFSLog.propTypes = {
   cfsLogArticles: CFSLogPropType.isRequired,
   isRefreshing: PropTypes.bool.isRequired,
   isAdding: PropTypes.bool.isRequired,
-  isSysTextChkBoxChecked: PropTypes.bool.isRequired,
-  isUsrTextChkBoxChecked: PropTypes.bool.isRequired,
-  isToneChkBoxChecked: PropTypes.bool.isRequired,
+  isSystemLogsDisplayed: PropTypes.bool.isRequired,
+  isUserLogsDisplayed: PropTypes.bool.isRequired,
+  isToneLogsDisplayed: PropTypes.bool.isRequired,
   refreshCFSLogAsync: PropTypes.func.isRequired,
   appendCFSLogAsync: PropTypes.func.isRequired,
-  showCFSLogSystemText: PropTypes.func.isRequired,
-  showCFSLogUserText: PropTypes.func.isRequired,
-  showCFSLogTone: PropTypes.func.isRequired,
+  toggleShowSystemLogs: PropTypes.func.isRequired,
+  toggleShowUserLogs: PropTypes.func.isRequired,
+  toggleShowToneLogs: PropTypes.func.isRequired,
 };
 
 
-const getVisibleCfsLogArticles = (cfsLogArticles, listFilterMask) => {
-  switch (listFilterMask) {
-    case 0: // show nothing
-      return cfsLogArticles.filter(t => t.type === 0);
-    case 1: // show system text only
-      return cfsLogArticles.filter(t => t.type === 1);
-    case 2: // 'show user text only':
-      return cfsLogArticles.filter(t => t.type === 2);
-    case 3: // 'show system text + user text
-      return cfsLogArticles.filter(t => t.type <= 3);
-    case 4: // 'show tone only
-      return cfsLogArticles.filter(t => t.type === 4);
-    case 5: // 'show tone only
-      return cfsLogArticles.filter(t => t.type === 1 || t.type === 4);
-    case 6: // 'show tone only
-      return cfsLogArticles.filter(t => t.type === 2 || t.type === 4);
-    case 7: // 'SHOW_ALL':
-      return cfsLogArticles.filter(t => t.type <= 7);
-    default:
-      return cfsLogArticles;
-  }
-};
+const getVisibleCfsLogArticles = createSelector(
+  state => state.itemsByCategory.CFS_LOG,
+  state => state.userPreference.isSystemLogsDisplayed,
+  state => state.userPreference.isUserLogsDisplayed,
+  state => state.userPreference.isToneLogsDisplayed,
+  (CFS_LOG, isSystemLogsDisplayed, isUserLogsDisplayed, isToneLogsDisplayed) => {
+    if (isSystemLogsDisplayed === true && isUserLogsDisplayed === true && isToneLogsDisplayed === true) {
+      return CFS_LOG;
+    }
+
+    let visibleLogs = [];
+    if (isSystemLogsDisplayed === true)
+      visibleLogs = visibleLogs.concat(CFS_LOG.filter(t => t.type === 1));
+
+    if (isUserLogsDisplayed === true)
+      visibleLogs = visibleLogs.concat(CFS_LOG.filter(t => t.type === 2));
+
+    if (isToneLogsDisplayed === true)
+      visibleLogs = visibleLogs.concat(CFS_LOG.filter(t => t.type === 4));
+
+    return visibleLogs;
+  },
+);
 
 const mapStateToProps = state => ({
-  currentCFSInfo: state.itemsByCategory.CFS_INFO,
-  routingId: state.location.payload.id,
-  cfsLogArticles: getVisibleCfsLogArticles(state.cfsLog.logArticles, state.cfsLogStatus.listFilterMask),
-  isRefreshing: state.cfsLogStatus.isRefreshing,
-  isAdding: state.cfsLogStatus.isAdding,
-  isSysTextChkBoxChecked: state.cfsLogStatus.chkChecked_SysText,
-  isUsrTextChkBoxChecked: state.cfsLogStatus.chkChecked_UsrText,
-  isToneChkBoxChecked: state.cfsLogStatus.chkChecked_Tone,
+  currentCfsId: state.itemsByCategory.CFS_INFO._id,
+  cfsLogArticles: getVisibleCfsLogArticles(state),
+  // isRefreshing: false,
+  // isAdding: false,
+  isSystemLogsDisplayed: state.userPreference.isSystemLogsDisplayed,
+  isUserLogsDisplayed: state.userPreference.isUserLogsDisplayed,
+  isToneLogsDisplayed: state.userPreference.isToneLogsDisplayed,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   refreshCFSLogAsync,
   appendCFSLogAsync,
-  showCFSLogSystemText,
-  showCFSLogUserText,
-  showCFSLogTone,
+  toggleShowSystemLogs,
+  toggleShowUserLogs,
+  toggleShowToneLogs,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CFSLog);

@@ -45,6 +45,13 @@ const Header = ({
   cfsList, isLoading, onClickLink,
 }) => (
   <div>
+    <div>
+      <Link to={{ type: 'HOME' }}>Home </Link>
+      <Link to={{ type: 'COUNTER' }}>Counter </Link>
+      <Link to={{ type: 'ITEM', payload: { category: CFS_LIST } }}>CFSList </Link> { /* action updates location state + changes address bar */}
+      <Link to={{ type: 'ITEM', payload: { category: CFS_INFO, id: '4dgr42fb01bab7ab4c5a1fd9' } }}>Cfs1 </Link>
+      <Link to={{ type: 'ITEM', payload: { category: CFS_INFO, id: '5ae09d2fb01bab7ab4c51dd9' } }}>Cfs2 </Link>
+    </div>
     {
       cfsList !== undefined ?
       (
@@ -76,14 +83,6 @@ const Header = ({
         </Menu>
       )
     }
-
-    <div>
-      <Link to={{ type: 'HOME' }}>Home </Link>
-      <Link to={{ type: 'COUNTER' }}>Counter </Link>
-      <Link to={{ type: 'ITEM', payload: { category: CFS_LIST } }}>CFSList </Link> { /* action updates location state + changes address bar */}
-      <Link to={{ type: 'ITEM', payload: { category: CFS_INFO, id: '5ae09d2fb01bab7ab4c51dd9' } }}>CFS2Info </Link>
-      <Link to={{ type: 'ITEM', payload: { category: CFS_INFO, id: '4dgr42fb01bab7ab4c5a1fd9' } }}>CFS1Info </Link>
-    </div>
   </div>
 );
 
