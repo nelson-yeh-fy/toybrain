@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
 import { CFSListPropType } from '../constants/propsTypes';
 import * as itemTypes from '../constants/itemTypes';
-import * as actionTypes from '../constants/actionTypes';
 import isLoading from '../selectors/isLoading';
 import { Menu, Image, Dropdown, Input, Icon } from 'semantic-ui-react';
 
@@ -31,15 +30,8 @@ const MenuItemCFSList = ({ isLoading, cfsList, onClickLink }) => {
   );
 };
 
-// <MenuItemCFSList cfsList={cfsList} onClickLink={onClickLink} />
-// <Menu.Item header key="1" >
-//   <Link to={{ type: 'CFSINFO_FETCHED', payload: { category: 'CFSINFO_FETCHED', id: `${currentCFSInfo._id}` } }}>
-//     <Icon name="vcard" /> CFS Summary
-//   </Link>
-// </Menu.Item>;
-
 const Header = ({
-  cfsList, isLoading, onClickLink,
+  cfsList, cfsInfo, isLoading, onClickLink,
 }) => (
   <div>
     <div>
@@ -49,37 +41,31 @@ const Header = ({
       <Link to={{ type: 'ITEM', payload: { category: itemTypes.CFS_INFO, id: '4dgr42fb01bab7ab4c5a1fd9' } }}>Cfs1 </Link>
       <Link to={{ type: 'ITEM', payload: { category: itemTypes.CFS_INFO, id: '5ae09d2fb01bab7ab4c51dd9' } }}>Cfs2 </Link>
     </div>
-    {
-      cfsList !== undefined ?
-      (
-        <Menu inverted style={{ borderRadius: 0, height: 50 }}>
-          <MenuItemCFSList isLoading cfsList={cfsList} onClickLink={onClickLink} />
-          <Menu.Item header key="1" onClick={() => onClickLink(actionTypes.CFSLIST_GET_SUCCEED)}>
-            <Icon name="vcard" /> CFS Summary
-          </Menu.Item>
-          <Menu.Item header key="2" onClick={() => onClickLink(actionTypes.CFSRELATED_GET_SUCCEED)}>
-            <Icon name="newspaper" /> Related Info.
-          </Menu.Item>
-          <Menu.Item header key="3">
-            <Icon name="map" /> Map
-          </Menu.Item>
-          <Menu.Item header key="4">
-            <Input size="medium" label={{ icon: 'search' }} labelPosition="left corner" placeholder="Enter CFS Number" />
-          </Menu.Item>
-          <Menu.Item header key="5" className="tooltip">
-            <Icon name="male" />
-            <span className="tooltiptext">Supervisor</span>
-          </Menu.Item>
-        </Menu>
-      ) : (
-        <Menu inverted style={{ borderRadius: 0, height: 50 }}>
-          <Menu.Item header key="6" className="tooltip">
-            <Icon name="male" />
-            <span className="tooltiptext">Supervisor</span>
-          </Menu.Item>
-        </Menu>
-      )
-    }
+    <Menu inverted style={{ borderRadius: 0, height: 50 }}>
+      <MenuItemCFSList isLoading cfsList={cfsList} onClickLink={onClickLink} />
+      {
+          cfsInfo !== undefined ? (
+            <Menu.Item header key="1" onClick={() => onClickLink('ITEM', itemTypes.CFS_INFO, cfsInfo._id)}>
+              <Icon name="vcard" /> CFS Summary
+            </Menu.Item>) : null
+        }
+      {
+          cfsInfo !== undefined ? (
+            <Menu.Item header key="2" onClick={() => onClickLink('ITEM', itemTypes.CFS_RELATED, cfsInfo._id)}>
+              <Icon name="newspaper" /> Related Info.
+            </Menu.Item>) : null
+        }
+      <Menu.Item header key="3">
+        <Icon name="map" /> Map
+      </Menu.Item>
+      <Menu.Item header key="4">
+        <Input size="medium" label={{ icon: 'search' }} labelPosition="left corner" placeholder="Enter CFS Number" />
+      </Menu.Item>
+      <Menu.Item header key="5" className="tooltip">
+        <Icon name="male" />
+        <span className="tooltiptext">Supervisor</span>
+      </Menu.Item>
+    </Menu>
   </div>
 );
 
@@ -96,11 +82,12 @@ Header.defaultProps = {
 
 const mapStateToProps = state => ({
   cfsList: state.itemsByCategory.CFS_LIST,
+  cfsInfo: state.itemsByCategory.CFS_INFO,
   isLoading: isLoading(state.loading),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClickLink: (routingType, routingPayload = {}) => dispatch({ type: routingType, payload: routingPayload }),
+  onClickLink: (routingType, category, id) => dispatch({ type: routingType, payload: { category, id } }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

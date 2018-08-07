@@ -7,9 +7,8 @@ export default (state = {}, action = {}) => {
     case actionTypes.CFSINFO_GET_SUCCEED:
     case actionTypes.CFSLOG_GET_SUCCEED:
     case actionTypes.CFSRELATED_GET_SUCCEED: {
+      console.log(action.payload);
       const { category, items } = action.payload;
-      console.log(category);
-      console.log(items);
       return {
         ...state,
         [category]: items,

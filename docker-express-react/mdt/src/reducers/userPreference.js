@@ -3,6 +3,7 @@ import * as actionTypes from '../constants/actionTypes';
 const defaultState = {
   // isRefreshing: false,
   // isAdding: false,
+  displayingCfsId: undefined,
   isSystemLogsDisplayed: true,
   isUserLogsDisplayed: false,
   isToneLogsDisplayed: true,

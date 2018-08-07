@@ -7,34 +7,9 @@ import * as constants from '../constants';
 /*
  * CFS_LIST
  */
-// export function getCFSListAsync() {
-//   return {
-//     [RSAA]: {
-//       // endpoint: constants.webAPIUrlCfsInfo.concat('/', val),
-//       endpoint: constants.webAPIUrlCfsInfoBriefList,
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       types: [
-//         actionTypes.CFSLIST_GET_REQUESTED,
-//         {
-//           type: actionTypes.CFSLIST_GET_SUCCEED,
-//           payload: (action, state, res) => {
-//             console.log("json: "+ res);
-//             getJSON(res).then(json => json)
-//           },
-//         },
-//         actionTypes.CFSLIST_GET_FAILED,
-//       ],
-//     },
-//   };
-// }
-
 export function getCFSListAsync() {
   return {
     [RSAA]: {
-      // endpoint: constants.webAPIUrlCfsInfo.concat('/', val),
       endpoint: constants.webAPIUrlCfsInfoBriefList,
       method: 'GET',
       headers: {
@@ -44,41 +19,10 @@ export function getCFSListAsync() {
         actionTypes.CFSLIST_GET_REQUESTED,
         {
           type: actionTypes.CFSLIST_GET_SUCCEED,
-          // payload: (action, state, res) => ({
-          //   category: actionTypes.CFS_LIST,
-          //   items: getJSON(res),
-          // }),
-          // payload: (action, state, res) => {
-          //   const contentType = res.headers.get('Content-Type');
-          //   if (contentType && ~contentType.indexOf('json')) {
-          //     // Just making sure res.json() does not raise an error
-          //     return {
-          //       category: actionTypes.CFS_LIST,
-          //       items: res.json().then(json => json),
-          //     };
-          //   }
-          // },
-          // payload: (action, state, res) => ({ category: itemTypes.CFS_LIST, items: getJSON(res).then(json => json) }),
-
-          // payload: { category: 'CFS_LIST', items: ['abc', 'ad'] },
-
-          // {
-          //   getJSON(res).then(json => { category: actionTypes.CFS_LIST, item: json });
-          //   // const contentType = res.headers.get('Content-Type');
-          //   // if (contentType && ~contentType.indexOf('json')) {
-          //   //   return res.json().then(json => ({ category: actionTypes.CFS_LIST, item: json })),
-          //   // }
-          // },
           payload: (action, state, res) =>
-            getJSON(res).then((json) => {
-              console.log("try parsing");
-              const JsonArray = [];
-              json.map(item => JsonArray.push(item));
-              // return JsonArray;
-              return { category: itemTypes.CFS_LIST, items: JsonArray };
-            }),
+            getJSON(res).then(json => ({ category: itemTypes.CFS_LIST, items: json })),
         },
-        NOT_FOUND,
+        actionTypes.CFSLIST_GET_FAILED,
       ],
     },
   };
@@ -88,7 +32,6 @@ export function getCFSListAsync() {
  * CFS_INFO
  */
 export function getCFSInfoAsync(val) {
-  console.log(val);
   return {
     [RSAA]: {
       endpoint: constants.webAPIUrlCfsInfo.concat('/', val),
@@ -101,10 +44,8 @@ export function getCFSInfoAsync(val) {
         actionTypes.CFSINFO_GET_REQUESTED,
         {
           type: actionTypes.CFSINFO_GET_SUCCEED,
-          payload: (action, state, res) => {
-            console.log("json: "+ res);
-            getJSON(res).then(json => json)
-          },
+          payload: (action, state, res) =>
+            getJSON(res).then(json => ({ category: itemTypes.CFS_INFO, items: json })),
         },
         actionTypes.CFSINFO_GET_FAILED,
       ],
@@ -246,6 +187,30 @@ export function refreshCFSLogAsync(val) {
             }),
         },
         actionTypes.CFSLOG_GET_FAILED,
+      ],
+    },
+  };
+}
+
+/*
+ * CFS_RELATED
+ */
+export function getCFSRelatedAsync(val) {
+  return {
+    [RSAA]: {
+      endpoint: constants.webAPIUrlCfsInfo.concat('/', val),
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      types: [
+        actionTypes.CFSRELATED_GET_REQUESTED,
+        {
+          type: actionTypes.CFSRELATED_GET_SUCCEED,
+          payload: (action, state, res) =>
+            getJSON(res).then(json => ({ category: itemTypes.CFS_RELATED, items: json })),
+        },
+        actionTypes.CFSRELATEDT_GET_FAILED,
       ],
     },
   };
