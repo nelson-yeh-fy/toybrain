@@ -1,20 +1,15 @@
-import {
-  CFS_LIST,
-  CFS_LIST_FETCHED,
-  CFS_INFO,
-  CFS_INFO_FETCHED,
-  CFS_RELATED,
-  CFS_RELATED_FETCHED } from '../constants/actionTypes';
+import * as itemTypes from '../constants/itemTypes';
+import * as actionTypes from '../constants/actionTypes';
 
 export default (state = false, action = {}) => {
   switch (action.type) {
-    case CFS_LIST:
-    case CFS_INFO:
-    case CFS_RELATED:
+    case itemTypes.CFS_LIST:
+    case itemTypes.CFS_INFO:
+    case itemTypes.CFS_RELATED:
       return true;
-    case CFS_LIST_FETCHED:
-    case CFS_INFO_FETCHED:
-    case CFS_RELATED_FETCHED:
+    case actionTypes.CFSLIST_GET_SUCCEED:
+    case actionTypes.CFSINFO_GET_SUCCEED:
+    case actionTypes.CFSRELATED_GET_SUCCEED:
       return false;
     default:
       return state;

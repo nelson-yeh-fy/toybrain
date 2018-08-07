@@ -1,50 +1,112 @@
 import { RSAA, getJSON } from 'redux-api-middleware'; // RSAA = '@@redux-api-middleware/RSAA'
+import { NOT_FOUND } from 'redux-first-router';
+import * as itemTypes from '../constants/itemTypes';
 import * as actionTypes from '../constants/actionTypes';
 import * as constants from '../constants';
 
-// The followings are actionCreators, to be separated from reducer file
-// export function getCFSInfoAsync() {
+/*
+ * CFS_LIST
+ */
+// export function getCFSListAsync() {
 //   return {
 //     [RSAA]: {
-//       endpoint: constants.webAPIUrlCfsInfo,
+//       // endpoint: constants.webAPIUrlCfsInfo.concat('/', val),
+//       endpoint: constants.webAPIUrlCfsInfoBriefList,
 //       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
 //       types: [
-//         actionTypes.GET_CFSINFO_REQUESTED,
+//         actionTypes.CFSLIST_GET_REQUESTED,
 //         {
-//           type: actionTypes.GET_CFSINFO_SUCCESS,
-//           payload: (action, state, res) =>
-//             getJSON(res).then((json) => {
-//               const JsonArray = [];
-//               json.map(item => JsonArray.push(item));
-//               return JsonArray;
-//             }),
+//           type: actionTypes.CFSLIST_GET_SUCCEED,
+//           payload: (action, state, res) => {
+//             console.log("json: "+ res);
+//             getJSON(res).then(json => json)
+//           },
 //         },
-//         actionTypes.GET_CFSINFO_FAILURE,
+//         actionTypes.CFSLIST_GET_FAILED,
 //       ],
 //     },
 //   };
 // }
 
-export function getCFSInfoAsync(val) {
-  console.log(val);
+export function getCFSListAsync() {
   return {
     [RSAA]: {
       // endpoint: constants.webAPIUrlCfsInfo.concat('/', val),
-      endpoint: `http://127.0.0.1:3001/api/cfsInfo/${val}`,
+      endpoint: constants.webAPIUrlCfsInfoBriefList,
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
       types: [
-        actionTypes.GET_CFSINFO_REQUESTED,
+        actionTypes.CFSLIST_GET_REQUESTED,
         {
-          type: actionTypes.GET_CFSINFO_SUCCESS,
+          type: actionTypes.CFSLIST_GET_SUCCEED,
+          // payload: (action, state, res) => ({
+          //   category: actionTypes.CFS_LIST,
+          //   items: getJSON(res),
+          // }),
+          // payload: (action, state, res) => {
+          //   const contentType = res.headers.get('Content-Type');
+          //   if (contentType && ~contentType.indexOf('json')) {
+          //     // Just making sure res.json() does not raise an error
+          //     return {
+          //       category: actionTypes.CFS_LIST,
+          //       items: res.json().then(json => json),
+          //     };
+          //   }
+          // },
+          // payload: (action, state, res) => ({ category: itemTypes.CFS_LIST, items: getJSON(res).then(json => json) }),
+
+          // payload: { category: 'CFS_LIST', items: ['abc', 'ad'] },
+
+          // {
+          //   getJSON(res).then(json => { category: actionTypes.CFS_LIST, item: json });
+          //   // const contentType = res.headers.get('Content-Type');
+          //   // if (contentType && ~contentType.indexOf('json')) {
+          //   //   return res.json().then(json => ({ category: actionTypes.CFS_LIST, item: json })),
+          //   // }
+          // },
+          payload: (action, state, res) =>
+            getJSON(res).then((json) => {
+              console.log("try parsing");
+              const JsonArray = [];
+              json.map(item => JsonArray.push(item));
+              // return JsonArray;
+              return { category: itemTypes.CFS_LIST, items: JsonArray };
+            }),
+        },
+        NOT_FOUND,
+      ],
+    },
+  };
+}
+
+/*
+ * CFS_INFO
+ */
+export function getCFSInfoAsync(val) {
+  console.log(val);
+  return {
+    [RSAA]: {
+      endpoint: constants.webAPIUrlCfsInfo.concat('/', val),
+      // endpoint: `http://127.0.0.1:3001/api/cfsInfo/${val}`,
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      types: [
+        actionTypes.CFSINFO_GET_REQUESTED,
+        {
+          type: actionTypes.CFSINFO_GET_SUCCEED,
           payload: (action, state, res) => {
             console.log("json: "+ res);
             getJSON(res).then(json => json)
           },
         },
-        actionTypes.GET_CFSINFO_FAILURE,
+        actionTypes.CFSINFO_GET_FAILED,
       ],
     },
   };
@@ -60,12 +122,12 @@ export function postCFSInfoAsync(val) {
         'Content-Type': 'application/json',
       },
       types: [
-        actionTypes.POST_CFSINFO_REQUESTED,
+        actionTypes.CFSINFO_POST_REQUESTED,
         {
-          type: actionTypes.POST_CFSINFO_SUCCESS,
+          type: actionTypes.CFSINFO_POST_SUCCEED,
           payload: val,
         },
-        actionTypes.POST_CFSINFO_FAILURE,
+        actionTypes.CFSINFO_POST_FAILED,
       ],
     },
   };
@@ -81,12 +143,12 @@ export function putCFSInfoAsync(val) {
         'Content-Type': 'application/json',
       },
       types: [
-        actionTypes.PUT_CFSINFO_REQUESTED,
+        actionTypes.CFSINFO_PUT_REQUESTED,
         {
-          type: actionTypes.PUT_CFSINFO_SUCCESS,
+          type: actionTypes.CFSINFO_PUT_SUCCEED,
           payload: val,
         },
-        actionTypes.PUT_CFSINFO_FAILURE,
+        actionTypes.CFSINFO_PUT_FAILED,
       ],
     },
   };
@@ -102,12 +164,12 @@ export function patchCFSInfoAsync(val) {
         'Content-Type': 'application/json',
       },
       types: [
-        actionTypes.PATCH_CFSINFO_REQUESTED,
+        actionTypes.CFSINFO_PATCH_REQUESTED,
         {
-          type: actionTypes.PATCH_CFSINFO_SUCCESS,
+          type: actionTypes.CFSINFO_PATCH_SUCCEED,
           payload: val,
         },
-        actionTypes.PATCH_CFSINFO_FAILURE,
+        actionTypes.CFSINFO_PATCH_FAILED,
       ],
     },
   };
@@ -115,7 +177,7 @@ export function patchCFSInfoAsync(val) {
 
 
 /*
- * CFS Log
+ * CFS_LOG
  */
 export function appendCFSLogAsync(val) {
   console.log(val);
@@ -130,12 +192,12 @@ export function appendCFSLogAsync(val) {
         'Content-Type': 'application/json',
       },
       types: [
-        actionTypes.POST_CFSLOG_REQUESTED,
+        actionTypes.CFSLOG_POST_REQUESTED,
         {
-          type: actionTypes.POST_CFSLOG_SUCCESS,
+          type: actionTypes.CFSLOG_POST_SUCCEED,
           payload: val,
         },
-        actionTypes.POST_CFSLOG_FAILURE,
+        actionTypes.CFSLOG_POST_FAILED,
       ],
     },
   };
@@ -148,9 +210,9 @@ export function refreshCFSLogAsync(val) {
       endpoint: constants.webAPIUrlCfsLogByCfs.concat('/', val),
       method: 'GET',
       types: [
-        actionTypes.REFRESH_CFSLOG_REQUESTED,
+        actionTypes.CFSLOG_GET_REQUESTED,
         {
-          type: actionTypes.REFRESH_CFSLOG_SUCCESS,
+          type: actionTypes.CFSLOG_GET_SUCCEED,
           payload: (action, state, res) =>
             getJSON(res).then((json) => {
               // const sampleItem = [{
@@ -179,10 +241,11 @@ export function refreshCFSLogAsync(val) {
               // return denormalizedJsonArray;
               const JsonArray = [];
               json.map(item => JsonArray.push(item));
-              return JsonArray;
+              // return JsonArray;
+              return { category: itemTypes.CFS_LOG, items: JsonArray };
             }),
         },
-        actionTypes.REFRESH_CFSLOG_FAILURE,
+        actionTypes.CFSLOG_GET_FAILED,
       ],
     },
   };
@@ -194,20 +257,20 @@ export function refreshCFSLogAsync(val) {
 export const toggleShowSystemLogs = () =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.TOGGLE_SHOW_SYSTEM_LOG,
+      type: actionTypes.SYSTEM_LOG_TOGGLED,
     });
   };
 
 export const toggleShowUserLogs = () =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.TOGGLE_SHOW_USER_LOG,
+      type: actionTypes.USER_LOG_TOGGLED,
     });
   };
 
 export const toggleShowToneLogs = () =>
   (dispatch) => {
     dispatch({
-      type: actionTypes.TOGGLE_SHOW_TONE_LOG,
+      type: actionTypes.TONE_LOG_TOGGLED,
     });
   };

@@ -1,35 +1,30 @@
-import {
-  CFS_LIST_FETCHED,
-  CFS_INFO_FETCHED,
-  CFS_LOG_FETCHED,
-  CFS_RELATED_FETCHED,
-
-  CFS_LOG,
-  REFRESH_CFSLOG_SUCCESS,
-  POST_CFSLOG_SUCCESS } from '../constants/actionTypes';
+import * as itemTypes from '../constants/itemTypes';
+import * as actionTypes from '../constants/actionTypes';
 
 export default (state = {}, action = {}) => {
   switch (action.type) {
-    case CFS_LIST_FETCHED:
-    case CFS_INFO_FETCHED:
-    case CFS_LOG_FETCHED:
-    case CFS_RELATED_FETCHED: {
+    case actionTypes.CFSLIST_GET_SUCCEED:
+    case actionTypes.CFSINFO_GET_SUCCEED:
+    case actionTypes.CFSLOG_GET_SUCCEED:
+    case actionTypes.CFSRELATED_GET_SUCCEED: {
       const { category, items } = action.payload;
+      console.log(category);
+      console.log(items);
       return {
         ...state,
         [category]: items,
       };
     }
-    case REFRESH_CFSLOG_SUCCESS:
-      return {
-        ...state,
-        [CFS_LOG]: [...action.payload],
-      };
+    // case actionTypes.CFSLOG_GET_SUCCEED:
+    //   return {
+    //     ...state,
+    //     [actionTypes.CFS_LOG]: [...action.payload],
+    //   };
 
-    case POST_CFSLOG_SUCCESS:
+    case actionTypes.CFSLOG_POST_SUCCEED:
       return {
         ...state,
-        [CFS_LOG]: [...state.CFS_LOG, action.payload],
+        [itemTypes.CFS_LOG]: [...state.CFS_LOG, action.payload],
       };
     default:
       return state;

@@ -3,11 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
 import { CFSListPropType } from '../constants/propsTypes';
-import {
-  CFS_LIST,
-  CFS_LIST_FETCHED,
-  CFS_INFO,
-  CFS_RELATED_FETCHED } from '../constants/actionTypes';
+import * as itemTypes from '../constants/itemTypes';
+import * as actionTypes from '../constants/actionTypes';
 import isLoading from '../selectors/isLoading';
 import { Menu, Image, Dropdown, Input, Icon } from 'semantic-ui-react';
 
@@ -28,7 +25,7 @@ const MenuItemCFSList = ({ isLoading, cfsList, onClickLink }) => {
         simple
         text={`${cfsOptions.length} CFS(s)`}
         options={cfsOptions}
-        onChange={(e, { /* name, */ value }) => onClickLink('ITEM', { category: CFS_INFO, id: `${value}` })}
+        onChange={(e, { /* name, */ value }) => onClickLink('ITEM', { category: itemTypes.CFS_INFO, id: `${value}` })}
       />
     </Menu.Item>
   );
@@ -48,19 +45,19 @@ const Header = ({
     <div>
       <Link to={{ type: 'HOME' }}>Home </Link>
       <Link to={{ type: 'COUNTER' }}>Counter </Link>
-      <Link to={{ type: 'ITEM', payload: { category: CFS_LIST } }}>CFSList </Link> { /* action updates location state + changes address bar */}
-      <Link to={{ type: 'ITEM', payload: { category: CFS_INFO, id: '4dgr42fb01bab7ab4c5a1fd9' } }}>Cfs1 </Link>
-      <Link to={{ type: 'ITEM', payload: { category: CFS_INFO, id: '5ae09d2fb01bab7ab4c51dd9' } }}>Cfs2 </Link>
+      <Link to={{ type: 'ITEM', payload: { category: itemTypes.CFS_LIST } }}>CFSList </Link> { /* action updates location state + changes address bar */}
+      <Link to={{ type: 'ITEM', payload: { category: itemTypes.CFS_INFO, id: '4dgr42fb01bab7ab4c5a1fd9' } }}>Cfs1 </Link>
+      <Link to={{ type: 'ITEM', payload: { category: itemTypes.CFS_INFO, id: '5ae09d2fb01bab7ab4c51dd9' } }}>Cfs2 </Link>
     </div>
     {
       cfsList !== undefined ?
       (
         <Menu inverted style={{ borderRadius: 0, height: 50 }}>
           <MenuItemCFSList isLoading cfsList={cfsList} onClickLink={onClickLink} />
-          <Menu.Item header key="1" onClick={() => onClickLink(CFS_LIST_FETCHED)}>
+          <Menu.Item header key="1" onClick={() => onClickLink(actionTypes.CFSLIST_GET_SUCCEED)}>
             <Icon name="vcard" /> CFS Summary
           </Menu.Item>
-          <Menu.Item header key="2" onClick={() => onClickLink(CFS_RELATED_FETCHED)}>
+          <Menu.Item header key="2" onClick={() => onClickLink(actionTypes.CFSRELATED_GET_SUCCEED)}>
             <Icon name="newspaper" /> Related Info.
           </Menu.Item>
           <Menu.Item header key="3">

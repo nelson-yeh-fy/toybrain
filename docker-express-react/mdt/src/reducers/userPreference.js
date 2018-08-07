@@ -11,43 +11,43 @@ const defaultState = {
 // The followings are reducers
 export default (state = defaultState, action) => {
   switch (action.type) {
-    // case actionTypes.REFRESH_CFSLOG_REQUESTED:
+    // case actionTypes.CFSLOG_GET_REQUESTED:
     //   return {
     //     ...state,
     //     isRefreshing: true,
     //   };
 
-    // case actionTypes.REFRESH_CFSLOG_SUCCESS:
+    // case actionTypes.CFSLOG_GET_SUCCEED:
     //   return {
     //     ...state,
     //     isRefreshing: !state.isRefreshing,
     //   };
 
-    // case actionTypes.POST_CFSLOG_REQUESTED:
+    // case actionTypes.CFSLOG_POST_REQUESTED:
     //   return {
     //     ...state,
     //     isAdding: true,
     //   };
 
-    // case actionTypes.POST_CFSLOG_SUCCESS:
+    // case actionTypes.CFSLOG_POST_SUCCEED:
     //   return {
     //     ...state,
     //     isAdding: !state.isAdding,
     //   };
 
-    case actionTypes.TOGGLE_SHOW_SYSTEM_LOG:
+    case actionTypes.SYSTEM_LOG_TOGGLED:
       return {
         ...state,
         isSystemLogsDisplayed: !state.isSystemLogsDisplayed,
       };
 
-    case actionTypes.TOGGLE_SHOW_USER_LOG:
+    case actionTypes.USER_LOG_TOGGLED:
       return {
         ...state,
         isUserLogsDisplayed: !state.isUserLogsDisplayed,
       };
 
-    case actionTypes.TOGGLE_SHOW_TONE_LOG:
+    case actionTypes.TONE_LOG_TOGGLED:
       return {
         ...state,
         isToneLogsDisplayed: !state.isToneLogsDisplayed,

@@ -1,14 +1,8 @@
 import { NOT_FOUND } from 'redux-first-router';
 import * as constants from './constants';
-import {
-  CFS_LIST,
-  CFS_LIST_FETCHED,
-  CFS_INFO,
-  CFS_INFO_FETCHED,
-  CFS_LOG,
-  CFS_LOG_FETCHED,
-  CFS_RELATED,
-  CFS_RELATED_FETCHED } from './constants/actionTypes';
+import * as itemTypes from './constants/itemTypes';
+import * as actionTypes from './constants/actionTypes';
+import { getCFSListAsync } from './actions/cfsActions';
 
 const fakeDelay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -21,7 +15,7 @@ const routesMap = {
       } = getState();
 
       if (!itemsByCategory.CFS_LIST) {
-        return dispatch({ type: 'ITEM', payload: { category: CFS_LIST } });
+        return dispatch({ type: 'ITEM', payload: { category: itemTypes.CFS_LIST } });
       }
     },
   },
@@ -39,36 +33,42 @@ const routesMap = {
 
       if (itemsByCategory[cate] && (currentId === prevId)) {
         switch (cate) {
-          case CFS_LIST:
-            return dispatch({ type: CFS_LIST_FETCHED });
-          case CFS_INFO:
-            return dispatch({ type: CFS_INFO_FETCHED });
-          case CFS_RELATED:
-            return dispatch({ type: CFS_RELATED_FETCHED });
+          case itemTypes.CFS_LIST:
+            return dispatch({ type: actionTypes.CFSLIST_GET_SUCCEED });
+          case itemTypes.CFS_INFO:
+            return dispatch({ type: actionTypes.CFSINFO_GET_SUCCEED });
+          case itemTypes.CFS_RELATED:
+            return dispatch({ type: actionTypes.CFSRELATED_GET_SUCCEED });
           default:
             return dispatch({ type: NOT_FOUND });
         }
       }
 
       switch (cate) {
-        case CFS_LIST: {
-          await fakeDelay(10); // await response of fetch call
-          const response = await fetch(`${constants.webAPIUrlCfsInfoBriefList}`);
+        // case itemTypes.CFS_LIST: {
+        //   await fakeDelay(10); // await response of fetch call
+        //   const response = await fetch(`${constants.webAPIUrlCfsInfoBriefList}`);
 
-          // only proceed once promise is resolved
-          const data = await response.json();
-          if (data.length === 0) { // only proceed once second promise is resolved
-            return dispatch({ type: NOT_FOUND });
-          }
-          dispatch({
-            type: CFS_LIST_FETCHED,
-            payload: { category: cate, items: data },
-          });
+        //   // only proceed once promise is resolved
+        //   const data = await response.json();
+        //   if (data.length === 0) { // only proceed once second promise is resolved
+        //     return dispatch({ type: NOT_FOUND });
+        //   }
+        //   dispatch({
+        //     type: actionTypes.CFSLIST_GET_SUCCEED,
+        //     payload: { category: cate, items: data },
+        //   });
+        //   break;
+        // }
+        case itemTypes.CFS_LIST: {
+          await fakeDelay(10); // await response of fetch call
+          dispatch(getCFSListAsync());
           break;
         }
-        case CFS_INFO: {
+
+        case itemTypes.CFS_INFO: {
           if (currentId === undefined) {
-            return dispatch({ type: 'HOME', payload: { category: CFS_LIST } });
+            return dispatch({ type: 'HOME', payload: { category: itemTypes.CFS_LIST } });
           }
 
           // retreive cfsLog information first
@@ -77,8 +77,8 @@ const routesMap = {
           const dataLog = await responseLog.json();
           if (dataLog.length !== 0) { // only proceed once second promise is resolved
             dispatch({
-              type: CFS_LOG_FETCHED,
-              payload: { category: CFS_LOG, items: dataLog },
+              type: actionTypes.CFSLOG_GET_SUCCEED,
+              payload: { category: itemTypes.CFS_LOG, items: dataLog },
             });
           }
 
@@ -89,15 +89,15 @@ const routesMap = {
             return dispatch({ type: NOT_FOUND });
           }
           dispatch({
-            type: CFS_INFO_FETCHED,
+            type: actionTypes.CFSINFO_GET_SUCCEED,
             payload: { category: cate, items: data },
           });
 
           break;
         }
-        case CFS_RELATED: {
+        case itemTypes.CFS_RELATED: {
           if (currentId === undefined) {
-            return dispatch({ type: 'HOME', payload: { category: CFS_LIST } });
+            return dispatch({ type: 'HOME', payload: { category: itemTypes.CFS_LIST } });
           }
 
           // only proceed once promise is resolved
@@ -108,7 +108,7 @@ const routesMap = {
           }
 
           dispatch({
-            type: CFS_RELATED_FETCHED,
+            type: actionTypes.CFSRELATED_GET_SUCCEED,
             payload: { category: cate, items: data },
           });
 

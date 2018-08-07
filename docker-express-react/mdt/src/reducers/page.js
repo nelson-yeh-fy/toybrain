@@ -1,16 +1,13 @@
 import { NOT_FOUND } from 'redux-first-router';
-import {
-  CFS_LIST_FETCHED,
-  CFS_INFO_FETCHED,
-  CFS_RELATED_FETCHED } from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 
 const componentName = {
   [NOT_FOUND]: 'NotFound',
   HOME: 'Home',
   COUNTER: 'Counter',
-  [CFS_LIST_FETCHED]: 'CFSList',
-  [CFS_INFO_FETCHED]: 'CFSInfo',
-  [CFS_RELATED_FETCHED]: 'CFSRelated',
+  [actionTypes.CFSLIST_GET_SUCCEED]: 'CFSList',
+  [actionTypes.CFSINFO_GET_SUCCEED]: 'CFSInfo',
+  [actionTypes.CFSRELATED_GET_SUCCEED]: 'CFSRelated',
   VIDEO: 'Video',
   ADMIN: 'Admin',
   LOGIN: 'Login',

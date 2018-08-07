@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'redux-first-router-link';
 import { connect } from 'react-redux';
+import * as itemTypes from '../constants/itemTypes';
 import { CFSListPropType } from '../constants/propsTypes';
-import { CFS_INFO } from '../constants/actionTypes';
 
 const CFSList = ({ CfsList }) => (
   <div>
@@ -10,7 +10,7 @@ const CFSList = ({ CfsList }) => (
       {
         CfsList.map(p => (
           <li key={p._id}>
-            <Link to={{ type: 'ITEM', payload: { category: CFS_INFO, id: `${p._id}` } }}>{p.cfsNumber}</Link>
+            <Link to={{ type: 'ITEM', payload: { category: itemTypes.CFS_INFO, id: `${p._id}` } }}>{p.cfsNumber}</Link>
           </li>
         ))
       }
