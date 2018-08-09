@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types';
 
 export const CFSListPropType = PropTypes.arrayOf(PropTypes.shape({
-  addon: PropTypes.string,
   _id: PropTypes.string,
   cfsNumber: PropTypes.string,
   cfsStatus: PropTypes.number,
-  cfsDesc: PropTypes.string,
-  addby: PropTypes.string,
 }));
 
 export const CFSInfoPropType = PropTypes.shape({

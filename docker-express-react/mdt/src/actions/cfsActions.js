@@ -208,7 +208,7 @@ export function getCFSRelatedAsync(val) {
           payload: (action, state, res) =>
             getJSON(res).then(json => ({ category: itemTypes.CFS_RELATED, items: json })),
         },
-        actionTypes.CFSRELATEDT_GET_FAILED,
+        actionTypes.CFSRELATED_GET_FAILED,
       ],
     },
   };

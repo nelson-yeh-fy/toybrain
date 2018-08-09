@@ -14,8 +14,8 @@ let inputVal = '';
 const CFSLog = ({
   currentCfsId,
   cfsLogs,
-  isRefreshing,
-  isAdding,
+  isRefreshing = false,
+  isAdding = false,
   isSystemLogsDisplayed,
   isUserLogsDisplayed,
   isToneLogsDisplayed,
@@ -106,8 +106,8 @@ const CFSLog = ({
 CFSLog.propTypes = {
   currentCfsId: PropTypes.string.isRequired,
   cfsLogs: CFSLogPropType.isRequired,
-  isRefreshing: PropTypes.bool.isRequired,
-  isAdding: PropTypes.bool.isRequired,
+  // isRefreshing: PropTypes.bool.isRequired,
+  // isAdding: PropTypes.bool.isRequired,
   isSystemLogsDisplayed: PropTypes.bool.isRequired,
   isUserLogsDisplayed: PropTypes.bool.isRequired,
   isToneLogsDisplayed: PropTypes.bool.isRequired,
