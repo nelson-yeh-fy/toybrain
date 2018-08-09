@@ -21,7 +21,7 @@ const CFSInfo = ({ currentCFSInfo, getCFSInfoAsync }) => (
         {currentCFSInfo.cfsDesc}
       </p>
       <Divider />
-      <button onClick={() => { getCFSInfoAsync('4dgr42fb01bab7ab4c5a1fd9'); }} >Click me</button>
+      <button onClick={() => { getCFSInfoAsync('4dgr42fb01bab7ab4c5a1fd9'); }} >getcfsinfo async</button>
     </div>
   </Container>
 );

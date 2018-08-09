@@ -14,8 +14,8 @@ let inputVal = '';
 const CFSLog = ({
   currentCfsId,
   cfsLogs,
-  isRefreshing = false,
-  isAdding = false,
+  isCfsLogLoading,
+  isCfsLogAdding,
   isSystemLogsDisplayed,
   isUserLogsDisplayed,
   isToneLogsDisplayed,
@@ -59,8 +59,9 @@ const CFSLog = ({
           Tone
         </label>
         <Button
+          loading={isCfsLogLoading}
           onClick={() => { refreshCFSLogAsync(currentCfsId); }}
-          disabled={isRefreshing}
+          disabled={isCfsLogLoading}
           size="mini"
           floated="right"
           icon="refresh"
@@ -75,15 +76,15 @@ const CFSLog = ({
     </div>
     <Divider />
     <Form onSubmit={() => {
-  if (inputVal !== '') {
-    appendCFSLogAsync({
-      cfsId: currentCfsId,
-      type: 2,
-      text: inputVal,
-      addby: 'TestUser',
-    });
-  }
-}}
+      if (inputVal !== '') {
+        appendCFSLogAsync({
+          cfsId: currentCfsId,
+          type: 2,
+          text: inputVal,
+          addby: 'TestUser',
+        });
+      }
+    }}
     >
       <Form.Group widths="equal">
         <Form.Field
@@ -92,7 +93,8 @@ const CFSLog = ({
           placeholder="Enter more comments..."
         />
         <Form.Button
-          disabled={isAdding}
+          loading={isCfsLogAdding}
+          disabled={isCfsLogAdding}
           content="Add"
           labelPosition="right"
           icon="edit"
@@ -106,8 +108,8 @@ const CFSLog = ({
 CFSLog.propTypes = {
   currentCfsId: PropTypes.string.isRequired,
   cfsLogs: CFSLogPropType.isRequired,
-  // isRefreshing: PropTypes.bool.isRequired,
-  // isAdding: PropTypes.bool.isRequired,
+  isCfsLogLoading: PropTypes.bool.isRequired,
+  isCfsLogAdding: PropTypes.bool.isRequired,
   isSystemLogsDisplayed: PropTypes.bool.isRequired,
   isUserLogsDisplayed: PropTypes.bool.isRequired,
   isToneLogsDisplayed: PropTypes.bool.isRequired,
@@ -121,8 +123,8 @@ CFSLog.propTypes = {
 const mapStateToProps = state => ({
   currentCfsId: state.itemsByCategory.CFS_INFO._id,
   cfsLogs: getVisibleCfsLogs(state),
-  // isRefreshing: false,
-  // isAdding: false,
+  isCfsLogLoading: state.loadingStatus.isCfsLogLoading,
+  isCfsLogAdding: state.loadingStatus.isCfsLogAdding,
   isSystemLogsDisplayed: state.userPreference.isSystemLogsDisplayed,
   isUserLogsDisplayed: state.userPreference.isUserLogsDisplayed,
   isToneLogsDisplayed: state.userPreference.isToneLogsDisplayed,

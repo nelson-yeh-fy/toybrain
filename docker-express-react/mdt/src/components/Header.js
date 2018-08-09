@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 import { Menu, Image, Dropdown, Input, Icon } from 'semantic-ui-react';
 import { CFSListPropType, CFSInfoPropType } from '../constants/propsTypes';
 import * as itemTypes from '../constants/itemTypes';
-import getLoadingStatus from '../selectors/loadingStatusSelector';
 
 const Header = ({
-  cfsList, cfsInfo, isLoading, onClickLink,
+  cfsList, cfsInfo, isCfsListLoading, onClickLink,
 }) => {
   const cfsOptions = [];
   if (cfsList !== undefined) {
@@ -33,7 +32,7 @@ const Header = ({
             style={{ marginRight: '0.5em' }}
           />
           <Dropdown
-            loading={isLoading}
+            loading={isCfsListLoading}
             simple
             text={`${cfsOptions.length} CFS(s)`}
             options={cfsOptions}
@@ -70,7 +69,7 @@ const Header = ({
 Header.propTypes = {
   cfsList: CFSListPropType,
   cfsInfo: CFSInfoPropType,
-  isLoading: PropTypes.bool.isRequired,
+  isCfsListLoading: PropTypes.bool.isRequired,
   onClickLink: PropTypes.func.isRequired,
 };
 
@@ -82,7 +81,7 @@ Header.defaultProps = {
 const mapStateToProps = state => ({
   cfsList: state.itemsByCategory.CFS_LIST,
   cfsInfo: state.itemsByCategory.CFS_INFO,
-  isLoading: getLoadingStatus(state),
+  isCfsListLoading: state.loadingStatus.isCfsListLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
