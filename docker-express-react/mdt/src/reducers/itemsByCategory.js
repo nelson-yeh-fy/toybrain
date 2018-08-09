@@ -14,12 +14,6 @@ export default (state = {}, action = {}) => {
         [category]: items,
       };
     }
-    // case actionTypes.CFSLOG_GET_SUCCEED:
-    //   return {
-    //     ...state,
-    //     [actionTypes.CFS_LOG]: [...action.payload],
-    //   };
-
     case actionTypes.CFSLOG_POST_SUCCEED:
       return {
         ...state,

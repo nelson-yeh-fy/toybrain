@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
+import { connect } from 'react-redux';
+import { Menu, Image, Dropdown, Input, Icon } from 'semantic-ui-react';
 import { CFSListPropType } from '../constants/propsTypes';
 import * as itemTypes from '../constants/itemTypes';
 import isLoading from '../selectors/isLoading';
-import { Menu, Image, Dropdown, Input, Icon } from 'semantic-ui-react';
 
 const MenuItemCFSList = ({ isLoading, cfsList, onClickLink }) => {
   const cfsOptions = [];
@@ -24,7 +24,7 @@ const MenuItemCFSList = ({ isLoading, cfsList, onClickLink }) => {
         simple
         text={`${cfsOptions.length} CFS(s)`}
         options={cfsOptions}
-        onChange={(e, { /* name, */ value }) => onClickLink('ITEM', { category: itemTypes.CFS_INFO, id: `${value}` })}
+        onChange={(e, { /* name, */ value }) => onClickLink('ITEM', itemTypes.CFS_INFO, value)}
       />
     </Menu.Item>
   );

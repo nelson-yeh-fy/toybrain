@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 import { Container, Segment, Button, Divider, Comment, Input, Form } from 'semantic-ui-react';
-import CFSLogItem from './CFSLogItem';
 import { CFSLogPropType } from '../constants/propsTypes';
 import { appendCFSLogAsync, refreshCFSLogAsync, toggleShowSystemLogs, toggleShowUserLogs, toggleShowToneLogs } from '../actions/cfsActions';
+import getVisibleCfsLogs from '../selectors/cfslogSelector';
+import CFSLogItem from './CFSLogItem';
 import '../assets/App.css';
 
 let inputVal = '';
 
 const CFSLog = ({
   currentCfsId,
-  cfsLogArticles,
+  cfsLogs,
   isRefreshing,
   isAdding,
   isSystemLogsDisplayed,
@@ -70,7 +70,7 @@ const CFSLog = ({
     </Segment>
     <div className="cfs-timeEvent">
       <Comment.Group style={{ maxWidth: 'none' }} >
-        {cfsLogArticles.map(x => CFSLogItem(x))}
+        {cfsLogs.map(x => CFSLogItem(x))}
       </Comment.Group>
     </div>
     <Divider />
@@ -104,7 +104,8 @@ const CFSLog = ({
 );
 
 CFSLog.propTypes = {
-  cfsLogArticles: CFSLogPropType.isRequired,
+  currentCfsId: PropTypes.string.isRequired,
+  cfsLogs: CFSLogPropType.isRequired,
   isRefreshing: PropTypes.bool.isRequired,
   isAdding: PropTypes.bool.isRequired,
   isSystemLogsDisplayed: PropTypes.bool.isRequired,
@@ -117,34 +118,9 @@ CFSLog.propTypes = {
   toggleShowToneLogs: PropTypes.func.isRequired,
 };
 
-
-const getVisibleCfsLogArticles = createSelector(
-  state => state.itemsByCategory.CFS_LOG,
-  state => state.userPreference.isSystemLogsDisplayed,
-  state => state.userPreference.isUserLogsDisplayed,
-  state => state.userPreference.isToneLogsDisplayed,
-  (CFS_LOG, isSystemLogsDisplayed, isUserLogsDisplayed, isToneLogsDisplayed) => {
-    if (isSystemLogsDisplayed === true && isUserLogsDisplayed === true && isToneLogsDisplayed === true) {
-      return CFS_LOG;
-    }
-
-    let visibleLogs = [];
-    if (isSystemLogsDisplayed === true)
-      visibleLogs = visibleLogs.concat(CFS_LOG.filter(t => t.type === 1));
-
-    if (isUserLogsDisplayed === true)
-      visibleLogs = visibleLogs.concat(CFS_LOG.filter(t => t.type === 2));
-
-    if (isToneLogsDisplayed === true)
-      visibleLogs = visibleLogs.concat(CFS_LOG.filter(t => t.type === 4));
-
-    return visibleLogs;
-  },
-);
-
 const mapStateToProps = state => ({
   currentCfsId: state.itemsByCategory.CFS_INFO._id,
-  cfsLogArticles: getVisibleCfsLogArticles(state),
+  cfsLogs: getVisibleCfsLogs(state),
   // isRefreshing: false,
   // isAdding: false,
   isSystemLogsDisplayed: state.userPreference.isSystemLogsDisplayed,

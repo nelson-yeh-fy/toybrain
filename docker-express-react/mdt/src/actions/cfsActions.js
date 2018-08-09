@@ -1,5 +1,5 @@
 import { RSAA, getJSON } from 'redux-api-middleware'; // RSAA = '@@redux-api-middleware/RSAA'
-import { NOT_FOUND } from 'redux-first-router';
+// import { NOT_FOUND } from 'redux-first-router';
 import * as itemTypes from '../constants/itemTypes';
 import * as actionTypes from '../constants/actionTypes';
 import * as constants from '../constants';
@@ -116,12 +116,10 @@ export function patchCFSInfoAsync(val) {
   };
 }
 
-
 /*
  * CFS_LOG
  */
 export function appendCFSLogAsync(val) {
-  console.log(val);
   return {
     [RSAA]: {
       // endpoint: `http://127.0.0.1:3001/api/cfsLog/`,

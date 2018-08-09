@@ -9,10 +9,7 @@ const routesMap = {
   HOME: {
     path: '/',
     thunk: async (dispatch, getState) => {
-      const {
-        itemsByCategory,
-      } = getState();
-
+      const { itemsByCategory } = getState();
       if (!itemsByCategory.CFS_LIST) {
         return dispatch({ type: 'ITEM', payload: { category: itemTypes.CFS_LIST } });
       }
