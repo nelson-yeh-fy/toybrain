@@ -10,7 +10,7 @@ const CFSList = ({ CfsList }) => (
       {
         CfsList.map(p => (
           <li key={p._id}>
-            <Link to={{ type: 'ITEM', payload: { category: itemTypes.CFS_INFO, id: `${p._id}` } }}>{p.cfsNumber}</Link>
+            <Link to={{ type: itemTypes.CFS_INFO, payload: { category: itemTypes.CFS_INFO, id: `${p._id}` } }}>{p.cfsNumber}</Link>
           </li>
         ))
       }

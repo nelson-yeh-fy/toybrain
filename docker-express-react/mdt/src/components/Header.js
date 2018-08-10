@@ -13,14 +13,13 @@ const Header = ({
   if (cfsList !== undefined) {
     cfsList.map(p => cfsOptions.push({ key: p._id, text: `${p.cfsNumber} [${p.cfsStatus}]`, value: p._id }));
   }
+  console.log(cfsOptions);
   return (
     <div>
       <div>
         <Link to={{ type: 'HOME' }}>Home </Link>
         <Link to={{ type: 'COUNTER' }}>Counter </Link>
-        <Link to={{ type: 'ITEM', payload: { category: itemTypes.CFS_LIST } }}>CFSList </Link> { /* action updates location state + changes address bar */}
-        <Link to={{ type: 'ITEM', payload: { category: itemTypes.CFS_INFO, id: '4dgr42fb01bab7ab4c5a1fd9' } }}>Cfs1 </Link>
-        <Link to={{ type: 'ITEM', payload: { category: itemTypes.CFS_INFO, id: '5ae09d2fb01bab7ab4c51dd9' } }}>Cfs2 </Link>
+        <Link to={{ type: 'CFS_LIST' }}>CFSList </Link> { /* action updates location state + changes address bar */}
       </div>
       <Menu inverted style={{ borderRadius: 0, height: 50 }}>
         <Menu.Item header key="0">
@@ -36,18 +35,18 @@ const Header = ({
             simple
             text={`${cfsOptions.length} CFS(s)`}
             options={cfsOptions}
-            onChange={(e, { /* name, */ value }) => onClickLink('ITEM', itemTypes.CFS_INFO, value)}
+            onChange={(e, { /* name, */ value }) => onClickLink(itemTypes.CFS_INFO, value)}
           />
         </Menu.Item>
         {
           cfsInfo !== undefined ? (
-            <Menu.Item header key="1" onClick={() => onClickLink('ITEM', itemTypes.CFS_INFO, cfsInfo._id)}>
+            <Menu.Item header key="1" onClick={() => onClickLink(itemTypes.CFS_INFO, cfsInfo._id)}>
               <Icon name="vcard" /> CFS Summary
             </Menu.Item>) : null
         }
         {
           cfsInfo !== undefined ? (
-            <Menu.Item header key="2" onClick={() => onClickLink('ITEM', itemTypes.CFS_RELATED, cfsInfo._id)}>
+            <Menu.Item header key="2" onClick={() => onClickLink(itemTypes.CFS_RELATED, cfsInfo._id)}>
               <Icon name="newspaper" /> Related Info.
             </Menu.Item>) : null
         }
@@ -85,7 +84,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClickLink: (routingType, category, id) => dispatch({ type: routingType, payload: { category, id } }),
+  onClickLink: (routingType, id) => dispatch({ type: routingType, payload: { category: routingType, id } }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

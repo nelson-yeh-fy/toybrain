@@ -9,9 +9,9 @@ import '../assets/App.css';
 
 const CFSInfo = ({ currentCFSInfo, getCFSInfoAsync }) => (
   <Container>
-    <Header size="large">{currentCFSInfo.cfsNumber} :102 SUNSET BOULEVARD, WEST CAPE MAY, NJ 08204
-      <Label size="medium" color="green" horizontal>Verified</Label>
-      <Label size="medium" color="red" horizontal>P1 - Residential Fire</Label>
+    <Header id="headerOfCfsInfo" size="large">{currentCFSInfo.cfsNumber} :102 SUNSET BOULEVARD, WEST CAPE MAY, NJ 08204
+      <Label htmlFor="headerOfCfsInfo" size="medium" color="green" horizontal>Verified</Label>
+      <Label htmlFor="headerOfCfsInfo" size="medium" color="red" horizontal>P1 - Residential Fire</Label>
     </Header>
     <div>
       <Segment color="blue">

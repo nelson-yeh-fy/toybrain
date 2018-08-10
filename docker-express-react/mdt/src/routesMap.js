@@ -11,59 +11,114 @@ const routesMap = {
     thunk: async (dispatch, getState) => {
       const { itemsByCategory } = getState();
       if (!itemsByCategory.CFS_LIST) {
-        return dispatch({ type: 'ITEM', payload: { category: itemTypes.CFS_LIST } });
+        return dispatch({ type: itemTypes.CFS_LIST });
       }
     },
   },
   USER: '/user/:id', // :id is a dynamic segment
   COUNTER: '/counter',
-  ITEM: {
-    path: '/items/:category',
+  CFS_LIST: {
+    path: '/cfsList',
+    thunk: async (dispatch) => {
+      return dispatch(getCFSListAsync());
+    },
+  },
+  CFS_INFO: {
+    path: '/cfsInfo/:id',
     thunk: async (dispatch, getState) => {
       const {
-        location: { payload: { category: cate } },
-        location: { payload: { id: currentCfsId } }, // const { id } = getState().location.payload;
+        location: { payload: { id: cfsId } },
+        // location: { payload: { id: currentCfsId } }, // const { id } = getState().location.payload;
         location: { prev: { payload: { id: prevId } } },
         itemsByCategory,
       } = getState();
 
-      switch (cate) {
-        case itemTypes.CFS_LIST: {
-          await fakeDelay(10);
-          if (itemsByCategory[cate] && (currentCfsId === prevId)) {
-            return dispatch({ type: actionTypes.CFSLIST_GET_SUCCEED });
-          }
-          dispatch(getCFSListAsync());
-          break;
-        }
-
-        case itemTypes.CFS_INFO: {
-          if (currentCfsId === undefined) {
-            return dispatch(redirect({ type: 'HOME' }));
-          }
-          if (itemsByCategory[cate] && (currentCfsId === prevId)) {
-            return dispatch(redirect({ type: actionTypes.CFSINFO_SWITCHED }));
-          }
-          await dispatch(refreshCFSLogAsync(currentCfsId));
-          await dispatch(getCFSInfoAsync(currentCfsId));
-          break;
-        }
-
-        case itemTypes.CFS_RELATED: {
-          if (currentCfsId === undefined) {
-            return dispatch(redirect({ type: 'HOME' }));
-          }
-          if (itemsByCategory[cate] && (currentCfsId === prevId)) {
-            return dispatch(redirect({ type: actionTypes.CFSRELATED_SWITCHED }));
-          }
-          dispatch(getCFSRelatedAsync(currentCfsId));
-          break;
-        }
-        default:
-          return dispatch({ type: NOT_FOUND });
+      if (cfsId === undefined) {
+        console.log("currentCfsId is undefined");
+        return dispatch(redirect({ type: 'CFS_LIST' }));
       }
+      if (!itemsByCategory[itemTypes.CFS_INFO] || itemsByCategory[itemTypes.CFS_INFO]._id !== cfsId) {
+        console.log("!itemsByCategory[itemTypes.CFS_INFO] || itemsByCategory[itemTypes.CFS_INFO]._id !== cfsId");
+        console.log(cfsId);
+        console.log(prevId);
+        await dispatch(refreshCFSLogAsync(cfsId));
+        return dispatch(getCFSInfoAsync(cfsId));
+      }
+      return dispatch(redirect({ type: actionTypes.CFSINFO_SWITCHED }));
     },
   },
+  CFS_RELATED: {
+    path: '/cfsRelated/:id',
+    thunk: async (dispatch, getState) => {
+      const {
+        location: { payload: { id: cfsId } },
+        // location: { payload: { id: currentCfsId } }, // const { id } = getState().location.payload;
+        location: { prev: { payload: { id: prevId } } },
+        itemsByCategory,
+      } = getState();
+
+      if (cfsId === undefined) {
+        console.log("currentCfsId is undefined");
+        return dispatch(redirect({ type: 'CFS_LIST' }));
+      }
+      if (!itemsByCategory[itemTypes.CFS_RELATED] || itemsByCategory[itemTypes.CFS_RELATED]._id !== cfsId) {
+        console.log("!itemsByCategory[itemTypes.CFS_RELATED] || itemsByCategory[itemTypes.CFS_RELATED]._id !== cfsId");
+        console.log(cfsId);
+        console.log(prevId);
+        return dispatch(getCFSRelatedAsync(cfsId));
+      }
+      return dispatch(redirect({ type: actionTypes.CFSRELATED_SWITCHED }));
+    },
+  },
+
+
+  // ITEM: {
+  //   path: '/items/:category',
+  //   thunk: async (dispatch, getState) => {
+  //     const {
+  //       location: { payload: { category: cate } },
+  //       location: { payload: { id: currentCfsId } }, // const { id } = getState().location.payload;
+  //       location: { prev: { payload: { id: prevId } } },
+  //       itemsByCategory,
+  //     } = getState();
+
+  //     switch (cate) {
+  //       case itemTypes.CFS_LIST: {
+  //         await fakeDelay(10);
+  //         dispatch(getCFSListAsync());
+  //         break;
+  //       }
+
+  //       case itemTypes.CFS_INFO: {
+  //         if (currentCfsId === undefined) {
+  //           console.log("currentCfsId is undefined");
+  //           return dispatch(redirect({ type: 'HOME' }));
+  //         }
+  //         if (itemsByCategory[cate] && (currentCfsId === prevId)) {
+  //           console.log("currentCfsId === prevId");
+  //           console.log(currentCfsId);
+  //           console.log(prevId);
+  //           return dispatch(redirect({ type: actionTypes.CFSINFO_SWITCHED }));
+  //         }
+  //         await dispatch(refreshCFSLogAsync(currentCfsId));
+  //         await dispatch(getCFSInfoAsync(currentCfsId));
+  //         break;
+  //       }
+
+  //       case itemTypes.CFS_RELATED: {
+  //         if (currentCfsId === undefined) {
+  //           return dispatch(redirect({ type: 'HOME' }));
+  //         }
+  //         if (itemsByCategory[cate] && (currentCfsId === prevId)) {
+  //           return dispatch(redirect({ type: actionTypes.CFSRELATED_SWITCHED }));
+  //         }
+  //         dispatch(getCFSRelatedAsync(currentCfsId));
+  //         break;
+  //       }
+  //       default:
+  //         return dispatch({ type: NOT_FOUND });
+  //     }
+  //   },
 };
 
 export default routesMap;

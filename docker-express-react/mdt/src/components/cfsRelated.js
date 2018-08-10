@@ -8,11 +8,9 @@ import { CFSInfoPropType } from '../constants/propsTypes';
 import { patchCFSInfoAsync } from '../actions/cfsActions';
 import '../assets/App.css';
 
-const CFSRelated = ({ currentCFSInfo, routingId, patchCFSInfoAsync }) => (
+const CFSRelated = ({ currentCFSRelated, patchCFSInfoAsync }) => (
   <Container>
-    <Header size="large">{currentCFSInfo.cfsNumber} :102 SUNSET BOULEVARD, WEST CAPE MAY, NJ 08204
-      <Label size="medium" color="green" horizontal>Verified</Label>
-      <Label size="medium" color="red" horizontal>P1 - Residential Fire</Label>
+    <Header size="large">{currentCFSRelated.cfsNumber} :102 SUNSET BOULEVARD, WEST CAPE MAY, NJ 08204
     </Header>
     <div>
       <Segment color="blue">
@@ -20,9 +18,9 @@ const CFSRelated = ({ currentCFSInfo, routingId, patchCFSInfoAsync }) => (
       </Segment>
       <EditableListElement
         funcToInvoke={patchCFSInfoAsync}
-        itemIdToBeUpdate={routingId}
+        itemIdToBeUpdate={currentCFSRelated._id}
         fieldKeyTBUpdate="cfsDesc"
-        fieldValueTBUpdate={currentCFSInfo.cfsDesc}
+        fieldValueTBUpdate={currentCFSRelated.cfsDesc}
       />
       <Divider />
       <Segment color="blue">
@@ -30,9 +28,9 @@ const CFSRelated = ({ currentCFSInfo, routingId, patchCFSInfoAsync }) => (
       </Segment>
       <EditableListElement
         funcToInvoke={patchCFSInfoAsync}
-        itemIdToBeUpdate={routingId}
+        itemIdToBeUpdate={currentCFSRelated._id}
         fieldKeyTBUpdate="cfsDesc"
-        fieldValueTBUpdate={currentCFSInfo.cfsDesc}
+        fieldValueTBUpdate={currentCFSRelated.cfsDesc}
       />
       <Divider />
     </div>
@@ -40,13 +38,13 @@ const CFSRelated = ({ currentCFSInfo, routingId, patchCFSInfoAsync }) => (
 );
 
 CFSRelated.propTypes = {
-  currentCFSInfo: CFSInfoPropType.isRequired,
+  currentCFSRelated: CFSInfoPropType.isRequired,
   patchCFSInfoAsync: PropTypes.func.isRequired,
 };
 
 
 const mapStateToProps = state => ({
-  currentCFSInfo: state.itemsByCategory.CFS_INFO,
+  currentCFSRelated: state.itemsByCategory.CFS_RELATED,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({ patchCFSInfoAsync }, dispatch);
