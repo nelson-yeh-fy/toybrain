@@ -13,7 +13,6 @@ const Header = ({
   if (cfsList !== undefined) {
     cfsList.map(p => cfsOptions.push({ key: p._id, text: `${p.cfsNumber} [${p.cfsStatus}]`, value: p._id }));
   }
-  console.log(cfsOptions);
   return (
     <div>
       <div>
@@ -50,7 +49,7 @@ const Header = ({
               <Icon name="newspaper" /> Related Info.
             </Menu.Item>) : null
         }
-        <Menu.Item header key="3">
+        <Menu.Item header key="3" onClick={() => onClickLink(itemTypes.CFS_MAP)}>
           <Icon name="map" /> Map
         </Menu.Item>
         <Menu.Item header key="4">

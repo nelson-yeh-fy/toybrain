@@ -7,13 +7,21 @@ export default (state = {}, action = {}) => {
     case actionTypes.CFSINFO_GET_SUCCEED:
     case actionTypes.CFSLOG_GET_SUCCEED:
     case actionTypes.CFSRELATED_GET_SUCCEED: {
-      console.log(action.payload);
       const { category, items } = action.payload;
       return {
         ...state,
         [category]: items,
       };
     }
+    case actionTypes.CFSINFO_PATCH_SUCCEED:
+      return {
+        ...state,
+        [itemTypes.CFS_INFO]: { ...state.CFS_INFO, ...action.payload },
+        // [itemTypes.CFS_INFO]: [itemTypes.CFS_INFO].map(
+        //   (eachItem) => eachItem._id === cfsId ? {...eachItem, ...valJson}
+        //                                        : eachItem
+        // )
+      };
     case actionTypes.CFSLOG_POST_SUCCEED:
       return {
         ...state,

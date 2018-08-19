@@ -95,12 +95,12 @@ export function putCFSInfoAsync(val) {
   };
 }
 
-export function patchCFSInfoAsync(val) {
+export function patchCFSInfoAsync(cfsId, valJson) {
   return {
     [RSAA]: {
-      endpoint: constants.webAPIUrlCfsInfo.concat('/', val.toBeUpdateId),
+      endpoint: constants.webAPIUrlCfsInfo.concat('/', cfsId),
       method: 'PATCH',
-      body: JSON.stringify(val),
+      body: JSON.stringify(valJson),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -108,7 +108,7 @@ export function patchCFSInfoAsync(val) {
         actionTypes.CFSINFO_PATCH_REQUESTED,
         {
           type: actionTypes.CFSINFO_PATCH_SUCCEED,
-          payload: val,
+          payload: valJson,
         },
         actionTypes.CFSINFO_PATCH_FAILED,
       ],

@@ -1,25 +1,23 @@
 import React from 'react';
-import { Container, Segment, Label, Step, Icon, List, Header } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Container, Label, Step, Icon, List } from 'semantic-ui-react';
+import { CFSInfoPropType } from '../constants/propsTypes';
+import { getCFSInfoAsync, patchCFSInfoAsync } from '../actions/cfsActions';
+import '../assets/App.css';
 
-const CFSStatus = () => (
+const CFSStatus = ({ currentCFSStatus }) => { console.log("cfsStatus:" + currentCFSStatus); return (
   <Container>
-    <Segment inverted tertiary className="margin-left-Right-14" style={{ height: 150 }} >
-      <Header as="h2" inverted>
-        CFS Map
-        <Header.Subheader>
-          under construction
-        </Header.Subheader>
-      </Header>
-    </Segment>
     <Step.Group vertical className="margin-left-Right-14">
-      <Step className="step">
+      <Step disabled={currentCFSStatus < 0} className="step">
         <Icon name="volume control phone" />
         <Step.Content>
           <Step.Title>CFS Initiated</Step.Title>
           <Step.Description>15:31:00</Step.Description>
         </Step.Content>
       </Step>
-      <Step active>
+      <Step disabled={currentCFSStatus < 1}>
         <Icon name="send outline" />
         <Step.Content>
           <Step.Title>Unit Dispatched</Step.Title>
@@ -38,7 +36,7 @@ const CFSStatus = () => (
           </Step.Description>
         </Step.Content>
       </Step>
-      <Step>
+      <Step disabled={currentCFSStatus < 2}>
         <Icon name="road" />
         <Step.Content>
           <Step.Title>Unit Enroute</Step.Title>
@@ -51,14 +49,14 @@ const CFSStatus = () => (
           </Step.Description>
         </Step.Content>
       </Step>
-      <Step disabled>
+      <Step disabled={currentCFSStatus < 3}>
         <Icon name="building" />
         <Step.Content>
           <Step.Title>Unit On Scene</Step.Title>
           <Step.Description>15:38:00</Step.Description>
         </Step.Content>
       </Step>
-      <Step disabled>
+      <Step disabled={currentCFSStatus < 4}>
         <Icon name="file text" />
         <Step.Content>
           <Step.Title>CFS Closed</Step.Title>
@@ -68,5 +66,14 @@ const CFSStatus = () => (
     </Step.Group>
   </Container>
 );
+};
 
-export default CFSStatus;
+CFSStatus.propTypes = {
+  currentCFSStatus: PropTypes.number.isRequired,
+};
+
+const mapStateToProps = state => ({
+  currentCFSStatus: state.itemsByCategory.CFS_INFO.cfsStatus,
+});
+
+export default connect(mapStateToProps)(CFSStatus);

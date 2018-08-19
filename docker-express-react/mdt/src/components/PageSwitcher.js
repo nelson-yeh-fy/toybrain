@@ -8,6 +8,7 @@ import CFSList from './CFSList';
 import CFSInfo from './CFSInfo';
 import CFSLog from './CFSLog';
 import CFSRelated from './CFSRelated';
+import CFSMap from './CFSMap';
 import CFSStatus from './CFSStatus';
 import Counter from './Counter';
 
@@ -43,6 +44,8 @@ const getComponent = (page) => {
           </Grid.Column>
         </Grid>
       );
+    case 'CFSMap':
+      return <CFSMap />;
     case 'Video':
       return <div>Video</div>;
     case 'Counter':
