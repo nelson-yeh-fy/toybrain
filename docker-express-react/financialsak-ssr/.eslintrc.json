@@ -1,0 +1,20 @@
+{
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "import/resolver": { "node": { "extensions": [".js", ".ios.js", ".android.js"] } },
+        "ecmaFeatures": {
+          "jsx": true,
+          "modules": true,
+          "experimentalObjectRestSpread": true
+        }
+    },
+    "rules": {
+        "max-len": 0,
+        "no-underscore-dangle": 0,
+        "react/require-extension": "off"
+    },
+    "extends": "react-app",
+    "plugins": [ "react", "react-native" ]
+}

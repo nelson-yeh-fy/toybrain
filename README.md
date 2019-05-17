@@ -35,6 +35,10 @@ https://medium.freecodecamp.org/an-introduction-to-the-redux-first-routing-model
 https://www.dailydrip.com/topics/react/drips/redux-first-router-first-impressions.html //Redux First Router
 https://medium.com/faceyspacey/pre-release-redux-first-router-a-step-beyond-redux-little-router-cd2716576aea //ReduxFirstRouter
 
+## Making Create-React-App SSR and code splitted
+https://medium.com/bucharestjs/upgrading-a-create-react-app-project-to-a-ssr-code-splitting-setup-9da57df2040a
+https://flaviocopes.com/react-server-side-rendering/
+
 # Add Express WebAPI
 https://code.visualstudio.com/docs/nodejs/nodejs-tutorial //visualStudio code tutorial
 https://daveceddia.com/create-react-app-express-backend/ //Add an Express WebAPI server via using express-generator
