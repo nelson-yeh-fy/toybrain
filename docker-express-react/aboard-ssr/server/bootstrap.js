@@ -11,9 +11,3 @@ require('@babel/register')({
     ]
 });
 require('./index');
-
-
-// require("@babel/core").transform("code", {
-//     presets: ["@babel/preset-react"],
-//   });
-//     presets: ['es2015', 'react-app'],
