@@ -7,19 +7,16 @@ module.exports = options => {
     mode: 'development',
     devtool: 'eval-source-map',
     // The entry file. All your app roots from here.
-    entry: [
-      path.join(__dirname, 'src/index.js')
-    ],
     entry: {
       main: path.resolve(__dirname, 'src/index.js'),
-      ProductList: path.resolve(__dirname, 'src/components/contact.component.js'),
-      ProductPage: path.resolve(__dirname, 'src/components/print.js'),
+      // cssrContact: path.resolve(__dirname, 'src/components/trial/contact.js'),
+      // cssrLoading: path.resolve(__dirname, 'src/components/trial/loading.js'),
       // Icon: path.resolve(__dirname, 'src/components/logo.svg'),
     },
     // Where you want the output to go
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: '[name].[contenthash].js',
+      filename: '[name].[contenthash:8].js',
     },
     plugins: [
       // handles creating an index.html file and injecting assets. necessary because assets
@@ -37,24 +34,6 @@ module.exports = options => {
     ],
     optimization: {
       runtimeChunk: 'single',
-      splitChunks: {
-        chunks: 'all',
-        maxInitialRequests: Infinity,
-        minSize: 0,
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name(module) {
-              // get the name. E.g. node_modules/packageName/not/this/part.js
-              // or node_modules/packageName
-              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-
-              // npm package names are URL-safe, but some servers don't like @ symbols
-              return `npm.${packageName.replace('@', '')}`;
-            },
-          },
-        },
-      },
     },
     module: {
       rules: [
@@ -68,10 +47,31 @@ module.exports = options => {
                 cacheDirectory: true,
               },
             },
+            {
+              loader: 'eslint-loader',
+            }
           ],
         },
+        {
+          test: /\.(png|jpg|gif)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[hash:8].[ext]',
+                outputPath: 'assets/'
+              }
+            }
+          ]
+        },
+        {
+          test: /\.svg$/,
+          loader: 'svg-url-loader',
+          options: {
+            noquotes: true
+          }
+        },
       ],
-      // loader: [{ test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/, loader: 'file' }],
     },
   }
 }

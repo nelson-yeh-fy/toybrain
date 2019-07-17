@@ -1,41 +1,17 @@
-// module.exports = options => {
-//   return {
-//     mode: 'production',
-//     entry: './index.js',
-//     output: {
-//       filename: 'bundle.js',
-//     },
-//     module: {
-//       rules: [
-//         {
-//           test: /.js$/,
-//           exclude: /node_modules/,
-//           use: [
-//             {
-//               loader: 'babel-loader',
-//               options: {
-//                 cacheDirectory: true,
-//               },
-//             },
-//           ],
-//         },
-//       ],
-//     },
-//   }
-// }
-
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-// var ReactLoadablePlugin = require ('react-loadable/webpack');
-//import { ReactLoadablePlugin } from 'react-loadable/webpack';
 
 module.exports = options => {
   return {
     mode: 'production',
     // The entry file. All your app roots from here.
     entry: [
-      path.join(__dirname, 'src/index.js')
+      path.join(__dirname, 'src/index.js'),
+      // main: path.resolve(__dirname, 'src/index.js'),
+      // cssrContact: path.resolve(__dirname, 'src/components/trial/contact.js'),
+      // cssrLoading: path.resolve(__dirname, 'src/components/trial/loading.js'),
+      // Icon: path.resolve(__dirname, 'src/components/logo.svg'),
     ],
     // Where you want the output to go
     output: {
@@ -92,7 +68,29 @@ module.exports = options => {
                 cacheDirectory: true,
               },
             },
+            {
+              loader: 'eslint-loader',
+            }
           ],
+        },
+        {
+          test: /\.(png|jpg|gif)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[hash:8].[ext]',
+                outputPath: 'assets/'
+              }
+            }
+          ]
+        },
+        {
+          test: /\.svg$/,
+          loader: 'svg-url-loader',
+          options: {
+            noquotes: true
+          }
         },
       ],
     },
