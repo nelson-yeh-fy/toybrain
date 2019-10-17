@@ -57,3 +57,7 @@ https://mlab.com/databases/cad-time-events/collections/timeEvents?q=&f=&s=&pageN
 (obsolete) https://www.terlici.com/2015/04/03/mongodb-node-express.html //sample to create a dbhelper
 (obsolete) https://gist.github.com/iksose/9401758 //sample to manipulate mongodb in dbhelper
 https://dev.to/aurelkurtula/building-a-restful-api-with-express-and-mongodb--3mmh
+
+## Prettier and ESlint
+https://blog.echobind.com/integrating-prettier-eslint-airbnb-style-guide-in-vscode-47f07b5d7d6a
+https://www.robinwieruch.de/webpack-eslint/
