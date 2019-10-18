@@ -1,6 +1,6 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import Loading from './loading';
+import Loading from '../loading';
 
 const LoadableContact = Loadable({
   loader: () => import(/* webpackChunkName: "cssr-contact" */ './contact'),

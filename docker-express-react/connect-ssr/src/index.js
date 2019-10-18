@@ -3,8 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Loadable from 'react-loadable';
 import { Route, BrowserRouter, Link, Switch } from 'react-router-dom';
-import Home from './components/home';
-import Loading from './components/trial/loading';
+import Loading from './components/loading';
 import Toggle from './components/trial/toggle';
 // import logo from './logo.svg';
 // <img src={logo} className="App-logo" alt="logo" height="14"/>
@@ -21,6 +20,12 @@ const LoadableContact = Loadable({
   delay: 500
 });
 
+const LoadableHome = Loadable({
+  loader: () => import(/* webpackChunkName: "cssr-home" */ './components/home'),
+  loading: Loading,
+  delay: 500
+});
+
 const styles = {
   app: {
     paddingTop: 40,
@@ -28,7 +33,7 @@ const styles = {
   }
 };
 
-const App = () => {
+const index = () => {
   return (
     <div style={styles.app}>
       Welcome to React!
@@ -43,7 +48,7 @@ const App = () => {
             </li>
           </ul>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={LoadableHome} />
             <Route path="/contact" component={LoadableContact} />
           </Switch>
         </div>
@@ -54,4 +59,4 @@ const App = () => {
 };
 
 // eslint-disable-next-line no-undef
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<index />, document.getElementById('root'));

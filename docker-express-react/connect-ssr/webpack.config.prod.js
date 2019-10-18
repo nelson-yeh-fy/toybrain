@@ -1,13 +1,14 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+import { join, resolve } from 'path';
+import { HashedModuleIdsPlugin } from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = options => {
+// eslint-disable-next-line no-unused-vars
+export default _options => {
   return {
     mode: 'production',
     // The entry file. All your app roots from here.
     entry: [
-      path.join(__dirname, 'src/index.js'),
+      join(__dirname, 'src/index.js')
       // main: path.resolve(__dirname, 'src/index.js'),
       // cssrContact: path.resolve(__dirname, 'src/components/trial/contact.js'),
       // cssrLoading: path.resolve(__dirname, 'src/components/trial/loading.js'),
@@ -15,8 +16,8 @@ module.exports = options => {
     ],
     // Where you want the output to go
     output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: '[name].[contenthash].js',
+      path: resolve(__dirname, 'dist'),
+      filename: '[name].[contenthash].js'
     },
     plugins: [
       // handles creating an index.html file and injecting assets. necessary because assets
@@ -26,10 +27,10 @@ module.exports = options => {
         template: 'src/index.tpl.html',
         filename: 'index.html',
         inject: 'body',
-        chunksSortMode: 'dependency',
+        chunksSortMode: 'dependency'
       }),
       // so that file hashes don't change unexpectedly
-      new webpack.HashedModuleIdsPlugin(),
+      new HashedModuleIdsPlugin()
       // // handles react-loadable mapping of modules and bundles
       // new ReactLoadablePlugin({
       //   filename: './dist/react-loadable.json',
@@ -51,10 +52,10 @@ module.exports = options => {
 
               // npm package names are URL-safe, but some servers don't like @ symbols
               return `npm.${packageName.replace('@', '')}`;
-            },
-          },
-        },
-      },
+            }
+          }
+        }
+      }
     },
     module: {
       rules: [
@@ -65,13 +66,13 @@ module.exports = options => {
             {
               loader: 'babel-loader',
               options: {
-                cacheDirectory: true,
-              },
+                cacheDirectory: true
+              }
             },
             {
-              loader: 'eslint-loader',
+              loader: 'eslint-loader'
             }
-          ],
+          ]
         },
         {
           test: /\.(png|jpg|gif)$/,
@@ -91,8 +92,8 @@ module.exports = options => {
           options: {
             noquotes: true
           }
-        },
-      ],
-    },
-  }
-}
+        }
+      ]
+    }
+  };
+};

@@ -1,22 +1,23 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+import { resolve } from 'path';
+import { HashedModuleIdsPlugin } from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = options => {
+// eslint-disable-next-line no-unused-vars
+export default _options => {
   return {
     mode: 'development',
     devtool: 'eval-source-map',
     // The entry file. All your app roots from here.
     entry: {
-      main: path.resolve(__dirname, 'src/index.js'),
+      main: resolve(__dirname, 'src/index.js')
       // cssrContact: path.resolve(__dirname, 'src/components/trial/contact.js'),
       // cssrLoading: path.resolve(__dirname, 'src/components/trial/loading.js'),
       // Icon: path.resolve(__dirname, 'src/components/logo.svg'),
     },
     // Where you want the output to go
     output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: '[name].[contenthash:8].js',
+      path: resolve(__dirname, 'dist'),
+      filename: '[name].[contenthash:8].js'
     },
     plugins: [
       // handles creating an index.html file and injecting assets. necessary because assets
@@ -27,13 +28,13 @@ module.exports = options => {
         template: 'src/index.tpl.html',
         filename: 'index.html',
         inject: 'body',
-        chunksSortMode: 'dependency',
+        chunksSortMode: 'dependency'
       }),
       // so that file hashes don't change unexpectedly
-      new webpack.HashedModuleIdsPlugin(),
+      new HashedModuleIdsPlugin()
     ],
     optimization: {
-      runtimeChunk: 'single',
+      runtimeChunk: 'single'
     },
     module: {
       rules: [
@@ -44,13 +45,13 @@ module.exports = options => {
             {
               loader: 'babel-loader',
               options: {
-                cacheDirectory: true,
-              },
+                cacheDirectory: true
+              }
             },
             {
-              loader: 'eslint-loader',
+              loader: 'eslint-loader'
             }
-          ],
+          ]
         },
         {
           test: /\.(png|jpg|gif)$/,
@@ -70,8 +71,8 @@ module.exports = options => {
           options: {
             noquotes: true
           }
-        },
-      ],
-    },
-  }
-}
+        }
+      ]
+    }
+  };
+};
