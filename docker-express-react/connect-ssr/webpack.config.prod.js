@@ -60,7 +60,7 @@ export default _options => {
     module: {
       rules: [
         {
-          test: /.js$/,
+          test: /.js?$/,
           exclude: /node_modules/,
           use: [
             {
