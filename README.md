@@ -1,6 +1,4 @@
-
-Implementing some of the modern tech stacks including JavaScript, ReactJs, Redux, docker. 
-Built the application using NodeJs and Mango DB.
+JavaScript, ReactJs, Redux, docker implementation of a chat comment, and others. Built the application using NodeJs and Mango DB.
 
 
 #### Notes for the self-learning:
