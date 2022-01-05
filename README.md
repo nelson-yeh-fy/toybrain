@@ -1,19 +1,22 @@
-# toybrain
-a toy-like, just-for-learning project to use cloud, docker, react, redux, smart home related thing
 
-# Instruction for deploying Nginx
-## Ref to this page: https://www.digitalocean.com/community/tutorials/how-to-run-nginx-in-a-docker-container-on-ubuntu-14-04
-## Get official nginx image from dockerhub
+Implementing some of the modern tech stacks including JavaScript, ReactJs, Redux, docker. 
+Built the application using NodeJs and Mango DB.
+
+
+#### Notes for the self-learning:
+##### Instruction for deploying Nginx
+Ref to this page: https://www.digitalocean.com/community/tutorials/how-to-run-nginx-in-a-docker-container-on-ubuntu-14-04
+Get official nginx image from dockerhub
 sudo docker pull nginx
 
-## Make sure nginx is running (make sure http 80 port is allowed in your AWS's inbound setting of security group)
+##### Make sure nginx is running (make sure http 80 port is allowed in your AWS's inbound setting of security group)
 sudo docker run --name docker-nginx -p 80:80 nginx
 docker rm docker-nginx
 
-## Run Nginx and let it access outside html and outside configurations
+##### Run Nginx and let it access outside html and outside configurations
 sudo docker run --name docker-nginx -p 80:80 -v ~/docker-nginx/html:/usr/share/nginx/html -v ~/docker-nginx/default.conf:/etc/nginx/conf.d/default.conf -d nginx
 
-# Create React App and using Redux, React-Bootstrap.
+##### Create React App and using Redux, React-Bootstrap.
 https://medium.com/@auchenberg/live-edit-and-debug-your-react-apps-directly-from-vs-code-without-leaving-the-editor-3da489ed905f
 https://github.com/facebookincubator/create-react-app
 http://www.penta-code.com/how-to-add-redux-to-create-react-app/ //Add Redux into app created by 'create-react-app'
@@ -35,22 +38,22 @@ https://medium.freecodecamp.org/an-introduction-to-the-redux-first-routing-model
 https://www.dailydrip.com/topics/react/drips/redux-first-router-first-impressions.html //Redux First Router
 https://medium.com/faceyspacey/pre-release-redux-first-router-a-step-beyond-redux-little-router-cd2716576aea //ReduxFirstRouter
 
-## Making Create-React-App SSR and code splitted
+##### Making Create-React-App SSR and code splitted
 https://medium.com/bucharestjs/upgrading-a-create-react-app-project-to-a-ssr-code-splitting-setup-9da57df2040a
 https://flaviocopes.com/react-server-side-rendering/
 
-# Add Express WebAPI
+##### Add Express WebAPI
 https://code.visualstudio.com/docs/nodejs/nodejs-tutorial //visualStudio code tutorial
 https://daveceddia.com/create-react-app-express-backend/ //Add an Express WebAPI server via using express-generator
 https://www.getpostman.com/ //Download Postman for testing WebAPIs
 https://medium.com/@stowball/a-dummys-guide-to-redux-and-thunk-in-react-d8904a7005d3 //Make react app dynamic, and change it to Redux.
 https://www.fullstackreact.com/articles/how-to-get-create-react-app-to-work-with-your-rails-api/ //Rails on React, a reference to fetch webAPI
 
-## CORS issues
+##### CORS issues
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 Proxying API Requests in Development: https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md
 
-## Make express webAPI restful and db-ready
+##### Make express webAPI restful and db-ready
 https://zellwk.com/blog/crud-express-mongodb/ //connect to mongodb
 https://mlab.com/databases/cad-time-events/collections/timeEvents?q=&f=&s=&pageNum=0&pageSize=10 //my mongolab db
 (obsolete) https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4 //make it restful
@@ -58,6 +61,6 @@ https://mlab.com/databases/cad-time-events/collections/timeEvents?q=&f=&s=&pageN
 (obsolete) https://gist.github.com/iksose/9401758 //sample to manipulate mongodb in dbhelper
 https://dev.to/aurelkurtula/building-a-restful-api-with-express-and-mongodb--3mmh
 
-## Prettier and ESlint
+##### Prettier and ESlint
 https://blog.echobind.com/integrating-prettier-eslint-airbnb-style-guide-in-vscode-47f07b5d7d6a
 https://www.robinwieruch.de/webpack-eslint/
